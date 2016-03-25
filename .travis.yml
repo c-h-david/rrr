@@ -1,0 +1,83 @@
+#*******************************************************************************
+#.travis.yml
+#*******************************************************************************
+
+#Purpose:
+#Travis CI is a hosted continuous integration service, that is, it allows 
+#running code directly from a repository and checking that the code acts as 
+#expected. The purpose of the .travis.yml file is to give instructions to Travis 
+#CI on how to do the work.
+#Author:
+#Cedric H. David, 2015-2016
+
+
+#*******************************************************************************
+#System specifications for Travis CI
+#*******************************************************************************
+sudo: false              #Activates the Travis CI container-based infrastructure
+language: python         #Sets the language to Python
+python:                  #Specifies which versions of Python to be used
+  - "2.6"
+addons:
+  apt:
+    packages:
+    - libhdf5-serial-dev #HDF5 library
+    - libnetcdf-dev      #netCDF library
+    - netcdf-bin         #netCDF binaries
+    - nco                #netCDF Operators
+    - gdal-bin           #GDAL binaries
+    - python-gdal        #GDAL Python bindings
+
+
+#*******************************************************************************
+#Before installing RRR
+#*******************************************************************************
+before_install:
+
+#-------------------------------------------------------------------------------
+#Creating directory for installation of prerequisites
+#-------------------------------------------------------------------------------
+- cd $TRAVIS_BUILD_DIR
+- mkdir ../installz
+- cd ../installz
+- export INSTALLZ_DIR=$PWD
+
+#-------------------------------------------------------------------------------
+#Installing NCL 6.3.0
+#-------------------------------------------------------------------------------
+- cd $INSTALLZ_DIR
+- wget "https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=8201fa1a-cd9b-11e4-bb80-00c0f03d5b7c" -O ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz
+- mkdir ncl_ncarg-6.3.0-install
+- ls
+- tar -xf ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz --directory=ncl_ncarg-6.3.0-install
+
+#-------------------------------------------------------------------------------
+#Exporting environment variables 
+#-------------------------------------------------------------------------------
+- export NCARG_ROOT=$INSTALLZ_DIR/ncl_ncarg-6.3.0-install/
+
+#-------------------------------------------------------------------------------
+#Exporting directories with library-related executables to $PATH
+#-------------------------------------------------------------------------------
+- export PATH=$PATH:/$NCARG_ROOT/bin
+
+
+#*******************************************************************************
+#Installing RRR
+#*******************************************************************************
+install:
+- cd $TRAVIS_BUILD_DIR
+- pip install -r requirements.txt
+
+
+#*******************************************************************************
+#Testing RRR 
+#*******************************************************************************
+script:
+- cd $TRAVIS_BUILD_DIR
+- echo "The build is now completed"
+
+
+#*******************************************************************************
+#End
+#*******************************************************************************
