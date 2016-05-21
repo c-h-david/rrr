@@ -25,8 +25,8 @@ addons:
     - libnetcdf-dev      #netCDF library
     - netcdf-bin         #netCDF binaries
     - nco                #netCDF Operators
+    - libgdal-dev        #GDAL library
     - gdal-bin           #GDAL binaries
-    - python-gdal        #GDAL Python bindings
 
 
 #*******************************************************************************
