@@ -27,6 +27,7 @@ addons:
     - nco                #netCDF Operators
     - libgdal-dev        #GDAL library
     - gdal-bin           #GDAL binaries
+    - ffmpeg             #ffmpeg
 
 
 #*******************************************************************************
