@@ -161,7 +161,7 @@ print(' . Number of time steps in rrr_mod_file: '+str(IS_tim_tot))
 if 'time' in f.variables:
      if f.variables['time'][0] != f.variables['time'][1]:
           date_ini=datetime.datetime.fromtimestamp(f.variables['time'][0])
-          date_stp = datetime.timedelta(0,                                      \
+          date_stp = datetime.timedelta(0,                                     \
                            float(f.variables['time'][1]-f.variables['time'][0]))
 
 if 'title' in f.ncattrs():
@@ -341,7 +341,7 @@ if BS_wid_auto:
 
      ZS_max=float(0)
      for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
-          ZS_max=max(ZS_max,max(f.variables[YV_var][JS_tim]))
+          ZS_max=max(ZS_max,max(f.variables[YV_var][JS_tim][IV_riv_bas_index]))
      IS_wid_fac = int(ZS_max/20)
 
      print('- The maximum flow to be plotted is: '+str(ZS_max)+ ' m3/s')
@@ -383,6 +383,9 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
         polyline_wdt = f.variables[YV_var][JS_tim][IV_riv_bas_index]/IS_wid_fac
         #This does not seem to be sped up by first reordering the polylines in  
         #the shapefile so that they are sorted similarly to the netCDF file
+
+        polyline_wdt=numpy.ma.filled(polyline_wdt,fill_value=0)
+        #Replaces potential NoData values in the netCDF file by 0 for plotting
 
         plt_clc.set_linewidths(polyline_wdt)
         #Scale thickness of each river reach by the magnitude of the variable
