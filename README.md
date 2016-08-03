@@ -30,8 +30,7 @@ formatted for use within:
 - The Routing Application for Parallel computatIon of Discharge (RAPID)
 
 Observed gauges are gathered from:
-- The National Water Information System (NWIS) [still in development - NOT YET 
-  RELEASED]
+- The National Water Information System (NWIS)
 
 Hydrological data analysis is done for the above datasets, as well as model 
 outputs from:
