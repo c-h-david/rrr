@@ -49,14 +49,15 @@ import csv
 # 3 - rrr_end_dat
 # 4 - rrr_obs_csv
 # 5 - rrr_flw_csv
+# 6 - rrr_ful_shp
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 6:
-     print('ERROR - 5 and only 5 arguments can be used')
+if IS_arg != 7:
+     print('ERROR - 6 and only 6 arguments can be used')
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
@@ -64,6 +65,7 @@ rrr_str_dat=sys.argv[2]
 rrr_end_dat=sys.argv[3]
 rrr_obs_csv=sys.argv[4]
 rrr_flw_csv=sys.argv[5]
+rrr_ful_shp=sys.argv[6]
 
 
 #*******************************************************************************
@@ -75,6 +77,7 @@ print('- '+rrr_str_dat)
 print('- '+rrr_end_dat)
 print('- '+rrr_obs_csv)
 print('- '+rrr_flw_csv)
+print('- '+rrr_ful_shp)
 
 
 #*******************************************************************************
@@ -252,6 +255,42 @@ for JS_time in range(IS_time):
           ZM_obs_tot_data[JS_time].append(ZS_val)
 
 print('- Data was also converted from cfs to m3/s')
+
+
+
+
+#*******************************************************************************
+#Create rrr_ful_shp based on rrr_obs_shp
+#*******************************************************************************
+print('Create rrr_ful_shp based on rrr_obs_shp')
+
+rrr_obs_crs=rrr_obs_lay.crs
+rrr_ful_crs=rrr_obs_crs.copy()
+print('- Coordinate Reference System copied')
+
+rrr_obs_sch=rrr_obs_lay.schema
+rrr_ful_sch=rrr_obs_sch.copy()
+print('- Schema copied')
+
+rrr_ful_lay=fiona.open(rrr_ful_shp, 'w',                                       \
+                       crs=rrr_ful_crs,                                        \
+                       driver='ESRI Shapefile',                                \
+                       schema=rrr_ful_sch                                      \
+                       )
+print('- New shapefile created')
+
+for JS_obs_all in range(IS_obs_all):
+     rrr_obs_fea=rrr_obs_lay[JS_obs_all]
+     rrr_obs_prp=rrr_obs_fea['properties']
+     if rrr_obs_prp['SOURCE_FEA'] in IV_obs_tot_code:
+          rrr_obs_geo=rrr_obs_fea['geometry']
+          rrr_ful_lay.write({                                                  \
+                             'properties': rrr_obs_prp,                        \
+                             'geometry': rrr_obs_geo,                          \
+                             })
+rrr_ful_lay.close()
+#Closing file so that values are saved
+print('- New shapefile populated')
 
 
 #*******************************************************************************
