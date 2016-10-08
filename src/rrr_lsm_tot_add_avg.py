@@ -182,7 +182,7 @@ f2 = netCDF4.Dataset(rrr_lsm_file2, 'a')
 #Create new variable
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Creating new variable')
-dm3_riv = f2.createVariable('dm3_riv',"f4",(YV_rivid,),fill_value=ZS_fill)
+sm3_riv = f2.createVariable('sm3_riv',"f4",(YV_rivid,),fill_value=ZS_fill)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Add variable attributes
@@ -197,7 +197,7 @@ if YV_coordinates != None: attdict['coordinates']=YV_coordinates
 if YV_grid_mapping != None: attdict['grid_mapping']=YV_grid_mapping
 if YV_cell_methods != None: attdict['cell_methods']=YV_cell_methods
 
-dm3_riv.setncatts(attdict)
+sm3_riv.setncatts(attdict)
 #Setting multiple attributes at once helps decrease the writing time a lot.
 #It looks like otherwise the file is copied over and over each time otherwise.
 #This limitation may not exist if netCDF4 is used instead of netCDF3.
@@ -206,7 +206,7 @@ dm3_riv.setncatts(attdict)
 #Populate new variable
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Populating new variable')
-dm3_riv[:]=ZV_vol_avg
+sm3_riv[:]=ZV_vol_avg
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Close file
