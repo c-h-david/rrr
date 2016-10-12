@@ -82,10 +82,12 @@ print('- The number of river features is: '+str(IS_riv_tot))
 
 if 'COMID' in rrr_riv_lay[0]['properties']:
      YV_riv_id='COMID'
+elif 'ComID' in rrr_riv_lay[0]['properties']:
+     YV_riv_id='ComID'
 elif 'ARCID' in rrr_riv_lay[0]['properties']:
      YV_riv_id='ARCID'
 else:
-     print('ERROR - Neither COMID nor ARCID exist in '+rrr_riv_shp)
+     print('ERROR - Neither COMID, ComID, nor ARCID exist in '+rrr_riv_shp)
      raise SystemExit(22) 
 
 IV_riv_tot_id=[]
