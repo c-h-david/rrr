@@ -18,6 +18,8 @@ import netCDF4
 import datetime
 import calendar
 import numpy
+import os.path
+import subprocess
 
 
 #*******************************************************************************
@@ -178,27 +180,73 @@ print('Generating rrr_mod_nc2 based on rrr_mod_nc1 and rrr_spl_csv')
 print('- Create netCDF file')
 f2 = netCDF4.Dataset(rrr_mod_nc2, "w", format="NETCDF3_CLASSIC")
 
-ZS_fill=float(1e20)
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Global attributes
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+for YV_att in f1.ncattrs():
+     f2.setncattr(YV_att,f1.getncattr(YV_att))
 
+vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
+vsn=vsn[0]
+vsn=vsn.rstrip()
+#Version of RRR
+
+if 'source' in f1.ncattrs():
+     f2.source=f1.source+'; RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+else:
+     f2.source='RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Dimensions
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 time = f2.createDimension(YV_time, None)
 rivid = f2.createDimension(YV_rivid, IS_riv_tot2)
+#The dimension of the new netCDF file is not IS_riv_tot1, it is IS_riv_tot2!!!
 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Variables
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 rivid = f2.createVariable(YV_rivid,"i4",(YV_rivid,))
+
+time = f2.createVariable(YV_time,"f4",(YV_time,))
+
+if '_FillValue' in  f1.variables[YV_var].ncattrs(): 
+     ZS_fill=f1.variables[YV_var]._FillValue
+else:
+     YV_var_type=f1.variables[YV_var].dtype.kind                               \
+                +str(f1.variables[YV_var].dtype.itemsize)
+     #This produces 'f4' for float32 which is needed to get default_fillvals
+     ZS_fill=netCDF4.default_fillvals[YV_var_type]
+     print(' . The fill value is: '+str(ZS_fill))
 var = f2.createVariable(YV_var,"f4",(YV_time,YV_rivid,),fill_value=ZS_fill)
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Variable attributes
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+for YV_att in f1.variables[YV_rivid].ncattrs():
+     f2.variables[YV_rivid].setncattr(                                         \
+                                YV_att,f1.variables[YV_rivid].getncattr(YV_att))
+
 if YV_time in f1.variables:
-     time = f2.createVariable(YV_time,"f4",(YV_time,))
+     for YV_att in f1.variables[YV_time].ncattrs():
+          f2.variables[YV_time].setncattr(                                     \
+                                YV_att,f1.variables[YV_time].getncattr(YV_att))
+
+for YV_att in f1.variables[YV_var].ncattrs():
+     f2.variables[YV_var].setncattr(                                           \
+                                YV_att,f1.variables[YV_var].getncattr(YV_att))
 
 #-------------------------------------------------------------------------------
-#Initialize netCDF file
+#Initialize netCDF variables
 #-------------------------------------------------------------------------------
-print('- Initialize netCDF file')
+print('- Initialize netCDF variables')
 rivid[:]=IV_riv_tot_id2
 #Populate the river IDs of the subsampled file in the subsampled netCDF file
 
-if YV_time in f1.variables:
-     ZV_time2=ZV_time1
-     time[:]=ZV_time2
-#Populate the times of the original netCDF file in the subsampled netCDF file
+ZV_time2=ZV_time1
+time[:]=ZV_time2
+#Populate the times of the original netCDF file in the subsampled netCDF file, 
+#or with those built from hardcoded values
 
 IS_time2=IS_time1
 for JS_time2 in range(IS_time2):
@@ -206,9 +254,9 @@ for JS_time2 in range(IS_time2):
 #Initialize all variable values (Qout or V) that are being subsampled to NoData
 
 #-------------------------------------------------------------------------------
-#Populate netCDF file
+#Populate netCDF variables
 #-------------------------------------------------------------------------------
-print('- Populate netCDF file')
+print('- Populate netCDF variables')
 for JS_riv_tot2 in range(IS_riv_tot2):
      for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
           #Every river ID/mean time pair from rrr_spl_csv is accessed here.
