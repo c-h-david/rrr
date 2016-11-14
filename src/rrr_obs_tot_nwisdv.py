@@ -104,8 +104,18 @@ if 'COMID_1' in rrr_obs_lay[0]['properties']:
      YV_obs_id='COMID_1'
 elif 'FLComID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='FLComID'
+elif 'ARCID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='ARCID'
 else:
-     print('ERROR - Neither COMID_1 nor COMID exist in '+rrr_obs_shp)
+     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
+     raise SystemExit(22) 
+
+if 'SOURCE_FEA' in rrr_obs_lay[0]['properties']:
+     YV_obs_code='SOURCE_FEA'
+elif 'Code' in rrr_obs_lay[0]['properties']:
+     YV_obs_code='Code'
+else:
+     print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
      raise SystemExit(22) 
 
 IV_obs_all_id=[]
@@ -113,7 +123,7 @@ IV_obs_all_code=[]
 for JS_obs_all in range(IS_obs_all):
      IV_obs_all_id.append(int(rrr_obs_lay[JS_obs_all]['properties'][YV_obs_id]))
      IV_obs_all_code.append(                                                   \
-                       str(rrr_obs_lay[JS_obs_all]['properties']['SOURCE_FEA']))
+                        str(rrr_obs_lay[JS_obs_all]['properties'][YV_obs_code]))
 
 
 #*******************************************************************************
@@ -201,10 +211,10 @@ for JS_obs_all in range(IS_obs_all):
           #Store information for full sites only
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           if IS_data!=IS_time:
-               print('   . '+str(JS_obs_all)+'/'+str(IS_obs_all)+' '           \
+               print('   . '+str(JS_obs_all+1)+'/'+str(IS_obs_all)+' '         \
                             +str(IV_obs_all_code[JS_obs_all])+' has some data')
           else:
-               print('   . '+str(JS_obs_all)+'/'+str(IS_obs_all)+' '           \
+               print('   . '+str(JS_obs_all+1)+'/'+str(IS_obs_all)+' '         \
                             +str(IV_obs_all_code[JS_obs_all])+' has full data')
                IV_obs_ful_id.append(IV_obs_all_id[JS_obs_all])
                IV_obs_ful_code.append(IV_obs_all_code[JS_obs_all])
@@ -282,7 +292,7 @@ print('- New shapefile created')
 for JS_obs_all in range(IS_obs_all):
      rrr_obs_fea=rrr_obs_lay[JS_obs_all]
      rrr_obs_prp=rrr_obs_fea['properties']
-     if rrr_obs_prp['SOURCE_FEA'] in IV_obs_tot_code:
+     if rrr_obs_prp[YV_obs_code] in IV_obs_tot_code:
           rrr_obs_geo=rrr_obs_fea['geometry']
           rrr_ful_lay.write({                                                  \
                              'properties': rrr_obs_prp,                        \
