@@ -102,14 +102,18 @@ if 'COMID_1' in rrr_obs_lay[0]['properties']:
      YV_obs_id='COMID_1'
 elif 'FLComID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='FLComID'
+elif 'ARCID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='ARCID'
 else:
-     print('ERROR - Neither COMID nor ARCID exist in '+rrr_obs_shp)
+     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
      raise SystemExit(22) 
 
 if 'STATION_NM' in rrr_obs_lay[0]['properties']:
      YV_obs_nm='STATION_NM'
+elif 'Name' in rrr_obs_lay[0]['properties']:
+     YV_obs_nm='Name'
 else:
-     print('ERROR - STATION_NM does not exist in '+rrr_obs_shp)
+     print('ERROR - STATION_NM or Name do not exist in '+rrr_obs_shp)
      raise SystemExit(22) 
 
 IV_obs_tot_id=[]
