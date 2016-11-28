@@ -7,7 +7,7 @@
 #Given a river shapefile from HydroSHEDS, a connectivity table and associated 
 #sorting integer, this program creates a csv file with the following 
 #information:
-# - rrr_riv_file
+# - rrr_riv_csv
 #   . River ID (sorted from upstream to downstream)
 #Author:
 #Cedric H. David, 2014-2016
@@ -17,17 +17,17 @@
 #Import Python modules
 #*******************************************************************************
 import sys
+import fiona
 import csv
-import dbf
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - hsd_riv_file
-# 2 - rrr_con_file
-# 3 - rrr_srt_file
-# 4 - rrr_riv_file
+# 1 - hsd_riv_shp
+# 2 - rrr_con_csv
+# 3 - rrr_srt_csv
+# 4 - rrr_riv_csv
 
 
 #*******************************************************************************
@@ -38,96 +38,104 @@ if IS_arg != 5:
      print('ERROR - 4 and only 4 arguments can be used')
      raise SystemExit(22) 
 
-hsd_riv_file=sys.argv[1]
-rrr_con_file=sys.argv[2]
-rrr_srt_file=sys.argv[3]
-rrr_riv_file=sys.argv[4]
+hsd_riv_shp=sys.argv[1]
+rrr_con_csv=sys.argv[2]
+rrr_srt_csv=sys.argv[3]
+rrr_riv_csv=sys.argv[4]
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
-print('- '+hsd_riv_file)
-print('- '+rrr_srt_file)
-print('- '+rrr_riv_file)
+print('- '+hsd_riv_shp)
+print('- '+rrr_srt_csv)
+print('- '+rrr_riv_csv)
 
 
 #*******************************************************************************
 #Check if files exist 
 #*******************************************************************************
 try:
-     with open(hsd_riv_file) as file:
+     with open(hsd_riv_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+hsd_riv_file)
+     print('ERROR - Unable to open '+hsd_riv_shp)
      raise SystemExit(22) 
 
 try:
-     with open(rrr_con_file) as file:
+     with open(rrr_con_csv) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_con_file)
+     print('ERROR - Unable to open '+rrr_con_csv)
      raise SystemExit(22) 
 
 try:
-     with open(rrr_srt_file) as file:
+     with open(rrr_srt_csv) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_srt_file)
+     print('ERROR - Unable to open '+rrr_srt_csv)
      raise SystemExit(22) 
 
 
 #*******************************************************************************
-#Read files
+#Reading input files
 #*******************************************************************************
 print('Reading input files')
 
 #-------------------------------------------------------------------------------
-#Basin file
+#Reading river shapefile
 #-------------------------------------------------------------------------------
-hsd_riv_dbf=dbf.Table(hsd_riv_file)
-hsd_riv_dbf.open()
+print('- Reading river shapefile')
+
+hsd_riv_lay=fiona.open(hsd_riv_shp, 'r')
+IS_riv_bas=len(hsd_riv_lay)
+print(' . Number of river reaches in rrr_riv_shp: '+str(IS_riv_bas))
+
+if 'ARCID' in hsd_riv_lay[0]['properties']:
+     YV_riv_id='ARCID'
+else:
+     print('ERROR - ARCID does not exist in '+hsd_riv_shp)
+     raise SystemExit(22) 
 
 IV_riv_bas_id=[]
-for record in hsd_riv_dbf:
-     IV_riv_bas_id.append(record['arcid'])    
-
-IS_riv_bas=len(IV_riv_bas_id)
-
-print('- Number of reaches in basin file: '+str(len(hsd_riv_dbf)))
+for JS_riv_bas in range(IS_riv_bas):
+     hsd_riv_prp=hsd_riv_lay[JS_riv_bas]['properties']
+     IV_riv_bas_id.append(int(hsd_riv_prp[YV_riv_id]))
 
 #-------------------------------------------------------------------------------
-#Connectivity file
+#Reading connectivity file
 #-------------------------------------------------------------------------------
+print('- Reading connectivity file')
 IV_riv_tot_id=[]
-with open(rrr_con_file,'rb') as csvfile:
+with open(rrr_con_csv,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_id.append(int(row[0]))
 IS_riv_tot1=len(IV_riv_tot_id)
-print('- Number of river reaches in rrr_con_file: '+str(IS_riv_tot1))
+print(' . Number of river reaches in rrr_con_csv: '+str(IS_riv_tot1))
 
 #-------------------------------------------------------------------------------
-#Sort file
+#Reading sort file
 #-------------------------------------------------------------------------------
+print('- Reading sort file')
 IV_riv_tot_sort=[]
-with open(rrr_srt_file,'rb') as csvfile:
+with open(rrr_srt_csv,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_sort.append(int(row[0]))
 IS_riv_tot2=len(IV_riv_tot_sort)
-print('- Number of river reaches in rrr_srt_file: '+str(IS_riv_tot2))
+print(' . Number of river reaches in rrr_srt_csv: '+str(IS_riv_tot2))
 
 
 #*******************************************************************************
-#Check that sizes of rrr_con_file and rrr_srt_file are the same
+#Check that sizes of rrr_con_csv and rrr_srt_csv are the same
 #*******************************************************************************
 if IS_riv_tot1==IS_riv_tot2:
      IS_riv_tot=IS_riv_tot1
 else:
-     print('ERROR - The number of river reaches in rrr_con_file and in ' \
-           'rrr_srt_file differ')
+     print('ERROR - The number of river reaches in rrr_con_csv and in ' \
+           'rrr_srt_csv differ')
      raise SystemExit(22) 
      
 
@@ -145,7 +153,7 @@ for JS_riv_bas in range(IS_riv_bas):
           IV_riv_bas_sort.append(IV_riv_tot_sort[JS_riv_tot])
      else:
           print('ERROR - Reach ID '+str(IV_riv_bas_id[JS_riv_bas])+'is not in '\
-                'rrr_con_file')
+                'rrr_con_csv')
           raise SystemExit(22) 
 
 
@@ -166,7 +174,7 @@ IV_riv_bas_sort2, IV_riv_bas_id2=z
 #*******************************************************************************
 print('Writing file')
 
-with open(rrr_riv_file, 'wb') as csvfile:
+with open(rrr_riv_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_bas in range(IS_riv_bas):
           csvwriter.writerow([IV_riv_bas_id2[JS_riv_bas]]) 

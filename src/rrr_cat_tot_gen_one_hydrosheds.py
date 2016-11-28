@@ -6,7 +6,7 @@
 #Purpose:
 #Given a river shapefile from HydroSHEDS, this program creates a csv file with 
 #the following information:
-# - rrr_cat_file 
+# - rrr_cat_csv 
 #   . Catchment ID
 #   . Catchment contributing area in square kilometers
 #   . Longitude of catchment centroid 
@@ -19,17 +19,17 @@
 #Import Python modules
 #*******************************************************************************
 import sys
-import csv
-import dbf
-import shapefile
 import math
+import fiona
+import shapely.geometry
+import csv
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - hsd_cat_file
-# 2 - rrr_cat_file
+# 1 - hsd_cat_shp
+# 2 - rrr_cat_csv
 
 
 #*******************************************************************************
@@ -40,26 +40,26 @@ if IS_arg != 3:
      print('ERROR - 2 and only 2 arguments can be used')
      raise SystemExit(22) 
 
-hsd_cat_file=sys.argv[1]
-rrr_cat_file=sys.argv[2]
+hsd_cat_shp=sys.argv[1]
+rrr_cat_csv=sys.argv[2]
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
-print('- '+hsd_cat_file)
-print('- '+rrr_cat_file)
+print('- '+hsd_cat_shp)
+print('- '+rrr_cat_csv)
 
 
 #*******************************************************************************
 #Check if files exist 
 #*******************************************************************************
 try:
-     with open(hsd_cat_file) as file:
+     with open(hsd_cat_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+hsd_cat_file)
+     print('ERROR - Unable to open '+hsd_cat_shp)
      raise SystemExit(22) 
 
 
@@ -96,25 +96,42 @@ ZS_xi=math.atanh(1-ZS_f)
 print('Read shapefile')
 
 #-------------------------------------------------------------------------------
-#Read reach IDs (much faster using dbf than shapefile module)
+#Open file 
+#-------------------------------------------------------------------------------
+print('- Open file')
+
+hsd_cat_lay=fiona.open(hsd_cat_shp, 'r')
+IS_cat_tot=len(hsd_cat_lay)
+print('- The number of catchment features is: '+str(IS_cat_tot))
+
+#-------------------------------------------------------------------------------
+#Read attributes
 #-------------------------------------------------------------------------------
 print('- Read attributes')
-hsd_cat_dbf=dbf.Table(hsd_cat_file)
-hsd_cat_dbf.open()
+
+if 'ARCID' in hsd_cat_lay[0]['properties']:
+     YV_cat_id='ARCID'
+else:
+     print('ERROR - ARCID does not exist in '+hsd_cat_shp)
+     raise SystemExit(22) 
+
+if 'UP_CELLS' in hsd_cat_lay[0]['properties']:
+     YV_cat_up_cells='UP_CELLS'
+else:
+     print('ERROR - UP_CELLS does not exist in '+hsd_cat_shp)
+     raise SystemExit(22) 
 
 IV_cat_tot_id=[]
 IV_cat_up_cells=[]
-for record in hsd_cat_dbf:
-     IV_cat_tot_id.append(record['arcid'])    
-     IV_cat_up_cells.append(record['up_cells'])    
-
-IS_cat_tot=len(IV_cat_tot_id)
+for JS_cat_tot in range(IS_cat_tot):
+     hsd_cat_prp=hsd_cat_lay[JS_cat_tot]['properties']
+     IV_cat_tot_id.append(int(hsd_cat_prp[YV_cat_id]))
+     IV_cat_up_cells.append(int(hsd_cat_prp[YV_cat_up_cells]))
 
 #-------------------------------------------------------------------------------
-#Reading shapes
+#Read geometry
 #-------------------------------------------------------------------------------
-print('- Read shapes')
-hsd_cat_shp=shapefile.Reader(hsd_cat_file)
+print('- Read geometry')
 
 ZV_cat_x_str=[]
 ZV_cat_y_str=[]
@@ -123,41 +140,18 @@ ZV_cat_y_end=[]
 ZV_cat_x_cen=[]
 ZV_cat_y_cen=[]
 for JS_cat_tot in range(IS_cat_tot):
-     shape=hsd_cat_shp.shape(JS_cat_tot)
-     IS_point=len(shape.points)
-     #Start point of each feature in the polyline:
-     ZV_cat_x_str.append(shape.points[0][0])
-     ZV_cat_y_str.append(shape.points[0][1])
-     #End point of each feature in the polyline:
-     ZV_cat_x_end.append(shape.points[IS_point-1][0])
-     ZV_cat_y_end.append(shape.points[IS_point-1][1])
-     #Centroid point of each feature in the polyline:
-     #(located at the weighted average x and y coordinates of the midpoints of 
-     #all line segments in the line feature; where the weight of a particular 
-     #midpoint is the length of the correspondent line segment)
-     ZV_cat_x_mid=[0]*(IS_point-1)
-     ZV_cat_y_mid=[0]*(IS_point-1)
-     ZV_cat_lengt=[0]*(IS_point-1)
-     for JS_point in range(IS_point-1):
-          ZV_cat_x_mid[JS_point]=( shape.points[JS_point][0]                   \
-                                  +shape.points[JS_point+1][0]                 \
-                                                              )/2
-          ZV_cat_y_mid[JS_point]=( shape.points[JS_point][1]                   \
-                                  +shape.points[JS_point+1][1]                 \
-                                                              )/2
-          ZV_cat_lengt[JS_point]=( ( shape.points[JS_point][0]                 \
-                                    -shape.points[JS_point+1][0]               \
-                                                                )**2           \
-                                  +( shape.points[JS_point][1]                 \
-                                    -shape.points[JS_point+1][1]               \
-                                                                )**2           \
-                                                                    )**0.5
-     ZV_cat_x_cen.append(1/sum(ZV_cat_lengt)*                                  \
-              sum([ZV_cat_x_mid[i]*ZV_cat_lengt[i] for i in range(IS_point-1)]))
-     ZV_cat_y_cen.append(1/sum(ZV_cat_lengt)*                                  \
-              sum([ZV_cat_y_mid[i]*ZV_cat_lengt[i] for i in range(IS_point-1)]))
-
-print('- Total number of catchments: '+str(IS_cat_tot))
+     hsd_cat_crd=hsd_cat_lay[JS_cat_tot]['geometry']['coordinates']
+     IS_point=len(hsd_cat_crd)
+     #Start and end points of each polyline:
+     ZV_cat_x_str.append(hsd_cat_crd[0][0])
+     ZV_cat_y_str.append(hsd_cat_crd[0][1])
+     ZV_cat_x_end.append(hsd_cat_crd[IS_point-1][0])
+     ZV_cat_y_end.append(hsd_cat_crd[IS_point-1][1])
+     #Centroid of each polyline:
+     hsd_cat_lns=shapely.geometry.LineString(hsd_cat_crd)
+     hsd_cat_cen=hsd_cat_lns.centroid.coords[:][0]
+     ZV_cat_x_cen.append(hsd_cat_cen[0])
+     ZV_cat_y_cen.append(hsd_cat_cen[1])
 
 
 #*******************************************************************************
@@ -258,7 +252,7 @@ for JS_cat_tot in range(IS_cat_tot):
 #*******************************************************************************
 print('Writing files')
 
-with open(rrr_cat_file, 'wb') as csvfile:
+with open(rrr_cat_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_cat_tot in range(IS_cat_tot):
           IV_line=[IV_cat_tot_id[JS_cat_tot],                                  \
