@@ -19,7 +19,7 @@ Vector-based ("blue line") river networks and associated contributing catchments
 can be used from the following datasets:
 - The enhanced National Hydrography Dataset (NHDPlus, versions 1 and 2)
 - The Hydrological data and maps based on SHuttle Elevation Derivatives at
-  multiple Scales (HydroSHEDS) [still in development - NOT YET RELEASED]
+  multiple Scales (HydroSHEDS)
 
 Surface and subsurface runoff are obtained using model outputs from:
 - The Global Land Data Assimilation System (GLDAS)
