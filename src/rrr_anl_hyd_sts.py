@@ -10,7 +10,7 @@
 #In case timeseries of different lengths are given, the smallest length is used
 #unless an optional argument containing the desired length is given.
 #Author:
-#Cedric H. David, 2011-2016
+#Cedric H. David, 2011-2017
 
 
 #*******************************************************************************

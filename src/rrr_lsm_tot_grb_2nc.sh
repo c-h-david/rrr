@@ -16,7 +16,7 @@
 #This program uses the NCAR Command Language (NCL, i.e. ncl_convert2nc) and the 
 #netCDF Common Operators (NCO, i.e. ncrename).
 #Author:
-#Cedric H. David, 2011-2016
+#Cedric H. David, 2011-2017
 
 
 #*******************************************************************************

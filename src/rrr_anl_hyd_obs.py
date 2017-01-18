@@ -10,7 +10,7 @@
 #program produces a set of csv files in which the (averaged) time series of 
 #observed quantities are stored.  
 #Author:
-#Cedric H. David, 2011-2016
+#Cedric H. David, 2011-2017
 
 
 #*******************************************************************************

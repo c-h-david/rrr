@@ -10,7 +10,7 @@
 #averaged together; this program produces a set of csv files in which the 
 #(averaged) time series of modeled quantities are stored.   
 #Author:
-#Cedric H. David, 2011-2016
+#Cedric H. David, 2011-2017
 
 
 #*******************************************************************************
