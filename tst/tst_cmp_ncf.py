@@ -15,6 +15,7 @@
 import sys
 import netCDF4
 import math
+import numpy
 
 
 #*******************************************************************************
@@ -177,9 +178,6 @@ for JS_time in range(IS_time):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #initializing
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     ZV_Vol_1=[0]*IS_riv_tot
-     ZV_Vol_2=[0]*IS_riv_tot
-     ZV_dVol_abs=[0]*IS_riv_tot
      ZS_rdif=0
      ZS_adif=0
 
@@ -192,25 +190,23 @@ for JS_time in range(IS_time):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #Comparing difference values
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     #Tried computations with regular Python lists but this makes is very slow.
      #Also tried using map(operator.sub,V,W) or [x-y for x,y in zip(V,W)]
-     #But this still results in slow computations
-     for JS_riv_tot in range(IS_riv_tot):
-          ZV_dVol_abs[JS_riv_tot]=abs(ZV_Vol_1[JS_riv_tot]-ZV_Vol_2[JS_riv_tot])
-          ZS_adif=ZV_dVol_abs[JS_riv_tot]
-          ZS_adif_max=max(ZS_adif,ZS_adif_max)
+     #But this still results in slow computations.
+     #The best performance seems to be with Numpy.
+     ZV_dVol_abs=numpy.absolute(ZV_Vol_1-ZV_Vol_2)
+     ZS_adif_max=max(numpy.max(ZV_dVol_abs),ZS_adif_max)
 
-     ZS_rdif=math.sqrt(                                                        \
-                     sum([dVol*dVol for dVol in ZV_dVol_abs])                  \
-                    /sum(vol*vol for vol in ZV_Vol_1)                          \
-                    )
+     ZS_rdif= math.sqrt( numpy.sum(ZV_dVol_abs*ZV_dVol_abs)                    \
+                        /numpy.sum(ZV_Vol_1*ZV_Vol_1))
      ZS_rdif_max=max(ZS_rdif,ZS_rdif_max)
 
 
 #*******************************************************************************
 #Print difference values and comparing values to tolerance
 #*******************************************************************************
-print('Max relative difference       :'+str(ZS_rdif_max))
-print('Max absolute difference       :'+str(ZS_adif_max))
+print('Max relative difference       :'+'{0:.2e}'.format(ZS_rdif_max))
+print('Max absolute difference       :'+'{0:.2e}'.format(ZS_adif_max))
 print('-------------------------------')
 
 if ZS_rdif_max > ZS_rtol:
