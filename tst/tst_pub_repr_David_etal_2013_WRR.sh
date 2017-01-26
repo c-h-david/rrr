@@ -455,14 +455,14 @@ echo "- Creating volume file"
    ../output/Reg07_WRR/coords_Reg07.csv                                        \
    ../output/Reg07_WRR/vic4.0.5_3H_20040101_20041231_cst.nc                    \
    ../output/Reg07_WRR/rapid_coupling_Reg07_NLDAS2.csv                         \
-   ../output/Reg07_WRR/m3_riv_Reg07_19970101_19981231_vic4.0.5_cst_tst.nc      \
+   ../output/Reg07_WRR/m3_riv_Reg07_20040101_20041231_vic4.0.5_cst_tst.nc      \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/Reg07_WRR/m3_riv_Reg07_19970101_19981231_vic4.0.5_cst.nc          \
-   ../output/Reg07_WRR/m3_riv_Reg07_19970101_19981231_vic4.0.5_cst_tst.nc      \
+   ../output/Reg07_WRR/m3_riv_Reg07_20040101_20041231_vic4.0.5_cst.nc          \
+   ../output/Reg07_WRR/m3_riv_Reg07_20040101_20041231_vic4.0.5_cst_tst.nc      \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -485,7 +485,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Updating netCDF global attributes"
 ../src/rrr_cpl_riv_lsm_att.sh                                                  \
-   ../output/Reg07_WRR/m3_riv_Reg07_19970101_19981231_vic4.0.5_cst_tst.nc      \
+   ../output/Reg07_WRR/m3_riv_Reg07_20040101_20041231_vic4.0.5_cst_tst.nc      \
    'RAPID data corresponding to the Upper Mississippi River Basin'             \
    'University of Texas at Austin'                                             \
    ' '                                                                         \
