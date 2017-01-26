@@ -308,9 +308,9 @@ crs.semi_major_axis=''
 crs.inverse_flattening=''
 
 #-------------------------------------------------------------------------------
-#Populate static data and read through LSM data to compute/populate dynamic data
+#Populate static data
 #-------------------------------------------------------------------------------
-print('- Populate data')
+print('- Populate static data')
 
 rivid[:]=IV_riv_tot_id[:]
 #Common to many of the input files
@@ -318,10 +318,19 @@ lon[:]=ZV_lon[:]
 lat[:]=ZV_lat[:]
 #from the coordinate file
 
+#-------------------------------------------------------------------------------
+#Read through LSM data to compute/populate dynamic data
+#-------------------------------------------------------------------------------
+print('- Populate dynamic data')
+
 ZV_riv_sqkm=numpy.array(ZV_riv_sqkm)
 #convert from list to array to allow for pointwise multiplication later
 ZV_riv_sqkm=1000*ZV_riv_sqkm
 #scale by 1000 to avoid doing so over and over below 
+IV_riv_i_index=[i-1 for i in IV_riv_i_index]
+IV_riv_j_index=[j-1 for j in IV_riv_j_index]
+#Shift from 1-based to 0-based indexing
+
 for JS_lsm_time in range(IS_lsm_time):
      if IS_lsm_time >=100:
           IS_lsm_percent=int(IS_lsm_time/100)+(IS_lsm_time%100>0)
@@ -334,42 +343,12 @@ for JS_lsm_time in range(IS_lsm_time):
      #The netCDF data are stored following: f.variables[var][time][lat][lon]
      ZM_lsm_run=ZM_lsm_runsf+ZM_lsm_runsb
      #ZM_lsm_run is of type 'numpy.ma.core.MaskedArray' or 'numpy.ndarray'
-    
-     #if type(ZM_lsm_run)==numpy.ma.core.MaskedArray: 
-     #     print(' . This netCDF variable reads as a numpy masked array')
-     #     print(' . # of values (not NoData):'                                 \
-     #          +str(ZM_lsm_runsf.count(axis=None)))
-     #elif type(ZM_lsm_run)==numpy.ndarray: 
-     #     print(' . This netCDF variable reads as a numpy N-dimensional')
-     ##Helpful to detect if NoData values are included. Python netCDF4 assumes 
-     ##that everything is NoData if the _fillValue attribute is not present.
-
-     ZV_riv_vol=numpy.empty(IS_riv_tot)
-     ZV_riv_vol.fill(ZS_fill_m3_riv)
-     #start with NoData everywhere
-     for JS_riv_tot in range(IS_riv_tot):
-          JS_riv_i_index=IV_riv_i_index[JS_riv_tot]-1
-          JS_riv_j_index=IV_riv_j_index[JS_riv_tot]-1
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          if JS_riv_j_index>=0 and JS_riv_j_index>=0:
-               ZS_lsm_run=ZM_lsm_run[JS_riv_j_index,JS_riv_i_index]
-               #It is much faster to use [j,i] than [j][i] here.
-               if type(ZS_lsm_run)==numpy.float32: 
-                    ZS_lsm_run_clean=float(ZS_lsm_run)
-                    #print('float32')
-               elif type(ZS_lsm_run)==numpy.ma.core.MaskedConstant: 
-                    ZS_lsm_run_clean=float(0)
-                    #print('Masked constant')
-               else:
-                    print('ERROR - Unrecognized format for runoff value'       \
-                          +str(type(ZS_lsm_run)))
-                    raise SystemExit(22) 
-          else:
-               ZS_lsm_run_clean=float(0)
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          ZV_riv_vol[JS_riv_tot]=ZS_lsm_run_clean
-
+     ZV_riv_vol=ZM_lsm_run[IV_riv_j_index,IV_riv_i_index]
+     #This uses the multidimensional list-of-locations indexing capability. All
+     #values at given i and j indices can be obtained by giving two lists of j
+     #and i indices. 
      ZV_riv_vol=ZV_riv_vol*ZV_riv_sqkm
+     #Scaling by the area.
      m3_riv[JS_lsm_time,:]=ZV_riv_vol[:]
      #The netCDF data are stored following: g.variables[m3_riv][time][rivid]
 print(' . Completed 100%')
