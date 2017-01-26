@@ -318,7 +318,9 @@ lon[:]=ZV_lon[:]
 lat[:]=ZV_lat[:]
 #from the coordinate file
 
-ZV_riv_sqkm[:] = [x*1000 for x in ZV_riv_sqkm]
+ZV_riv_sqkm=numpy.array(ZV_riv_sqkm)
+#convert from list to array to allow for pointwise multiplication later
+ZV_riv_sqkm=1000*ZV_riv_sqkm
 #scale by 1000 to avoid doing so over and over below 
 for JS_lsm_time in range(IS_lsm_time):
      if IS_lsm_time >=100:
@@ -342,10 +344,10 @@ for JS_lsm_time in range(IS_lsm_time):
      ##Helpful to detect if NoData values are included. Python netCDF4 assumes 
      ##that everything is NoData if the _fillValue attribute is not present.
 
-     ZV_riv_vol=[ZS_fill_m3_riv]*IS_riv_tot
+     ZV_riv_vol=numpy.empty(IS_riv_tot)
+     ZV_riv_vol.fill(ZS_fill_m3_riv)
      #start with NoData everywhere
      for JS_riv_tot in range(IS_riv_tot):
-          ZS_riv_sqkm=ZV_riv_sqkm[JS_riv_tot]
           JS_riv_i_index=IV_riv_i_index[JS_riv_tot]-1
           JS_riv_j_index=IV_riv_j_index[JS_riv_tot]-1
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -365,9 +367,9 @@ for JS_lsm_time in range(IS_lsm_time):
           else:
                ZS_lsm_run_clean=float(0)
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          ZS_riv_vol=ZS_riv_sqkm*ZS_lsm_run_clean
-          ZV_riv_vol[JS_riv_tot]=ZS_riv_vol
+          ZV_riv_vol[JS_riv_tot]=ZS_lsm_run_clean
 
+     ZV_riv_vol=ZV_riv_vol*ZV_riv_sqkm
      m3_riv[JS_lsm_time,:]=ZV_riv_vol[:]
      #The netCDF data are stored following: g.variables[m3_riv][time][rivid]
 print(' . Completed 100%')
