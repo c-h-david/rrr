@@ -20,6 +20,7 @@
 import sys
 import shutil
 import netCDF4
+import numpy
 
 
 #*******************************************************************************
@@ -143,8 +144,7 @@ else:
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Computing average')
 
-ZV_vol_tmp=[0]*IS_riv_tot
-ZV_vol_avg=[0]*IS_riv_tot
+ZV_vol_avg=numpy.empty(IS_riv_tot)
 for JS_lsm_time in range(IS_lsm_time):
      ZV_vol_tmp=f1.variables[YV_var][JS_lsm_time,:]
      ZV_vol_avg=ZV_vol_avg+ZV_vol_tmp
