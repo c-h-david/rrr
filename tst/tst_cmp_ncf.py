@@ -162,11 +162,33 @@ if rrr_ncf_var1==rrr_ncf_var2:
      rrr_ncf_var=rrr_ncf_var1
      print('Common variable name          :'+rrr_ncf_var)
 else:
-     print('ERROR - The variables differ: '                                    \
+     print('ERROR - The variable names differ: '                               \
            +rrr_ncf_var1+' <> '+rrr_ncf_var1)
      raise SystemExit(99) 
 
 print('-------------------------------')
+
+#-------------------------------------------------------------------------------
+#Compare rivid values if they exist in both files
+#-------------------------------------------------------------------------------
+if 'COMID' in f1.variables:
+     IV_riv_tot1=f1.variables['COMID']
+elif 'rivid' in f1.variables:
+     IV_riv_tot1=f1.variables['rivid']
+
+if 'COMID' in f2.variables:
+     IV_riv_tot2=f2.variables['COMID']
+elif 'rivid' in f2.variables:
+     IV_riv_tot2=f2.variables['rivid']
+
+if 'IV_riv_tot1' in locals() and 'IV_riv_tot2' in locals():
+     #This makes sure that both variables actually exist before comparing them
+     if numpy.array_equal(IV_riv_tot1[:],IV_riv_tot2[:]):
+          print('The rivids are the same')
+     else:
+          print('ERROR: The rivids differ')
+          raise SystemExit(99) 
+     print('-------------------------------')
 
 #-------------------------------------------------------------------------------
 #Compute differences 
