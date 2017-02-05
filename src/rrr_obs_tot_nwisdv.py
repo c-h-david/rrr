@@ -267,8 +267,6 @@ for JS_time in range(IS_time):
 print('- Data was also converted from cfs to m3/s')
 
 
-
-
 #*******************************************************************************
 #Create rrr_ful_shp based on rrr_obs_shp
 #*******************************************************************************
