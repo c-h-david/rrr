@@ -146,8 +146,8 @@ echo "- Comparing coordinates"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-rm $run_file
-rm $cmp_file
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -265,8 +265,8 @@ echo "- Comparing sorted basin file"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-rm $run_file
-rm $cmp_file
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -297,8 +297,8 @@ echo "- Comparing catchment file"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-rm $run_file
-rm $cmp_file
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -338,8 +338,8 @@ echo "- Comparing coupling file"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-rm $run_file
-rm $cmp_file
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -353,7 +353,7 @@ fi
 #*******************************************************************************
 #Clean up
 #*******************************************************************************
-rm ../output/HSmsp_WRR/*_tst.csv
+rm -f ../output/HSmsp_WRR/*_tst.csv
 
 
 #*******************************************************************************
