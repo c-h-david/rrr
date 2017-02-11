@@ -198,6 +198,32 @@ IS_riv_tot3=len(IV_riv_tot_id3)
 print('  . The number of river reaches in coupling file is: '+str(IS_riv_tot3))
 
 #-------------------------------------------------------------------------------
+#Ensure consistency in coupling file
+#-------------------------------------------------------------------------------
+print('- Ensure consistency in coupling file')
+
+IV_riv_i_zeros=[1 if i==0 else 0 for i in IV_riv_i_index]
+IV_riv_j_zeros=[1 if j==0 else 0 for j in IV_riv_j_index]
+#These two lists contain the value 1 where the index is null, 0 otherwise
+
+if IV_riv_i_zeros!=IV_riv_j_zeros:
+     print('ERROR - The locations where i and j both equal zero differ')
+     raise SystemExit(22)
+#Checks that the zero values are located in the same indices
+
+for JS_riv_tot3 in range(IS_riv_tot3):
+     if (IV_riv_i_index[JS_riv_tot3] == 0 and ZV_riv_sqkm[JS_riv_tot3] != 0.0):
+          print('ERROR - Non-null area found for null i index')
+          raise SystemExit(22)
+#Check that every null i index also has null area
+
+for JS_riv_tot3 in range(IS_riv_tot3):
+     if (IV_riv_j_index[JS_riv_tot3] == 0 and ZV_riv_sqkm[JS_riv_tot3] != 0.0):
+          print('ERROR - Non-null area found for null j index')
+          raise SystemExit(22)
+#Check that every null j index also has null area
+
+#-------------------------------------------------------------------------------
 #Checking that IDs are the same
 #-------------------------------------------------------------------------------
 print('- Checking that IDs are the same')
@@ -329,7 +355,8 @@ ZV_riv_sqkm=1000*ZV_riv_sqkm
 #scale by 1000 to avoid doing so over and over below 
 IV_riv_i_index=[i-1 for i in IV_riv_i_index]
 IV_riv_j_index=[j-1 for j in IV_riv_j_index]
-#Shift from 1-based to 0-based indexing
+#Shift from 1-based to 0-based indexing, places with new index -1 have already 
+#been checked for null area anyway
 
 for JS_lsm_time in range(IS_lsm_time):
      if IS_lsm_time >=100:
