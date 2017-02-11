@@ -376,6 +376,9 @@ for JS_lsm_time in range(IS_lsm_time):
      #and i indices. 
      ZV_riv_vol=ZV_riv_vol*ZV_riv_sqkm
      #Scaling by the area.
+     if isinstance(ZV_riv_vol,numpy.ma.MaskedArray):
+          ZV_riv_vol=ZV_riv_vol.filled(0)
+     #Make sure the masked values are replaced by 0
      m3_riv[JS_lsm_time,:]=ZV_riv_vol[:]
      #The netCDF data are stored following: g.variables[m3_riv][time][rivid]
 print(' . Completed 100%')
