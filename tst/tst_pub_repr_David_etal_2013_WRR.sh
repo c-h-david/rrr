@@ -119,6 +119,8 @@ echo "- Comparing kfac"
 ./tst_cmp_csv.py                                                               \
      ../output/Reg07_WRR/kfac_Reg07_1km_hour.csv                               \
      ../output/Reg07_WRR/kfac_Reg07_1km_hour_tst.csv                           \
+     1e-9                                                                      \
+     1e-6                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -140,6 +142,8 @@ echo "- Comparing coordinates"
 ./tst_cmp_csv.py                                                               \
      ../output/Reg07_WRR/coords_Reg07.csv                                      \
      ../output/Reg07_WRR/coords_Reg07_tst.csv                                  \
+     1e-9                                                                      \
+     1e-6                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 

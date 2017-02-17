@@ -117,6 +117,8 @@ echo "- Comparing kfac"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_XYZ/kfac_WSWM_1km_hour.csv                                 \
      ../output/WSWM_XYZ/kfac_WSWM_1km_hour_tst.csv                             \
+     1e-9                                                                      \
+     1e-6                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -138,6 +140,8 @@ echo "- Comparing coordinates"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_XYZ/coords_WSWM.csv                                        \
      ../output/WSWM_XYZ/coords_WSWM_tst.csv                                    \
+     1e-9                                                                      \
+     1e-6                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -234,7 +238,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_nhdplus.py                                          \
-     ../input/WSWM_XYZ/catchment_WSWM_Sort.dbf                                 \
+     ../input/WSWM_XYZ/Catchment_WSWM_Sort.dbf                                 \
      ../output/WSWM_XYZ/rapid_catchment_WSWM_tst.csv                           \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
