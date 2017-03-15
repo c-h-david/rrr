@@ -159,9 +159,18 @@ ZV_vol_avg=ZV_vol_avg*ZS_avg_perc/100
 print(' . Summed runoff for all reaches averaged for one time step, scaled: '  \
       +str(sum(ZV_vol_avg))+' m^3')
 
+IS_negative=(ZV_vol_avg<0).sum()
+print(' . Number of negative elements in summed runoff for all reaches '       \
+      'averaged for one time step, scaled: '+str(IS_negative))
+
 ZS_vol_avg=sum(ZV_vol_avg)/IS_riv_tot
 print(' . Summed runoff averaged for one reach and one time step, scaled: '    \
       +str(ZS_vol_avg)+' m^3')
+
+ZV_vol_avg=numpy.absolute(ZV_vol_avg)
+ZS_vol_avg=sum(ZV_vol_avg)/IS_riv_tot
+print(' . Summed runoff averaged for one reach and one time step, scaled, '    \
+      +'absolute value: '+str(ZS_vol_avg)+' m^3')
 
 ZS_vol_avg_rms=(sum([i**2 for i in ZV_vol_avg]))**0.5
 print(' . Estimate of error from square root of sum of squares: '              \
