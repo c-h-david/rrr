@@ -40,5 +40,5 @@ RRR is specifically designed to work hand-in-hand with RAPID.  Further
 information on both RAPID and RRR can be found on the the RAPID website at:
 http://rapid-hub.org/.
 
-Up-to-date installation instructions can be found in requirements.txt and 
-.travis.yml files.
+Up-to-date installation instructions can be found in requirements.apt, 
+requirements.pip, and .travis.yml files.
