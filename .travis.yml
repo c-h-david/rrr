@@ -47,7 +47,7 @@ before_install:
 #Installing NCL 6.3.0
 #-------------------------------------------------------------------------------
 - cd $INSTALLZ_DIR
-- wget "https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=8201fa1a-cd9b-11e4-bb80-00c0f03d5b7c" -O ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz
+- wget "https://www.earthsystemgrid.org/download/fileDownload.html?logicalFileId=8201fa1a-cd9b-11e4-bb80-00c0f03d5b7c" -O ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz
 - mkdir ncl_ncarg-6.3.0-install
 - ls
 - tar -xf ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz --directory=ncl_ncarg-6.3.0-install
