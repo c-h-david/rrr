@@ -3,10 +3,16 @@
 #*******************************************************************************
 
 #Purpose:
-#This file lists all the packages from the Python Packaging Index packages that 
-#are required by RRR, and is used by the "pip" software.
+#This file lists all the packages from the Python Packaging Index that are 
+#required by RRR, and is used by the "pip" software.
 #Author:
 #Cedric H. David, 2015-2017
+
+
+#*******************************************************************************
+#Usage
+#*******************************************************************************
+#sudo pip install -r requirements.txt
 
 
 #*******************************************************************************
