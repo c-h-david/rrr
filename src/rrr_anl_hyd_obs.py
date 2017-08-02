@@ -28,23 +28,28 @@ import csv
 # 2 - rrr_obs_csv
 # 3 - rrr_hyd_dir
 #(4)- IS_avg
+#(5)- ZS_pct_uq
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 4 or IS_arg > 5:
-     print('ERROR - A minimum of 3 and a maximum of 4 arguments can be used')
+if IS_arg < 4 or IS_arg > 6:
+     print('ERROR - A minimum of 3 and a maximum of 5 arguments can be used')
      raise SystemExit(22) 
 
 rrr_Qob_csv=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
 rrr_hyd_dir=sys.argv[3]
-if IS_arg==5:
+if IS_arg>=5:
      IS_avg=int(sys.argv[4])
 else:
      IS_avg=1
+if IS_arg==6:
+     ZS_pct_uq=float(sys.argv[5])
+else:
+     ZS_pct_uq=0
 
 
 #*******************************************************************************
@@ -55,6 +60,7 @@ print('- '+rrr_Qob_csv)
 print('- '+rrr_obs_csv)
 print('- '+rrr_hyd_dir)
 print('- '+str(IS_avg))
+print('- '+str(ZS_pct_uq))
 
 
 #*******************************************************************************
@@ -76,6 +82,10 @@ except IOError as e:
 
 if not os.path.isdir(rrr_hyd_dir):
      os.mkdir(rrr_hyd_dir)
+
+if (ZS_pct_uq < 0 or ZS_pct_uq >100):
+     print('ERROR - The percentage '+str(ZS_pct_uq)+' must be in range [0,100]')
+     raise SystemExit(22) 
 
 
 #*******************************************************************************
@@ -149,13 +159,26 @@ for JS_obs_tot in range(IS_obs_tot):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      rrr_hyd_dir=os.path.join(rrr_hyd_dir, '')
      #Add trailing slash to directory name if not present, do nothing otherwise
+
      rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
                   '_obs.csv'
      with open(rrr_hyd_csv, 'wb') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
           for JS_obs_avg in range(IS_obs_avg):
                IV_line=[ZV_obs_avg[JS_obs_avg]] 
-               csvwriter.writerow(IV_line) 
+               csvwriter.writerow(IV_line)
+     #Write hydrographs
+ 
+     if ZS_pct_uq > 0:
+          ZV_obs_avg_uq=[ZS_obs_avg*ZS_pct_uq/100 for ZS_obs_avg in ZV_obs_avg]
+          rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+\
+                       '_obs_uq.csv'
+          with open(rrr_hyd_csv, 'wb') as csvfile:
+               csvwriter = csv.writer(csvfile, dialect='excel')
+               for JS_obs_avg in range(IS_obs_avg):
+                    IV_line=[ZV_obs_avg_uq[JS_obs_avg]] 
+                    csvwriter.writerow(IV_line) 
+     #Write hydrographs for uncertainty 
 
 
 #*******************************************************************************

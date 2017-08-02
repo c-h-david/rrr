@@ -121,6 +121,11 @@ else:
      print('ERROR - neither Qout nor V exist in'+rrr_out_ncf)
      raise SystemExit(22) 
 
+if 'sQout' in f.variables:
+     YS_uq_name='sQout'
+elif 'sV' in f.variables:
+     YS_uq_name='sV'
+
 #-------------------------------------------------------------------------------
 #Get variable sizes 
 #-------------------------------------------------------------------------------
@@ -135,6 +140,15 @@ print('- Number of time steps: '+str(IS_R))
 #-------------------------------------------------------------------------------
 print('- Getting river IDs')
 IV_riv_bas_id=f.variables[YS_id_name]
+
+#-------------------------------------------------------------------------------
+#Look for UQ estimates
+#-------------------------------------------------------------------------------
+print('- Look for UQ estimates')
+if YS_uq_name!='':
+     print(' . UQ estimates available')
+else:
+     print(' . UQ estimates NOT available')
 
 #-------------------------------------------------------------------------------
 #Make hash table
@@ -181,6 +195,7 @@ for JS_obs_tot in range(IS_obs_tot):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      rrr_hyd_dir=os.path.join(rrr_hyd_dir, '')
      #Add trailing slash to directory name if not present, do nothing otherwise
+
      rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
                   '_mod.csv'
      with open(rrr_hyd_csv, 'wb') as csvfile:
@@ -188,6 +203,22 @@ for JS_obs_tot in range(IS_obs_tot):
           for JS_out_avg in range(IS_out_avg):
                IV_line=[ZV_out_avg[JS_out_avg]] 
                csvwriter.writerow(IV_line) 
+     #Write hydrographs
+ 
+     if YS_uq_name != '':
+          ZS_pct_uq=f.variables[YS_uq_name][IM_hsh[IV_obs_tot_id[JS_obs_tot]]] \
+                   *float(len(ZV_out_avg))/sum(ZV_out_avg)                     \
+                   *100
+          ZV_out_avg_uq=[ZS_out_avg*ZS_pct_uq/100 for ZS_out_avg in ZV_out_avg]
+          rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+\
+                       '_mod_uq.csv'
+          with open(rrr_hyd_csv, 'wb') as csvfile:
+               csvwriter = csv.writer(csvfile, dialect='excel')
+               for JS_out_avg in range(IS_out_avg):
+                    IV_line=[ZV_out_avg_uq[JS_out_avg]] 
+                    csvwriter.writerow(IV_line) 
+     #Write hydrographs for uncertainty 
+
 
 
 #*******************************************************************************
