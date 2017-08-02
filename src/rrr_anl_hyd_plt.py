@@ -152,6 +152,10 @@ for JS_obs_tot in range(IS_obs_tot):
                   '_obs.csv'
      rrr_mod_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
                   '_mod.csv'
+     rrr_obs_uq_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
+                  '_obs_uq.csv'
+     rrr_mod_uq_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
+                  '_mod_uq.csv'
 
      #--------------------------------------------------------------------------
      #Check that csv files exist
@@ -183,12 +187,30 @@ for JS_obs_tot in range(IS_obs_tot):
           for row in csvreader:
                ZV_Qmod.append(float(row[0]))
 
+     if os.path.isfile(rrr_obs_uq_csv):
+          ZV_Qobs_uq=[]
+          with open(rrr_obs_uq_csv,'rb') as csvfile:
+               csvreader=csv.reader(csvfile)
+               for row in csvreader:
+                    ZV_Qobs_uq.append(float(row[0]))
+     if os.path.isfile(rrr_mod_uq_csv):
+          ZV_Qmod_uq=[]
+          with open(rrr_mod_uq_csv,'rb') as csvfile:
+               csvreader=csv.reader(csvfile)
+               for row in csvreader:
+                    ZV_Qmod_uq.append(float(row[0]))
+
      #--------------------------------------------------------------------------
      #Ensure same number of values
      #--------------------------------------------------------------------------
      IS_time=min(len(ZV_Qobs),len(ZV_Qmod))
      ZV_Qobs=ZV_Qobs[:IS_time]
      ZV_Qmod=ZV_Qmod[:IS_time]
+
+     if os.path.isfile(rrr_obs_uq_csv):
+          ZV_Qobs_uq=ZV_Qobs_uq[:IS_time]
+     if os.path.isfile(rrr_mod_uq_csv):
+          ZV_Qmod_uq=ZV_Qmod_uq[:IS_time]
 
      #--------------------------------------------------------------------------
      #Make list of times
@@ -200,12 +222,27 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Plot timeseries
      #--------------------------------------------------------------------------
-     plt.close()
      plt.plot(ZV_time, ZV_Qobs, color='k', linestyle='solid', linewidth=1,     \
               label='Observations')
      plt.plot(ZV_time, ZV_Qmod, color='b', linestyle='dotted', linewidth=1,    \
               label='RAPID')
      
+     #--------------------------------------------------------------------------
+     #Plot uncertainties
+     #--------------------------------------------------------------------------
+     if os.path.isfile(rrr_obs_uq_csv):
+          plt.fill_between(ZV_time,                                            \
+                           [x-y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
+                           [x+y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
+                           color='k', alpha=0.1,                               \
+                           label='Uncertainty in observations')
+     if os.path.isfile(rrr_mod_uq_csv):
+          plt.fill_between(ZV_time,                                            \
+                           [x-y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
+                           [x+y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
+                           color='b', alpha=0.1,                               \
+                           label='Uncertainty in RAPID')
+
      #--------------------------------------------------------------------------
      #Format x axis
      #--------------------------------------------------------------------------
@@ -213,6 +250,7 @@ for JS_obs_tot in range(IS_obs_tot):
      
      plt.axes().xaxis.set_major_locator(mdates.MonthLocator(interval=12))
      plt.axes().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+     plt.xlim(ZV_time[0],ZV_time[IS_time-1])
      
      #--------------------------------------------------------------------------
      #Format y axis
@@ -228,12 +266,17 @@ for JS_obs_tot in range(IS_obs_tot):
      plt.legend()
      
      #--------------------------------------------------------------------------
-     #Plot and save into a file
+     #(Optional) plot in real time
      #--------------------------------------------------------------------------
-     plt.show()
+     #plt.show()
+
+     #--------------------------------------------------------------------------
+     #Save into a file and close plot
+     #--------------------------------------------------------------------------
      rrr_plt_pdf=rrr_plt_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
                   '.pdf'
      plt.savefig(rrr_plt_pdf)
+     plt.close()
 
 
 #*******************************************************************************
