@@ -140,7 +140,11 @@ payload['parameterCd']='00060'
 payload['startDT']='2004-01-01'
 payload['endDT']='2004-01-01'
 payload['statCd']='00003'
-#payload = {'key1': 'value1', 'key2': 'value2'}
+#This generates: 
+#https://waterservices.usgs.gov/nwis/dv/?format=waterml&sites=08176500
+#                                        &parameterCd=00060&startDT=2004-01-01
+#                                        &endDT=2004-01-01&statCd=00003
+#Note: payload = {'key1': 'value1', 'key2': 'value2'}
 
 data=requests.get(url,payload)
 tree = etree.fromstring(data.content)
