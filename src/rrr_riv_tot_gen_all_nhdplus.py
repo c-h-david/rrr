@@ -128,10 +128,12 @@ nhd_riv_dbf.open()
 
 IV_riv_tot_id=[]
 ZV_lengthkm=[]
+YV_ftype=[]
 for record in nhd_riv_dbf:
      if record['flowdir'].strip()=='With Digitized':
           IV_riv_tot_id.append(record['comid'])    
           ZV_lengthkm.append(record['lengthkm'])
+          YV_ftype.append(str(record['ftype']).strip())
 #IV_riv_tot_id and ZV_lengthkm only correspond to reaches with known flow dir.
 IS_riv_tot=len(IV_riv_tot_id)
 
@@ -186,6 +188,11 @@ for JS_riv_tot in range(IS_riv_tot):
      if IV_Divergence[JS_riv_tot]==2:
           IV_FromNode[JS_riv_tot]=-999
 #Virtually disconnect the upstream node of all minor divergences
+
+for JS_riv_tot in range(IS_riv_tot):
+     if YV_ftype[JS_riv_tot]=='Coastline':
+          IV_FromNode[JS_riv_tot]=-999
+#Virtually disconnect the upstream node of all coastlines (neeeded for NHDPlus2)
 
 IM_hsh1={}
 for JS_riv_tot in range(IS_riv_tot):
