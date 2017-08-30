@@ -23,10 +23,11 @@ fiona==1.6.3.post1
 lxml==2.3
 matplotlib==1.5.1
 netCDF4==1.0.8
+pyopenssl==0.14
 pyproj==1.9.5.1
 pyshp==1.2.3
 rasterio==0.35.1
-requests==2.7.0
+requests==2.12.1
 rtree==0.6.0
 shapely==1.5.15
 
