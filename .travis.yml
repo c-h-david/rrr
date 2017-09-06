@@ -17,7 +17,7 @@
 sudo: false              #Activates the Travis CI container-based infrastructure
 language: python         #Sets the language to Python
 python:                  #Specifies which versions of Python to be used
-  - "2.6"
+  - "2.7"
 addons:
   apt:
     packages:
