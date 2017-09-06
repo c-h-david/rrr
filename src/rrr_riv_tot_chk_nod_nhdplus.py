@@ -300,7 +300,6 @@ for nhd_riv_fea in nhd_riv_lay:
           if (IS_riv_tot_tnd!=0 and IS_riv_tot_tnd not in IM_hsh2):
                IM_hsh2[IS_riv_tot_tnd]=(ZS_end_x,ZS_end_y)
 
-
 #*******************************************************************************
 #Checking node/coordinates mismatch 
 #*******************************************************************************
@@ -313,7 +312,8 @@ else:
            +str(len(IM_nod_err)))
      if IS_arg!=4:
           print('ERROR - Node/coordinates mismatches cannot be checked if no ' \
-                'PlusFlow file is provided')
+                'PlusFlow file is provided:')
+          print(sorted(IM_nod_err.keys()))
           raise SystemExit(99) 
      if IS_arg==4:
           BS_error=False
