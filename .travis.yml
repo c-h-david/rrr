@@ -21,7 +21,7 @@ python:                  #Specifies which versions of Python to be used
 addons:
   apt:
     packages:
-    - libhdf5-serial-dev #HDF5 library
+    - libhdf5-dev        #HDF5 library
     - libnetcdf-dev      #netCDF library
     - netcdf-bin         #netCDF binaries
     - nco                #netCDF Operators
