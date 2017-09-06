@@ -27,7 +27,7 @@ addons:
     - nco                #netCDF Operators
     - libgdal-dev        #GDAL library
     - gdal-bin           #GDAL binaries
-    - ffmpeg             #ffmpeg
+    - libav-tools        #Audio/Video tools (avconv is similar to ffmpeg)
 
 
 #*******************************************************************************
