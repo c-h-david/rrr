@@ -29,6 +29,9 @@ addons:
     - gdal-bin           #GDAL binaries
     - libav-tools        #Audio/Video tools (avconv is similar to ffmpeg)
     - libfreetype6-dev   #Freetype library (to render fonts)
+    - libxml2-dev        #XML library
+    - libxslt1-dev       #XSLT library (to convert XMLs)
+    - libffi-dev         #FFI library (Foreign Function Interface)
 
 
 #*******************************************************************************
