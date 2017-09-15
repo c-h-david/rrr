@@ -96,7 +96,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_nhdplus.py                                          \
      ../input/WSWM_XYZ/NHDFlowline_WSWM_Sort.dbf                               \
-     ../input/WSWM_XYZ/PlusFlowlineVAA_WSWM_Sort.dbf                           \
+     ../input/WSWM_XYZ/PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.dbf       \
      12                                                                        \
      ../output/WSWM_XYZ/rapid_connect_WSWM_tst.csv                             \
      ../output/WSWM_XYZ/kfac_WSWM_1km_hour_tst.csv                             \
