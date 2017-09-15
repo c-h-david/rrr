@@ -181,6 +181,10 @@ for JS_obs_all in range(IS_obs_all):
      #Update station code 
      data=requests.get(url,payload)
      #Request data
+     for JS_try in range(10):
+          if data.status_code!=200:
+               data=requests.get(url,payload)
+     #Repeat the request another 10 times if the status code is not 'OK' (200)
      if data.status_code!=200:
           print('ERROR - Status code '+str(data.status_code)+' raised for '+   \
                 str(payload['sites']))
