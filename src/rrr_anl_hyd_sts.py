@@ -184,27 +184,40 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
      ZS_obsbar=0
      ZS_modbar=0
+     ZS_modBIA=0
      ZS_modRMS=0
+     ZS_modSTD=0
      ZS_modNum=0
      ZS_den=0
      ZS_modNash=0
+     ZS_modCor=0
+     ZS_den2=0
 
 #-------------------------------------------------------------------------------
 #calculate stats
 #-------------------------------------------------------------------------------
      ZS_obsbar=sum(ZV_obs)/IS_M
      ZS_modbar=sum(ZV_mod)/IS_M
+     ZS_modBIA=abs(ZS_obsbar-ZS_modbar)
 
      for JS_M in range(IS_M):
           ZS_modRMS=ZS_modRMS                                                  \
                    +(ZV_mod[JS_M]-ZV_obs[JS_M])*(ZV_mod[JS_M]-ZV_obs[JS_M])
+          ZS_modSTD=ZS_modSTD                                                  \
+                   +((ZV_mod[JS_M]-ZS_modbar)-(ZV_obs[JS_M]-ZS_obsbar))**2
+          ZS_modCor=ZS_modCor                                                  \
+                   +(ZV_mod[JS_M]-ZS_modbar)*(ZV_obs[JS_M]-ZS_obsbar)
           ZS_modNum=ZS_modNum                                                  \
                    +(ZV_mod[JS_M]-ZV_obs[JS_M])*(ZV_mod[JS_M]-ZV_obs[JS_M])
           ZS_den=ZS_den+(ZV_obs[JS_M]-ZS_obsbar)*(ZV_obs[JS_M]-ZS_obsbar)
+          ZS_den2=ZS_den2+(ZV_mod[JS_M]-ZS_modbar)*(ZV_mod[JS_M]-ZS_modbar)
 
      ZS_modRMS=ZS_modRMS/IS_M
      ZS_modRMS=(ZS_modRMS)**0.5
+     ZS_modSTD=ZS_modSTD/IS_M
+     ZS_modSTD=(ZS_modSTD)**0.5
      ZS_modNash=1-ZS_modNum/ZS_den
+     ZS_modCor=ZS_modCor/(ZS_den*ZS_den2)**0.5
 
 #-------------------------------------------------------------------------------
 #Print outputs
@@ -215,7 +228,10 @@ for JS_obs_tot in range(IS_obs_tot):
                               round(ZS_obsbar,2),                              \
                               round(ZS_modbar,2),                              \
                               round(ZS_modRMS,2),                              \
+                              round(ZS_modBIA,2),                              \
+                              round(ZS_modSTD,2),                              \
                               round(ZS_modNash,2),                             \
+                              round(ZS_modCor,2),                              \
                              ]) 
 
 
