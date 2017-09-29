@@ -216,8 +216,14 @@ for JS_obs_tot in range(IS_obs_tot):
      ZS_modRMS=(ZS_modRMS)**0.5
      ZS_modSTD=ZS_modSTD/IS_M
      ZS_modSTD=(ZS_modSTD)**0.5
-     ZS_modNash=1-ZS_modNum/ZS_den
-     ZS_modCor=ZS_modCor/(ZS_den*ZS_den2)**0.5
+     if ZS_den!=0:
+          ZS_modNash=1-ZS_modNum/ZS_den
+     else:
+          ZS_modNash=float('nan')
+     if ZS_den!=0 and ZS_den2!=0:
+          ZS_modCor=ZS_modCor/(ZS_den*ZS_den2)**0.5
+     else:
+          ZS_modCor=float('nan')
 
 #-------------------------------------------------------------------------------
 #Print outputs
