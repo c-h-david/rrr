@@ -61,7 +61,7 @@ print('- '+str(IS_M))
 
 
 #*******************************************************************************
-#Check if files and directory exist 
+#Check if files exist 
 #*******************************************************************************
 try:
      with open(rrr_obs_csv) as file:
@@ -70,17 +70,13 @@ except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_obs_dir):
-     print('ERROR - Directory does not exist'+rrr_obs_dir)
+if not os.path.isfile(rrr_obs_dir):
+     print('ERROR - Unable to open'+rrr_obs_dir)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_mod_dir):
-     print('ERROR - Directory does not exist'+rrr_mod_dir)
+if not os.path.isfile(rrr_mod_dir):
+     print('ERROR - Unable to open'+rrr_mod_dir)
      raise SystemExit(22) 
-
-rrr_obs_dir=os.path.join(rrr_obs_dir, '')
-rrr_mod_dir=os.path.join(rrr_mod_dir, '')
-#Add trailing slash to directory name if not present, do nothing otherwise
 
 
 #*******************************************************************************
