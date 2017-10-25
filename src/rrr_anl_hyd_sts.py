@@ -92,33 +92,6 @@ with fiona.open(rrr_obs_shp, 'r') as shpfile:
 IS_obs_tot=len(IV_obs_tot_id)
 print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
 
-
-#*******************************************************************************
-#Check if all files exist
-#*******************************************************************************
-# print('- Checking that all observed and modeled hydrographs exist')
-
-# for JS_obs_tot in range(IS_obs_tot):
-#      rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-#                  +'_obs.csv'
-#      try:
-#           with open(rrr_Qob_csv) as file:
-#                pass
-#      except IOError as e:
-#           print('ERROR - Unable to open '+rrr_Qob_csv)
-#           raise SystemExit(22) 
-#      #observed hydrographs
-#      rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-#                  +'_mod.csv'
-#      try:
-#           with open(rrr_Qmo_csv) as file:
-#                pass
-#      except IOError as e:
-#           print('ERROR - Unable to open '+rrr_Qmo_csv)
-#           raise SystemExit(22) 
-     #modeled hydrographs
-
-
 #*******************************************************************************
 #Check length of all hydrographs 
 #*******************************************************************************
