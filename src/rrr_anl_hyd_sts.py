@@ -19,14 +19,15 @@
 import sys
 import os.path
 import csv
+import fiona
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_obs_csv
-# 2 - rrr_obs_dir
-# 3 - rrr_mod_dir
+# 1 - rrr_obs_shp
+# 2 - rrr_obs_csv
+# 3 - rrr_mod_csv
 # 4 - rrr_sts_csv
 #(5)- IS_M
 
@@ -39,9 +40,9 @@ if IS_arg < 5 or IS_arg > 6:
      print('ERROR - A minimum of 4 and a maximum of 5 arguments can be used')
      raise SystemExit(22) 
 
-rrr_obs_csv=sys.argv[1]
-rrr_obs_dir=sys.argv[2]
-rrr_mod_dir=sys.argv[3]
+rrr_obs_shp=sys.argv[1]
+rrr_obs_csv=sys.argv[2]
+rrr_mod_csv=sys.argv[3]
 rrr_sts_csv=sys.argv[4]
 if IS_arg==6:
      IS_M=int(sys.argv[5])
@@ -53,9 +54,9 @@ else:
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
+print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
-print('- '+rrr_obs_dir)
-print('- '+rrr_mod_dir)
+print('- '+rrr_mod_csv)
 print('- '+rrr_sts_csv)
 print('- '+str(IS_M))
 
@@ -64,32 +65,31 @@ print('- '+str(IS_M))
 #Check if files exist 
 #*******************************************************************************
 try:
-     with open(rrr_obs_csv) as file:
+     with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_obs_csv)
+     print('ERROR - Unable to open '+rrr_obs_shp)
      raise SystemExit(22) 
 
-if not os.path.isfile(rrr_obs_dir):
-     print('ERROR - Unable to open'+rrr_obs_dir)
+if not os.path.isfile(rrr_obs_csv):
+     print('ERROR - Unable to open'+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isfile(rrr_mod_dir):
-     print('ERROR - Unable to open'+rrr_mod_dir)
+if not os.path.isfile(rrr_mod_csv):
+     print('ERROR - Unable to open'+rrr_mod_csv)
      raise SystemExit(22) 
 
 
 #*******************************************************************************
-#Read rrr_obs_csv
+#Read rrr_obs_shp
 #*******************************************************************************
-print('Reading rrr_obs_csv')
+print('Reading rrr_obs_shp')
 IV_obs_tot_id=[]
-with open(rrr_obs_csv,'rb') as csvfile:
-     csvreader=csv.reader(csvfile)
-     for row in csvreader:
-          IV_obs_tot_id.append(int(row[0]))
+with fiona.open(rrr_obs_shp, 'r') as shpfile:
+     for reach in shpfile:
+          IV_obs_tot_id.append(reach['properties']['FLComID'])
 IS_obs_tot=len(IV_obs_tot_id)
-print('- Number of river reaches in rrr_obs_csv: '+str(IS_obs_tot))
+print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
 
 
 #*******************************************************************************
@@ -98,7 +98,7 @@ print('- Number of river reaches in rrr_obs_csv: '+str(IS_obs_tot))
 print('- Checking that all observed and modeled hydrographs exist')
 
 for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_obs.csv'
      try:
           with open(rrr_Qob_csv) as file:
@@ -107,7 +107,7 @@ for JS_obs_tot in range(IS_obs_tot):
           print('ERROR - Unable to open '+rrr_Qob_csv)
           raise SystemExit(22) 
      #observed hydrographs
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_mod.csv'
      try:
           with open(rrr_Qmo_csv) as file:
@@ -124,7 +124,7 @@ for JS_obs_tot in range(IS_obs_tot):
 print('- Checking the length of all hydrographs')
 
 for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_obs.csv'
      with open(rrr_Qob_csv,'rb') as csvfile:
           csvreader=csv.reader(csvfile)
@@ -132,7 +132,7 @@ for JS_obs_tot in range(IS_obs_tot):
           #print(IS_count)
           if (IS_count<IS_M):
                IS_M=IS_count
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_mod.csv'
      with open(rrr_Qmo_csv,'rb') as csvfile:
           csvreader=csv.reader(csvfile)
@@ -160,7 +160,7 @@ for JS_obs_tot in range(IS_obs_tot):
 #Read hydrographs
 #-------------------------------------------------------------------------------
      ZV_obs=[0]*IS_M
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_obs.csv'
      with open(rrr_Qob_csv,'rb') as csvfile:
           csvreader=csv.reader(csvfile)
@@ -168,7 +168,7 @@ for JS_obs_tot in range(IS_obs_tot):
                ZV_obs[JS_M]=float(csvreader.next()[0])
 
      ZV_mod=[0]*IS_M
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
                  +'_mod.csv'
      with open(rrr_Qmo_csv,'rb') as csvfile:
           csvreader=csv.reader(csvfile)
