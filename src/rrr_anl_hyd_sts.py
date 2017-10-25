@@ -37,18 +37,26 @@ from datetime import datetime
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 5 or IS_arg > 6:
-     print('ERROR - A minimum of 4 and a maximum of 5 arguments can be used')
+if IS_arg < 5 or IS_arg > 7:
+     print('ERROR - A minimum of 4 and a maximum of 6 arguments can be used')
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
 rrr_mod_csv=sys.argv[3]
 rrr_sts_csv=sys.argv[4]
-if IS_arg==6:
-     IS_M=int(sys.argv[5])
+if IS_arg==7:
+     try:
+          IS_start_date = datetime.strptime(sys.argv[5], "%Y-%m-%d")
+          IS_end_date = datetime.strptime(sys.argv[6], "%Y-%m-%d")
+     except ValueError:
+          print('ERROR - Dates need to provided in YEAR-MONTH-DAY format')
+          raise SystemExit(22)
+     IS_M = (IS_end_date-IS_start_date).days+1
 else:
      IS_M=1e20
+     IS_start_date = None
+     IS_end_date = None
 
 
 #*******************************************************************************
@@ -177,8 +185,14 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #select data and convert to list
 #-------------------------------------------------------------------------------
-     ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
-     ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
+     if IS_start_date is None:
+          ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
+          ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
+     else:
+          ZV_obs = [value for vi, value in enumerate(ZTV_obs[IV_obs_tot_id[JS_obs_tot]])
+                    if ZTV_obs['date'][vi]>=IS_start_date and ZTV_obs['date'][vi]<=IS_end_date]
+          ZV_mod= [value for vi, value in enumerate(ZTV_mod[IV_obs_tot_id[JS_obs_tot]])
+                   if ZTV_mod['date'][vi]>=IS_start_date and ZTV_mod['date'][vi]<=IS_end_date]
 
 #-------------------------------------------------------------------------------
 #calculate stats
