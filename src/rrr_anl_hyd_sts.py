@@ -20,6 +20,7 @@ import sys
 import os.path
 import csv
 import fiona
+from datetime import datetime
 
 
 #*******************************************************************************
@@ -95,26 +96,26 @@ print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
 #*******************************************************************************
 #Check if all files exist
 #*******************************************************************************
-print('- Checking that all observed and modeled hydrographs exist')
+# print('- Checking that all observed and modeled hydrographs exist')
 
-for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     try:
-          with open(rrr_Qob_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_Qob_csv)
-          raise SystemExit(22) 
-     #observed hydrographs
-     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     try:
-          with open(rrr_Qmo_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_Qmo_csv)
-          raise SystemExit(22) 
+# for JS_obs_tot in range(IS_obs_tot):
+#      rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+#                  +'_obs.csv'
+#      try:
+#           with open(rrr_Qob_csv) as file:
+#                pass
+#      except IOError as e:
+#           print('ERROR - Unable to open '+rrr_Qob_csv)
+#           raise SystemExit(22) 
+#      #observed hydrographs
+#      rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
+#                  +'_mod.csv'
+#      try:
+#           with open(rrr_Qmo_csv) as file:
+#                pass
+#      except IOError as e:
+#           print('ERROR - Unable to open '+rrr_Qmo_csv)
+#           raise SystemExit(22) 
      #modeled hydrographs
 
 
@@ -123,23 +124,20 @@ for JS_obs_tot in range(IS_obs_tot):
 #*******************************************************************************
 print('- Checking the length of all hydrographs')
 
-for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     with open(rrr_Qob_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          IS_count=sum(1 for row in csvfile)
-          #print(IS_count)
-          if (IS_count<IS_M):
-               IS_M=IS_count
-     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     with open(rrr_Qmo_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          IS_count=sum(1 for row in csvfile)
-          #print(IS_count)
-          if (IS_count<IS_M):
-               IS_M=IS_count
+with open(rrr_obs_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     next(iter(csvreader), None)  # skip header
+     IS_count=sum(1 for row in csvfile)
+     #print(IS_count)
+     if (IS_count<IS_M):
+          IS_M=IS_count
+with open(rrr_mod_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     next(iter(csvreader), None)  # skip header
+     IS_count=sum(1 for row in csvfile)
+     #print(IS_count)
+     if (IS_count<IS_M):
+          IS_M=IS_count
 
 print('  . Will compute statistics for: '+str(IS_M)+' time steps')
 
@@ -155,26 +153,40 @@ with open(rrr_sts_csv, 'wb') as csvfile:
      #Difficult to compare CSV files with headers, removed them here
      #However, 'wb' here ensures creation of a new file instead of appending.
 
-for JS_obs_tot in range(IS_obs_tot):
+
 #-------------------------------------------------------------------------------
 #Read hydrographs
 #-------------------------------------------------------------------------------
-     ZV_obs=[0]*IS_M
-     rrr_Qob_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     with open(rrr_Qob_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for JS_M in range(IS_M):
-               ZV_obs[JS_M]=float(csvreader.next()[0])
+with open(rrr_obs_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     header = next(iter(csvreader))
+     rids = [int(h) for h in header[1:]]
+     ZTV_obs = {rid: [0]*IS_M for rid in rids}
+     ZTV_obs['date'] = []
+     for JS_M in range(IS_M):
+          row = next(iter(csvreader))
+          if len(row[0]) > 0:
+               dt = datetime.strptime(row[0], "%Y-%m-%d")
+               ZTV_obs['date'].append(dt)
+               for i, rid in enumerate(rids):
+                    ZTV_obs[rid][JS_M] = float(row[i+1])
 
-     ZV_mod=[0]*IS_M
-     rrr_Qmo_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     with open(rrr_Qmo_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for JS_M in range(IS_M):
-               ZV_mod[JS_M]=float(csvreader.next()[0])
+with open(rrr_mod_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     header = next(iter(csvreader))
+     rids = [int(h) for h in header[1:]]
+     ZTV_mod = {rid: [0]*IS_M for rid in rids}
+     ZTV_mod['date'] = []
+     for JS_M in range(IS_M):
+          row = next(iter(csvreader))
+          if len(row[0]) > 0:
+               dt = datetime.strptime(row[0], "%Y-%m-%d")
+               ZTV_mod['date'].append(dt)
+               for i, rid in enumerate(rids):
+                    ZTV_mod[rid][JS_M] = float(row[i+1])
 
+
+for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #initialize all stats to zero
 #-------------------------------------------------------------------------------
@@ -188,6 +200,12 @@ for JS_obs_tot in range(IS_obs_tot):
      ZS_modNash=0
      ZS_modCor=0
      ZS_den2=0
+
+#-------------------------------------------------------------------------------
+#select data and convert to list
+#-------------------------------------------------------------------------------
+     ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
 
 #-------------------------------------------------------------------------------
 #calculate stats
