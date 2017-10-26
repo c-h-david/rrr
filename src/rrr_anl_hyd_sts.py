@@ -108,14 +108,14 @@ print('- Checking the length of all hydrographs')
 with open(rrr_obs_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      next(iter(csvreader), None)  # skip header
-     IS_count=sum(1 for row in csvfile)
+     IS_count = len([row for row in csvreader if len(row[0]) > 0])
      #print(IS_count)
      if (IS_count<IS_M):
           IS_M=IS_count
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      next(iter(csvreader), None)  # skip header
-     IS_count=sum(1 for row in csvfile)
+     IS_count = len([row for row in csvreader if len(row[0]) > 0])
      #print(IS_count)
      if (IS_count<IS_M):
           IS_M=IS_count
