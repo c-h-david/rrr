@@ -143,28 +143,28 @@ with open(rrr_obs_csv) as csvfile:
      header = next(iter(csvreader))
      rids = [int(h) for h in header[1:]]
      ZTV_obs = {rid: [0]*IS_M for rid in rids}
-     ZTV_obs['date'] = []
-     for JS_M in range(IS_M):
+     JS_M = 0
+     while JS_M < IS_M:
           row = next(iter(csvreader))
-          if len(row[0]) > 0:
-               dt = datetime.strptime(row[0], "%Y-%m-%d")
-               ZTV_obs['date'].append(dt)
+          dt = datetime.strptime(row[0], "%Y-%m-%d")
+          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
                for i, rid in enumerate(rids):
                     ZTV_obs[rid][JS_M] = float(row[i+1])
+               JS_M += 1
 
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      header = next(iter(csvreader))
      rids = [int(h) for h in header[1:]]
      ZTV_mod = {rid: [0]*IS_M for rid in rids}
-     ZTV_mod['date'] = []
-     for JS_M in range(IS_M):
+     JS_M = 0
+     while JS_M < IS_M:
           row = next(iter(csvreader))
-          if len(row[0]) > 0:
-               dt = datetime.strptime(row[0], "%Y-%m-%d")
-               ZTV_mod['date'].append(dt)
+          dt = datetime.strptime(row[0], "%Y-%m-%d")
+          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
                for i, rid in enumerate(rids):
                     ZTV_mod[rid][JS_M] = float(row[i+1])
+               JS_M += 1
 
 
 for JS_obs_tot in range(IS_obs_tot):
@@ -185,14 +185,8 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #select data and convert to list
 #-------------------------------------------------------------------------------
-     if IS_start_date is None:
-          ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
-          ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
-     else:
-          ZV_obs = [value for vi, value in enumerate(ZTV_obs[IV_obs_tot_id[JS_obs_tot]])
-                    if ZTV_obs['date'][vi]>=IS_start_date and ZTV_obs['date'][vi]<=IS_end_date]
-          ZV_mod= [value for vi, value in enumerate(ZTV_mod[IV_obs_tot_id[JS_obs_tot]])
-                   if ZTV_mod['date'][vi]>=IS_start_date and ZTV_mod['date'][vi]<=IS_end_date]
+     ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
 
 #-------------------------------------------------------------------------------
 #calculate stats
