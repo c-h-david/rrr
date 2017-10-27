@@ -4,13 +4,14 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a csv file containing observed quantities (for many days/many stations), 
-#a csv file containing the unique identifiers corresponding to each station, and
-#(optionally) a number of consecutive values to be averaged together; this 
-#program produces a set of csv files in which the (averaged) time series of 
-#observed quantities are stored.  
+#Given a shapefile with unique integer identifiers for observing stations and 
+#unique station codes, a csv file containing observations previously downloaded
+#using rrr_obs_tot_nwisdv.py, a start date (%Y-%m-%d), an interval (in number of 
+#days), and a name; this program creates one csv file that contains a summary 
+#table of hydrographs indexed by station rivid. An optional percentage integer
+#can also be given to compute a similar uncertainty table.
 #Author:
-#Cedric H. David, 2011-2017
+#Cedric H. David, 2016-2017
 
 
 #*******************************************************************************
@@ -18,36 +19,40 @@
 #*******************************************************************************
 import sys
 import os
+import fiona
+import numpy
 import csv
+import datetime
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_Qob_csv
+# 1 - rrr_obs_shp
 # 2 - rrr_obs_csv
-# 3 - rrr_hyd_dir
-#(4)- IS_avg
-#(5)- ZS_pct_uq
+# 3 - iso_dat_str
+# 4 - ZS_interval
+# 5 - rrr_obs_str
+# 6 - rrr_hyd_csv
+#(7)- ZS_pct_uq
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 4 or IS_arg > 6:
-     print('ERROR - A minimum of 3 and a maximum of 5 arguments can be used')
+if IS_arg < 7 or IS_arg > 8:
+     print('ERROR - A minimum of 6 and a maximum of 7 arguments can be used')
      raise SystemExit(22) 
 
-rrr_Qob_csv=sys.argv[1]
+rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
-rrr_hyd_dir=sys.argv[3]
-if IS_arg>=5:
-     IS_avg=int(sys.argv[4])
-else:
-     IS_avg=1
-if IS_arg==6:
-     ZS_pct_uq=float(sys.argv[5])
+iso_dat_str=sys.argv[3]
+ZS_interval=float(sys.argv[4])
+rrr_obs_str=sys.argv[5]
+rrr_hyd_csv=sys.argv[6]
+if IS_arg==8:
+     ZS_pct_uq=float(sys.argv[7])
 else:
      ZS_pct_uq=0
 
@@ -56,21 +61,23 @@ else:
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
-print('- '+rrr_Qob_csv)
+print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
-print('- '+rrr_hyd_dir)
-print('- '+str(IS_avg))
+print('- '+iso_dat_str)
+print('- '+str(ZS_interval))
+print('- '+rrr_obs_str)
+print('- '+rrr_hyd_csv)
 print('- '+str(ZS_pct_uq))
 
 
 #*******************************************************************************
-#Check if files and directory exist 
+#Check if files exist 
 #*******************************************************************************
 try:
-     with open(rrr_Qob_csv) as file:
+     with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_Qob_csv)
+     print('ERROR - Unable to open '+rrr_obs_shp)
      raise SystemExit(22) 
 
 try:
@@ -80,105 +87,111 @@ except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_hyd_dir):
-     os.mkdir(rrr_hyd_dir)
-
 if (ZS_pct_uq < 0 or ZS_pct_uq >100):
      print('ERROR - The percentage '+str(ZS_pct_uq)+' must be in range [0,100]')
      raise SystemExit(22) 
 
 
 #*******************************************************************************
+#Read rrr_obs_shp
+#*******************************************************************************
+print('Read rrr_obs_shp')
+
+rrr_obs_lay=fiona.open(rrr_obs_shp, 'r')
+IS_obs_tot=len(rrr_obs_lay)
+print('- The number of gauge features is: '+str(IS_obs_tot))
+
+if 'COMID_1' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='COMID_1'
+elif 'FLComID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='FLComID'
+elif 'ARCID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='ARCID'
+else:
+     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
+     raise SystemExit(22) 
+
+if 'SOURCE_FEA' in rrr_obs_lay[0]['properties']:
+     YV_obs_cd='SOURCE_FEA'
+elif 'Code' in rrr_obs_lay[0]['properties']:
+     YV_obs_cd='Code'
+else:
+     print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
+     raise SystemExit(22) 
+
+IV_obs_tot_id=[]
+YV_obs_tot_cd=[]
+for JS_obs_tot in range(IS_obs_tot):
+     IV_obs_tot_id.append(int(rrr_obs_lay[JS_obs_tot]['properties'][YV_obs_id]))
+     YV_obs_tot_cd.append(str(rrr_obs_lay[JS_obs_tot]['properties'][YV_obs_cd]))
+
+z = sorted(zip(IV_obs_tot_id,YV_obs_tot_cd))
+IV_obs_tot_id_srt,YV_obs_tot_cd_srt=zip(*z)
+#Sorting the lists together based on increasing value of the river ID.
+IV_obs_tot_id_srt=list(IV_obs_tot_id_srt)
+YV_obs_tot_cd_srt=list(YV_obs_tot_cd_srt)
+#Because zip creates tuples and not lists
+
+
+#*******************************************************************************
 #Read rrr_obs_csv
 #*******************************************************************************
-print('Reading rrr_obs_csv')
-IV_obs_tot_id=[]
+print('Read rrr_obs_csv')
+
+ZM_obs=numpy.array([]).reshape(0,IS_obs_tot)
+#Initialize an empty array of size IS_obs_tot to store all hydrographs
+
 with open(rrr_obs_csv,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
-          IV_obs_tot_id.append(int(row[0]))
-IS_obs_tot=len(IV_obs_tot_id)
-print('- Number of river reaches in rrr_obs_csv: '+str(IS_obs_tot))
+          ZV_obs=[float(obs) for obs in row]
+          ZM_obs=numpy.vstack((ZM_obs,ZV_obs))
+
+IS_time=ZM_obs.shape[0]
+print('- The number of time steps is: '+str(IS_time))
 
 
 #*******************************************************************************
-#Read rrr_Qob_csv and creating hydrographs
+#Get temporal information from command line options
 #*******************************************************************************
-print('Reading rrr_Qob_csv and creating hydrographs')
+print('Get temporal information from command line options')
 
-#-------------------------------------------------------------------------------
-#Generate hydrographs
-#-------------------------------------------------------------------------------
-print('- Reading rrr_Qob_csv')
+dt_str=datetime.datetime.strptime(iso_dat_str,'%Y-%m-%d')
+print('- Start date selected is: '+str(dt_str))
 
-ZV_obs=[]
-with open(rrr_Qob_csv,'rb') as csvfile:
-     csvreader=csv.reader(csvfile)
-     for row in csvreader:
-          ZV_obs.append(float(row[0]))
-IS_M=len(ZV_obs)
-print('- Number time steps in rrr_Qob_csv: '+str(IS_M))
+dt_int=datetime.timedelta(ZS_interval)
+print('- Interval selected is: '+str(dt_int))
 
-#-------------------------------------------------------------------------------
-#Generate hydrographs
-#-------------------------------------------------------------------------------
-print('- Generating hydrographs')
+ZV_time=[]
+YV_time=[]
+for JS_time in range(IS_time):
+     ZV_time.append(dt_str+JS_time*dt_int)
+     YV_time.append(ZV_time[JS_time].strftime('%Y-%m-%d'))
 
-for JS_obs_tot in range(IS_obs_tot):
-     print('  . processing river ID: '+str(IV_obs_tot_id[JS_obs_tot]))
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-#Get values
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     ZV_obs=[]
-     with open(rrr_Qob_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for row in csvreader:
-               ZV_obs.append(float(row[JS_obs_tot]))
-
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-#Average every so many values
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     #Examples: IS_avg=8 to make daily from 3-hourly
-     #          IS_avg=1 to make 3-hourly from 3-hourly
-     ZS_obs_avg=0
-     ZV_obs_avg=[]
-     for JS_M in range(IS_M):
-          ZS_obs_avg=ZS_obs_avg+ZV_obs[JS_M]
-          if (JS_M%IS_avg==IS_avg-1):
-               #modulo is % in python.
-               ZS_obs_avg=ZS_obs_avg/IS_avg
-               ZV_obs_avg.append(ZS_obs_avg)
-               ZS_obs_avg=0
-
-     IS_obs_avg=len(ZV_obs_avg)
-     #print(IS_obs_avg)
-
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#*******************************************************************************
 #Write CSV file
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     rrr_hyd_dir=os.path.join(rrr_hyd_dir, '')
-     #Add trailing slash to directory name if not present, do nothing otherwise
+#*******************************************************************************
+print('Write CSV file')
 
-     rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
-                  '_obs.csv'
+with open(rrr_hyd_csv, 'wb') as csvfile:
+     csvwriter = csv.writer(csvfile, dialect='excel')
+     #csvwriter.writerow([rrr_obs_str]+YV_obs_tot_cd_srt)
+     csvwriter.writerow([rrr_obs_str]+IV_obs_tot_id_srt)
+     for JS_time in range(IS_time):
+          IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]) 
+          csvwriter.writerow(IV_line) 
+
+if ZS_pct_uq > 0:
+     rrr_hyd_csv=rrr_hyd_csv[:-4]+'_uq.csv'
      with open(rrr_hyd_csv, 'wb') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
-          for JS_obs_avg in range(IS_obs_avg):
-               IV_line=[ZV_obs_avg[JS_obs_avg]] 
-               csvwriter.writerow(IV_line)
-     #Write hydrographs
- 
-     if ZS_pct_uq > 0:
-          ZV_obs_avg_uq=[ZS_obs_avg*ZS_pct_uq/100 for ZS_obs_avg in ZV_obs_avg]
-          rrr_hyd_csv=rrr_hyd_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+\
-                       '_obs_uq.csv'
-          with open(rrr_hyd_csv, 'wb') as csvfile:
-               csvwriter = csv.writer(csvfile, dialect='excel')
-               for JS_obs_avg in range(IS_obs_avg):
-                    IV_line=[ZV_obs_avg_uq[JS_obs_avg]] 
-                    csvwriter.writerow(IV_line) 
-     #Write hydrographs for uncertainty 
+          #csvwriter.writerow([rrr_obs_str]+YV_obs_tot_cd_srt)
+          csvwriter.writerow([rrr_obs_str]+IV_obs_tot_id_srt)
+          for JS_time in range(IS_time):
+               IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]*ZS_pct_uq/100) 
+               csvwriter.writerow(IV_line) 
+#Write hydrographs for uncertainty 
 
 
 #*******************************************************************************
