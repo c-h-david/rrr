@@ -248,7 +248,7 @@ ZV_time=numpy.array(ZV_time)
 ZV_time_avg=(ZV_time.reshape(-1,IS_avg)).mean(axis=1)
 #Compute running average
 
-YV_time_avg=[datetime.datetime.fromtimestamp(t).strftime('%m/%d/%Y')           \
+YV_time_avg=[datetime.datetime.fromtimestamp(t).strftime('%Y-%m-%d')           \
              for t in ZV_time_avg]
 
 #-------------------------------------------------------------------------------
