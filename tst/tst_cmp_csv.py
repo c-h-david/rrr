@@ -80,10 +80,18 @@ except IOError as e:
 ZM_csv1=[]
 IS_col1=0
 with open(csv_file1) as csv_file:
-     reader=csv.reader(csv_file,dialect='excel',quoting=csv.QUOTE_NONNUMERIC)
+     reader=csv.reader(csv_file,dialect='excel')
      for row in reader:
           row=filter(lambda x: x!='',row)
           #Removes the empty strings created by csv.reader for trailing commas
+          for JS_col in range(len(row)):
+               try:
+                    row[JS_col]=int(row[JS_col])
+               except ValueError:
+                    try:
+                         row[JS_col]=float(row[JS_col])
+                    except ValueError:
+                         row[JS_col]=str(row[JS_col])
           ZM_csv1.append(row)
 IS_row1=len(ZM_csv1)
 IS_col1=len(row)
@@ -97,10 +105,18 @@ for row in ZM_csv1:
 ZM_csv2=[]
 IS_col2=0
 with open(csv_file2) as csv_file:
-     reader=csv.reader(csv_file,dialect='excel',quoting=csv.QUOTE_NONNUMERIC)
+     reader=csv.reader(csv_file,dialect='excel')
      for row in reader:
           row=filter(lambda x: x!='',row)
           #Removes the empty strings created by csv.reader for trailing commas
+          for JS_col in range(len(row)):
+               try:
+                    row[JS_col]=int(row[JS_col])
+               except ValueError:
+                    try:
+                         row[JS_col]=float(row[JS_col])
+                    except ValueError:
+                         row[JS_col]=str(row[JS_col])
           ZM_csv2.append(row)
 IS_row2=len(ZM_csv2)
 IS_col2=len(row)
@@ -141,17 +157,28 @@ ZS_rdif_max=float(0)
 ZS_adif_max=float(0)
 for JS_row in range(IS_row):
      for JS_col in range(IS_col):
-          ZS_adif=abs(ZM_csv1[JS_row][JS_col]-ZM_csv2[JS_row][JS_col])
-          #Absolute difference computed
+          if type(ZM_csv1[JS_row][JS_col]) is str:
+               if ZM_csv1[JS_row][JS_col].strip()                              \
+                ==ZM_csv2[JS_row][JS_col].strip():
+                    ZS_adif=0
+                    ZS_rdif=0
+               else:
+                    print('ERROR!!! in comparison of strings: '+               \
+                           ZM_csv1[JS_row][JS_col]+' differs from '+           \
+                           ZM_csv2[JS_row][JS_col])
+                    raise SystemExit(99) 
+          else:
+               ZS_adif=abs(ZM_csv1[JS_row][JS_col]-ZM_csv2[JS_row][JS_col])
+               #Absolute difference computed
+               if ZS_adif == 0:
+                    ZS_rdif=0
+               else:
+                    ZS_rdif=2*ZS_adif/                                         \
+                            abs(ZM_csv1[JS_row][JS_col]+ZM_csv2[JS_row][JS_col])
+               #Relative difference computed
           if ZS_adif > ZS_adif_max:
                ZS_adif_max=ZS_adif
           #Maximum absolute difference updated
-          if ZS_adif == 0:
-               ZS_rdif=0
-          else:
-               ZS_rdif=2*ZS_adif/                                              \
-                       abs(ZM_csv1[JS_row][JS_col]+ZM_csv2[JS_row][JS_col])
-          #Relative difference computed
           if ZS_rdif > ZS_rdif_max:
                ZS_rdif_max=ZS_rdif
           #Maximum relative difference updated
