@@ -98,6 +98,13 @@ except IOError as e:
 
 
 #*******************************************************************************
+#Print desired length for statistics
+#*******************************************************************************
+print('Print desired length for statistics')
+print('- The dates provided (or ommitted) correspond to '+str(IS_M)+' days')
+
+
+#*******************************************************************************
 #Read rrr_obs_shp
 #*******************************************************************************
 print('Reading rrr_obs_shp')
@@ -107,6 +114,7 @@ with fiona.open(rrr_obs_shp, 'r') as shpfile:
           IV_obs_tot_id.append(reach['properties']['FLComID'])
 IS_obs_tot=len(IV_obs_tot_id)
 print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
+
 
 #*******************************************************************************
 #Check length of all hydrographs 
