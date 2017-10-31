@@ -30,15 +30,16 @@ from datetime import datetime
 # 2 - rrr_obs_csv
 # 3 - rrr_mod_csv
 # 4 - rrr_sts_csv
-#(5)- IS_M
+#(5)- rrr_str_dat
+#(6)- rrr_end_dat
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 5 or IS_arg > 7:
-     print('ERROR - A minimum of 4 and a maximum of 6 arguments can be used')
+if IS_arg < 5 or IS_arg > 7 or IS_arg == 6:
+     print('ERROR - Either 4 or 6 arguments must be used')
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
@@ -67,7 +68,8 @@ print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
 print('- '+rrr_mod_csv)
 print('- '+rrr_sts_csv)
-print('- '+str(IS_M))
+print('- '+str(rrr_str_dat))
+print('- '+str(rrr_end_dat))
 
 
 #*******************************************************************************
@@ -80,11 +82,17 @@ except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_shp)
      raise SystemExit(22) 
 
-if not os.path.isfile(rrr_obs_csv):
+try:
+     with open(rrr_obs_csv) as file:
+          pass
+except IOError as e:
      print('ERROR - Unable to open'+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isfile(rrr_mod_csv):
+try:
+     with open(rrr_mod_csv) as file:
+          pass
+except IOError as e:
      print('ERROR - Unable to open'+rrr_mod_csv)
      raise SystemExit(22) 
 
