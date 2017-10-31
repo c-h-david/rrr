@@ -19,14 +19,16 @@
 import sys
 import os.path
 import csv
+import fiona
+from datetime import datetime
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_obs_csv
-# 2 - rrr_obs_dir
-# 3 - rrr_mod_dir
+# 1 - rrr_obs_shp
+# 2 - rrr_obs_csv
+# 3 - rrr_mod_csv
 # 4 - rrr_sts_csv
 #(5)- IS_M
 
@@ -35,115 +37,88 @@ import csv
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 5 or IS_arg > 6:
-     print('ERROR - A minimum of 4 and a maximum of 5 arguments can be used')
+if IS_arg < 5 or IS_arg > 7:
+     print('ERROR - A minimum of 4 and a maximum of 6 arguments can be used')
      raise SystemExit(22) 
 
-rrr_obs_csv=sys.argv[1]
-rrr_obs_dir=sys.argv[2]
-rrr_mod_dir=sys.argv[3]
+rrr_obs_shp=sys.argv[1]
+rrr_obs_csv=sys.argv[2]
+rrr_mod_csv=sys.argv[3]
 rrr_sts_csv=sys.argv[4]
-if IS_arg==6:
-     IS_M=int(sys.argv[5])
+if IS_arg==7:
+     try:
+          IS_start_date = datetime.strptime(sys.argv[5], "%Y-%m-%d")
+          IS_end_date = datetime.strptime(sys.argv[6], "%Y-%m-%d")
+     except ValueError:
+          print('ERROR - Dates need to provided in YEAR-MONTH-DAY format')
+          raise SystemExit(22)
+     IS_M = (IS_end_date-IS_start_date).days+1
 else:
      IS_M=1e20
+     IS_start_date = None
+     IS_end_date = None
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
+print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
-print('- '+rrr_obs_dir)
-print('- '+rrr_mod_dir)
+print('- '+rrr_mod_csv)
 print('- '+rrr_sts_csv)
 print('- '+str(IS_M))
 
 
 #*******************************************************************************
-#Check if files and directory exist 
+#Check if files exist 
 #*******************************************************************************
 try:
-     with open(rrr_obs_csv) as file:
+     with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_obs_csv)
+     print('ERROR - Unable to open '+rrr_obs_shp)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_obs_dir):
-     print('ERROR - Directory does not exist'+rrr_obs_dir)
+if not os.path.isfile(rrr_obs_csv):
+     print('ERROR - Unable to open'+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_mod_dir):
-     print('ERROR - Directory does not exist'+rrr_mod_dir)
+if not os.path.isfile(rrr_mod_csv):
+     print('ERROR - Unable to open'+rrr_mod_csv)
      raise SystemExit(22) 
-
-rrr_obs_dir=os.path.join(rrr_obs_dir, '')
-rrr_mod_dir=os.path.join(rrr_mod_dir, '')
-#Add trailing slash to directory name if not present, do nothing otherwise
 
 
 #*******************************************************************************
-#Read rrr_obs_csv
+#Read rrr_obs_shp
 #*******************************************************************************
-print('Reading rrr_obs_csv')
+print('Reading rrr_obs_shp')
 IV_obs_tot_id=[]
-with open(rrr_obs_csv,'rb') as csvfile:
-     csvreader=csv.reader(csvfile)
-     for row in csvreader:
-          IV_obs_tot_id.append(int(row[0]))
+with fiona.open(rrr_obs_shp, 'r') as shpfile:
+     for reach in shpfile:
+          IV_obs_tot_id.append(reach['properties']['FLComID'])
 IS_obs_tot=len(IV_obs_tot_id)
-print('- Number of river reaches in rrr_obs_csv: '+str(IS_obs_tot))
-
-
-#*******************************************************************************
-#Check if all files exist
-#*******************************************************************************
-print('- Checking that all observed and modeled hydrographs exist')
-
-for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     try:
-          with open(rrr_Qob_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_Qob_csv)
-          raise SystemExit(22) 
-     #observed hydrographs
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     try:
-          with open(rrr_Qmo_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_Qmo_csv)
-          raise SystemExit(22) 
-     #modeled hydrographs
-
+print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
 
 #*******************************************************************************
 #Check length of all hydrographs 
 #*******************************************************************************
 print('- Checking the length of all hydrographs')
 
-for JS_obs_tot in range(IS_obs_tot):
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     with open(rrr_Qob_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          IS_count=sum(1 for row in csvfile)
-          #print(IS_count)
-          if (IS_count<IS_M):
-               IS_M=IS_count
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     with open(rrr_Qmo_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          IS_count=sum(1 for row in csvfile)
-          #print(IS_count)
-          if (IS_count<IS_M):
-               IS_M=IS_count
+with open(rrr_obs_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     next(iter(csvreader), None)  # skip header
+     IS_count = len([row for row in csvreader if len(row[0]) > 0])
+     #print(IS_count)
+     if (IS_count<IS_M):
+          IS_M=IS_count
+with open(rrr_mod_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     next(iter(csvreader), None)  # skip header
+     IS_count = len([row for row in csvreader if len(row[0]) > 0])
+     #print(IS_count)
+     if (IS_count<IS_M):
+          IS_M=IS_count
 
 print('  . Will compute statistics for: '+str(IS_M)+' time steps')
 
@@ -159,26 +134,40 @@ with open(rrr_sts_csv, 'wb') as csvfile:
      #Difficult to compare CSV files with headers, removed them here
      #However, 'wb' here ensures creation of a new file instead of appending.
 
-for JS_obs_tot in range(IS_obs_tot):
+
 #-------------------------------------------------------------------------------
 #Read hydrographs
 #-------------------------------------------------------------------------------
-     ZV_obs=[0]*IS_M
-     rrr_Qob_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_obs.csv'
-     with open(rrr_Qob_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for JS_M in range(IS_M):
-               ZV_obs[JS_M]=float(csvreader.next()[0])
+with open(rrr_obs_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     header = next(iter(csvreader))
+     rids = [int(h) for h in header[1:]]
+     ZTV_obs = {rid: [0]*IS_M for rid in rids}
+     JS_M = 0
+     while JS_M < IS_M:
+          row = next(iter(csvreader))
+          dt = datetime.strptime(row[0], "%Y-%m-%d")
+          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
+               for i, rid in enumerate(rids):
+                    ZTV_obs[rid][JS_M] = float(row[i+1])
+               JS_M += 1
 
-     ZV_mod=[0]*IS_M
-     rrr_Qmo_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])      \
-                 +'_mod.csv'
-     with open(rrr_Qmo_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for JS_M in range(IS_M):
-               ZV_mod[JS_M]=float(csvreader.next()[0])
+with open(rrr_mod_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     header = next(iter(csvreader))
+     rids = [int(h) for h in header[1:]]
+     ZTV_mod = {rid: [0]*IS_M for rid in rids}
+     JS_M = 0
+     while JS_M < IS_M:
+          row = next(iter(csvreader))
+          dt = datetime.strptime(row[0], "%Y-%m-%d")
+          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
+               for i, rid in enumerate(rids):
+                    ZTV_mod[rid][JS_M] = float(row[i+1])
+               JS_M += 1
 
+
+for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #initialize all stats to zero
 #-------------------------------------------------------------------------------
@@ -192,6 +181,12 @@ for JS_obs_tot in range(IS_obs_tot):
      ZS_modNash=0
      ZS_modCor=0
      ZS_den2=0
+
+#-------------------------------------------------------------------------------
+#select data and convert to list
+#-------------------------------------------------------------------------------
+     ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
 
 #-------------------------------------------------------------------------------
 #calculate stats
