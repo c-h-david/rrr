@@ -47,16 +47,16 @@ rrr_mod_csv=sys.argv[3]
 rrr_sts_csv=sys.argv[4]
 if IS_arg==7:
      try:
-          IS_start_date = datetime.strptime(sys.argv[5], "%Y-%m-%d")
-          IS_end_date = datetime.strptime(sys.argv[6], "%Y-%m-%d")
+          rrr_str_dat = datetime.strptime(sys.argv[5], "%Y-%m-%d")
+          rrr_end_dat = datetime.strptime(sys.argv[6], "%Y-%m-%d")
      except ValueError:
           print('ERROR - Dates need to provided in YEAR-MONTH-DAY format')
           raise SystemExit(22)
-     IS_M = (IS_end_date-IS_start_date).days+1
+     IS_M = (rrr_end_dat-rrr_str_dat).days+1
 else:
      IS_M=1e20
-     IS_start_date = None
-     IS_end_date = None
+     rrr_str_dat = None
+     rrr_end_dat = None
 
 
 #*******************************************************************************
@@ -147,7 +147,7 @@ with open(rrr_obs_csv) as csvfile:
      while JS_M < IS_M:
           row = next(iter(csvreader))
           dt = datetime.strptime(row[0], "%Y-%m-%d")
-          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
+          if rrr_str_dat is None or (dt >= rrr_str_dat and dt <= rrr_end_dat):
                for i, rid in enumerate(rids):
                     ZTV_obs[rid][JS_M] = float(row[i+1])
                JS_M += 1
@@ -161,7 +161,7 @@ with open(rrr_mod_csv) as csvfile:
      while JS_M < IS_M:
           row = next(iter(csvreader))
           dt = datetime.strptime(row[0], "%Y-%m-%d")
-          if IS_start_date is None or (dt >= IS_start_date and dt <= IS_end_date):
+          if rrr_str_dat is None or (dt >= rrr_str_dat and dt <= rrr_end_dat):
                for i, rid in enumerate(rids):
                     ZTV_mod[rid][JS_M] = float(row[i+1])
                JS_M += 1
