@@ -150,38 +150,36 @@ with open(rrr_sts_csv, 'wb') as csvfile:
      #Difficult to compare CSV files with headers, removed them here
      #However, 'wb' here ensures creation of a new file instead of appending.
 
-
 #-------------------------------------------------------------------------------
 #Read hydrographs
 #-------------------------------------------------------------------------------
 with open(rrr_obs_csv) as csvfile:
      csvreader=csv.reader(csvfile)
-     header = next(iter(csvreader))
-     rids = [int(h) for h in header[1:]]
-     ZTV_obs = {rid: [0]*IS_M for rid in rids}
+     YV_header = next(iter(csvreader))
+     IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_obs = {rid: [0]*IS_M for rid in IV_headid}
      JS_M = 0
      while JS_M < IS_M:
           row = next(iter(csvreader))
-          dt = datetime.strptime(row[0], "%Y-%m-%d")
-          if rrr_str_dat is None or (dt >= rrr_str_dat and dt <= rrr_end_dat):
-               for i, rid in enumerate(rids):
-                    ZTV_obs[rid][JS_M] = float(row[i+1])
+          dat = datetime.strptime(row[0], "%Y-%m-%d")
+          if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
+               for i, rid in enumerate(IV_headid):
+                    ZH_obs[rid][JS_M] = float(row[i+1])
                JS_M += 1
 
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
-     header = next(iter(csvreader))
-     rids = [int(h) for h in header[1:]]
-     ZTV_mod = {rid: [0]*IS_M for rid in rids}
+     YV_header = next(iter(csvreader))
+     IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_mod = {rid: [0]*IS_M for rid in IV_headid}
      JS_M = 0
      while JS_M < IS_M:
           row = next(iter(csvreader))
-          dt = datetime.strptime(row[0], "%Y-%m-%d")
-          if rrr_str_dat is None or (dt >= rrr_str_dat and dt <= rrr_end_dat):
-               for i, rid in enumerate(rids):
-                    ZTV_mod[rid][JS_M] = float(row[i+1])
+          dat = datetime.strptime(row[0], "%Y-%m-%d")
+          if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
+               for i, rid in enumerate(IV_headid):
+                    ZH_mod[rid][JS_M] = float(row[i+1])
                JS_M += 1
-
 
 for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
@@ -201,8 +199,8 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #select data and convert to list
 #-------------------------------------------------------------------------------
-     ZV_obs = [value for value in ZTV_obs[IV_obs_tot_id[JS_obs_tot]]]
-     ZV_mod = [value for value in ZTV_mod[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_obs = [value for value in ZH_obs[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_mod = [value for value in ZH_mod[IV_obs_tot_id[JS_obs_tot]]]
 
 #-------------------------------------------------------------------------------
 #calculate stats
