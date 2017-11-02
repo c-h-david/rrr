@@ -51,7 +51,6 @@ rrr_mod_csv=sys.argv[3]
 rrr_plt_dir=sys.argv[4]
 rrr_str_dat=sys.argv[5]
 rrr_end_dat=sys.argv[6]
-# ZS_interval=float(sys.argv[6])
 ZS_max_val=float(sys.argv[7])
 
 
@@ -65,7 +64,6 @@ print('- '+rrr_mod_csv)
 print('- '+rrr_plt_dir)
 print('- '+rrr_str_dat)
 print('- '+rrr_end_dat)
-# print('- '+str(ZS_interval))
 print('- '+str(ZS_max_val))
 
 
@@ -141,9 +139,6 @@ print('- Start date selected is: '+str(dt_str))
 
 dt_end=datetime.datetime.strptime(rrr_end_dat,'%Y-%m-%d')
 print('- End date selected is: '+str(dt_end))
-# dt_int=datetime.timedelta(ZS_interval)
-# print('- Interval selected is: '+str(dt_int))
-
 
 
 #*******************************************************************************
@@ -213,50 +208,22 @@ print('Generate plots')
 
 
 for JS_obs_tot in range(IS_obs_tot):
-     #--------------------------------------------------------------------------
-     #Generate file names from unique IDs
-     #--------------------------------------------------------------------------
-     # rrr_obs_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
-     #              '_obs.csv'
-     # rrr_mod_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
-     #              '_mod.csv'
-     # rrr_obs_uq_csv=rrr_obs_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
-     #              '_obs_uq.csv'
-     # rrr_mod_uq_csv=rrr_mod_csv+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
-     #              '_mod_uq.csv'
 
      #--------------------------------------------------------------------------
      #Read timeseries from csv files
      #--------------------------------------------------------------------------
-     # ZV_Qobs=[]
      ZV_Qobs=ZH_obs[IV_obs_tot_id[JS_obs_tot]]
      ZV_Qmod=ZH_mod[IV_obs_tot_id[JS_obs_tot]]
-     # with open(rrr_obs_csv,'rb') as csvfile:
-     #      csvreader=csv.reader(csvfile)
-     #      for row in csvreader:
-     #           ZV_Qobs.append(float(row[0]))
-     # ZV_Qmod=[]
-     # with open(rrr_mod_csv,'rb') as csvfile:
-     #      csvreader=csv.reader(csvfile)
-     #      for row in csvreader:
-     #           ZV_Qmod.append(float(row[0]))
 
      if os.path.isfile(rrr_obs_uq_csv):
           ZV_Qobs_uq=ZH_obs_uq[IV_obs_tot_id[JS_obs_tot]]
      else:
           ZV_Qobs_uq=[]
-     #      with open(rrr_obs_uq_csv,'rb') as csvfile:
-     #           csvreader=csv.reader(csvfile)
-     #           for row in csvreader:
-     #                ZV_Qobs_uq.append(float(row[0]))
+
      if os.path.isfile(rrr_mod_uq_csv):
           ZV_Qmod_uq=ZH_mod_uq[IV_obs_tot_id[JS_obs_tot]]
      else:
           ZV_Qmod_uq=[]
-     #      with open(rrr_mod_uq_csv,'rb') as csvfile:
-     #           csvreader=csv.reader(csvfile)
-     #           for row in csvreader:
-     #                ZV_Qmod_uq.append(float(row[0]))
 
      #--------------------------------------------------------------------------
      #Ensure same number of values
@@ -273,9 +240,6 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Make list of times
      #--------------------------------------------------------------------------
-     # ZV_time=[]
-     # for JS_time in range(IS_time):
-     #      ZV_time.append(dt_str+JS_time*dt_int)
      ZV_time=ZH_time[IV_obs_tot_id[JS_obs_tot]]
 
      #--------------------------------------------------------------------------
