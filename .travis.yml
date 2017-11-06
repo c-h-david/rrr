@@ -32,6 +32,7 @@ addons:
     - libxml2-dev        #XML library
     - libxslt1-dev       #XSLT library (to convert XMLs)
     - libffi-dev         #FFI library (Foreign Function Interface)
+    - libspatialindex-dev #Spatial index library (needed for rtree)
 
 
 #*******************************************************************************
