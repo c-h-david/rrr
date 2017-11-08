@@ -269,10 +269,11 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Format x axis
      #--------------------------------------------------------------------------
-     plt.axes().xaxis.set_minor_locator(mdates.MonthLocator())
-     
-     plt.axes().xaxis.set_major_locator(mdates.MonthLocator(interval=12))
-     plt.axes().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+     plt.axes().xaxis.set_minor_locator(mdates.AutoDateLocator())
+
+     locator=mdates.AutoDateLocator(minticks=6,maxticks=8)
+     plt.axes().xaxis.set_major_locator(locator)
+     plt.axes().xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
      plt.xlim(ZV_time[0],ZV_time[IS_time-1])
      
      #--------------------------------------------------------------------------
