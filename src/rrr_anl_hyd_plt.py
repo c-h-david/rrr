@@ -31,27 +31,29 @@ import datetime
 # 1 - rrr_obs_shp
 # 2 - rrr_obs_csv
 # 3 - rrr_mod_csv
-# 4 - rrr_plt_dir
-# 5 - rrr_str_dat
-# 6 - rrr_end_dat
-# 7 - ZS_max_val
+# 4 - rrr_stats_csv
+# 5 - rrr_plt_dir
+# 6 - rrr_str_dat
+# 7 - rrr_end_dat
+# 8 - ZS_max_val
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 8:
-     print('ERROR - 7 and only 7 arguments can be used')
+if IS_arg != 9:
+     print('ERROR - 8 and only 8 arguments can be used')
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
 rrr_mod_csv=sys.argv[3]
-rrr_plt_dir=sys.argv[4]
-rrr_str_dat=sys.argv[5]
-rrr_end_dat=sys.argv[6]
-ZS_max_val=float(sys.argv[7])
+rrr_stats_csv=sys.argv[4]
+rrr_plt_dir=sys.argv[5]
+rrr_str_dat=sys.argv[6]
+rrr_end_dat=sys.argv[7]
+ZS_max_val=float(sys.argv[8])
 
 
 #*******************************************************************************
@@ -61,6 +63,7 @@ print('Command line inputs')
 print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
 print('- '+rrr_mod_csv)
+print('- '+rrr_stats_csv)
 print('- '+rrr_plt_dir)
 print('- '+rrr_str_dat)
 print('- '+rrr_end_dat)
@@ -200,6 +203,14 @@ if os.path.isfile(rrr_mod_uq_csv):
                     for i, rid in enumerate(IV_headid):
                          ZH_mod_uq[rid].append(float(row[i+1]))
 
+#*******************************************************************************
+#Read statistics from csv file
+#*******************************************************************************
+with open(rrr_stats_csv) as csvfile:
+     csvreader = csv.reader(csvfile)
+     YV_header = next(iter(csvreader))
+     IV_headid = [h for h in YV_header]
+     ZH_stats = {int(row[0]): {h: float(row[i+1]) for i, h in enumerate(IV_headid[1:])} for row in csvreader}
 
 #*******************************************************************************
 #Generate plots
@@ -288,6 +299,12 @@ for JS_obs_tot in range(IS_obs_tot):
      plt.xlabel('Time')
      plt.ylabel('Discharge ('+r'$m^3 s^{-1}$'+')')
      plt.legend()
+     
+     #--------------------------------------------------------------------------
+     #Annotate plot with statistics
+     #--------------------------------------------------------------------------
+     Stats_str = "NS = {0:.2f}\nCorr = {1:.2f}".format(ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Nash'], ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Correl'])
+     plt.text(0.1, 0.95, Stats_str, ha='center', va='center', transform=plt.axes().transAxes)
      
      #--------------------------------------------------------------------------
      #(Optional) plot in real time
