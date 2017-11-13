@@ -29,11 +29,11 @@ import datetime
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
 # 1 - rrr_obs_shp
-# 2 - rrr_obs_dir
-# 3 - rrr_mod_dir
+# 2 - rrr_obs_csv
+# 3 - rrr_mod_csv
 # 4 - rrr_plt_dir
 # 5 - rrr_str_dat
-# 6 - ZS_interval
+# 6 - rrr_end_dat
 # 7 - ZS_max_val
 
 
@@ -46,11 +46,11 @@ if IS_arg != 8:
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
-rrr_obs_dir=sys.argv[2]
-rrr_mod_dir=sys.argv[3]
+rrr_obs_csv=sys.argv[2]
+rrr_mod_csv=sys.argv[3]
 rrr_plt_dir=sys.argv[4]
 rrr_str_dat=sys.argv[5]
-ZS_interval=float(sys.argv[6])
+rrr_end_dat=sys.argv[6]
 ZS_max_val=float(sys.argv[7])
 
 
@@ -59,11 +59,11 @@ ZS_max_val=float(sys.argv[7])
 #*******************************************************************************
 print('Command line inputs')
 print('- '+rrr_obs_shp)
-print('- '+rrr_obs_dir)
-print('- '+rrr_mod_dir)
+print('- '+rrr_obs_csv)
+print('- '+rrr_mod_csv)
 print('- '+rrr_plt_dir)
 print('- '+rrr_str_dat)
-print('- '+str(ZS_interval))
+print('- '+rrr_end_dat)
 print('- '+str(ZS_max_val))
 
 
@@ -77,12 +77,18 @@ except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_shp)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_obs_dir):
-     print('ERROR - Directory does not exist'+rrr_obs_dir)
+try:
+     with open(rrr_obs_csv) as file:
+          pass
+except IOError as e:
+     print('ERROR - Unable to open'+rrr_obs_csv)
      raise SystemExit(22) 
 
-if not os.path.isdir(rrr_mod_dir):
-     print('ERROR - Directory does not exist'+rrr_mod_dir)
+try:
+     with open(rrr_mod_csv) as file:
+          pass
+except IOError as e:
+     print('ERROR - Unable to open'+rrr_mod_csv)
      raise SystemExit(22) 
 
 if not os.path.isdir(rrr_plt_dir):
@@ -131,8 +137,68 @@ print('Get temporal information from command line options')
 dt_str=datetime.datetime.strptime(rrr_str_dat,'%Y-%m-%d')
 print('- Start date selected is: '+str(dt_str))
 
-dt_int=datetime.timedelta(ZS_interval)
-print('- Interval selected is: '+str(dt_int))
+dt_end=datetime.datetime.strptime(rrr_end_dat,'%Y-%m-%d')
+print('- End date selected is: '+str(dt_end))
+
+
+#*******************************************************************************
+#Read timeseries from csv files
+#*******************************************************************************
+rrr_str_dat=datetime.datetime.strptime(rrr_str_dat, "%Y-%m-%d")
+rrr_end_dat=datetime.datetime.strptime(rrr_end_dat, "%Y-%m-%d")
+
+with open(rrr_obs_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     YV_header = next(iter(csvreader))
+     IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_obs = {rid: [] for rid in IV_headid}
+     ZH_time = {rid: [] for rid in IV_headid}
+     for row in csvreader:
+          dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
+          if dat >= rrr_str_dat and dat <= rrr_end_dat:
+               for i, rid in enumerate(IV_headid):
+                    ZH_obs[rid].append(float(row[i+1]))
+                    ZH_time[rid].append(dat)
+
+with open(rrr_mod_csv) as csvfile:
+     csvreader=csv.reader(csvfile)
+     YV_header = next(iter(csvreader))
+     IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_mod = {rid: [] for rid in IV_headid}
+     for row in csvreader:
+          dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
+          if dat >= rrr_str_dat and dat <= rrr_end_dat:
+               for i, rid in enumerate(IV_headid):
+                    ZH_mod[rid].append(float(row[i+1]))
+                    if dat not in ZH_time[rid]:
+                         ZH_time[rid].append(dat)
+
+rrr_obs_uq_csv = rrr_obs_csv.replace(".csv", "_uq.csv")
+rrr_mod_uq_csv = rrr_mod_csv.replace(".csv", "_uq.csv")
+
+if os.path.isfile(rrr_obs_uq_csv):
+     with open(rrr_obs_uq_csv) as csvfile:
+          csvreader=csv.reader(csvfile)
+          YV_header = next(iter(csvreader))
+          IV_headid = [int(h) for h in YV_header[1:]]
+          ZH_obs_uq = {rid: [] for rid in IV_headid}
+          for row in csvreader:
+               dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
+               if dat >= rrr_str_dat and dat <= rrr_end_dat:
+                    for i, rid in enumerate(IV_headid):
+                         ZH_obs_uq[rid].append(float(row[i+1]))
+
+if os.path.isfile(rrr_mod_uq_csv):
+     with open(rrr_mod_uq_csv) as csvfile:
+          csvreader=csv.reader(csvfile)
+          YV_header = next(iter(csvreader))
+          IV_headid = [int(h) for h in YV_header[1:]]
+          ZH_mod_uq = {rid: [] for rid in IV_headid}
+          for row in csvreader:
+               dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
+               if dat >= rrr_str_dat and dat <= rrr_end_dat:
+                    for i, rid in enumerate(IV_headid):
+                         ZH_mod_uq[rid].append(float(row[i+1]))
 
 
 #*******************************************************************************
@@ -140,65 +206,24 @@ print('- Interval selected is: '+str(dt_int))
 #*******************************************************************************
 print('Generate plots')
 
-rrr_obs_dir=os.path.join(rrr_obs_dir, '')
-rrr_mod_dir=os.path.join(rrr_mod_dir, '')
-#Add trailing slash to directory name if not present, do nothing otherwise
 
 for JS_obs_tot in range(IS_obs_tot):
-     #--------------------------------------------------------------------------
-     #Generate file names from unique IDs
-     #--------------------------------------------------------------------------
-     rrr_obs_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
-                  '_obs.csv'
-     rrr_mod_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+     \
-                  '_mod.csv'
-     rrr_obs_uq_csv=rrr_obs_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
-                  '_obs_uq.csv'
-     rrr_mod_uq_csv=rrr_mod_dir+'hydrograph_'+str(IV_obs_tot_id[JS_obs_tot])+  \
-                  '_mod_uq.csv'
-
-     #--------------------------------------------------------------------------
-     #Check that csv files exist
-     #--------------------------------------------------------------------------
-     try:
-          with open(rrr_obs_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_obs_csv)
-          raise SystemExit(22) 
-     try:
-          with open(rrr_mod_csv) as file:
-               pass
-     except IOError as e:
-          print('ERROR - Unable to open '+rrr_mod_csv)
-          raise SystemExit(22) 
 
      #--------------------------------------------------------------------------
      #Read timeseries from csv files
      #--------------------------------------------------------------------------
-     ZV_Qobs=[]
-     with open(rrr_obs_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for row in csvreader:
-               ZV_Qobs.append(float(row[0]))
-     ZV_Qmod=[]
-     with open(rrr_mod_csv,'rb') as csvfile:
-          csvreader=csv.reader(csvfile)
-          for row in csvreader:
-               ZV_Qmod.append(float(row[0]))
+     ZV_Qobs=ZH_obs[IV_obs_tot_id[JS_obs_tot]]
+     ZV_Qmod=ZH_mod[IV_obs_tot_id[JS_obs_tot]]
 
      if os.path.isfile(rrr_obs_uq_csv):
+          ZV_Qobs_uq=ZH_obs_uq[IV_obs_tot_id[JS_obs_tot]]
+     else:
           ZV_Qobs_uq=[]
-          with open(rrr_obs_uq_csv,'rb') as csvfile:
-               csvreader=csv.reader(csvfile)
-               for row in csvreader:
-                    ZV_Qobs_uq.append(float(row[0]))
+
      if os.path.isfile(rrr_mod_uq_csv):
+          ZV_Qmod_uq=ZH_mod_uq[IV_obs_tot_id[JS_obs_tot]]
+     else:
           ZV_Qmod_uq=[]
-          with open(rrr_mod_uq_csv,'rb') as csvfile:
-               csvreader=csv.reader(csvfile)
-               for row in csvreader:
-                    ZV_Qmod_uq.append(float(row[0]))
 
      #--------------------------------------------------------------------------
      #Ensure same number of values
@@ -215,9 +240,7 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Make list of times
      #--------------------------------------------------------------------------
-     ZV_time=[]
-     for JS_time in range(IS_time):
-          ZV_time.append(dt_str+JS_time*dt_int)
+     ZV_time=ZH_time[IV_obs_tot_id[JS_obs_tot]]
 
      #--------------------------------------------------------------------------
      #Plot timeseries
