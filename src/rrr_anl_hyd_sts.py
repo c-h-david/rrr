@@ -110,8 +110,18 @@ print('- The dates provided (or ommitted) correspond to '+str(IS_M)+' days')
 print('Reading rrr_obs_shp')
 IV_obs_tot_id=[]
 with fiona.open(rrr_obs_shp, 'r') as shpfile:
+     if 'COMID_1' in shpfile[0]['properties']:
+          YV_obs_id='COMID_1'
+     elif 'FLComID' in shpfile[0]['properties']:
+          YV_obs_id='FLComID'
+     elif 'ARCID' in shpfile[0]['properties']:
+          YV_obs_id='ARCID'
+     else:
+          print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
+          raise SystemExit(22) 
+
      for reach in shpfile:
-          IV_obs_tot_id.append(reach['properties']['FLComID'])
+          IV_obs_tot_id.append(reach['properties'][YV_obs_id])
 IS_obs_tot=len(IV_obs_tot_id)
 print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
 
