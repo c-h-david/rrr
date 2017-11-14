@@ -184,6 +184,8 @@ if 'sQout' in f.variables:
      YS_uq_name='sQout'
 elif 'sV' in f.variables:
      YS_uq_name='sV'
+else:
+     YS_uq_name=''
 
 #-------------------------------------------------------------------------------
 #Get variable sizes 
