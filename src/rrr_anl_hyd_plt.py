@@ -149,11 +149,14 @@ print('- End date selected is: '+str(dt_end))
 #*******************************************************************************
 rrr_str_dat=datetime.datetime.strptime(rrr_str_dat, "%Y-%m-%d")
 rrr_end_dat=datetime.datetime.strptime(rrr_end_dat, "%Y-%m-%d")
+ZH_obs_name = ''
+ZH_mod_name = ''
 
 with open(rrr_obs_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_obs_name = YV_header[0].split("_")[0]
      ZH_obs = {rid: [] for rid in IV_headid}
      ZH_time = {rid: [] for rid in IV_headid}
      for row in csvreader:
@@ -167,6 +170,7 @@ with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
+     ZH_mod_name = YV_header[0].split("_")[0]
      ZH_mod = {rid: [] for rid in IV_headid}
      for row in csvreader:
           dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -254,12 +258,20 @@ for JS_obs_tot in range(IS_obs_tot):
      ZV_time=ZH_time[IV_obs_tot_id[JS_obs_tot]]
 
      #--------------------------------------------------------------------------
+     #Ensure label names have been set, if not use defaults
+     #--------------------------------------------------------------------------
+     if len(ZH_obs_name) < 1:
+          ZH_obs_name = 'Observations'
+     if len(ZH_mod_name) < 1:
+          ZH_mod_name = 'RAPID'
+
+     #--------------------------------------------------------------------------
      #Plot timeseries
      #--------------------------------------------------------------------------
      plt.plot(ZV_time, ZV_Qobs, color='k', linestyle='solid', linewidth=1,     \
-              label='Observations')
+              label=ZH_obs_name)
      plt.plot(ZV_time, ZV_Qmod, color='b', linestyle='dotted', linewidth=1,    \
-              label='RAPID')
+              label=ZH_mod_name)
      
      #--------------------------------------------------------------------------
      #Plot uncertainties
@@ -269,13 +281,13 @@ for JS_obs_tot in range(IS_obs_tot):
                            [x-y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            [x+y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            color='k', alpha=0.1,                               \
-                           label='Uncertainty in observations')
+                           label='Uncertainty in {0}'.format(ZH_obs_name))
      if os.path.isfile(rrr_mod_uq_csv):
           plt.fill_between(ZV_time,                                            \
                            [x-y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            [x+y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            color='b', alpha=0.1,                               \
-                           label='Uncertainty in RAPID')
+                           label='Uncertainty in {0}'.format(ZH_mod_name))
 
      #--------------------------------------------------------------------------
      #Format x axis
