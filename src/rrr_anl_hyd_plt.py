@@ -266,6 +266,10 @@ for JS_obs_tot in range(IS_obs_tot):
           ZH_obs_name = 'Observations'
      if len(ZH_mod_name) < 1:
           ZH_mod_name = 'RAPID'
+     if len(ZH_obs_uq_name) < 1:
+          ZH_obs_name = 'Observations'
+     if len(ZH_mod_uq_name) < 1:
+          ZH_mod_name = 'RAPID'
 
      #--------------------------------------------------------------------------
      #Plot timeseries
