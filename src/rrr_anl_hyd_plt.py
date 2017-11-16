@@ -319,8 +319,9 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Annotate plot with statistics
      #--------------------------------------------------------------------------
+     Bbox_props = dict(boxstyle="square", fc="white", ec="black", alpha=1.0)
      Stats_str = "NS = {0:.2f}\nCorr = {1:.2f}".format(ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Nash'], ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Correl'])
-     plt.text(0.1, 0.95, Stats_str, ha='center', va='center', transform=plt.axes().transAxes)
+     plt.text(0.1, 0.9, Stats_str, ha='center', va='center', transform=plt.axes().transAxes, bbox=Bbox_props)
      
      #--------------------------------------------------------------------------
      #(Optional) plot in real time
