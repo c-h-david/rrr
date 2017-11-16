@@ -150,13 +150,15 @@ print('- End date selected is: '+str(dt_end))
 rrr_str_dat=datetime.datetime.strptime(rrr_str_dat, "%Y-%m-%d")
 rrr_end_dat=datetime.datetime.strptime(rrr_end_dat, "%Y-%m-%d")
 ZH_obs_name = ''
+ZH_obs_uq_name = ''
 ZH_mod_name = ''
+ZH_mod_uq_name = ''
 
 with open(rrr_obs_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
-     ZH_obs_name = YV_header[0].split("_")[0]
+     ZH_obs_name = YV_header[0]
      ZH_obs = {rid: [] for rid in IV_headid}
      ZH_time = {rid: [] for rid in IV_headid}
      for row in csvreader:
@@ -170,7 +172,7 @@ with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
-     ZH_mod_name = YV_header[0].split("_")[0]
+     ZH_mod_name = YV_header[0]
      ZH_mod = {rid: [] for rid in IV_headid}
      for row in csvreader:
           dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -188,6 +190,7 @@ if os.path.isfile(rrr_obs_uq_csv):
           csvreader=csv.reader(csvfile)
           YV_header = next(iter(csvreader))
           IV_headid = [int(h) for h in YV_header[1:]]
+          ZH_obs_uq_name = YV_header[0]
           ZH_obs_uq = {rid: [] for rid in IV_headid}
           for row in csvreader:
                dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -200,6 +203,7 @@ if os.path.isfile(rrr_mod_uq_csv):
           csvreader=csv.reader(csvfile)
           YV_header = next(iter(csvreader))
           IV_headid = [int(h) for h in YV_header[1:]]
+          ZH_mod_uq_name = YV_header[0]
           ZH_mod_uq = {rid: [] for rid in IV_headid}
           for row in csvreader:
                dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -281,13 +285,13 @@ for JS_obs_tot in range(IS_obs_tot):
                            [x-y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            [x+y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            color='k', alpha=0.1,                               \
-                           label='Uncertainty in {0}'.format(ZH_obs_name))
+                           label='Uncertainty in {0}'.format(ZH_obs_uq_name))
      if os.path.isfile(rrr_mod_uq_csv):
           plt.fill_between(ZV_time,                                            \
                            [x-y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            [x+y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            color='b', alpha=0.1,                               \
-                           label='Uncertainty in {0}'.format(ZH_mod_name))
+                           label='Uncertainty in {0}'.format(ZH_mod_uq_name))
 
      #--------------------------------------------------------------------------
      #Format x axis
