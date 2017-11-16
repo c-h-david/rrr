@@ -37,7 +37,6 @@ import datetime
 # 7 - rrr_end_dat
 # 8 - ZS_max_val
 
-
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
@@ -54,7 +53,6 @@ rrr_plt_dir=sys.argv[5]
 rrr_str_dat=sys.argv[6]
 rrr_end_dat=sys.argv[7]
 ZS_max_val=float(sys.argv[8])
-
 
 #*******************************************************************************
 #Print input information
