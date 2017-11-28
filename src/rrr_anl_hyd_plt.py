@@ -31,7 +31,7 @@ import datetime
 # 1 - rrr_obs_shp
 # 2 - rrr_obs_csv
 # 3 - rrr_mod_csv
-# 4 - rrr_stats_csv
+# 4 - rrr_sts_csv
 # 5 - rrr_plt_dir
 # 6 - rrr_str_dat
 # 7 - rrr_end_dat
@@ -48,7 +48,7 @@ if IS_arg != 9:
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
 rrr_mod_csv=sys.argv[3]
-rrr_stats_csv=sys.argv[4]
+rrr_sts_csv=sys.argv[4]
 rrr_plt_dir=sys.argv[5]
 rrr_str_dat=sys.argv[6]
 rrr_end_dat=sys.argv[7]
@@ -61,7 +61,7 @@ print('Command line inputs')
 print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
 print('- '+rrr_mod_csv)
-print('- '+rrr_stats_csv)
+print('- '+rrr_sts_csv)
 print('- '+rrr_plt_dir)
 print('- '+rrr_str_dat)
 print('- '+rrr_end_dat)
@@ -147,16 +147,16 @@ print('- End date selected is: '+str(dt_end))
 #*******************************************************************************
 rrr_str_dat=datetime.datetime.strptime(rrr_str_dat, "%Y-%m-%d")
 rrr_end_dat=datetime.datetime.strptime(rrr_end_dat, "%Y-%m-%d")
-ZH_obs_name = ''
-ZH_obs_uq_name = ''
-ZH_mod_name = ''
-ZH_mod_uq_name = ''
+YS_obs_nam = ''
+YS_obs_nam_uq = ''
+YS_mod_nam = ''
+YS_mod_nam_uq = ''
 
 with open(rrr_obs_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
-     ZH_obs_name = YV_header[0]
+     YS_obs_nam = YV_header[0]
      ZH_obs = {rid: [] for rid in IV_headid}
      ZH_time = {rid: [] for rid in IV_headid}
      for row in csvreader:
@@ -170,7 +170,7 @@ with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
-     ZH_mod_name = YV_header[0]
+     YS_mod_nam = YV_header[0]
      ZH_mod = {rid: [] for rid in IV_headid}
      for row in csvreader:
           dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -188,7 +188,7 @@ if os.path.isfile(rrr_obs_uq_csv):
           csvreader=csv.reader(csvfile)
           YV_header = next(iter(csvreader))
           IV_headid = [int(h) for h in YV_header[1:]]
-          ZH_obs_uq_name = YV_header[0]
+          YS_obs_nam_uq = YV_header[0]
           ZH_obs_uq = {rid: [] for rid in IV_headid}
           for row in csvreader:
                dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -201,7 +201,7 @@ if os.path.isfile(rrr_mod_uq_csv):
           csvreader=csv.reader(csvfile)
           YV_header = next(iter(csvreader))
           IV_headid = [int(h) for h in YV_header[1:]]
-          ZH_mod_uq_name = YV_header[0]
+          YS_mod_nam_uq = YV_header[0]
           ZH_mod_uq = {rid: [] for rid in IV_headid}
           for row in csvreader:
                dat = datetime.datetime.strptime(row[0], "%Y-%m-%d")
@@ -209,20 +209,22 @@ if os.path.isfile(rrr_mod_uq_csv):
                     for i, rid in enumerate(IV_headid):
                          ZH_mod_uq[rid].append(float(row[i+1]))
 
+
 #*******************************************************************************
 #Read statistics from csv file
 #*******************************************************************************
-with open(rrr_stats_csv) as csvfile:
+with open(rrr_sts_csv) as csvfile:
      csvreader = csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [h for h in YV_header]
-     ZH_stats = {int(row[0]): {h: float(row[i+1]) for i, h in enumerate(IV_headid[1:])} for row in csvreader}
+     ZH_stats = {int(row[0]): {h: float(row[i+1]) for i, h                     \
+                 in enumerate(IV_headid[1:])} for row in csvreader}
+
 
 #*******************************************************************************
 #Generate plots
 #*******************************************************************************
 print('Generate plots')
-
 
 for JS_obs_tot in range(IS_obs_tot):
 
@@ -262,22 +264,22 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Ensure label names have been set, if not use defaults
      #--------------------------------------------------------------------------
-     if len(ZH_obs_name) < 1:
-          ZH_obs_name = 'Observations'
-     if len(ZH_mod_name) < 1:
-          ZH_mod_name = 'RAPID'
-     if len(ZH_obs_uq_name) < 1:
-          ZH_obs_name = 'Observations'
-     if len(ZH_mod_uq_name) < 1:
-          ZH_mod_name = 'RAPID'
+     if len(YS_obs_nam) < 1:
+          YS_obs_nam = 'Observations'
+     if len(YS_mod_nam) < 1:
+          YS_mod_nam = 'Model'
+     if len(YS_obs_nam_uq) < 1:
+          YS_obs_nam = 'Observations'
+     if len(YS_mod_nam_uq) < 1:
+          YS_mod_nam = 'Model'
 
      #--------------------------------------------------------------------------
      #Plot timeseries
      #--------------------------------------------------------------------------
      plt.plot(ZV_time, ZV_Qobs, color='k', linestyle='solid', linewidth=1,     \
-              label=ZH_obs_name)
+              label=YS_obs_nam)
      plt.plot(ZV_time, ZV_Qmod, color='b', linestyle='dotted', linewidth=1,    \
-              label=ZH_mod_name)
+              label=YS_mod_nam)
      
      #--------------------------------------------------------------------------
      #Plot uncertainties
@@ -287,19 +289,18 @@ for JS_obs_tot in range(IS_obs_tot):
                            [x-y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            [x+y for x,y in zip(ZV_Qobs,ZV_Qobs_uq)],           \
                            color='k', alpha=0.1,                               \
-                           label='Uncertainty in {0}'.format(ZH_obs_uq_name))
+                           label='Uncertainty in {0}'.format(YS_obs_nam_uq))
      if os.path.isfile(rrr_mod_uq_csv):
           plt.fill_between(ZV_time,                                            \
                            [x-y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            [x+y for x,y in zip(ZV_Qmod,ZV_Qmod_uq)],           \
                            color='b', alpha=0.1,                               \
-                           label='Uncertainty in {0}'.format(ZH_mod_uq_name))
+                           label='Uncertainty in {0}'.format(YS_mod_nam_uq))
 
      #--------------------------------------------------------------------------
      #Format x axis
      #--------------------------------------------------------------------------
      plt.axes().xaxis.set_minor_locator(mdates.AutoDateLocator())
-
      locator=mdates.AutoDateLocator(minticks=6,maxticks=8)
      plt.axes().xaxis.set_major_locator(locator)
      plt.axes().xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
@@ -321,9 +322,12 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Annotate plot with statistics
      #--------------------------------------------------------------------------
-     Bbox_props = dict(boxstyle="square", fc="white", ec="black", alpha=1.0)
-     Stats_str = "NS = {0:.2f}\nCorr = {1:.2f}".format(ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Nash'], ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Correl'])
-     plt.text(0.1, 0.9, Stats_str, ha='center', va='center', transform=plt.axes().transAxes, bbox=Bbox_props)
+     bbox_prop = dict(boxstyle="square", fc="white", ec="black", alpha=1.0)
+     stats_str = "NS = {0:.2f}\nCorr = {1:.2f}".format(                        \
+                  ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Nash'],                 \
+                  ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Correl'])
+     plt.text(0.1, 0.9, stats_str, ha='center', va='center',                   \
+              transform=plt.axes().transAxes, bbox=bbox_prop)
      
      #--------------------------------------------------------------------------
      #(Optional) plot in real time
