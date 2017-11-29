@@ -131,7 +131,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Timeseries for RAPID"
 ../src/rrr_anl_hyd_mod.py                                                      \
      ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
-     ../../../../tmp_rapid_dev/rapid/output/HSmsp_WRR/Qout_HSmsp_2000_2009_VIC_NASA_sgl_pa_phi1_2008_1_n1_preonly_ilu.nc \
+     ../output/RivMIP/Qout_HSmsp_2000_2009_VIC_NASA_sgl_pa_phi1_2008_1_n1_preonly_ilu.nc \
      RAPID                                                                     \
      8                                                                         \
      ../output/RivMIP/analysis/timeseries_RAPID_201411xx_pa_phi1_2008_1_tst.csv \
@@ -647,6 +647,186 @@ echo "- Hydrographs for CaMa-Flood 02 years"
      ../output/RivMIP/analysis/timeseries_CaMa-Flood_20170116.csv              \
      ../output/RivMIP/analysis/stats_02yrs_CaMa-Flood_20170116.csv             \
      ../output/RivMIP/analysis/hydrographs_CaMa-Flood_20170116/                \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for CTRIP 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for CTRIP 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_CTRIP_20171006_vitVAR_groundwDEF_floodT.csv \
+     ../output/RivMIP/analysis/stats_02yrs_CTRIP_20171006_vitVAR_groundwDEF_floodT.csv \
+     ../output/RivMIP/analysis/hydrographs_CTRIP_20171006_vitVAR_groundwDEF_floodT/ \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for HRR 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for HRR 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_HRR_20170212.csv                     \
+     ../output/RivMIP/analysis/stats_02yrs_HRR_20170212.csv                    \
+     ../output/RivMIP/analysis/hydrographs_HRR_20170212/                       \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for LISFLOOD 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for LISFLOOD 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_LISFLOOD_20170607.csv                \
+     ../output/RivMIP/analysis/stats_02yrs_LISFLOOD_20170607.csv               \
+     ../output/RivMIP/analysis/hydrographs_LISFLOOD_201706078/                 \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for MGB 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for MGB 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_MGB_20170202_HD_H95_W_CS_10_CB_10.csv \
+     ../output/RivMIP/analysis/stats_02yrs_MGB_20170202_HD_H95_W_CS_10_CB_10.csv \
+     ../output/RivMIP/analysis/hydrographs_MGB_20170202_HD_H95_W_CS_10_CB_10/  \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for RAPID 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for RAPID 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_RAPID_201411xx_pa_phi1_2008_1.csv    \
+     ../output/RivMIP/analysis/stats_02yrs_RAPID_201411xx_pa_phi1_2008_1.csv   \
+     ../output/RivMIP/analysis/hydrographs_RAPID_201411xx_pa_phi1_2008_1/      \
+     2000-01-01                                                                \
+     2001-12-31                                                                \
+     30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for RVIC 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for RVIC 02 years"
+../src/./rrr_anl_hyd_plt.py                                                    \
+     ../output/RivMIP/obs_HSmsp_Merge_Spatial_Join_Sort.shp                    \
+     ../output/RivMIP/analysis/timeseries_USGS.csv                             \
+     ../output/RivMIP/analysis/timeseries_RVIC_20170609.csv                    \
+     ../output/RivMIP/analysis/stats_02yrs_RVIC_20170609.csv                   \
+     ../output/RivMIP/analysis/hydrographs_RVIC_20170609/                      \
      2000-01-01                                                                \
      2001-12-31                                                                \
      30000                                                                     \
