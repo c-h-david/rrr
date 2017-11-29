@@ -317,16 +317,17 @@ for JS_obs_tot in range(IS_obs_tot):
      plt.title(YV_obs_tot_nm[JS_obs_tot])
      plt.xlabel('Time')
      plt.ylabel('Discharge ('+r'$m^3 s^{-1}$'+')')
-     plt.legend()
+     plt.legend(loc='upper right')
      
      #--------------------------------------------------------------------------
      #Annotate plot with statistics
      #--------------------------------------------------------------------------
-     bbox_prop = dict(boxstyle="square", fc="white", ec="black", alpha=1.0)
-     stats_str = "NS = {0:.2f}\nCorr = {1:.2f}".format(                        \
+     stats_str = "NSE = {0:.2f}\n$\\rho$ = {1:.2f}".format(                    \
                   ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Nash'],                 \
                   ZH_stats[IV_obs_tot_id[JS_obs_tot]]['Correl'])
-     plt.text(0.1, 0.9, stats_str, ha='center', va='center',                   \
+     bbox_prop = dict(boxstyle="round,pad=0.2", fc="white", ec="lightgrey",    \
+                      alpha=1.0)
+     plt.text(0.02, 0.97, stats_str, ha='left', va='top',                      \
               transform=plt.axes().transAxes, bbox=bbox_prop)
      
      #--------------------------------------------------------------------------
