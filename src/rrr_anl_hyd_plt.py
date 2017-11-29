@@ -269,9 +269,9 @@ for JS_obs_tot in range(IS_obs_tot):
      if len(YS_mod_nam) < 1:
           YS_mod_nam = 'Model'
      if len(YS_obs_nam_uq) < 1:
-          YS_obs_nam = 'Observations'
+          YS_obs_nam_uq = 'Observations'
      if len(YS_mod_nam_uq) < 1:
-          YS_mod_nam = 'Model'
+          YS_mod_nam_uq = 'Model'
 
      #--------------------------------------------------------------------------
      #Plot timeseries
