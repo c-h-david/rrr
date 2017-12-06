@@ -736,7 +736,7 @@ echo "- Hydrographs for LISFLOOD 02 years"
      ../output/RivMIP/analysis/timeseries_USGS.csv                             \
      ../output/RivMIP/analysis/timeseries_LISFLOOD_20170607.csv                \
      ../output/RivMIP/analysis/stats_02yrs_LISFLOOD_20170607.csv               \
-     ../output/RivMIP/analysis/hydrographs_LISFLOOD_201706078/                 \
+     ../output/RivMIP/analysis/hydrographs_LISFLOOD_20170607/                  \
      2000-01-01                                                                \
      2001-12-31                                                                \
      30000                                                                     \
@@ -830,6 +830,174 @@ echo "- Hydrographs for RVIC 02 years"
      2000-01-01                                                                \
      2001-12-31                                                                \
      30000                                                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for CaMa-Flood 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for CaMa-Flood 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_CaMa-Flood_20170116.csv             \
+     ../output/RivMIP/analysis/cdf_02yrs_CaMa-Flood_20170116/                  \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for CTRIP 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for CTRIP 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_CTRIP_20171006_vitVAR_groundwDEF_floodT.csv \
+     ../output/RivMIP/analysis/cdf_02yrs_CTRIP_20171006_vitVAR_groundwDEF_floodT/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for HRR 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for HRR 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_HRR_20170212.csv                    \
+     ../output/RivMIP/analysis/cdf_02yrs_HRR_20170212/                         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for LISFLOOD 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for LISFLOOD 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_LISFLOOD_20170607.csv               \
+     ../output/RivMIP/analysis/cdf_02yrs_LISFLOOD_20170607/                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for MGB 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for MGB 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_MGB_20170202_HD_H95_W_CS_10_CB_10.csv \
+     ../output/RivMIP/analysis/cdf_02yrs_MGB_20170202_HD_H95_W_CS_10_CB_10/    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for RAPID 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for RAPID 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_RAPID_201411xx_pa_phi1_2008_1.csv   \
+     ../output/RivMIP/analysis/cdf_02yrs_RAPID_201411xx_pa_phi1_2008_1/        \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for RVIC 02 years
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for RVIC 02 years"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/RivMIP/analysis/stats_02yrs_RVIC_20170609.csv                   \
+     ../output/RivMIP/analysis/cdf_02yrs_RVIC_20170609/                        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
