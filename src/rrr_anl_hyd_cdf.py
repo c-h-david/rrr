@@ -176,13 +176,15 @@ for JS_fig in range(IS_fig):
           YS_title='All stations with large flow'
      if JS_fig==2:
           ZV_fix=numpy.copy(ZV_mbr)
-          numpy.place(ZV_fix,ZV_cor<0.8,numpy.nan)
+          numpy.place(ZV_fix,[ZS_cor<0.8 for ZS_cor in ZV_cor],numpy.nan)
           YS_title='All stations with large correlation'
      if JS_fig==3:
           ZV_fix=numpy.copy(ZV_mbr)
-          numpy.place(ZV_fix,ZV_cor<0.8,numpy.nan)
-          numpy.place(ZV_fix,ZV_obr<100,numpy.nan)
+          numpy.place(ZV_fix,[ZS_cor<0.8 for ZS_cor in ZV_cor],numpy.nan)
+          numpy.place(ZV_fix,[ZS_obr<100 for ZS_obr in ZV_obr],numpy.nan)
           YS_title='All stations with large correlation and large flow'
+     #Using list comprehension for '<' is better here than direct '<' over numpy 
+     #arrays because of the runtime warning for NaNs in numpy array comparison.
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Compute percentile
