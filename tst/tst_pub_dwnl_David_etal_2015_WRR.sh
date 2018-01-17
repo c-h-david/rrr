@@ -63,6 +63,26 @@ echo "********************"
 
 
 #*******************************************************************************
+#Command line option
+#*******************************************************************************
+if [ "$#" -gt "1" ]; then
+     echo "A maximum of one argument can be given" 1>&2
+     exit 22
+fi
+#Make sure a maximum of one command land line option was given
+
+if [ "$#" -eq "1" ]; then
+     if [ "$1" == "nldas" ] || [ "$1" == "rrr" ]; then 
+          dwnl=$1
+     else
+          echo "The option $1 does not exist" 1>&2
+          exit 22
+     fi
+fi
+#Make sure the command line option given exists
+
+
+#*******************************************************************************
 #Download NLDAS2 files
 #*******************************************************************************
 
@@ -90,6 +110,7 @@ folder="../input/HSmsp_WRR/NLDAS2"
 #-------------------------------------------------------------------------------
 #Download process
 #-------------------------------------------------------------------------------
+if [ "$dwnl" == "nldas" ] || [ "$dwnl" == "" ]; then
 for model in $model
 do
 mkdir -p $folder"/NLDAS_"$model"0125_H.002/"
@@ -101,6 +122,7 @@ do
      if [ $? -gt 0 ] ; then echo "Problem downloading $year" >&2 ; exit 44 ; fi
 done
 done
+fi
 
 
 #*******************************************************************************
