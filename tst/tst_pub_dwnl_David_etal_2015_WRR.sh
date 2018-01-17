@@ -126,9 +126,73 @@ fi
 
 
 #*******************************************************************************
+#Download RRR input files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
+folder="../input/HSmsp_WRR"
+list="                                                                         \
+      riv_HSmsp.zip                                                            \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+fi
+
+
+#*******************************************************************************
+#Download RRR output files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
+folder="../output/HSmsp_WRR"
+list="                                                                         \
+      coords_HSmsp.csv                                                         \
+      k_HSmsp_pa_phi1_2008_0.csv                                               \
+      k_HSmsp_pa_phi1_2008_1.csv                                               \
+      kfac_HSmsp_1km_hour.csv                                                  \
+      rapid_connect_HSmsp.csv                                                  \
+      riv_bas_id_HSmsp_topo.csv                                                \
+      sort_HSmsp_topo.csv                                                      \
+      xfac_HSmsp_0.1.csv                                                       \
+      x_HSmsp_pa_phi1_2008_0.csv                                               \
+      x_HSmsp_pa_phi1_2008_1.csv                                               \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+fi
+
+
+#*******************************************************************************
 #Convert legacy files
 #*******************************************************************************
-#N/A
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+unzip -nq ../input/HSmsp_WRR/riv_HSmsp.zip -d ../input/HSmsp_WRR/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+fi
 
 
 #*******************************************************************************
