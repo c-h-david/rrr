@@ -19,6 +19,11 @@
 #1. Intercomparison and application of model products,  Journal of Geophysical 
 #Research, 117, D03109
 #DOI: 10.1029/2011JD016048
+#This script also downloads a subset of the files from:
+#Lehner, Bernhard, Kristine Verdin, and Andy Jarvis (2008), New Global 
+#Hydrography Derived From Spaceborne Elevation Data, Eos Trans. AGU, 89(10), 
+#93–94.
+#DOI:10.1029/2008EO100001.
 #The files used are available from:
 #David, Cédric H., James S. Famiglietti, Zong-Liang Yang, and Victor Eijkhout 
 #(2015),
@@ -31,6 +36,11 @@
 #Mocko (2012), Continental-scale water and energy flux analysis and validation 
 #for the North American Land Data Assimilation System project phase 2 (NLDAS-2).
 #ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/
+#and from:
+#Lehner, Bernhard, Kristine Verdin, and Andy Jarvis (2008), New Global 
+#Hydrography Derived From Spaceborne Elevation Data, Eos Trans. AGU, 89(10), 
+#93–94.
+#http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
@@ -55,8 +65,10 @@
 echo "********************"
 echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
 echo "                          ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/"
+echo "                          http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
 echo "which correspond to   :   http://dx.doi.org/10.1002/2014WR016650"
 echo "                          http://dx.doi.org/10.1029/2011JD016048"
+echo "                          http://dx.doi.org/10.1029/2008EO100001"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
 echo "Please cite these four DOIs if using these files for your publications."
 echo "********************"
@@ -72,7 +84,8 @@ fi
 #Make sure a maximum of one command land line option was given
 
 if [ "$#" -eq "1" ]; then
-     if [ "$1" == "nldas" ] || [ "$1" == "rrr" ]; then 
+     if [ "$1" == "nldas" ] || [ "$1" == "hydrosheds" ] ||                     \
+        [ "$1" == "rrr" ]; then 
           dwnl=$1
      else
           echo "The option $1 does not exist" 1>&2
@@ -126,6 +139,32 @@ fi
 
 
 #*******************************************************************************
+#Download HydroSHEDS files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
+folder="../input/HSmsp_WRR"
+list="                                                                         \
+      na_riv_15s.zip                                                           \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+if [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+fi
+
+
+#*******************************************************************************
 #Download RRR input files
 #*******************************************************************************
 
@@ -165,6 +204,7 @@ list="                                                                         \
       k_HSmsp_pa_phi1_2008_0.csv                                               \
       k_HSmsp_pa_phi1_2008_1.csv                                               \
       kfac_HSmsp_1km_hour.csv                                                  \
+      rapid_catchment_na_riv_15s.csv                                           \
       rapid_connect_HSmsp.csv                                                  \
       riv_bas_id_HSmsp_topo.csv                                                \
       sort_HSmsp_topo.csv                                                      \
@@ -189,6 +229,11 @@ fi
 #*******************************************************************************
 #Convert legacy files
 #*******************************************************************************
+if [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
+unzip -nq ../input/HSmsp_WRR/na_riv_15s.zip -d ../input/HSmsp_WRR/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+fi
+
 if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
 unzip -nq ../input/HSmsp_WRR/riv_HSmsp.zip -d ../input/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
