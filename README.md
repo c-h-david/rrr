@@ -48,7 +48,7 @@ information on both RAPID and RRR can be found on the the RAPID website at:
 ## Installation on Ubuntu
 This document was written and tested on a machine with a **clean** image of 
 [Ubuntu 14.04.0 Desktop 64-bit](http://old-releases.ubuntu.com/releases/14.04.0/ubuntu-14.04-desktop-amd64.iso)
-installed, *i.e.* **no update** were performed, and **no upgrade** either. 
+installed, *i.e.* **no update** was performed, and **no upgrade** either. 
 
 Note that the experienced users may find more up-to-date installation 
 instructions in
