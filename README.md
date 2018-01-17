@@ -46,9 +46,9 @@ information on both RAPID and RRR can be found on the the RAPID website at:
 [http://rapid-hub.org/](http://rapid-hub.org/).
 
 ## Installation on Ubuntu
-This document was written and tested on a machine with a clean image of 
+This document was written and tested on a machine with a **clean** image of 
 [Ubuntu 14.04.0 Desktop 64-bit](http://old-releases.ubuntu.com/releases/14.04.0/ubuntu-14.04-desktop-amd64.iso)
-installed. 
+installed, *i.e.* **no update** were performed, and **no upgrade** either. 
 
 Note that the experienced users may find more up-to-date installation 
 instructions in
@@ -82,12 +82,19 @@ and can be installed with `apt-get`. All packages can be installed at once using
 $ sudo apt-get install -y $(grep -v -E '(^#|^$)' requirements.apt)
 ```
 
-Alternatively, one may install the APT packages listed in 
-[requirements.apt](https://github.com/c-h-david/rrr/blob/master/requirements.apt)
-one by one, for example:
+> Alternatively, one may install the APT packages listed in 
+> [requirements.apt](https://github.com/c-h-david/rrr/blob/master/requirements.apt)
+> one by one, for example:
+>
+> ```
+> $ sudo apt-get install -y python-pip
+>```
+
+Note that Ubuntu 14.0.0 does not support `ffmpeg` and instead has `avconv`. A simple
+symbolic link will suffice to here:
 
 ```
-$ sudo apt-get install -y python-pip
+$ sudo ln -s /usr/bin/avconv /usr/bin/ffmpeg
 ```
 
 ### Install Python packages
@@ -99,13 +106,13 @@ and can be installed with `pip`. All packages can be installed at once using:
 $ sudo pip install -r requirements.pip
 ```
 
-Alternatively, one may install the PyPI packages listed in 
-[requirements.pip](https://github.com/c-h-david/rrr/blob/master/requirements.pip)
-one by one, for example:
-
-```
-$ sudo pip install cryptography==2.0.3
-```
+> Alternatively, one may install the PyPI packages listed in 
+> [requirements.pip](https://github.com/c-h-david/rrr/blob/master/requirements.pip)
+> one by one, for example:
+>
+> ```
+> $ sudo pip install cryptography==2.0.3
+> ```
 
 ### Install NCL
 The NCAR Command Language (NCL) can be downloaded using:
@@ -125,8 +132,8 @@ $ export NCARG_ROOT=$HOME/installz/ncl_ncarg-6.3.0-install
 $ export PATH=$PATH:$NCARG_ROOT/bin
 ```
 
-Note that these two lines can also be added in `~/.bash_aliases` so that the 
-environment variables persist.
+> Note that these two lines can also be added in `~/.bash_aliases` so that the 
+> environment variables persist.
 
 ## Testing on Ubuntu
 Testing scripts are currently under development.
