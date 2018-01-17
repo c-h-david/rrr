@@ -39,7 +39,8 @@ addons:
 #Environment variables for different tests on multiple Travis CI workers 
 #*******************************************************************************
 env:
-- TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh rrr' TST_PUB_REPR='./rtk_pub_repr_David_etal_2015_WRR.sh 1 4'
+- TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh rrr' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 1 4'
+- TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 5'
 
 
 #*******************************************************************************
