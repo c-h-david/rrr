@@ -27,7 +27,6 @@ addons:
     - nco                #netCDF Operators
     - libgdal-dev        #GDAL library
     - gdal-bin           #GDAL binaries
-    - python-gdal        #Python bindings for GDAL
     - libav-tools        #Audio/Video tools (avconv is similar to ffmpeg)
     - libfreetype6-dev   #Freetype library (to render fonts)
     - libxml2-dev        #XML library
@@ -91,7 +90,6 @@ install:
 script:
 - cd $TRAVIS_BUILD_DIR
 - cd ./tst/
-- pip freeze
 - echo $TST_PUB_DWNL && $TST_PUB_DWNL
 - echo $TST_PUB_REPR && $TST_PUB_REPR
 
