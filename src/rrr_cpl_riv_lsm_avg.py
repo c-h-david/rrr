@@ -169,8 +169,11 @@ ZV_vol_sdv=numpy.sqrt(ZV_vol_sdv)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Computing estimate of bias from average')
 
-ZV_vol_bia=ZV_vol_avg*ZS_avg_perc/100
+ZV_vol_bia=numpy.copy(ZV_vol_avg)
+ZV_vol_bia=ZV_vol_bia*ZS_avg_perc/100
 ZV_vol_bia=numpy.absolute(ZV_vol_bia)
+#It's best to use numpy.copy because any later modification of ZV_vol_avg would
+#otherwise impact ZV_vol_bia 
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computing estimate of standard error from standard deviation
