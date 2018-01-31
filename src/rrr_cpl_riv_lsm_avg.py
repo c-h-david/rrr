@@ -148,6 +148,27 @@ ZV_vol_avg=numpy.empty(IS_riv_tot)
 for JS_lsm_time in range(IS_lsm_time):
      ZV_vol_tmp=f1.variables[YV_var][JS_lsm_time,:]
      ZV_vol_avg=ZV_vol_avg+ZV_vol_tmp
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Computing standard deviation
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+print('- Computing standard deviation')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Computing estimate of bias from average
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+print('- Computing estimate of bias from average')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Computing estimate of standard error from standard deviation
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+print('- Computing estimate of standard error from standard deviation')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Printing some diagnostic quantities
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+print('- Printing some diagnostic quantities')
+
 print(' . Summed runoff for all reaches and all time steps: '                  \
       + str(sum(ZV_vol_avg))+' m^3')
 
