@@ -88,6 +88,45 @@ unt=0
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
+#Extracting study domain
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Extracting study domain"
+../src/rrr_riv_tot_ext_bas_hydrosheds.py                                       \
+     ../input/HydroSHEDS/na_bas_15s_beta.shp                                   \
+     [426769]                                                                  \
+     ../input/HydroSHEDS/na_riv_15s.shp                                        \
+     ../output/HSmsp_WRR/bas_HSmsp_tst.shp                                     \
+     ../output/HSmsp_WRR/riv_HSmsp_tst.shp                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing basin file"
+./tst_cmp_shp.py                                                               \
+     ../output/HSmsp_WRR/bas_HSmsp.shp                                         \
+     ../output/HSmsp_WRR/bas_HSmsp_tst.shp                                     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing river file"
+./tst_cmp_shp.py                                                               \
+     ../output/HSmsp_WRR/riv_HSmsp.shp                                         \
+     ../output/HSmsp_WRR/riv_HSmsp_tst.shp                                     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Connectivity, base parameters, coordinates, sort
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -98,7 +137,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_hydrosheds.py                                       \
-     ../input/HSmsp_WRR/riv_HSmsp.shp                                          \
+     ../output/HSmsp_WRR/riv_HSmsp.shp                                         \
      4                                                                         \
      esri:102008                                                               \
      ../output/HSmsp_WRR/rapid_connect_HSmsp_tst.csv                           \
@@ -253,7 +292,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sorted basin file"
 ../src/rrr_riv_bas_gen_one_hydrosheds.py                                       \
-     ../input/HSmsp_WRR/riv_HSmsp.shp                                          \
+     ../output/HSmsp_WRR/riv_HSmsp.shp                                         \
      ../output/HSmsp_WRR/rapid_connect_HSmsp.csv                               \
      ../output/HSmsp_WRR/sort_HSmsp_topo.csv                                   \
      ../output/HSmsp_WRR/riv_bas_id_HSmsp_topo_tst.csv                         \
@@ -285,7 +324,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_hydrosheds.py                                       \
-     ../input/HSmsp_WRR/na_riv_15s.dbf                                         \
+     ../input/HydroSHEDS/na_riv_15s.dbf                                        \
      ../output/HSmsp_WRR/rapid_catchment_na_riv_15s_tst.csv                    \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
