@@ -149,6 +149,8 @@ for JS_lsm_time in range(IS_lsm_time):
      ZV_vol_tmp=f1.variables[YV_var][JS_lsm_time,:]
      ZV_vol_avg=ZV_vol_avg+ZV_vol_tmp
 
+ZV_vol_avg=ZV_vol_avg/IS_lsm_time
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computing standard deviation
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -158,6 +160,9 @@ print('- Computing standard deviation')
 #Computing estimate of bias from average
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Computing estimate of bias from average')
+
+ZV_vol_bia=ZV_vol_avg*ZS_avg_perc/100
+ZV_vol_bia=numpy.absolute(ZV_vol_bia)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computing estimate of standard error from standard deviation
@@ -170,30 +175,26 @@ print('- Computing estimate of standard error from standard deviation')
 print('- Printing some diagnostic quantities')
 
 print(' . Summed runoff for all reaches and all time steps: '                  \
-      + str(sum(ZV_vol_avg))+' m^3')
+      + str(sum(ZV_vol_avg)*IS_lsm_time)+' m^3')
 
-ZV_vol_avg=ZV_vol_avg/IS_lsm_time
 print(' . Summed runoff for all reaches averaged for one time step: '          \
       +str(sum(ZV_vol_avg))+' m^3')
 
-ZV_vol_avg=ZV_vol_avg*ZS_avg_perc/100
 print(' . Summed runoff for all reaches averaged for one time step, scaled: '  \
-      +str(sum(ZV_vol_avg))+' m^3')
+      +str(sum(ZV_vol_avg)*ZS_avg_perc/100)+' m^3')
 
 IS_negative=(ZV_vol_avg<0).sum()
-print(' . Number of negative elements in summed runoff for all reaches '       \
-      'averaged for one time step, scaled: '+str(IS_negative))
+print(' . Number of negative elements in average runoff: '+str(IS_negative))
 
-ZS_vol_avg=sum(ZV_vol_avg)/IS_riv_tot
+ZS_vol_avg=sum(ZV_vol_avg)/IS_riv_tot*ZS_avg_perc/100
 print(' . Summed runoff averaged for one reach and one time step, scaled: '    \
       +str(ZS_vol_avg)+' m^3')
 
-ZV_vol_avg=numpy.absolute(ZV_vol_avg)
-ZS_vol_avg=sum(ZV_vol_avg)/IS_riv_tot
+ZS_vol_avg=sum(ZV_vol_bia)/IS_riv_tot
 print(' . Summed runoff averaged for one reach and one time step, scaled, '    \
       +'absolute value: '+str(ZS_vol_avg)+' m^3')
 
-ZS_vol_avg_rms=(sum([i**2 for i in ZV_vol_avg]))**0.5
+ZS_vol_avg_rms=(sum([i**2 for i in ZV_vol_bia]))**0.5
 print(' . Estimate of error from square root of sum of squares: '              \
       +str(ZS_vol_avg_rms)+' m^3')
 
@@ -251,7 +252,7 @@ sm3_riv.setncatts(attdict)
 #Populate new variable
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Populating new variable')
-sm3_riv[:]=ZV_vol_avg
+sm3_riv[:]=ZV_vol_bia
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Close file
