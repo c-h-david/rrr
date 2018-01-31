@@ -146,8 +146,9 @@ fi
 #Download parameters
 #-------------------------------------------------------------------------------
 URL="http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
-folder="../input/HSmsp_WRR"
+folder="../input/HydroSHEDS"
 list="                                                                         \
+      na_bas_15s_beta.zip                                                      \
       na_riv_15s.zip                                                           \
      "
 
@@ -174,7 +175,6 @@ fi
 URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
 folder="../input/HSmsp_WRR"
 list="                                                                         \
-      riv_HSmsp.zip                                                            \
      "
 
 #-------------------------------------------------------------------------------
@@ -200,6 +200,7 @@ fi
 URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
 folder="../output/HSmsp_WRR"
 list="                                                                         \
+      bas_HSmsp.zip                                                            \
       coords_HSmsp.csv                                                         \
       k_HSmsp_pa_phi1_2008_0.csv                                               \
       k_HSmsp_pa_phi1_2008_1.csv                                               \
@@ -207,6 +208,7 @@ list="                                                                         \
       rapid_catchment_na_riv_15s.csv                                           \
       rapid_connect_HSmsp.csv                                                  \
       riv_bas_id_HSmsp_topo.csv                                                \
+      riv_HSmsp.zip                                                            \
       sort_HSmsp_topo.csv                                                      \
       xfac_HSmsp_0.1.csv                                                       \
       x_HSmsp_pa_phi1_2008_0.csv                                               \
@@ -231,12 +233,16 @@ fi
 #Convert legacy files
 #*******************************************************************************
 if [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
-unzip -nq ../input/HSmsp_WRR/na_riv_15s.zip -d ../input/HSmsp_WRR/
+unzip -nq ../input/HydroSHEDS/na_bas_15s_beta.zip -d ../input/HydroSHEDS/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../input/HydroSHEDS/na_riv_15s.zip -d ../input/HydroSHEDS/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 fi
 
 if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
-unzip -nq ../input/HSmsp_WRR/riv_HSmsp.zip -d ../input/HSmsp_WRR/
+unzip -nq ../output/HSmsp_WRR/bas_HSmsp.zip -d ../output/HSmsp_WRR/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../output/HSmsp_WRR/riv_HSmsp.zip -d ../output/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 fi
 
