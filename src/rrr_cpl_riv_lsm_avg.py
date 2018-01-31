@@ -156,6 +156,14 @@ ZV_vol_avg=ZV_vol_avg/IS_lsm_time
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Computing standard deviation')
 
+ZV_vol_sdv=numpy.empty(IS_riv_tot)
+for JS_lsm_time in range(IS_lsm_time):
+     ZV_vol_tmp=f1.variables[YV_var][JS_lsm_time,:]
+     ZV_vol_sdv=ZV_vol_sdv+numpy.square(ZV_vol_tmp-ZV_vol_avg)
+
+ZV_vol_sdv=ZV_vol_sdv/IS_lsm_time
+ZV_vol_sdv=numpy.sqrt(ZV_vol_sdv)
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computing estimate of bias from average
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
