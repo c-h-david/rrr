@@ -32,7 +32,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Reproducing files for: Allen_etal_201x_XYZ.sh"
+echo "Reproducing files for: Allen_etal_201x_GGG.sh"
 echo "********************"
 
 
@@ -93,7 +93,7 @@ mkdir -p '../output/MIGBM/'
 
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_hydrosheds.py                                       \
-     ../input/hydroSHEDS/MIGBM_flowlines.shp                                   \
+     ../input/hydroSHEDS/riv_MIGBM.shp                                         \
      4                                                                         \
      esri:102025                                                               \
      ../output/MIGBM/rapid_connect_MIGBM.csv                                   \
@@ -257,7 +257,7 @@ echo "- Creating p_0 files"
 
 echo "- Creating sorted basin file"
 ../src/rrr_riv_bas_gen_one_hydrosheds.py                                       \
-     ../input/hydroSHEDS/MIGBM_flowlines.shp                                   \
+     ../input/hydroSHEDS/riv_MIGBM.shp                                         \
      ../output/MIGBM/rapid_connect_MIGBM.csv                                   \
      ../output/MIGBM/sort_MIGBM_topo.csv                                       \
      ../output/MIGBM/riv_bas_id_MIGBM_topo.csv                                 \
@@ -289,8 +289,8 @@ echo "- Creating sorted basin file"
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_hydrosheds.py                                       \
-     ../input/hydroSHEDS/MIGBM_flowlines.dbf                                   \
-     ../output/MIGBM/rapid_catchment.csv                                       \
+     ../input/hydroSHEDS/riv_MIGBM.dbf                                         \
+     ../output/MIGBM/rapid_catchment_MIGBM.csv                                 \
 #     > $run_file
 #x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #

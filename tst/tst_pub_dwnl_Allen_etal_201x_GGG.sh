@@ -111,13 +111,13 @@ folder="../input/GLDAS-VIC/GRIB/"
 #-------------------------------------------------------------------------------
 mkdir -p $folder
 touch ~/.netrc
-echo "machine urs.earthdata.nasa.gov user anonymous password password"    \
+echo "machine urs.earthdata.nasa.gov user YOUR_USERNAME password YOUR_PASSWORD" \
       >> ~/.netrc
 
 chmod 0600 ~/.netrc
 touch ~/.urs_cookies
 wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies                \
-     --auth-no-challenge=on --ask-password --keep-session-cookies --content-disposition        \
+     --auth-no-challenge=on --keep-session-cookies --content-disposition        \
      -i  $URL -P $folder
 
 
