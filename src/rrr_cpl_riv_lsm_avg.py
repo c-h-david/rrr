@@ -180,10 +180,13 @@ ZV_vol_bia=numpy.absolute(ZV_vol_bia)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 print('- Computing estimate of standard error from standard deviation')
 
+ZV_vol_sde=numpy.copy(ZV_vol_sdv)
+ZV_vol_sde=ZV_vol_sde*ZS_avg_perc/100
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#Printing some diagnostic quantities
+#Printing some diagnostic quantities on average/bias
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-print('- Printing some diagnostic quantities')
+print('- Printing some diagnostic quantities on average/bias')
 
 print(' . Summed runoff for all reaches and all time steps: '                  \
       + str(sum(ZV_vol_avg)*IS_lsm_time)+' m^3')
@@ -204,6 +207,11 @@ print(' . Summed runoff averaged for one reach and one time step, scaled: '    \
 ZS_vol_avg=sum(ZV_vol_bia)/IS_riv_tot
 print(' . Summed runoff averaged for one reach and one time step, scaled, '    \
       +'absolute value: '+str(ZS_vol_avg)+' m^3')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Printing some diagnostic quantities on stddev/stderr
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+print('- Printing some diagnostic quantities on stddev/stderr')
 
 ZS_vol_avg_rms=(sum([i**2 for i in ZV_vol_bia]))**0.5
 print(' . Estimate of error from square root of sum of squares: '              \
