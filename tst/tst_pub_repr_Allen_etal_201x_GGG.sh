@@ -227,34 +227,46 @@ echo "********************"
 fi
 
 
-##*******************************************************************************
-##Contributing catchment information
-##*******************************************************************************
-#unt=$((unt+1))
-#if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-#echo "Running unit test $unt/x"
-#run_file=tmp_run_$unt.txt
-#cmp_file=tmp_cmp_$unt.txt
+#*******************************************************************************
+#Contributing catchment information
+#*******************************************************************************
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_hydrosheds.py                                       \
-     ../input/hydroSHEDS/riv_MIGBM.dbf                                         \
-     ../output/MIGBM/rapid_catchment_MIGBM.csv                                 \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing catchment file"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/rapid_catchment_na_riv_15s.csv                        \
-#     ../output/HSmsp_WRR/rapid_catchment_na_riv_15s_tst.csv                    \
-#     1e-5                                                                      \
-#     1e-3                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#rm -f $run_file
-#rm -f $cmp_file
-#echo "Success"
-#echo "********************"
-#fi
-#
+     ../output/MIGBM_GGG/riv_MIGBM.dbf                                         \
+     ../output/MIGBM_GGG/rapid_catchment_MIGBM_tst.csv                         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing catchment file"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/rapid_catchment_MIGBM.csv                             \
+     ../output/MIGBM_GGG/rapid_catchment_MIGBM_tst.csv                         \
+     1e-5                                                                      \
+     1e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Clean up
+#*******************************************************************************
+rm -f ../output/MIGBM_GGG/*_tst.csv
+
+
+#*******************************************************************************
+#End
+#*******************************************************************************
+echo "Passed all tests!!!"
+echo "********************"
