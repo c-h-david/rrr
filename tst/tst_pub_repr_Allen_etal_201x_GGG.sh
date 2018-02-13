@@ -1,12 +1,16 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_repr_Allen_etal_201x_XYZ.sh
+#tst_pub_repr_Allen_etal_201x_GGG.sh
 #*******************************************************************************
 
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
-# 
+#Allen, George H., et al. (201x)
+#xxx
+#DOI: xx.xxxx/xxxxxx
+#The files used are available from:
+#Allen, George H., et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #The following are the possible arguments:
@@ -19,7 +23,7 @@
 # - 33 if a search failed 
 # - 99 if a comparison failed 
 #Authors:
-#Allen H. Allen, Cedric H. David, 2016-2018
+#George H. Allen, Cedric H. David, 2017-2018
 
 
 #*******************************************************************************
@@ -32,7 +36,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Reproducing files for: Allen_etal_201x_GGG.sh"
+echo "Reproducing files for: http://dx.doi.org/xx.xxxx/xxxxxx"
 echo "********************"
 
 
