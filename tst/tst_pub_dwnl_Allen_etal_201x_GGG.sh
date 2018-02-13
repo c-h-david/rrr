@@ -132,7 +132,7 @@ fi
 #Download parameters
 #-------------------------------------------------------------------------------
 URL="http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
-folder="../input/hydroSHEDS/"
+folder="../input/HydroSHEDS/"
 list="                                                                         \
       as_bas_15s_beta.zip                                                      \
       as_riv_15s.zip                                                           \
@@ -190,7 +190,7 @@ list="                                                                         \
       coords_MIGBM.csv                                                         \
       k_MIGBM_scl.csv                                                          \
       kfac_MIGBM_1km_hour.csv                                                  \
-      rapid_catchment_MIGBM.csv                                                \
+      rapid_catchment_as_riv_15s.csv                                           \
       rapid_connect_MIGBM.csv                                                  \
       riv_bas_id_MIGBM_topo.csv                                                \
       riv_MIGBM.zip                                                            \

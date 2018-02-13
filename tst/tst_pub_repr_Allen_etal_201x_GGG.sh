@@ -277,15 +277,15 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_hydrosheds.py                                       \
-     ../output/MIGBM_GGG/riv_MIGBM.dbf                                         \
-     ../output/MIGBM_GGG/rapid_catchment_MIGBM_tst.csv                         \
+     ../input/HydroSHEDS/as_riv_15s.dbf                                        \
+     ../output/MIGBM_GGG/rapid_catchment_as_riv_15s_tst.csv                    \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing catchment file"
 ./tst_cmp_csv.py                                                               \
-     ../output/MIGBM_GGG/rapid_catchment_MIGBM.csv                             \
-     ../output/MIGBM_GGG/rapid_catchment_MIGBM_tst.csv                         \
+     ../output/MIGBM_GGG/rapid_catchment_as_riv_15s.csv                        \
+     ../output/MIGBM_GGG/rapid_catchment_as_riv_15s_tst.csv                    \
      1e-5                                                                      \
      1e-3                                                                      \
      > $cmp_file
