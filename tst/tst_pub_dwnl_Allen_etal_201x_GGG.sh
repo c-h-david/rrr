@@ -1,43 +1,44 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_Allen_etal_201x_XYZ.sh
+#tst_pub_dwnl_Allen_etal_201x_GGG.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
-#Allen et al. MIGBM
-#
-#
-#
-#DOI: 10.1002/2014WR016650.
+#Allen, George H., et al. (201x)
+#xxx
+#DOI: xx.xxxx/xxxxxx
 #This script also downloads a subset of the files from:
-# Global Land Assimilation System (GLDAS)
-#
-#
-#
+#Rodell, M., P. R. Houser, U. Jambor, J. Gottschalck, K. Mitchell, C.-J. Meng, 
+#K. Arsenault, B. Cosgrove, J. Radakovich, M. Bosilovich, J. K. Entin, J. P. 
+#Walker, D. Lohmann, and D. Toll (2004), The Global Land Data Assimilation 
+#System, Bulletin of the American Meteorological Society, 85(3), 381–394.
+#DOI: 10.1175/BAMS-85-3-381
 #This script also downloads a subset of the files from:
 #Lehner, Bernhard, Kristine Verdin, and Andy Jarvis (2008), New Global 
 #Hydrography Derived From Spaceborne Elevation Data, Eos Trans. AGU, 89(10), 
 #93–94.
 #DOI:10.1029/2008EO100001.
 #The files used are available from:
-# Allen et al. MIGBM
-#
+#Allen, George H., et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #and from:
-# Global Land Assimilation System (GLDAS)
+#Rodell, M., P. R. Houser, U. Jambor, J. Gottschalck, K. Mitchell, C.-J. Meng, 
+#K. Arsenault, B. Cosgrove, J. Radakovich, M. Bosilovich, J. K. Entin, J. P. 
+#Walker, D. Lohmann, and D. Toll (2004), The Global Land Data Assimilation 
+#System:
+#https://hydro1.sci.gsfc.nasa.gov/data/s4pa/GLDAS/
 #and from:
 #Lehner, Bernhard, Kristine Verdin, and Andy Jarvis (2008), New Global 
-#Hydrography Derived From Spaceborne Elevation Data, Eos Trans. AGU, 89(10), 
-#93–94.
+#Hydrography Derived From Spaceborne Elevation Data:
 #http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
 # - 44 if one download is not successful
 #Author:
-#George H. Allen, Cedric H. David, 2016-2018.
+#George H. Allen, Cedric H. David, 2017-2018.
 
 
 #*******************************************************************************
@@ -53,18 +54,18 @@
 #*******************************************************************************
 #Publication message
 #*******************************************************************************
-#echo "********************"
-#echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
-#echo "                          ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/"
-#echo "                          http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
-#echo "which correspond to   :   http://dx.doi.org/10.1002/2014WR016650"
-#echo "                          http://dx.doi.org/10.1029/2011JD016048"
-#echo "                          http://dx.doi.org/10.1029/2008EO100001"
-#echo "These files are under a Creative Commons Attribution (CC BY) license."
-#echo "Please cite these four DOIs if using these files for your publications."
-#echo "********************"
-#
-#
+echo "********************"
+echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
+echo "                          https://hydro1.sci.gsfc.nasa.gov/data/s4pa/GLDAS/"
+echo "                          http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
+echo "which correspond to   :   http://dx.doi.org/xx.xxxx/xxxxxx"
+echo "                          http://dx.doi.org/10.1175/BAMS-85-3-381"
+echo "                          http://dx.doi.org/10.1029/2008EO100001"
+echo "These files are under a Creative Commons Attribution (CC BY) license."
+echo "Please cite these four DOIs if using these files for your publications."
+echo "********************"
+
+
 #*******************************************************************************
 #Command line option
 #*******************************************************************************
