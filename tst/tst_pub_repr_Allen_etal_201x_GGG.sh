@@ -195,38 +195,38 @@ echo "Success"
 echo "********************"
 fi
 
-##-------------------------------------------------------------------------------
-##Sorted subset
-##-------------------------------------------------------------------------------
-#unt=$((unt+1))
-#if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-#echo "Running unit test $unt/x"
-#run_file=tmp_run_$unt.txt
-#cmp_file=tmp_cmp_$unt.txt
+#-------------------------------------------------------------------------------
+#Sorted subset
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sorted basin file"
 ../src/rrr_riv_bas_gen_one_hydrosheds.py                                       \
-     ../input/hydroSHEDS/riv_MIGBM.shp                                         \
-     ../output/MIGBM/rapid_connect_MIGBM.csv                                   \
-     ../output/MIGBM/sort_MIGBM_topo.csv                                       \
-     ../output/MIGBM/riv_bas_id_MIGBM_topo.csv                                 \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing sorted basin file"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/riv_bas_id_HSmsp_topo.csv                             \
-#     ../output/HSmsp_WRR/riv_bas_id_HSmsp_topo_tst.csv                         \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#rm -f $run_file
-#rm -f $cmp_file
-#echo "Success"
-#echo "********************"
-#fi
-#
-#
+     ../output/MIGBM_GGG/riv_MIGBM.shp                                         \
+     ../output/MIGBM_GGG/rapid_connect_MIGBM.csv                               \
+     ../output/MIGBM_GGG/sort_MIGBM_topo.csv                                   \
+     ../output/MIGBM_GGG/riv_bas_id_MIGBM_topo_tst.csv                         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sorted basin file"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/riv_bas_id_MIGBM_topo.csv                             \
+     ../output/MIGBM_GGG/riv_bas_id_MIGBM_topo_tst.csv                         \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
 ##*******************************************************************************
 ##Contributing catchment information
 ##*******************************************************************************
