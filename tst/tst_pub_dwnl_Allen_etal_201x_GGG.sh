@@ -76,7 +76,7 @@ fi
 #Make sure a maximum of one command land line option was given
 
 if [ "$#" -eq "1" ]; then
-     if [ "$1" == "nldas" ] || [ "$1" == "hydrosheds" ] ||                     \
+     if [ "$1" == "gldas" ] || [ "$1" == "hydrosheds" ] ||                     \
         [ "$1" == "rrr" ]; then 
           dwnl=$1
      else
@@ -110,6 +110,7 @@ folder="../input/GLDAS-VIC/GRIB/"
 #------------------------------------------------------------------------------- 
 # Download process
 #-------------------------------------------------------------------------------
+if [ "$dwnl" == "gldas" ] || [ "$dwnl" == "" ]; then
 mkdir -p $folder
 touch ~/.netrc
 echo "machine urs.earthdata.nasa.gov user YOUR_USERNAME password YOUR_PASSWORD" \
@@ -120,7 +121,7 @@ touch ~/.urs_cookies
 wget --load-cookies ~/.urs_cookies --save-cookies ~/.urs_cookies                \
      --auth-no-challenge=on --keep-session-cookies --content-disposition        \
      -i  $URL -P $folder
-
+fi
 
 
 #*******************************************************************************
@@ -201,7 +202,7 @@ fi
 ##-------------------------------------------------------------------------------
 ##Download process
 ##-------------------------------------------------------------------------------
-#if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "nldas" ] ||                           \
+#if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "gldas" ] ||                           \
 #   [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
 #mkdir -p $folder
 #for file in $list
