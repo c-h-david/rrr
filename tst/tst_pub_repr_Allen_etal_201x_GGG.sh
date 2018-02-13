@@ -151,103 +151,50 @@ echo "Success"
 echo "********************"
 fi
 
-##-------------------------------------------------------------------------------
-##Parameters
-##-------------------------------------------------------------------------------
-#unt=$((unt+1))
-#if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-#echo "Running unit test $unt/x"
-#run_file=tmp_run_$unt.txt
-#cmp_file=tmp_cmp_$unt.txt
+#-------------------------------------------------------------------------------
+#Parameters 0
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating p_0 files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
-     ../output/MIGBM/kfac_MIGBM_1km_hour.csv                                   \
-     ../output/MIGBM/xfac_MIGBM_0.1.csv                                        \
+     ../output/MIGBM_GGG/kfac_MIGBM_1km_hour.csv                               \
+     ../output/MIGBM_GGG/xfac_MIGBM_0.1.csv                                    \
      0.2                                                                       \
      3                                                                         \
-     ../output/MIGBM/k_MIGBM_scl.csv                                           \
-     ../output/MIGBM/x_MIGBM_scl.csv                                           \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing k_0 files"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_0.csv                            \
-#     0.296875                                                                  \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_0_tst.csv                        \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_0_tst.csv                        \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing k_0 files"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_0.csv                            \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_0_tst.csv                        \
-#     1e-6                                                                      \
-#     2e-2                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing x_0 files"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_0.csv                            \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_0_tst.csv                        \
-#     1e-6                                                                      \
-#     2e-2                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#rm -f $run_file
-#rm -f $cmp_file
-#echo "Success"
-#echo "********************"
-#fi
-#
-##-------------------------------------------------------------------------------
-##Parameters 1
-##-------------------------------------------------------------------------------
-#unt=$((unt+1))
-#if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-#echo "Running unit test $unt/x"
-#run_file=tmp_run_$unt.txt
-#cmp_file=tmp_cmp_$unt.txt
-#
-#echo "- Creating p_1 files"
-#../src/rrr_riv_tot_scl_prm.py                                                  \
-#     ../output/HSmsp_WRR/kfac_HSmsp_1km_hour.csv                               \
-#     ../output/HSmsp_WRR/xfac_HSmsp_0.1.csv                                    \
-#     0.210876                                                                  \
-#     0.341400                                                                  \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_1_tst.csv                        \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_1_tst.csv                        \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing k_1 files"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_1.csv                            \
-#     ../output/HSmsp_WRR/k_HSmsp_pa_phi1_2008_1_tst.csv                        \
-#     1e-6                                                                      \
-#     2e-2                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing x_1 files"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_1.csv                            \
-#     ../output/HSmsp_WRR/x_HSmsp_pa_phi1_2008_1_tst.csv                        \
-#     1e-6                                                                      \
-#     2e-2                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#rm -f $run_file
-#rm -f $cmp_file
-#echo "Success"
-#echo "********************"
-#fi
-#
+     ../output/MIGBM_GGG/k_MIGBM_scl_tst.csv                                   \
+     ../output/MIGBM_GGG/x_MIGBM_scl_tst.csv                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing k_0 files"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/k_MIGBM_scl.csv                                       \
+     ../output/MIGBM_GGG/k_MIGBM_scl_tst.csv                                   \
+     1e-6                                                                      \
+     2e-2                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing x_0 files"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/x_MIGBM_scl.csv                                       \
+     ../output/MIGBM_GGG/x_MIGBM_scl_tst.csv                                   \
+     1e-6                                                                      \
+     2e-2                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 ##-------------------------------------------------------------------------------
 ##Sorted subset
 ##-------------------------------------------------------------------------------
