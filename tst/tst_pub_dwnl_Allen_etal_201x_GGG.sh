@@ -134,6 +134,7 @@ fi
 URL="http://earlywarning.usgs.gov/hydrodata/sa_shapefiles_zip"
 folder="../input/hydroSHEDS/"
 list="                                                                         \
+      as_bas_15s_beta.zip                                                      \
       as_riv_15s.zip                                                           \
      "
 
