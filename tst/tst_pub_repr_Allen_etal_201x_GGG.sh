@@ -40,46 +40,46 @@ echo "Reproducing files for: http://dx.doi.org/xx.xxxx/xxxxxx"
 echo "********************"
 
 
-##*******************************************************************************
-##Select which unit tests to perform based on inputs to this shell script
-##*******************************************************************************
-#if [ "$#" = "0" ]; then
-#     fst=1
-#     lst=99
-#     echo "Performing all unit tests: 1-99"
-#     echo "********************"
-#fi 
-##Perform all unit tests if no options are given 
-#
-#if [ "$#" = "1" ]; then
-#     fst=$1
-#     lst=$1
-#     echo "Performing one unit test: $1"
-#     echo "********************"
-#fi 
-##Perform one single unit test if one option is given 
-#
-#if [ "$#" = "2" ]; then
-#     fst=$1
-#     lst=$2
-#     echo "Performing unit tests: $1-$2"
-#     echo "********************"
-#fi 
-##Perform all unit tests between first and second option given (both included) 
-#
-#if [ "$#" -gt "2" ]; then
-#     echo "A maximum of two options can be used" 1>&2
-#     exit 22
-#fi 
-##Exit if more than two options are given 
-#
-#
-##*******************************************************************************
-##Initialize count for unit tests
-##*******************************************************************************
-#unt=0
-#
-#
+#*******************************************************************************
+#Select which unit tests to perform based on inputs to this shell script
+#*******************************************************************************
+if [ "$#" = "0" ]; then
+     fst=1
+     lst=99
+     echo "Performing all unit tests: 1-99"
+     echo "********************"
+fi 
+#Perform all unit tests if no options are given 
+
+if [ "$#" = "1" ]; then
+     fst=$1
+     lst=$1
+     echo "Performing one unit test: $1"
+     echo "********************"
+fi 
+#Perform one single unit test if one option is given 
+
+if [ "$#" = "2" ]; then
+     fst=$1
+     lst=$2
+     echo "Performing unit tests: $1-$2"
+     echo "********************"
+fi 
+#Perform all unit tests between first and second option given (both included) 
+
+if [ "$#" -gt "2" ]; then
+     echo "A maximum of two options can be used" 1>&2
+     exit 22
+fi 
+#Exit if more than two options are given 
+
+
+#*******************************************************************************
+#Initialize count for unit tests
+#*******************************************************************************
+unt=0
+
+
 ##*******************************************************************************
 ##River network details
 ##*******************************************************************************
