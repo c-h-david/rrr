@@ -80,79 +80,77 @@ fi
 unt=0
 
 
-##*******************************************************************************
-##River network details
-##*******************************************************************************
-#
-##-------------------------------------------------------------------------------
-##Connectivity, base parameters, coordinates, sort
-##-------------------------------------------------------------------------------
-#unt=$((unt+1))
-#if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-#echo "Running unit test $unt/x"
-#run_file=tmp_run_$unt.txt
-#cmp_file=tmp_cmp_$unt.txt
+#*******************************************************************************
+#River network details
+#*******************************************************************************
 
-mkdir -p '../output/MIGBM/'
+#-------------------------------------------------------------------------------
+#Connectivity, base parameters, coordinates, sort
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_hydrosheds.py                                       \
-     ../input/hydroSHEDS/riv_MIGBM.shp                                         \
+     ../output/MIGBM_GGG/riv_MIGBM.shp                                         \
      4                                                                         \
      esri:102025                                                               \
-     ../output/MIGBM/rapid_connect_MIGBM.csv                                   \
-     ../output/MIGBM/kfac_MIGBM_1km_hour.csv                                   \
-     ../output/MIGBM/xfac_MIGBM_0.1.csv                                        \
-     ../output/MIGBM/sort_MIGBM_topo.csv                                       \
-     ../output/MIGBM/coords_MIGBM.csv                                          \
-#     > $run_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+     ../output/MIGBM_GGG/rapid_connect_MIGBM_tst.csv                           \
+     ../output/MIGBM_GGG/kfac_MIGBM_1km_hour_tst.csv                           \
+     ../output/MIGBM_GGG/xfac_MIGBM_0.1_tst.csv                                \
+     ../output/MIGBM_GGG/sort_MIGBM_topo_tst.csv                               \
+     ../output/MIGBM_GGG/coords_MIGBM_tst.csv                                  \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-#echo "- Comparing connectivity"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/rapid_connect_HSmsp.csv                               \
-#     ../output/HSmsp_WRR/rapid_connect_HSmsp_tst.csv                           \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing kfac"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/kfac_HSmsp_1km_hour.csv                               \
-#     ../output/HSmsp_WRR/kfac_HSmsp_1km_hour_tst.csv                           \
-#     1e-6                                                                      \
-#     1e-1                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing xfac"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/xfac_HSmsp_0.1.csv                                    \
-#     ../output/HSmsp_WRR/xfac_HSmsp_0.1_tst.csv                                \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing sorted IDs"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/sort_HSmsp_topo.csv                                   \
-#     ../output/HSmsp_WRR/sort_HSmsp_topo_tst.csv                               \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#echo "- Comparing coordinates"
-#./tst_cmp_csv.py                                                               \
-#     ../output/HSmsp_WRR/coords_HSmsp.csv                                      \
-#     ../output/HSmsp_WRR/coords_HSmsp_tst.csv                                  \
-#     1e-10                                                                     \
-#     1e-8                                                                      \
-#     > $cmp_file
-#x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-#
-#rm -f $run_file
-#rm -f $cmp_file
-#echo "Success"
-#echo "********************"
-#fi
-#
+echo "- Comparing connectivity"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/rapid_connect_MIGBM.csv                               \
+     ../output/MIGBM_GGG/rapid_connect_MIGBM_tst.csv                           \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing kfac"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/kfac_MIGBM_1km_hour.csv                               \
+     ../output/MIGBM_GGG/kfac_MIGBM_1km_hour_tst.csv                           \
+     1e-6                                                                      \
+     1e-1                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing xfac"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/xfac_MIGBM_0.1.csv                                    \
+     ../output/MIGBM_GGG/xfac_MIGBM_0.1_tst.csv                                \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sorted IDs"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/sort_MIGBM_topo.csv                                   \
+     ../output/MIGBM_GGG/sort_MIGBM_topo_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coordinates"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/coords_MIGBM.csv                                      \
+     ../output/MIGBM_GGG/coords_MIGBM_tst.csv                                  \
+     1e-10                                                                     \
+     1e-8                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 ##-------------------------------------------------------------------------------
 ##Parameters
 ##-------------------------------------------------------------------------------
