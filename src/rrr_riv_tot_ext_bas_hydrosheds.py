@@ -18,6 +18,7 @@
 import sys
 import fiona
 import shapely.geometry
+import shapely.prepared
 import rtree
 import csv
 
@@ -221,11 +222,15 @@ rrr_ba2_lay=fiona.open(rrr_ba2_shp, 'r')
 IV_ri2_tot_id=[]
 #The river IDs in the new river shapefile
 
+print('- Going through each basin feature')
 for rrr_ba2_fea in rrr_ba2_lay:
      ba2_fid=int(rrr_ba2_fea['id'])
      ba2_shy=shapely.geometry.shape(rrr_ba2_fea['geometry'])
      print(' . The number of elements that intersect with this basin feature '+\
            'is: '+str(len(list(index.intersection(ba2_shy.bounds)))))
+     ba2_pre=shapely.prepared.prep(ba2_shy)
+     #This 'prep' step is crucial for performance: ba2_shy.contains() is much 
+     #slower than ba2_pre.contains() if it is run many times.
      for riv_fid in [int(x) for x in list(index.intersection(ba2_shy.bounds))]:
           #---------------------------------------------------------------------
           #print('The bounds of riv_fid='+str(riv_fid)+                        \
@@ -233,7 +238,7 @@ for rrr_ba2_fea in rrr_ba2_lay:
           #---------------------------------------------------------------------
           rrr_riv_fea=rrr_riv_lay[riv_fid]
           riv_shy=shapely.geometry.shape(rrr_riv_fea['geometry'])
-          if ba2_shy.contains(riv_shy):
+          if ba2_pre.contains(riv_shy):
                #----------------------------------------------------------------
                #print('riv_fid='+str(riv_fid)+                                 \
                #      ' is completely inside of ba2_fid='+str(ba2_fid))
