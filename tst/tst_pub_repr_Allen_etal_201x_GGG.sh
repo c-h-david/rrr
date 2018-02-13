@@ -85,6 +85,45 @@ unt=0
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
+#Extracting study domain
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Extracting study domain"
+../src/rrr_riv_tot_ext_bas_hydrosheds.py                                       \
+     ../input/HydroSHEDS/as_bas_15s_beta.shp                                   \
+     [218033,225914,405068]                                                    \
+     ../input/HydroSHEDS/as_riv_15s.shp                                        \
+     ../output/MIGBM_GGG/bas_MIGBM_tst.shp                                     \
+     ../output/MIGBM_GGG/riv_MIGBM_tst.shp                                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing basin file"
+./tst_cmp_shp.py                                                               \
+     ../output/MIGBM_GGG/bas_MIGBM.shp                                         \
+     ../output/MIGBM_GGG/bas_MIGBM_tst.shp                                     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing river file"
+./tst_cmp_shp.py                                                               \
+     ../output/MIGBM_GGG/riv_MIGBM.shp                                         \
+     ../output/MIGBM_GGG/riv_MIGBM_tst.shp                                     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Connectivity, base parameters, coordinates, sort
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
