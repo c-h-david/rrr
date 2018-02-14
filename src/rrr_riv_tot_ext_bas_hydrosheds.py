@@ -238,11 +238,15 @@ for rrr_ba2_fea in rrr_ba2_lay:
           #---------------------------------------------------------------------
           rrr_riv_fea=rrr_riv_lay[riv_fid]
           riv_shy=shapely.geometry.shape(rrr_riv_fea['geometry'])
-          if ba2_pre.contains(riv_shy):
+          if ba2_pre.intersects(riv_shy):
                #----------------------------------------------------------------
                #print('riv_fid='+str(riv_fid)+                                 \
-               #      ' is completely inside of ba2_fid='+str(ba2_fid))
+               #      ' intersects with ba2_fid='+str(ba2_fid))
                #Using 'contains' appears to be as fast as 'intersects' here
+               #Note that 'contains' does not select the reaches of a basin that
+               #touch its boundary, but that 'intersects' may select reaches
+               #outside of a basin that touch its boundary. For now 'intersects'
+               #produces the same results as ArcGIS 'contain' (not completely).
                #----------------------------------------------------------------
                IS_ri2_tot_id=int(rrr_riv_fea['properties'][YV_riv_id])
                IV_ri2_tot_id.append(IS_ri2_tot_id)
