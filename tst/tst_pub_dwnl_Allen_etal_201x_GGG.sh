@@ -223,7 +223,8 @@ unzip -nq ../input/HydroSHEDS/as_riv_15s.zip -d ../input/HydroSHEDS/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 fi
 
-if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ] ||                                \
+   [ "$dwnl" == "hydrosheds" ]; then
 unzip -nq ../output/MIGBM_GGG/bas_MIGBM.zip -d ../output/MIGBM_GGG/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 unzip -nq ../output/MIGBM_GGG/riv_MIGBM.zip -d ../output/MIGBM_GGG/

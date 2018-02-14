@@ -238,7 +238,8 @@ unzip -nq ../input/HydroSHEDS/na_riv_15s.zip -d ../input/HydroSHEDS/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 fi
 
-if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ] ||                                \
+   [ "$dwnl" == "hydrosheds" ]; then
 unzip -nq ../output/HSmsp_WRR/bas_HSmsp.zip -d ../output/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 unzip -nq ../output/HSmsp_WRR/riv_HSmsp.zip -d ../output/HSmsp_WRR/
