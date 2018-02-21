@@ -164,7 +164,7 @@ print('Check that service works for one known value')
 url1='https://watertrek.jpl.nasa.gov/hydrology/rest/'
 
 url2=url1+'river/comid/'+'24520424'+'/flowrate/'+'1997-01-01T00:00:00'+'/'     \
-         +'1997-01-01T00:00:00'
+         +'1997-01-01T00:00:00'+'?format=json'
 
 data=requests.get(url2, auth=cred)
 if not data.ok:
@@ -222,7 +222,8 @@ for JS_obs_tot in range(IS_obs_tot):
      print(' . Gathering data for gauge '+str(JS_obs_tot+1)+'/'+str(IS_obs_tot))
      IS_obs_tot_id=IV_obs_tot_id_srt[JS_obs_tot]
      url2=url1+'river/comid/'+str(IS_obs_tot_id)+'/flowrate/'+rrr_iso_beg+'/'  \
-                                                             +rrr_iso_end
+                                                             +rrr_iso_end      \
+                                                             +'?format=json'
      #data=requests.get(url2,auth=cred)
      data=s.get(url2)
      if not data.ok:
