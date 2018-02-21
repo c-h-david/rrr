@@ -167,6 +167,10 @@ url2=url1+'river/comid/'+'24520424'+'/flowrate/'+'1997-01-01T00:00:00'+'/'     \
          +'1997-01-01T00:00:00'
 
 data=requests.get(url2, auth=cred)
+if not data.ok:
+     print('ERROR - status code '+str(data.status_code)+                       \
+           ' returned when downloading '+url2)
+     raise SystemExit(22)
 exec('ZH_tmp='+data.content)
 
 if ZH_tmp['flowrate'][0]['date']=='1997-01-01T00:00:00' and                    \
@@ -221,6 +225,10 @@ for JS_obs_tot in range(IS_obs_tot):
                                                              +rrr_iso_end
      #data=requests.get(url2,auth=cred)
      data=s.get(url2)
+     if not data.ok:
+          print('ERROR - status code '+str(data.status_code)+                  \
+                ' returned when downloading '+url2)
+          raise SystemExit(22)
      exec('ZH_tmp='+data.content)
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Checking and reformatting data
