@@ -30,29 +30,31 @@ import datetime
 #*******************************************************************************
 # 1 - rrr_obs_shp
 # 2 - rrr_obs_csv
-# 3 - iso_dat_str
-# 4 - ZS_interval
-# 5 - rrr_obs_str
-# 6 - rrr_hyd_csv
-#(7)- ZS_pct_uq
+# 3 - rrr_flw_csv
+# 4 - iso_dat_str
+# 5 - ZS_interval
+# 6 - rrr_obs_str
+# 7 - rrr_hyd_csv
+#(8)- ZS_pct_uq
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 7 or IS_arg > 8:
-     print('ERROR - A minimum of 6 and a maximum of 7 arguments can be used')
+if IS_arg < 8 or IS_arg > 9:
+     print('ERROR - A minimum of 7 and a maximum of 8 arguments can be used')
      raise SystemExit(22) 
 
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
-iso_dat_str=sys.argv[3]
-ZS_interval=float(sys.argv[4])
-rrr_obs_str=sys.argv[5]
-rrr_hyd_csv=sys.argv[6]
-if IS_arg==8:
-     ZS_pct_uq=float(sys.argv[7])
+rrr_flw_csv=sys.argv[3]
+iso_dat_str=sys.argv[4]
+ZS_interval=float(sys.argv[5])
+rrr_obs_str=sys.argv[6]
+rrr_hyd_csv=sys.argv[7]
+if IS_arg==9:
+     ZS_pct_uq=float(sys.argv[8])
 else:
      ZS_pct_uq=0
 
@@ -63,6 +65,7 @@ else:
 print('Command line inputs')
 print('- '+rrr_obs_shp)
 print('- '+rrr_obs_csv)
+print('- '+rrr_flw_csv)
 print('- '+iso_dat_str)
 print('- '+str(ZS_interval))
 print('- '+rrr_obs_str)
@@ -81,10 +84,10 @@ except IOError as e:
      raise SystemExit(22) 
 
 try:
-     with open(rrr_obs_csv) as file:
+     with open(rrr_flw_csv) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_obs_csv)
+     print('ERROR - Unable to open '+rrr_flw_csv)
      raise SystemExit(22) 
 
 if (ZS_pct_uq < 0 or ZS_pct_uq >100):
@@ -134,14 +137,14 @@ YV_obs_tot_cd_srt=list(YV_obs_tot_cd_srt)
 
 
 #*******************************************************************************
-#Read rrr_obs_csv
+#Read rrr_flw_csv
 #*******************************************************************************
-print('Read rrr_obs_csv')
+print('Read rrr_flw_csv')
 
 ZM_obs=numpy.array([]).reshape(0,IS_obs_tot)
 #Initialize an empty array of size IS_obs_tot to store all hydrographs
 
-with open(rrr_obs_csv,'rb') as csvfile:
+with open(rrr_flw_csv,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           ZV_obs=[float(obs) for obs in row]
