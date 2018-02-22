@@ -108,7 +108,9 @@ print('- The dates provided (or ommitted) correspond to '+str(IS_M)+' days')
 #Read rrr_obs_shp
 #*******************************************************************************
 print('Reading rrr_obs_shp')
+
 IV_obs_tot_id=[]
+YV_obs_tot_cd=[]
 with fiona.open(rrr_obs_shp, 'r') as shpfile:
      if 'COMID_1' in shpfile[0]['properties']:
           YV_obs_id='COMID_1'
@@ -119,11 +121,26 @@ with fiona.open(rrr_obs_shp, 'r') as shpfile:
      else:
           print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
           raise SystemExit(22) 
-
+     if 'SOURCE_FEA' in shpfile[0]['properties']:
+          YV_obs_cd='SOURCE_FEA'
+     elif 'Code' in shpfile[0]['properties']:
+          YV_obs_cd='Code'
+     else:
+          print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
+          raise SystemExit(22)
      for reach in shpfile:
           IV_obs_tot_id.append(reach['properties'][YV_obs_id])
+          YV_obs_tot_cd.append(reach['properties'][YV_obs_cd])
+
 IS_obs_tot=len(IV_obs_tot_id)
 print('- Number of river reaches in rrr_obs_shp: '+str(IS_obs_tot))
+
+z = sorted(zip(IV_obs_tot_id,YV_obs_tot_cd))
+IV_obs_tot_id_srt,YV_obs_tot_cd_srt=zip(*z)
+#Sorting the lists together based on increasing value of the river ID.
+IV_obs_tot_id_srt=list(IV_obs_tot_id_srt)
+YV_obs_tot_cd_srt=list(YV_obs_tot_cd_srt)
+#Because zip creates tuples and not lists
 
 
 #*******************************************************************************
@@ -209,8 +226,8 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #select data and convert to list
 #-------------------------------------------------------------------------------
-     ZV_obs = [value for value in ZH_obs[IV_obs_tot_id[JS_obs_tot]]]
-     ZV_mod = [value for value in ZH_mod[IV_obs_tot_id[JS_obs_tot]]]
+     ZV_obs = [value for value in ZH_obs[IV_obs_tot_id_srt[JS_obs_tot]]]
+     ZV_mod = [value for value in ZH_mod[IV_obs_tot_id_srt[JS_obs_tot]]]
 
 #-------------------------------------------------------------------------------
 #calculate stats
@@ -249,7 +266,7 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
      with open(rrr_sts_csv, 'ab') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
-          csvwriter.writerow([IV_obs_tot_id[JS_obs_tot],                       \
+          csvwriter.writerow([IV_obs_tot_id_srt[JS_obs_tot],                   \
                               round(ZS_obsbar,2),                              \
                               round(ZS_modbar,2),                              \
                               round(ZS_modRMS,2),                              \
