@@ -171,7 +171,7 @@ exec('ZH_tmp='+data.content)
 
 if ZH_tmp['data'][0]['datetime']=='1997-01-01T00:00:00' and                    \
    ZH_tmp['data'][0]['discharge']==16537.03841: 
-     print('- Successfully checked value for RAPID simulations corresponding ' \
+     print('- Successfully checked value for USGS observations corresponding ' \
            'to Columbia River at Beaver Army Terminal, near Quincy, OR for '   \
            '1997-01-01T00:00:00')
 else:
