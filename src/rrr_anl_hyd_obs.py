@@ -153,7 +153,7 @@ IV_obs_tot_id=[]
 with open(rrr_obs_csv,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
-          IV_obs_tot_id.append(row[0])
+          IV_obs_tot_id.append(int(row[0]))
 
 IS_obs_tot=len(IV_obs_tot_id)
 print('- The number of observed locations is: '+str(IS_obs_tot))
@@ -193,6 +193,20 @@ YV_time=[]
 for JS_time in range(IS_time):
      ZV_time.append(dt_str+JS_time*dt_int)
      YV_time.append(ZV_time[JS_time].strftime('%Y-%m-%d'))
+
+
+#*******************************************************************************
+#Create hash table
+#*******************************************************************************
+print('Create hash table')
+
+IM_hsh={}
+
+for JS_obs_tot in range(IS_obs_tot):
+     IM_hsh[IV_obs_tot_id[JS_obs_tot]]=JS_obs_tot
+
+IV_obs_loc=[IM_hsh[IV_obs_bas_id_srt[JS_obs_bas]]                              \
+            for JS_obs_bas in range(IS_obs_bas)]
 
 
 #*******************************************************************************
