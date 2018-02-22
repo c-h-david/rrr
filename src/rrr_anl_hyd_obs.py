@@ -84,6 +84,13 @@ except IOError as e:
      raise SystemExit(22) 
 
 try:
+     with open(rrr_obs_csv) as file:
+          pass
+except IOError as e:
+     print('ERROR - Unable to open '+rrr_obs_csv)
+     raise SystemExit(22)
+
+try:
      with open(rrr_flw_csv) as file:
           pass
 except IOError as e:
@@ -134,6 +141,22 @@ IV_obs_bas_id_srt,YV_obs_bas_cd_srt=zip(*z)
 IV_obs_bas_id_srt=list(IV_obs_bas_id_srt)
 YV_obs_bas_cd_srt=list(YV_obs_bas_cd_srt)
 #Because zip creates tuples and not lists
+
+
+#*******************************************************************************
+#Read rrr_obs_csv
+#*******************************************************************************
+print('Read rrr_obs_csv')
+
+IV_obs_tot_id=[]
+
+with open(rrr_obs_csv,'rb') as csvfile:
+     csvreader=csv.reader(csvfile)
+     for row in csvreader:
+          IV_obs_tot_id.append(row[0])
+
+IS_obs_tot=len(IV_obs_tot_id)
+print('- The number of observed locations is: '+str(IS_obs_tot))
 
 
 #*******************************************************************************
