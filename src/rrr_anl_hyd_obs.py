@@ -101,8 +101,8 @@ if (ZS_pct_uq < 0 or ZS_pct_uq >100):
 print('Read rrr_obs_shp')
 
 rrr_obs_lay=fiona.open(rrr_obs_shp, 'r')
-IS_obs_tot=len(rrr_obs_lay)
-print('- The number of gauge features is: '+str(IS_obs_tot))
+IS_obs_bas=len(rrr_obs_lay)
+print('- The number of gauge features is: '+str(IS_obs_bas))
 
 if 'COMID_1' in rrr_obs_lay[0]['properties']:
      YV_obs_id='COMID_1'
@@ -122,17 +122,17 @@ else:
      print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
      raise SystemExit(22) 
 
-IV_obs_tot_id=[]
-YV_obs_tot_cd=[]
-for JS_obs_tot in range(IS_obs_tot):
-     IV_obs_tot_id.append(int(rrr_obs_lay[JS_obs_tot]['properties'][YV_obs_id]))
-     YV_obs_tot_cd.append(str(rrr_obs_lay[JS_obs_tot]['properties'][YV_obs_cd]))
+IV_obs_bas_id=[]
+YV_obs_bas_cd=[]
+for JS_obs_bas in range(IS_obs_bas):
+     IV_obs_bas_id.append(int(rrr_obs_lay[JS_obs_bas]['properties'][YV_obs_id]))
+     YV_obs_bas_cd.append(str(rrr_obs_lay[JS_obs_bas]['properties'][YV_obs_cd]))
 
-z = sorted(zip(IV_obs_tot_id,YV_obs_tot_cd))
-IV_obs_tot_id_srt,YV_obs_tot_cd_srt=zip(*z)
+z = sorted(zip(IV_obs_bas_id,YV_obs_bas_cd))
+IV_obs_bas_id_srt,YV_obs_bas_cd_srt=zip(*z)
 #Sorting the lists together based on increasing value of the river ID.
-IV_obs_tot_id_srt=list(IV_obs_tot_id_srt)
-YV_obs_tot_cd_srt=list(YV_obs_tot_cd_srt)
+IV_obs_bas_id_srt=list(IV_obs_bas_id_srt)
+YV_obs_bas_cd_srt=list(YV_obs_bas_cd_srt)
 #Because zip creates tuples and not lists
 
 
@@ -179,8 +179,8 @@ print('Write CSV file')
 
 with open(rrr_hyd_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
-     #csvwriter.writerow([rrr_obs_str]+YV_obs_tot_cd_srt)
-     csvwriter.writerow([rrr_obs_str]+IV_obs_tot_id_srt)
+     #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
+     csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
      for JS_time in range(IS_time):
           IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]) 
           csvwriter.writerow(IV_line) 
@@ -189,8 +189,8 @@ if ZS_pct_uq > 0:
      rrr_hyd_csv=rrr_hyd_csv[:-4]+'_uq.csv'
      with open(rrr_hyd_csv, 'wb') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
-          #csvwriter.writerow([rrr_obs_str]+YV_obs_tot_cd_srt)
-          csvwriter.writerow([rrr_obs_str]+IV_obs_tot_id_srt)
+          #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
+          csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
           for JS_time in range(IS_time):
                IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]*ZS_pct_uq/100) 
                csvwriter.writerow(IV_line) 
