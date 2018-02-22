@@ -219,7 +219,7 @@ with open(rrr_hyd_csv, 'wb') as csvfile:
      #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
      csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
      for JS_time in range(IS_time):
-          IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]) 
+          IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,IV_obs_loc])
           csvwriter.writerow(IV_line) 
 
 if ZS_pct_uq > 0:
@@ -229,7 +229,8 @@ if ZS_pct_uq > 0:
           #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
           csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
           for JS_time in range(IS_time):
-               IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,:]*ZS_pct_uq/100) 
+               IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,IV_obs_loc]      \
+                                               *ZS_pct_uq/100)
                csvwriter.writerow(IV_line) 
 #Write hydrographs for uncertainty 
 
