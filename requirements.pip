@@ -24,6 +24,7 @@ fiona==1.6.3.post1
 lxml==2.3
 matplotlib==2.0.0
 netCDF4==1.2.4
+pandas==0.22.0
 pyopenssl==0.14
 pyproj==1.9.5.1
 pyshp==1.2.3
