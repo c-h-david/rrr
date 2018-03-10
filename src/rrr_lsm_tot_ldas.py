@@ -394,7 +394,7 @@ if rrr_lsm_frq=='M':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          rrr_dat_stp=(rrr_dat_stp+datetime.timedelta(days=32)).replace(day=1)
+          rrr_dat_cur=(rrr_dat_cur+datetime.timedelta(days=32)).replace(day=1)
      
 #-------------------------------------------------------------------------------
 #Closing the networking session
