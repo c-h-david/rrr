@@ -298,9 +298,15 @@ if rrr_lsm_frq=='H':
           payload['LABEL']   ='NLDAS_'+rrr_lsm_mod+'0125_H.A'+YS_yr+YS_mo+YS_da\
                              +'.'+YS_hr+'00.002.grb.SUB.nc4'
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Create directory if it doesn't exist
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_H.002/'
+          if not os.path.isdir(rrr_lsm_dir+YS_dir):
+               os.mkdir(rrr_lsm_dir+YS_dir)
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Place request if file does not already exist, and check it is ok
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          if os.path.isfile(rrr_lsm_dir+payload['LABEL']):
+          if os.path.isfile(rrr_lsm_dir+YS_dir+payload['LABEL']):
                print(' . Skipping '+payload['LABEL'])
           else:
                print(' . Downloading '+payload['LABEL'])
@@ -316,7 +322,7 @@ if rrr_lsm_frq=='H':
           YS_name=YS_name.replace('attachment; filename=','')
           YS_name=YS_name.replace('"','')
           #The file name is extracted directly from what requests.get() returns
-          open(rrr_lsm_dir+YS_name, 'wb').write(r.content)
+          open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
           #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
@@ -371,9 +377,16 @@ if rrr_lsm_frq=='M':
           payload['LABEL']   ='NLDAS_'+rrr_lsm_mod+'0125_M.A'+YS_yr+''+YS_mo   \
                              +'.002.grb.SUB.nc4'
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Create directory if it doesn't exist
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_M.002/'
+          if not os.path.isdir(rrr_lsm_dir+YS_dir):
+               os.mkdir(rrr_lsm_dir+YS_dir)
+          #Update directory name and make sure it exists
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Place request if file does not already exist, and check it is ok
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          if os.path.isfile(rrr_lsm_dir+payload['LABEL']):
+          if os.path.isfile(rrr_lsm_dir+YS_dir+payload['LABEL']):
                print(' . Skipping '+payload['LABEL'])
           else:
                print(' . Downloading '+payload['LABEL'])
@@ -389,7 +402,7 @@ if rrr_lsm_frq=='M':
           YS_name=YS_name.replace('attachment; filename=','')
           YS_name=YS_name.replace('"','')
           #The file name is extracted directly from what requests.get() returns
-          open(rrr_lsm_dir+YS_name, 'wb').write(r.content)
+          open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
           #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
