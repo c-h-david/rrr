@@ -315,15 +315,12 @@ if rrr_lsm_frq=='H':
                     print('ERROR - status code '+str(r.status_code)+           \
                           'returned when downloading '+payload['FILENAME'])
                     raise SystemExit(22)
-          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          #Save file to disk
-          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_name=r.headers['content-disposition']
-          YS_name=YS_name.replace('attachment; filename=','')
-          YS_name=YS_name.replace('"','')
-          #The file name is extracted directly from what requests.get() returns
-          open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
-          #The file is written on local disk
+               YS_name=r.headers['content-disposition']
+               YS_name=YS_name.replace('attachment; filename=','')
+               YS_name=YS_name.replace('"','')
+               #The file name is extracted directly from requests.get() results
+               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
@@ -395,15 +392,12 @@ if rrr_lsm_frq=='M':
                     print('ERROR - status code '+str(r.status_code)+           \
                           'returned when downloading '+payload['FILENAME'])
                     raise SystemExit(22)
-          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          #Save file to disk
-          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_name=r.headers['content-disposition']
-          YS_name=YS_name.replace('attachment; filename=','')
-          YS_name=YS_name.replace('"','')
-          #The file name is extracted directly from what requests.get() returns
-          open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
-          #The file is written on local disk
+               YS_name=r.headers['content-disposition']
+               YS_name=YS_name.replace('attachment; filename=','')
+               YS_name=YS_name.replace('"','')
+               #The file name is extracted directly from requests.get() results
+               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
