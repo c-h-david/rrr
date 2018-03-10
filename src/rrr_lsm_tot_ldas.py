@@ -300,9 +300,9 @@ if rrr_lsm_frq=='H':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_H.002/'
+          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_H.002/'+YS_yr+'/'+YS_dy+'/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
-               os.mkdir(rrr_lsm_dir+YS_dir)
+               os.makedirs(rrr_lsm_dir+YS_dir)
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Place request if file does not already exist, and check it is ok
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
@@ -376,9 +376,9 @@ if rrr_lsm_frq=='M':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_M.002/'
+          YS_dir='NLDAS_'+rrr_lsm_mod+'0125_M.002/'+YS_yr+'/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
-               os.mkdir(rrr_lsm_dir+YS_dir)
+               os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Place request if file does not already exist, and check it is ok
