@@ -70,17 +70,24 @@ if not os.path.isdir(rrr_lsm_dir):
 
 
 #*******************************************************************************
-#Check NLDAS arguments
+#Check LDAS arguments
 #*******************************************************************************
-print('Check NLDAS arguments')
+print('Check LDAS arguments')
 
-if rrr_lsm_mod=='VIC' or rrr_lsm_mod=='NOAH' or rrr_lsm_mod=='MOS':
+if rrr_lsm_exp=='NLDAS' or rrr_lsm_exp=='GLDAS':
+     print('- LDAS name is valid')
+else:
+     print('ERROR - Invalid LDAS name')
+     raise SystemExit(22) 
+
+if rrr_lsm_mod=='VIC' or rrr_lsm_mod=='NOAH' or rrr_lsm_mod=='MOS'             \
+                      or rrr_lsm_mod=='CLM':
      print('- Model name is valid')
 else:
      print('ERROR - Invalid model name')
      raise SystemExit(22) 
 
-if rrr_lsm_frq=='H' or rrr_lsm_frq=='M':
+if rrr_lsm_frq=='H' or rrr_lsm_frq=='M' or rrr_lsm_frq=='3H':
      print('- Data frequency is valid')
 else:
      print('ERROR - Invalid data frequency')
