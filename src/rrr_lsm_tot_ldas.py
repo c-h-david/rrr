@@ -23,32 +23,35 @@ import requests
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_lsm_mod
-# 2 - rrr_lsm_frq
-# 3 - rrr_iso_beg
-# 4 - rrr_iso_end
-# 5 - rrr_lsm_dir
+# 1 - rrr_lsm_exp
+# 2 - rrr_lsm_mod
+# 3 - rrr_lsm_frq
+# 4 - rrr_iso_beg
+# 5 - rrr_iso_end
+# 6 - rrr_lsm_dir
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 6:
-     print('ERROR - 5 and only 5 arguments can be used')
+if IS_arg != 7:
+     print('ERROR - 6 and only 6 arguments can be used')
      raise SystemExit(22) 
 
-rrr_lsm_mod=sys.argv[1]
-rrr_lsm_frq=sys.argv[2]
-rrr_iso_beg=sys.argv[3]
-rrr_iso_end=sys.argv[4]
-rrr_lsm_dir=sys.argv[5]
+rrr_lsm_exp=sys.argv[1]
+rrr_lsm_mod=sys.argv[2]
+rrr_lsm_frq=sys.argv[3]
+rrr_iso_beg=sys.argv[4]
+rrr_iso_end=sys.argv[5]
+rrr_lsm_dir=sys.argv[6]
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
+print('- '+rrr_lsm_exp)
 print('- '+rrr_lsm_mod)
 print('- '+rrr_lsm_frq)
 print('- '+rrr_iso_beg)
