@@ -246,12 +246,12 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      r=requests.get(url, params=payload, auth=cred)
      #Downloads data from:
      #http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
-     #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_H.002/2000/001/
-     #     NLDAS_VIC0125_H.A20000101.0000.002.grb
+     #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_M.002/2000/
+     #     NLDAS_VIC0125_M.A200001.002.grb
      #     &FORMAT=bmM0Lw
      #     &BBOX=25,-125,53,-67
-     #     &LABEL=NLDAS_VIC0125_H.A20000101.0000.002.grb.SUB.nc4
-     #     &SHORTNAME=NLDAS_VIC0125_H
+     #     &LABEL=NLDAS_VIC0125_M.A200001.002.grb.SUB.nc4
+     #     &SHORTNAME=NLDAS_VIC0125_M
      #     &SERVICE=L34RS_LDAS
      #     &VERSION=1.02
      #     &DATASET_VERSION=002
