@@ -183,9 +183,9 @@ print('- The credentials were obtained from ~/.netrc file')
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#If requesting hourly data
+#If requesting NLDAS hourly data
 #-------------------------------------------------------------------------------
-if rrr_lsm_frq=='H':
+if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      print('Checking that service and credentials work for one known file')
 
      url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
@@ -224,9 +224,9 @@ if rrr_lsm_frq=='H':
           raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
-#If requesting monthly data
+#If requesting NLDAS monthly data
 #-------------------------------------------------------------------------------
-if rrr_lsm_frq=='M':
+if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      print('Checking that service and credentials work for one known file')
 
      url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
@@ -279,9 +279,9 @@ s=requests.Session()
 s.auth=cred
 
 #-------------------------------------------------------------------------------
-#If requesting hourly data
+#If requesting NLDAS hourly data
 #-------------------------------------------------------------------------------
-if rrr_lsm_frq=='H':
+if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Initializing URL and payload
@@ -355,9 +355,9 @@ if rrr_lsm_frq=='H':
           rrr_dat_cur=rrr_dat_cur+datetime.timedelta(hours=1)
      
 #-------------------------------------------------------------------------------
-#If requesting monthly data
+#If requesting NLDAS monthly data
 #-------------------------------------------------------------------------------
-if rrr_lsm_frq=='M':
+if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Initializing URL and payload
