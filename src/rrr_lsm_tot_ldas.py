@@ -130,6 +130,24 @@ if rrr_lsm_frq=='H':
      print('- The number of files to be downloaded is: '+str(IS_count))
 
 #-------------------------------------------------------------------------------
+#If requesting 3-hourly data
+#-------------------------------------------------------------------------------
+if rrr_lsm_frq=='3H':
+     if rrr_dat_beg.hour %3==0 and rrr_dat_beg.minute==0 and                   \
+        rrr_dat_beg.second==0:
+          print('- Interval starts at the top of a 3-hour')
+     else:
+          print('ERROR - The interval does NOT start at the top of a 3-hour: ' \
+                +rrr_iso_beg)
+          raise SystemExit(22) 
+
+     while rrr_dat_stp<=rrr_dat_end:
+          rrr_dat_stp=rrr_dat_stp+datetime.timedelta(hours=3)
+          #Adding one hour
+          IS_count=IS_count+1
+     print('- The number of files to be downloaded is: '+str(IS_count))
+
+#-------------------------------------------------------------------------------
 #If requesting monthly data
 #-------------------------------------------------------------------------------
 if rrr_lsm_frq=='M':
