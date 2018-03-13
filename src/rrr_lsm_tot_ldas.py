@@ -264,6 +264,47 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
           print('ERROR - Status code '+str(r.status_code))
           raise SystemExit(22)
 
+#-------------------------------------------------------------------------------
+#If requesting GLDAS 3-hourly data
+#-------------------------------------------------------------------------------
+if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
+     print('Checking that service and credentials work for one known file')
+
+     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     payload={}
+     payload['FILENAME']='/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/'             \
+                        +'GLDAS_VIC10_3H.A2000001.0000.001.grb'
+     payload['FORMAT']='bmM0Lw'
+     payload['BBOX']='-60,-180,90,180'
+     payload['LABEL']='GLDAS_VIC10_3H.A2000001.0000.001.grb.SUB.nc4'
+     payload['SHORTNAME']='GLDAS_VIC10_3H'
+     payload['SERVICE']='L34RS_LDAS'
+     payload['VERSION']='1.02'
+     payload['DATASET_VERSION']='001'
+     payload['VARIABLES']='Qs,Qsb'
+
+     print('- Requesting a subset of GLDAS_VIC10_3H.A2000001.0000.001.grb')
+     r=requests.get(url, params=payload, auth=cred)
+     #Downloads data from:
+     #http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
+     #     ?FILENAME=/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/
+     #     GLDAS_VIC10_3H.A20000101.0000.001.grb
+     #     &FORMAT=bmM0Lw
+     #     &BBOX=25,-125,53,-67
+     #     &LABEL=GLDAS_VIC10_3H.A20000101.0000.001.grb.SUB.nc4
+     #     &SHORTNAME=GLDAS_VIC10_3H
+     #     &SERVICE=L34RS_LDAS
+     #     &VERSION=1.02
+     #     &DATASET_VERSION=001
+     #     &VARIABLES=Qs,Qsb'
+     #requests.get() actually downloads the file into memory and also saves some
+     #associated download metadata
+     if r.ok:
+          print('- The request was successful')
+     else:
+          print('ERROR - Status code '+str(r.status_code))
+          raise SystemExit(22)
+
 
 #*******************************************************************************
 #Downloading all files
