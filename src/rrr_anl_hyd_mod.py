@@ -224,7 +224,10 @@ for JS_riv_bas in range(IS_riv_bas):
 #-------------------------------------------------------------------------------
 print('- Getting or making time variable values')
 ZV_time=[0]*IS_R
-if YS_time_name in f.variables:
+if YS_time_name in f.variables and                                             \
+   f.variables[YS_time_name][0]!=netCDF4.default_fillvals['i4']:
+   #If the time variable exists but was not populated it holds the default
+   #netCDF _fillValue and should be ignored here
      print(' . Values of time variable obtained from metadata')
      ZV_time=f.variables[YS_time_name][:]
      ZS_TauR=f.variables[YS_time_name][1]-f.variables[YS_time_name][0]
@@ -309,7 +312,10 @@ with open(rrr_hyd_csv, 'wb') as csvfile:
           csvwriter.writerow(IV_line) 
 #Write hydrographs
  
-if YS_uq_name != '':
+if YS_uq_name!='' and                                                          \
+   f.variables[YS_uq_name][0]!=netCDF4.default_fillvals['f4']:
+   #If the uncertainty variable exists but was not populated it holds the
+   #default netCDF _fillValue and should be ignored here
      ZV_out_bar=numpy.mean(ZM_out_avg, axis=0)
      ZV_pct_uq=numpy.zeros(IS_obs_tot)
      for JS_obs_tot in range(IS_obs_tot):
