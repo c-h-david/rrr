@@ -300,7 +300,7 @@ for JS_time in range(IS_time):
      ZV_vol_dif=(ZV_vol_in1-ZV_vol_av1)-(ZV_vol_in2-ZV_vol_av2)
      ZV_vol_sde=ZV_vol_sde+numpy.square(ZV_vol_dif)
 
-ZV_vol_sde=ZV_vol_sde/IS_time
+ZV_vol_sde=ZV_vol_sde/(IS_time-1)
 ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
 
 #-------------------------------------------------------------------------------
@@ -308,7 +308,37 @@ ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
 #-------------------------------------------------------------------------------
 print('- Computing error covariances')
 
-#TO BE ADDED
+ZM_vol_in1=f1.variables[YS_var1][:,:]
+ZM_vol_in2=f2.variables[YS_var2][:,:]
+ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Check the previous standard error computation from the variance equations
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ZV_vol_sd2=numpy.empty(IS_riv_tot)
+
+for JS_riv_tot in range(IS_riv_tot):
+     ZV_vol_dif=ZM_vol_dif[:,JS_riv_tot]
+     ZV_vol_sd2[JS_riv_tot]=numpy.dot(ZV_vol_dif-ZV_vol_dif.mean(),            \
+
+                                      ZV_vol_dif-ZV_vol_dif.mean())
+ZV_vol_sd2=ZV_vol_sd2/(IS_time-1)
+ZV_vol_sd2=numpy.sqrt(ZV_vol_sd2)
+
+ZS_rdif_max=0
+for JS_riv_tot in range(IS_riv_tot):
+     if ZV_vol_sde[JS_riv_tot]!=0:
+          ZS_rdif=abs((ZV_vol_sd2[JS_riv_tot]-ZV_vol_sde[JS_riv_tot])          \
+                      /ZV_vol_sde[JS_riv_tot])
+          ZS_rdif_max=max(ZS_rdif_max,ZS_rdif)
+
+if ZS_rdif_max<=5e-6:
+     print(' . Acceptable max relative difference in standard errors using two'\
+          +' different methods: '+str(ZS_rdif_max))
+else:
+     print('ERROR - Unacceptable max relative difference in standard errors '  \
+           'using two different methods')
+     raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
 #Close netCDF files
