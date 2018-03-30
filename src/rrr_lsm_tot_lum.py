@@ -36,11 +36,11 @@ import csv
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - shb_lsm_ncf
+# 1 - rrr_lsm_ncf
 # 2 - ZS_conv
-# 3 - shb_pol_shp
-# 4 - shb_pnt_shp
-# 5 - shb_var_csv
+# 3 - rrr_pol_shp
+# 4 - rrr_pnt_shp
+# 5 - rrr_var_csv
 
 
 #*******************************************************************************
@@ -51,39 +51,39 @@ if IS_arg != 6:
      print('ERROR - 5 and only 5 arguments can be used')
      raise SystemExit(22) 
 
-shb_lsm_ncf=sys.argv[1]
+rrr_lsm_ncf=sys.argv[1]
 ZS_conv=eval(sys.argv[2])
-shb_pol_shp=sys.argv[3]
-shb_pnt_shp=sys.argv[4]
-shb_var_csv=sys.argv[5]
+rrr_pol_shp=sys.argv[3]
+rrr_pnt_shp=sys.argv[4]
+rrr_var_csv=sys.argv[5]
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
-print(' - '+shb_lsm_ncf)
+print(' - '+rrr_lsm_ncf)
 print(' - '+str(ZS_conv))
-print(' - '+shb_pol_shp)
-print(' - '+shb_pnt_shp)
-print(' - '+shb_var_csv)
+print(' - '+rrr_pol_shp)
+print(' - '+rrr_pnt_shp)
+print(' - '+rrr_var_csv)
 
 
 #*******************************************************************************
 #Check if files exist 
 #*******************************************************************************
 try:
-     with open(shb_lsm_ncf) as file:
+     with open(rrr_lsm_ncf) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+shb_lsm_ncf)
+     print('ERROR - Unable to open '+rrr_lsm_ncf)
      raise SystemExit(22) 
 
 try:
-     with open(shb_pol_shp) as file:
+     with open(rrr_pol_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+shb_pol_shp)
+     print('ERROR - Unable to open '+rrr_pol_shp)
      raise SystemExit(22) 
 
 
@@ -95,7 +95,7 @@ print('Read LSM netCDF file')
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Open netCDF file
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-f = netCDF4.Dataset(shb_lsm_ncf, 'r')
+f = netCDF4.Dataset(rrr_lsm_ncf, 'r')
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get dimension sizes
@@ -124,7 +124,7 @@ if 'RUNSF' in f.variables:
 elif 'SSRUN' in f.variables:
      YS_rsf_nam='SSRUN'
 else:
-     print('ERROR - Neither RUNSF nor SSRUN exist in '+shb_lsm_ncf)
+     print('ERROR - Neither RUNSF nor SSRUN exist in '+rrr_lsm_ncf)
      raise SystemExit(22) 
 
 if 'RUNSB' in f.variables:
@@ -132,7 +132,7 @@ if 'RUNSB' in f.variables:
 elif 'BGRUN' in f.variables:
      YS_rsb_nam='BGRUN'
 else:
-     print('ERROR - Neither RUNSB nor BGRUN exist in '+shb_lsm_ncf)
+     print('ERROR - Neither RUNSB nor BGRUN exist in '+rrr_lsm_ncf)
      raise SystemExit(22) 
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -148,7 +148,7 @@ if YS_rsf_nam in f.variables:
      else:
           ZS_rsf_fil=None
 else:
-     print('ERROR - Unable to find '+YS_rsf_nam+' in '+shb_lsm_ncf)
+     print('ERROR - Unable to find '+YS_rsf_nam+' in '+rrr_lsm_ncf)
      raise SystemExit(22) 
      
 ZS_rsb_fil=netCDF4.default_fillvals['f4']
@@ -161,7 +161,7 @@ if YS_rsb_nam in f.variables:
      else:
           ZS_rsb_fil=None
 else:
-     print('ERROR - Unable to find '+YS_rsb_nam+' in '+shb_lsm_ncf)
+     print('ERROR - Unable to find '+YS_rsb_nam+' in '+rrr_lsm_ncf)
      raise SystemExit(22) 
      
 
@@ -170,9 +170,9 @@ else:
 #*******************************************************************************
 print('Read polygon shapefile')
 
-shb_pol_lay=fiona.open(shb_pol_shp, 'r')
+rrr_pol_lay=fiona.open(rrr_pol_shp, 'r')
 
-IS_pol_tot=len(shb_pol_lay)
+IS_pol_tot=len(rrr_pol_lay)
 print(' - The number of polygon features is: '+str(IS_pol_tot))
 
 
@@ -181,29 +181,29 @@ print(' - The number of polygon features is: '+str(IS_pol_tot))
 #*******************************************************************************
 print('Create a point shapefile with all the LSM grid cells')
 
-shb_pol_drv=shb_pol_lay.driver
-shb_pnt_drv=shb_pol_drv
+rrr_pol_drv=rrr_pol_lay.driver
+rrr_pnt_drv=rrr_pol_drv
 
-shb_pol_crs=shb_pol_lay.crs
-shb_pnt_crs=shb_pol_crs.copy()
+rrr_pol_crs=rrr_pol_lay.crs
+rrr_pnt_crs=rrr_pol_crs.copy()
 
-shb_pnt_sch={'geometry': 'Point',                                              \
+rrr_pnt_sch={'geometry': 'Point',                                              \
              'properties': {'JS_lsm_lon': 'int:4',                             \
                             'JS_lsm_lat': 'int:4'}}
 
-with fiona.open(shb_pnt_shp,'w',driver=shb_pnt_drv,                            \
-                                crs=shb_pnt_crs,                               \
-                                schema=shb_pnt_sch) as shb_pnt_lay:
+with fiona.open(rrr_pnt_shp,'w',driver=rrr_pnt_drv,                            \
+                                crs=rrr_pnt_crs,                               \
+                                schema=rrr_pnt_sch) as rrr_pnt_lay:
      for JS_lsm_lon in range(IS_lsm_lon):
           ZS_lsm_lon=ZV_lsm_lon[JS_lsm_lon]
           for JS_lsm_lat in range(IS_lsm_lat):
                ZS_lsm_lat=ZV_lsm_lat[JS_lsm_lat]
-               shb_pnt_prp={'JS_lsm_lon': JS_lsm_lon, 'JS_lsm_lat': JS_lsm_lat}
-               shb_pnt_geo=shapely.geometry.mapping(                           \
+               rrr_pnt_prp={'JS_lsm_lon': JS_lsm_lon, 'JS_lsm_lat': JS_lsm_lat}
+               rrr_pnt_geo=shapely.geometry.mapping(                           \
                                 shapely.geometry.Point((ZS_lsm_lon,ZS_lsm_lat)))
-               shb_pnt_lay.write({                                             \
-                                  'properties': shb_pnt_prp,                   \
-                                  'geometry': shb_pnt_geo,                     \
+               rrr_pnt_lay.write({                                             \
+                                  'properties': rrr_pnt_prp,                   \
+                                  'geometry': rrr_pnt_geo,                     \
                                   })
 
 print(' - New shapefile created')
@@ -214,14 +214,14 @@ print(' - New shapefile created')
 #*******************************************************************************
 print('Create spatial index for the bounds of each point feature')
 
-shb_pnt_lay=fiona.open(shb_pnt_shp, 'r')
+rrr_pnt_lay=fiona.open(rrr_pnt_shp, 'r')
 
 index=rtree.index.Index()
-for shb_pnt_fea in shb_pnt_lay:
-     shb_pnt_fid=int(shb_pnt_fea['id'])
+for rrr_pnt_fea in rrr_pnt_lay:
+     rrr_pnt_fid=int(rrr_pnt_fea['id'])
      #the first argument of index.insert has to be 'int', not 'long' or 'str'
-     shb_pnt_shy=shapely.geometry.shape(shb_pnt_fea['geometry'])
-     index.insert(shb_pnt_fid, shb_pnt_shy.bounds)
+     rrr_pnt_shy=shapely.geometry.shape(rrr_pnt_fea['geometry'])
+     index.insert(rrr_pnt_fid, rrr_pnt_shy.bounds)
      #creates an index between the feature ID and the bounds of that feature
 
 print(' - Spatial index created')
@@ -236,17 +236,17 @@ IS_dom_tot=0
 IV_dom_lon=[]
 IV_dom_lat=[]
 
-for shb_pol_fea in shb_pol_lay:
-     shb_pol_shy=shapely.geometry.shape(shb_pol_fea['geometry'])
-     shb_pol_pre=shapely.prepared.prep(shb_pol_shy)
+for rrr_pol_fea in rrr_pol_lay:
+     rrr_pol_shy=shapely.geometry.shape(rrr_pol_fea['geometry'])
+     rrr_pol_pre=shapely.prepared.prep(rrr_pol_shy)
      #a 'prepared' geometry allows for faster processing after
-     for shb_pnt_fid in [int(x) for x in                                       \
-                                  list(index.intersection(shb_pol_shy.bounds))]:
-          shb_pnt_fea=shb_pnt_lay[shb_pnt_fid]
-          shb_pnt_shy=shapely.geometry.shape(shb_pnt_fea['geometry'])
-          if shb_pol_pre.contains(shb_pnt_shy):
-               JS_dom_lon=shb_pnt_fea['properties']['JS_lsm_lon']
-               JS_dom_lat=shb_pnt_fea['properties']['JS_lsm_lat']
+     for rrr_pnt_fid in [int(x) for x in                                       \
+                                  list(index.intersection(rrr_pol_shy.bounds))]:
+          rrr_pnt_fea=rrr_pnt_lay[rrr_pnt_fid]
+          rrr_pnt_shy=shapely.geometry.shape(rrr_pnt_fea['geometry'])
+          if rrr_pol_pre.contains(rrr_pnt_shy):
+               JS_dom_lon=rrr_pnt_fea['properties']['JS_lsm_lon']
+               JS_dom_lat=rrr_pnt_fea['properties']['JS_lsm_lat']
                IV_dom_lon.append(JS_dom_lon)
                IV_dom_lat.append(JS_dom_lat)
                IS_dom_tot=IS_dom_tot+1
@@ -373,22 +373,22 @@ print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_sqm))
 ##Determine time strings
 ##*******************************************************************************
 #print('Determine time strings')
-#shb_dat_str=datetime.datetime.strptime('2002-04-01T00:00:00',                \
+#rrr_dat_str=datetime.datetime.strptime('2002-04-01T00:00:00',                \
 #                                         '%Y-%m-%dT%H:%M:%S')
 #
 #YV_lsm_time=[]
 #for JS_lsm_time in range(IS_lsm_time):
-#     shb_dat_dlt=datetime.timedelta(hours=ZV_lsm_time[JS_lsm_time])
-#     YS_lsm_time=(shb_dat_str+shb_dat_dlt).strftime('%Y-%m-%d')
+#     rrr_dat_dlt=datetime.timedelta(hours=ZV_lsm_time[JS_lsm_time])
+#     YS_lsm_time=(rrr_dat_str+rrr_dat_dlt).strftime('%Y-%m-%d')
 #     YV_lsm_time.append(YS_lsm_time)
 #
 #
 ##*******************************************************************************
-##Write shb_var_csv
+##Write rrr_var_csv
 ##*******************************************************************************
-#print('Write shb_var_csv')
+#print('Write rrr_var_csv')
 #
-#with open(shb_var_csv, 'wb') as csvfile:
+#with open(rrr_var_csv, 'wb') as csvfile:
 #     csvwriter = csv.writer(csvfile, dialect='excel')
 #     for JS_lsm_time in range(IS_lsm_time):
 #          IV_line=[YV_lsm_time[JS_lsm_time],ZV_var[JS_lsm_time]] 
