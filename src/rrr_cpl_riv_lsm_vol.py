@@ -15,6 +15,8 @@
 #   . lon(lon)
 #   . lat(lat)
 #   . crs
+#Note that the runoff file is assumed to have units of mm. That is, it contains
+#an equivalent water height accumulated over the runoff time step.
 #Author:
 #Cedric H. David, 2011-2017
 
@@ -352,7 +354,8 @@ print('- Populate dynamic data')
 ZV_riv_sqkm=numpy.array(ZV_riv_sqkm)
 #convert from list to array to allow for pointwise multiplication later
 ZV_riv_sqkm=1000*ZV_riv_sqkm
-#scale by 1000 to avoid doing so over and over below 
+#scale by 1000 to avoid doing so over and over below. This number comes from the
+#multiplication of 0.001 m/mm and 1,000,000 sqm/sqkm.
 IV_riv_i_index=[i-1 for i in IV_riv_i_index]
 IV_riv_j_index=[j-1 for j in IV_riv_j_index]
 #Shift from 1-based to 0-based indexing, places with new index -1 have already 
