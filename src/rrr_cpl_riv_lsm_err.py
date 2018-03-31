@@ -6,7 +6,8 @@
 #Purpose:
 #Given one file with estimates of time-varying external inflow (in m^3) into the
 #river network, and another similar file assumed to contain the "true" values of
-#the same quantities, this program computes the corresponding bias, standard 
+#the same quantities, along with a multiplying factor allowing to convert the
+#inputs into m^3/s, this program computes the corresponding bias, standard
 #error, and error convariances and saves these values in a new netCDF file.
 #Author:
 #Cedric H. David, 2018-2018
@@ -25,20 +26,22 @@ import numpy
 #*******************************************************************************
 # 1 - rrr_vol_mod
 # 2 - rrr_vol_tru
-# 3 - rrr_vol_err
+# 3 - ZS_conv
+# 4 - rrr_vol_err
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 4:
-     print('ERROR - 3 and only 3 arguments must be used')
+if IS_arg != 5:
+     print('ERROR - 4 and only 4 arguments must be used')
      raise SystemExit(22) 
 
 rrr_vol_mod=sys.argv[1]
 rrr_vol_tru=sys.argv[2]
-rrr_vol_err=sys.argv[3]
+ZS_conv=eval(sys.argv[3])
+rrr_vol_err=sys.argv[4]
 
 
 #*******************************************************************************
@@ -47,6 +50,7 @@ rrr_vol_err=sys.argv[3]
 print('Command line inputs')
 print('- '+rrr_vol_mod)
 print('- '+rrr_vol_tru)
+print('- '+str(ZS_conv))
 print('- '+rrr_vol_err)
 
 
@@ -275,8 +279,8 @@ ZV_vol_av2=numpy.empty(IS_riv_tot)
 ZV_vol_bia=numpy.empty(IS_riv_tot)
 
 for JS_time in range(IS_time):
-     ZV_vol_in1=f1.variables[YS_var1][JS_time,:]
-     ZV_vol_in2=f2.variables[YS_var2][JS_time,:]
+     ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
+     ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
 
      ZV_vol_av1=ZV_vol_av1+ZV_vol_in1
      ZV_vol_av2=ZV_vol_av2+ZV_vol_in2
@@ -294,8 +298,8 @@ ZV_vol_dif=numpy.empty(IS_riv_tot)
 ZV_vol_sde=numpy.empty(IS_riv_tot)
 
 for JS_time in range(IS_time):
-     ZV_vol_in1=f1.variables[YS_var1][JS_time,:]
-     ZV_vol_in2=f2.variables[YS_var2][JS_time,:]
+     ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
+     ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
 
      ZV_vol_dif=(ZV_vol_in1-ZV_vol_av1)-(ZV_vol_in2-ZV_vol_av2)
      ZV_vol_sde=ZV_vol_sde+numpy.square(ZV_vol_dif)
@@ -308,8 +312,8 @@ ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
 #-------------------------------------------------------------------------------
 print('- Computing error covariances')
 
-ZM_vol_in1=f1.variables[YS_var1][:,:]
-ZM_vol_in2=f2.variables[YS_var2][:,:]
+ZM_vol_in1=f1.variables[YS_var1][:,:]*ZS_conv
+ZM_vol_in2=f2.variables[YS_var2][:,:]*ZS_conv
 ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -360,9 +364,9 @@ print('- Spatial and temporal mean of model:          '+YS_str)
 YS_str=str(numpy.round(ZV_vol_av2.mean(),2))
 print('- Spatial and temporal mean of ensemble:       '+YS_str)
 YS_str=str(numpy.round(ZV_vol_bia.mean(),2))
-print('- Spatial and temporal mean of bias:           '+YS_str)
+print('- Spatial mean of bias:                        '+YS_str)
 YS_str=str(numpy.round(ZV_vol_sde.mean(),2))
-print('- Spatial and temporal mean of standard error: '+YS_str)
+print('- Spatial mean of standard error:              '+YS_str)
 
 #-------------------------------------------------------------------------------
 #More advanced quantities
