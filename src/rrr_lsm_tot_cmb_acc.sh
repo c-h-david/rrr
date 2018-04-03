@@ -79,6 +79,19 @@ fi
 #This uses the NCO 'subcycle' and 'multi record outputs' options.
 
 #-------------------------------------------------------------------------------
+#Rename netCDF variables in case it was not done before
+#-------------------------------------------------------------------------------
+if [ -e "$nc_temp" ]; then
+ncrename -v SSRUN,RUNSF                                                        \
+         -v BGRUN,RUNSB                                                        \
+         -v Qs,RUNSF                                                           \
+         -v Qsb,RUNSB                                                          \
+         $nc_temp
+fi
+#SSRUN / BGRUN are used in NLDAS for surface runoff / subsurface runoff (resp).
+#Qs    / Qsb   are used in GLDAS for surface runoff / subsurface runoff (resp).
+
+#-------------------------------------------------------------------------------
 #scale so that value is accumulated, not averaged 
 #-------------------------------------------------------------------------------
 ncap2 -s "RUNSF=RUNSF*$IS_step;RUNSB=RUNSB*$IS_step"                           \
