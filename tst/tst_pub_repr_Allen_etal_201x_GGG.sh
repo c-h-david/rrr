@@ -299,6 +299,109 @@ fi
 
 
 #*******************************************************************************
+#Process Land surface model (LSM) data
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Prepare single large netCDF files with multiple files concatenated
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Preparing single netCDF files with multiple files concatenated"
+
+mkdir -p ../output/GLDAS/GLDAS_VIC10_3H/
+for year in `seq 2000 2009`; do
+for month in 01 02 03 04 05 06 07 08 09 10 11 12; do
+
+echo "  . Creating a concatenated & accumulated file for $year/$month"
+doy1=`date -d "$year-$month-01" "+%j"`                   #day of year, beginning
+doyn=`date -d "$year-$month-01 + 1 month -1 days" "+%j"` #day of year, end
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     $(eval echo "../input/GLDAS/GLDAS_VIC10_3H/$year/{$doy1..$doyn}/*.nc4")   \
+     1                                                                         \
+     ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_${year}${month}.nc4         \
+      > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+done
+done
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Make the single large netCDF files CF compliant
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making the single netCDF files CF compliant"
+
+for year in `seq 2000 2009`; do
+for month in 01 02 03 04 05 06 07 08 09 10 11 12; do
+
+echo "  . Creating a CF compliant file for $year/$month"
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_${year}${month}.nc4         \
+     "$year-$month-01T00:00:00"                                                \
+     10800                                                                     \
+     ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_${year}${month}_utc.nc4     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+done
+done
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenate several large netCDF files
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "  . Concatenating all large files"
+nc_file=../output/MIGBM_GGG/GLDAS_VIC10_3H_20000101_20091231_utc.nc
+if [ ! -e "$nc_file" ]; then
+ncrcat ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2000*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2001*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2002*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2003*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2004*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2005*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2006*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2007*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2008*_utc.nc4             \
+       ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_2009*_utc.nc4             \
+       -o $nc_file                                                             \
+        > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MIGBM_GGG/*_tst.*
