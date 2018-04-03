@@ -97,6 +97,11 @@ print('Reading input netCDF file')
 f = netCDF4.Dataset(rrr_lsm_file1, 'r')
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Read file format
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+YS_format=f.file_format
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get dimension sizes
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 IS_lsm_lon=len(f.dimensions['lon'])
@@ -140,21 +145,22 @@ print('Process data')
 #Create netCDF file
 #-------------------------------------------------------------------------------
 print('- Create new netCDF file')
-g = netCDF4.Dataset(rrr_lsm_file2, "w", format="NETCDF3_CLASSIC")
+g = netCDF4.Dataset(rrr_lsm_file2, "w", format=YS_format)
 
 time = g.createDimension("time", None)
 lat = g.createDimension("lat", IS_lsm_lat)
 lon = g.createDimension("lon", IS_lsm_lon)
 nv = g.createDimension("nv", 2)
 
-time = g.createVariable("time","i4",("time",))
-time_bnds = g.createVariable("time_bnds","i4",("time","nv",))
-lat = g.createVariable("lat","f4",("lat",))
-lon = g.createVariable("lon","f4",("lon",))
+time = g.createVariable("time","i4",("time",),zlib=True,complevel=1)
+time_bnds = g.createVariable("time_bnds","i4",("time","nv",),                  \
+                             zlib=True,complevel=1)
+lat = g.createVariable("lat","f4",("lat",),zlib=True,complevel=1)
+lon = g.createVariable("lon","f4",("lon",),zlib=True,complevel=1)
 RUNSF = g.createVariable("RUNSF","f4",("time","lat","lon",),                   \
-                         fill_value=ZS_fill_runsf)
+                         fill_value=ZS_fill_runsf,zlib=True,complevel=1)
 RUNSB = g.createVariable("RUNSB","f4",("time","lat","lon",),                   \
-                         fill_value=ZS_fill_runsb)
+                         fill_value=ZS_fill_runsb,zlib=True,complevel=1)
 crs = g.createVariable("crs","i4")
 
 #-------------------------------------------------------------------------------
