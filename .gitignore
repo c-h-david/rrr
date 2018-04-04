@@ -29,6 +29,7 @@ tst/*
 !tst/tst_cmp_shp.py
 !tst/tst_chk_srt.py
 !tst/tst_chk_ncf.py
+!tst/tst_prf_ncf.py
 !tst/tst_pub*
 
 
