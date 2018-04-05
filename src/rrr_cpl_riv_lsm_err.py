@@ -392,15 +392,15 @@ print('Printing some diagnostic quantities')
 #-------------------------------------------------------------------------------
 #Basic quantities
 #-------------------------------------------------------------------------------
-YS_str=str(numpy.round(ZV_vol_av1.mean(),2))
+YS_str=str(numpy.round(ZV_vol_av1.mean(),4))
 print('- Spatial and temporal mean of model:          '+YS_str)
-YS_str=str(numpy.round(ZV_vol_av2.mean(),2))
+YS_str=str(numpy.round(ZV_vol_av2.mean(),4))
 print('- Spatial and temporal mean of ensemble:       '+YS_str)
-YS_str=str(numpy.round(ZV_vol_bia.mean(),2))
+YS_str=str(numpy.round(ZV_vol_bia.mean(),4))
 print('- Spatial mean of bias:                        '+YS_str)
-YS_str=str(numpy.round(ZV_vol_sde.mean(),2))
+YS_str=str(numpy.round(ZV_vol_sde.mean(),4))
 print('- Spatial mean of standard error:              '+YS_str)
-YS_str=str(numpy.round(ZV_vol_acv.mean(),2))
+YS_str=str(numpy.round(ZV_vol_acv.mean(),4))
 print('- Spatial mean of spatial mean of covariances: '+YS_str)
 
 #-------------------------------------------------------------------------------
