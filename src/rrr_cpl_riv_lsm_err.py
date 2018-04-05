@@ -25,10 +25,10 @@ import csv
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_vol_mod
-# 2 - rrr_vol_tru
+# 1 - rrr_mod_ncf
+# 2 - rrr_tru_ncf
 # 3 - ZS_conv
-# 4 - rrr_vol_err
+# 4 - rrr_err_csv
 
 
 #*******************************************************************************
@@ -39,37 +39,37 @@ if IS_arg != 5:
      print('ERROR - 4 and only 4 arguments must be used')
      raise SystemExit(22) 
 
-rrr_vol_mod=sys.argv[1]
-rrr_vol_tru=sys.argv[2]
+rrr_mod_ncf=sys.argv[1]
+rrr_tru_ncf=sys.argv[2]
 ZS_conv=eval(sys.argv[3])
-rrr_vol_err=sys.argv[4]
+rrr_err_csv=sys.argv[4]
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
 print('Command line inputs')
-print('- '+rrr_vol_mod)
-print('- '+rrr_vol_tru)
+print('- '+rrr_mod_ncf)
+print('- '+rrr_tru_ncf)
 print('- '+str(ZS_conv))
-print('- '+rrr_vol_err)
+print('- '+rrr_err_csv)
 
 
 #*******************************************************************************
 #Check if files exist 
 #*******************************************************************************
 try:
-     with open(rrr_vol_mod) as file:
+     with open(rrr_mod_ncf) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_vol_mod)
+     print('ERROR - Unable to open '+rrr_mod_ncf)
      raise SystemExit(22) 
 
 try:
-     with open(rrr_vol_tru) as file:
+     with open(rrr_tru_ncf) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_vol_tru)
+     print('ERROR - Unable to open '+rrr_tru_ncf)
      raise SystemExit(22) 
 
 
@@ -81,7 +81,7 @@ print('Reading netCDF file 1')
 #-------------------------------------------------------------------------------
 #Open netCDF file
 #-------------------------------------------------------------------------------
-f1 = netCDF4.Dataset(rrr_vol_mod, 'r')
+f1 = netCDF4.Dataset(rrr_mod_ncf, 'r')
 
 #-------------------------------------------------------------------------------
 #Get dimension sizes
@@ -91,7 +91,7 @@ if 'COMID' in f1.dimensions:
 elif 'rivid' in f1.dimensions:
      YS_rivid1='rivid'
 else:
-     print('ERROR - Neither COMID nor rivid exist in '+rrr_vol_mod)
+     print('ERROR - Neither COMID nor rivid exist in '+rrr_mod_ncf)
      raise SystemExit(22) 
 
 IS_riv_tot1=len(f1.dimensions[YS_rivid1])
@@ -102,7 +102,7 @@ if 'Time' in f1.dimensions:
 elif 'time' in f1.dimensions:
      YS_time1='time'
 else:
-     print('ERROR - Neither Time nor time exist in '+rrr_vol_mod)
+     print('ERROR - Neither Time nor time exist in '+rrr_mod_ncf)
      raise SystemExit(22) 
 
 IS_time1=len(f1.dimensions[YS_time1])
@@ -114,7 +114,7 @@ print('- The number of time steps is: '+str(IS_time1))
 if 'm3_riv' in f1.variables:
      YS_var1='m3_riv'
 else:
-     print('ERROR - m3_riv does not exist in '+rrr_vol_mod)
+     print('ERROR - m3_riv does not exist in '+rrr_mod_ncf)
      raise SystemExit(22) 
 
 IV_riv_tot_id1=f1.variables[YS_rivid1][:]
@@ -160,7 +160,7 @@ print('Reading netCDF file 2')
 #-------------------------------------------------------------------------------
 #Open netCDF file
 #-------------------------------------------------------------------------------
-f2 = netCDF4.Dataset(rrr_vol_tru, 'r')
+f2 = netCDF4.Dataset(rrr_tru_ncf, 'r')
 
 #-------------------------------------------------------------------------------
 #Get dimension sizes
@@ -170,7 +170,7 @@ if 'COMID' in f2.dimensions:
 elif 'rivid' in f2.dimensions:
      YS_rivid2='rivid'
 else:
-     print('ERROR - Neither COMID nor rivid exist in '+rrr_vol_tru)
+     print('ERROR - Neither COMID nor rivid exist in '+rrr_tru_ncf)
      raise SystemExit(22) 
 
 IS_riv_tot2=len(f2.dimensions[YS_rivid2])
@@ -181,7 +181,7 @@ if 'Time' in f2.dimensions:
 elif 'time' in f2.dimensions:
      YS_time2='time'
 else:
-     print('ERROR - Neither Time nor time exist in '+rrr_vol_tru)
+     print('ERROR - Neither Time nor time exist in '+rrr_tru_ncf)
      raise SystemExit(22) 
 
 IS_time2=len(f2.dimensions[YS_time2])
@@ -193,7 +193,7 @@ print('- The number of time steps is: '+str(IS_time2))
 if 'm3_riv' in f2.variables:
      YS_var2='m3_riv'
 else:
-     print('ERROR - m3_riv does not exist in '+rrr_vol_tru)
+     print('ERROR - m3_riv does not exist in '+rrr_tru_ncf)
      raise SystemExit(22) 
 
 IV_riv_tot_id2=f2.variables[YS_rivid2][:]
@@ -372,7 +372,7 @@ f2.close()
 #*******************************************************************************
 print('Write summarized results in a file')
 
-with open(rrr_vol_err, 'wb') as csvfile:
+with open(rrr_err_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid','modbar','trubar','bias','stderr','avgcov'])
      for JS_riv_tot in range(IS_riv_tot):
