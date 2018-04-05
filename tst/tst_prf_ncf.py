@@ -132,9 +132,9 @@ else:
 
 
 #*******************************************************************************
-#Evaluate read performance over each dimension
+#Evaluate read performance over the given number of read operations
 #*******************************************************************************
-print('Evaluate read performance over each dimension')
+print('Evaluate read performance over the given number of read operations')
 
 #-------------------------------------------------------------------------------
 #Read all river reaches for a given time
@@ -164,6 +164,44 @@ print(' . Each read operation will access: '+YS_len+' values')
 ZS_beg=time.time()
 for JS_read in range(IS_read):
     ZV_read=f.variables[YS_var][:,0]
+ZS_end=time.time()
+ZS_dif=round(ZS_end-ZS_beg,3)
+print(' . Duration for this task: '+str(ZS_dif)+' seconds')
+
+
+#*******************************************************************************
+#Evaluate read performance over the entire record
+#*******************************************************************************
+print('Evaluate read performance over the entire record')
+
+#-------------------------------------------------------------------------------
+#Read all river reaches for a given time
+#-------------------------------------------------------------------------------
+print('- Read all river reaches for a given time')
+
+YS_len=str(len(f.variables[YS_var][0,:]))
+print(' . Read operations will be performed: '+str(IS_time)+' times')
+print(' . Each read operation will access: '+YS_len+' values')
+
+ZS_beg=time.time()
+for JS_time in range(IS_time):
+    ZV_read=f.variables[YS_var][JS_time,:]
+ZS_end=time.time()
+ZS_dif=round(ZS_end-ZS_beg,3)
+print(' . Duration for this task: '+str(ZS_dif)+' seconds')
+
+#-------------------------------------------------------------------------------
+#Read all times for a given river reach
+#-------------------------------------------------------------------------------
+print('- Read all times for a given river reach')
+
+YS_len=str(len(f.variables[YS_var][:,0]))
+print(' . Read operations will be performed: '+str(IS_riv_tot)+' times')
+print(' . Each read operation will access: '+YS_len+' values')
+
+ZS_beg=time.time()
+for JS_riv_tot in range(IS_riv_tot):
+    ZV_read=f.variables[YS_var][:,JS_riv_tot]
 ZS_end=time.time()
 ZS_dif=round(ZS_end-ZS_beg,3)
 print(' . Duration for this task: '+str(ZS_dif)+' seconds')
