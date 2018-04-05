@@ -8,7 +8,7 @@
 #river network, and another similar file assumed to contain the "true" values of
 #the same quantities, along with a multiplying factor allowing to convert the
 #inputs into m^3/s, this program computes the corresponding bias, standard
-#error, and error convariances and saves these values in a new netCDF file.
+#error, and error convariances and saves these values in a new CSV file.
 #Author:
 #Cedric H. David, 2018-2018
 
@@ -19,6 +19,7 @@
 import sys
 import netCDF4
 import numpy
+import csv
 
 
 #*******************************************************************************
@@ -288,6 +289,7 @@ for JS_time in range(IS_time):
 ZV_vol_av1=ZV_vol_av1/IS_time
 ZV_vol_av2=ZV_vol_av2/IS_time
 ZV_vol_bia=ZV_vol_av1-ZV_vol_av2
+#The bias (the mean of the error) is now computed
 
 #-------------------------------------------------------------------------------
 #Computing standard errors
@@ -301,34 +303,48 @@ for JS_time in range(IS_time):
      ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
      ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
 
-     ZV_vol_dif=(ZV_vol_in1-ZV_vol_av1)-(ZV_vol_in2-ZV_vol_av2)
-     ZV_vol_sde=ZV_vol_sde+numpy.square(ZV_vol_dif)
+     ZV_vol_dif=ZV_vol_in1-ZV_vol_in2
+     #The current difference between the two values, i.e. the current error
+     ZV_vol_dev=ZV_vol_dif-ZV_vol_bia
+     #The deviation between the current error and the mean error
+     ZV_vol_sde=ZV_vol_sde+numpy.square(ZV_vol_dev)
+     #Updating the value of the standard deviation of the error
 
 ZV_vol_sde=ZV_vol_sde/(IS_time-1)
 ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
+#The standard error (the standard deviation of the error) is now computed
 
 #-------------------------------------------------------------------------------
 #Computing error covariances
 #-------------------------------------------------------------------------------
 print('- Computing error covariances')
 
-ZM_vol_in1=f1.variables[YS_var1][:,:]*ZS_conv
-ZM_vol_in2=f2.variables[YS_var2][:,:]*ZS_conv
-ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
+ZV_vol_sd2=numpy.empty(IS_riv_tot)
+#Another version of the standard error, which is used to check covariances here.
+#The variance is included in the variance/covarience matrix and the standard
+#error is its square root.
+ZV_vol_acv=numpy.empty(IS_riv_tot)
+#The average of the covariance between each river reach and all others.
+
+for JS_riv_tot in range(IS_riv_tot):
+     ZV_vol_cov=numpy.empty(IS_riv_tot)
+     #A 1-D array with all the covariances for the river reach at JS_riv_tot
+     for JS_time in range(IS_time):
+          ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
+          ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
+
+          ZV_vol_dif=ZV_vol_in1-ZV_vol_in2
+          ZV_vol_dev=ZV_vol_dif-ZV_vol_bia
+
+          ZV_vol_cov=ZV_vol_cov+ZV_vol_dev[JS_riv_tot]*ZV_vol_dev
+
+     ZV_vol_cov=ZV_vol_cov/(IS_time-1)
+     ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
+     ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Check the previous standard error computation from the variance equations
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-ZV_vol_sd2=numpy.empty(IS_riv_tot)
-
-for JS_riv_tot in range(IS_riv_tot):
-     ZV_vol_dif=ZM_vol_dif[:,JS_riv_tot]
-     ZV_vol_sd2[JS_riv_tot]=numpy.dot(ZV_vol_dif-ZV_vol_dif.mean(),            \
-
-                                      ZV_vol_dif-ZV_vol_dif.mean())
-ZV_vol_sd2=ZV_vol_sd2/(IS_time-1)
-ZV_vol_sd2=numpy.sqrt(ZV_vol_sd2)
-
 ZS_rdif_max=0
 for JS_riv_tot in range(IS_riv_tot):
      if ZV_vol_sde[JS_riv_tot]!=0:
@@ -352,6 +368,23 @@ f2.close()
 
 
 #*******************************************************************************
+#Write summarized results in a file
+#*******************************************************************************
+print('Write summarized results in a file')
+
+with open(rrr_vol_err, 'wb') as csvfile:
+     csvwriter = csv.writer(csvfile, dialect='excel')
+     csvwriter.writerow(['rivid','modbar','trubar','bias','stderr','avgcov'])
+     for JS_riv_tot in range(IS_riv_tot):
+          csvwriter.writerow([IV_riv_tot_id[JS_riv_tot],                       \
+                              ZV_vol_av1[JS_riv_tot],                          \
+                              ZV_vol_av2[JS_riv_tot],                          \
+                              ZV_vol_bia[JS_riv_tot],                          \
+                              ZV_vol_sde[JS_riv_tot],                          \
+                              ZV_vol_acv[JS_riv_tot]])
+
+
+#*******************************************************************************
 #Printing some diagnostic quantities
 #*******************************************************************************
 print('Printing some diagnostic quantities')
@@ -367,6 +400,8 @@ YS_str=str(numpy.round(ZV_vol_bia.mean(),2))
 print('- Spatial mean of bias:                        '+YS_str)
 YS_str=str(numpy.round(ZV_vol_sde.mean(),2))
 print('- Spatial mean of standard error:              '+YS_str)
+YS_str=str(numpy.round(ZV_vol_acv.mean(),2))
+print('- Spatial mean of spatial mean of covariances: '+YS_str)
 
 #-------------------------------------------------------------------------------
 #More advanced quantities
