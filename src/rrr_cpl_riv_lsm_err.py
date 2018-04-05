@@ -28,21 +28,23 @@ import csv
 # 1 - rrr_mod_ncf
 # 2 - rrr_tru_ncf
 # 3 - ZS_conv
-# 4 - rrr_err_csv
+# 4 - YS_opt
+# 5 - rrr_err_csv
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 5:
-     print('ERROR - 4 and only 4 arguments must be used')
+if IS_arg != 6:
+     print('ERROR - 5 and only 5 arguments must be used')
      raise SystemExit(22) 
 
 rrr_mod_ncf=sys.argv[1]
 rrr_tru_ncf=sys.argv[2]
 ZS_conv=eval(sys.argv[3])
-rrr_err_csv=sys.argv[4]
+YS_opt=sys.argv[4]
+rrr_err_csv=sys.argv[5]
 
 
 #*******************************************************************************
@@ -52,6 +54,7 @@ print('Command line inputs')
 print('- '+rrr_mod_ncf)
 print('- '+rrr_tru_ncf)
 print('- '+str(ZS_conv))
+print('- '+YS_opt)
 print('- '+rrr_err_csv)
 
 
@@ -71,6 +74,20 @@ try:
 except IOError as e:
      print('ERROR - Unable to open '+rrr_tru_ncf)
      raise SystemExit(22) 
+
+
+#*******************************************************************************
+#Check read option provided
+#*******************************************************************************
+print('Check read option provided')
+
+if YS_opt=='once':
+     print('- The covariance computation will read the .nc files at once')
+elif YS_opt=='incr':
+     print('- The covariance computation will read the .nc files incrementally')
+else:
+     print('ERROR - The option provided is neither once or incr: '+YS_opt)
+     raise SystemExit(22)
 
 
 #*******************************************************************************
