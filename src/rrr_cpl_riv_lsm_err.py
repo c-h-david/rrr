@@ -85,8 +85,10 @@ if YS_opt=='once':
      print('- The covariance computation will read the .nc files at once')
 elif YS_opt=='incr':
      print('- The covariance computation will read the .nc files incrementally')
+elif YS_opt=='skip':
+     print('- The covariance computation will be skipped')
 else:
-     print('ERROR - The option provided is neither once or incr: '+YS_opt)
+     print('ERROR - The option given is neither once, incr, nor skip: '+YS_opt)
      raise SystemExit(22)
 
 
@@ -343,6 +345,13 @@ ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 ZV_vol_acv=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Computation by reading netCDF files all at once
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Computation by reading netCDF files incrementally
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for JS_riv_tot in range(IS_riv_tot):
      ZV_vol_cov=numpy.zeros(IS_riv_tot)
      #A 1-D array with all the covariances for the river reach at JS_riv_tot
@@ -358,6 +367,10 @@ for JS_riv_tot in range(IS_riv_tot):
      ZV_vol_cov=ZV_vol_cov/(IS_time-1)
      ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
      ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Skipping covariance computation
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Check the previous standard error computation from the variance equations
