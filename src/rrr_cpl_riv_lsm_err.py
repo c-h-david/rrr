@@ -275,9 +275,9 @@ print('Computing estimates of error')
 #-------------------------------------------------------------------------------
 print('- Computing biases')
 
-ZV_vol_av1=numpy.empty(IS_riv_tot)
-ZV_vol_av2=numpy.empty(IS_riv_tot)
-ZV_vol_bia=numpy.empty(IS_riv_tot)
+ZV_vol_av1=numpy.zeros(IS_riv_tot)
+ZV_vol_av2=numpy.zeros(IS_riv_tot)
+ZV_vol_bia=numpy.zeros(IS_riv_tot)
 
 for JS_time in range(IS_time):
      ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
@@ -296,8 +296,8 @@ ZV_vol_bia=ZV_vol_av1-ZV_vol_av2
 #-------------------------------------------------------------------------------
 print('- Computing standard errors')
 
-ZV_vol_dif=numpy.empty(IS_riv_tot)
-ZV_vol_sde=numpy.empty(IS_riv_tot)
+ZV_vol_dif=numpy.zeros(IS_riv_tot)
+ZV_vol_sde=numpy.zeros(IS_riv_tot)
 
 for JS_time in range(IS_time):
      ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
@@ -319,15 +319,15 @@ ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
 #-------------------------------------------------------------------------------
 print('- Computing error covariances')
 
-ZV_vol_sd2=numpy.empty(IS_riv_tot)
+ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 #Another version of the standard error, which is used to check covariances here.
 #The variance is included in the variance/covarience matrix and the standard
 #error is its square root.
-ZV_vol_acv=numpy.empty(IS_riv_tot)
+ZV_vol_acv=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
 
 for JS_riv_tot in range(IS_riv_tot):
-     ZV_vol_cov=numpy.empty(IS_riv_tot)
+     ZV_vol_cov=numpy.zeros(IS_riv_tot)
      #A 1-D array with all the covariances for the river reach at JS_riv_tot
      for JS_time in range(IS_time):
           ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
