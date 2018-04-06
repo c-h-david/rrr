@@ -342,8 +342,14 @@ ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 #Another version of the standard error, which is used to check covariances here.
 #The variance is included in the variance/covarience matrix and the standard
 #error is its square root.
-ZV_vol_acv=numpy.zeros(IS_riv_tot)
+ZV_vol_cva=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
+ZV_vol_cvd=numpy.zeros(IS_riv_tot)
+#The median  of the covariance between each river reach and all others.
+ZV_vol_cvn=numpy.zeros(IS_riv_tot)
+#The mininum of the covariance between each river reach and all others.
+ZV_vol_cvx=numpy.zeros(IS_riv_tot)
+#The maximum of the covariance between each river reach and all others.
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
@@ -366,7 +372,10 @@ if YS_opt=='once':
 
           ZV_vol_cov=ZV_vol_cov/(IS_time-1)
           ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-          ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cva[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvd[JS_riv_tot]=numpy.median(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvn[JS_riv_tot]=numpy.minimum(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvx[JS_riv_tot]=numpy.maximum(numpy.delete(ZV_vol_cov,JS_riv_tot))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
@@ -387,7 +396,10 @@ if YS_opt=='incr':
 
           ZV_vol_cov=ZV_vol_cov/(IS_time-1)
           ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-          ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cva[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvd[JS_riv_tot]=numpy.median(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvn[JS_riv_tot]=numpy.minimum(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvx[JS_riv_tot]=numpy.maximum(numpy.delete(ZV_vol_cov,JS_riv_tot))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
@@ -427,14 +439,18 @@ print('Write summarized results in a file')
 
 with open(rrr_err_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
-     csvwriter.writerow(['rivid','modbar','trubar','bias','stderr','avgcov'])
+     csvwriter.writerow(['rivid', 'modbar','trubar','bias','stderr','covavg',  \
+                         'covmed','covmin','covmax'])
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([IV_riv_tot_id[JS_riv_tot],                       \
                               ZV_vol_av1[JS_riv_tot],                          \
                               ZV_vol_av2[JS_riv_tot],                          \
                               ZV_vol_bia[JS_riv_tot],                          \
                               ZV_vol_sde[JS_riv_tot],                          \
-                              ZV_vol_acv[JS_riv_tot]])
+                              ZV_vol_cva[JS_riv_tot],                          \
+                              ZV_vol_cvd[JS_riv_tot],                          \
+                              ZV_vol_cvn[JS_riv_tot],                          \
+                              ZV_vol_cvx[JS_riv_tot]])
 
 
 #*******************************************************************************
@@ -453,7 +469,7 @@ YS_str=str(numpy.round(ZV_vol_bia.mean(),4))
 print('- Spatial mean of bias:                        '+YS_str)
 YS_str=str(numpy.round(ZV_vol_sde.mean(),4))
 print('- Spatial mean of standard error:              '+YS_str)
-YS_str=str(numpy.round(ZV_vol_acv.mean(),4))
+YS_str=str(numpy.round(ZV_vol_cva.mean(),4))
 print('- Spatial mean of spatial mean of covariances: '+YS_str)
 
 #-------------------------------------------------------------------------------
