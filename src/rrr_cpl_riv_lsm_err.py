@@ -372,10 +372,12 @@ if YS_opt=='once':
 
           ZV_vol_cov=ZV_vol_cov/(IS_time-1)
           ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-          ZV_vol_cva[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvd[JS_riv_tot]=numpy.median(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvn[JS_riv_tot]=numpy.minimum(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvx[JS_riv_tot]=numpy.maximum(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvo=numpy.delete(ZV_vol_cov,JS_riv_tot)
+          #Removed the one variance element from the covariances
+          ZV_vol_cva[JS_riv_tot]=numpy.mean(ZV_vol_cvo)
+          ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
+          ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
+          ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
@@ -396,10 +398,12 @@ if YS_opt=='incr':
 
           ZV_vol_cov=ZV_vol_cov/(IS_time-1)
           ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-          ZV_vol_cva[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvd[JS_riv_tot]=numpy.median(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvn[JS_riv_tot]=numpy.minimum(numpy.delete(ZV_vol_cov,JS_riv_tot))
-          ZV_vol_cvx[JS_riv_tot]=numpy.maximum(numpy.delete(ZV_vol_cov,JS_riv_tot))
+          ZV_vol_cvo=numpy.delete(ZV_vol_cov,JS_riv_tot)
+          #Removed the one variance element from the covariances
+          ZV_vol_cva[JS_riv_tot]=numpy.mean(ZV_vol_cvo)
+          ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
+          ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
+          ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
