@@ -348,29 +348,52 @@ ZV_vol_acv=numpy.zeros(IS_riv_tot)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if YS_opt=='once':
+
+     ZM_vol_in1=f1.variables[YS_var1][:,:]*ZS_conv
+     ZM_vol_in2=f2.variables[YS_var2][:,:]*ZS_conv
+
+     ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
+     ZM_vol_dev=ZM_vol_dif-ZV_vol_bia
+
+     for JS_riv_tot in range(IS_riv_tot):
+          ZV_vol_cov=numpy.zeros(IS_riv_tot)
+          #A 1-D array with all the covariances for the reach at JS_riv_tot
+          for JS_time in range(IS_time):
+               ZV_vol_dev=ZM_vol_dev[JS_time,:]
+
+               ZV_vol_cov=ZV_vol_cov+ZV_vol_dev[JS_riv_tot]*ZV_vol_dev
+
+          ZV_vol_cov=ZV_vol_cov/(IS_time-1)
+          ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
+          ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-for JS_riv_tot in range(IS_riv_tot):
-     ZV_vol_cov=numpy.zeros(IS_riv_tot)
-     #A 1-D array with all the covariances for the river reach at JS_riv_tot
-     for JS_time in range(IS_time):
-          ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
-          ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
+if YS_opt=='incr':
 
-          ZV_vol_dif=ZV_vol_in1-ZV_vol_in2
-          ZV_vol_dev=ZV_vol_dif-ZV_vol_bia
+     for JS_riv_tot in range(IS_riv_tot):
+          ZV_vol_cov=numpy.zeros(IS_riv_tot)
+          #A 1-D array with all the covariances for the reach at JS_riv_tot
+          for JS_time in range(IS_time):
+               ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
+               ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
 
-          ZV_vol_cov=ZV_vol_cov+ZV_vol_dev[JS_riv_tot]*ZV_vol_dev
+               ZV_vol_dif=ZV_vol_in1-ZV_vol_in2
+               ZV_vol_dev=ZV_vol_dif-ZV_vol_bia
 
-     ZV_vol_cov=ZV_vol_cov/(IS_time-1)
-     ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-     ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
+               ZV_vol_cov=ZV_vol_cov+ZV_vol_dev[JS_riv_tot]*ZV_vol_dev
+
+          ZV_vol_cov=ZV_vol_cov/(IS_time-1)
+          ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
+          ZV_vol_acv[JS_riv_tot]=numpy.mean(numpy.delete(ZV_vol_cov,JS_riv_tot))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if YS_opt=='skip':
+     print(' . Skipped')
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Check the previous standard error computation from the variance equations
@@ -388,7 +411,7 @@ if ZS_rdif_max<=5e-6:
 else:
      print('ERROR - Unacceptable max relative difference in standard errors '  \
            'using two different methods')
-     raise SystemExit(22)
+     if YS_opt!='skip': raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
 #Close netCDF files
