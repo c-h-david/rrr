@@ -117,22 +117,42 @@ ZV_lsm_lat=f.variables['lat']
 ZV_lsm_time=f.variables['time']
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Get the interval sizes
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ZS_lsm_lon_stp=abs(ZV_lsm_lon[1]-ZV_lsm_lon[0])
+print(' - The interval size for longitudes is: '+str(ZS_lsm_lon_stp))
+
+ZS_lsm_lat_stp=abs(ZV_lsm_lat[1]-ZV_lsm_lat[0])
+print(' - The interval size for latitudes is: '+str(ZS_lsm_lat_stp))
+
+if len(ZV_lsm_time) > 1:
+     ZS_lsm_time_stp=abs(ZV_lsm_time[1]-ZV_lsm_time[0])
+     print(' - The interval size for time is: '+str(ZS_lsm_time_stp))
+else:
+     ZS_lsm_time_stp=0
+     print(' - No interval size for time (one unique time step)')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get variable names
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if 'RUNSF' in f.variables:
      YS_rsf_nam='RUNSF'
 elif 'SSRUN' in f.variables:
      YS_rsf_nam='SSRUN'
+elif 'Qs' in f.variables:
+     YS_rsf_nam='Qs'
 else:
-     print('ERROR - Neither RUNSF nor SSRUN exist in '+rrr_lsm_ncf)
+     print('ERROR - None of RUNSF, SSRUN, or Qs exist in '+rrr_lsm_ncf)
      raise SystemExit(22) 
 
 if 'RUNSB' in f.variables:
      YS_rsb_nam='RUNSB'
 elif 'BGRUN' in f.variables:
      YS_rsb_nam='BGRUN'
+elif 'Qsb' in f.variables:
+     YS_rsb_nam='Qsb'
 else:
-     print('ERROR - Neither RUNSB nor BGRUN exist in '+rrr_lsm_ncf)
+     print('ERROR - None of RUNSB, BGRUN, or Qsb exist in '+rrr_lsm_ncf)
      raise SystemExit(22) 
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -279,8 +299,8 @@ ZV_dom_sqm=[0]*IS_dom_tot
 for JS_dom_tot in range(IS_dom_tot):
      JS_lsm_lat=IV_dom_lat[JS_dom_tot]
      ZS_lsm_lat=ZV_lsm_lat[JS_lsm_lat]
-     ZV_dom_sqm[JS_dom_tot]=6371000*math.radians(0.5)                          \
-                           *6371000*math.radians(0.5)                          \
+     ZV_dom_sqm[JS_dom_tot]=6371000*math.radians(ZS_lsm_lat_stp)               \
+                           *6371000*math.radians(ZS_lsm_lon_stp)               \
                            *math.cos(math.radians(ZS_lsm_lat))
 
 print(' - The total area of interesecting grid cells is: '+str(sum(ZV_dom_sqm))\
