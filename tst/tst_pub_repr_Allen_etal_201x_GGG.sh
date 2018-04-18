@@ -354,6 +354,7 @@ echo "  . Creating a CF compliant file for $year/$month"
      ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_${year}${month}.nc4         \
      "$year-$month-01T00:00:00"                                                \
      10800                                                                     \
+     10800                                                                     \
      ../output/GLDAS/GLDAS_VIC10_3H/GLDAS_VIC10_3H_${year}${month}_utc.nc4     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
