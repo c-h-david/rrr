@@ -403,6 +403,76 @@ fi
 
 
 #*******************************************************************************
+#Coupling
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Create coupling file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating coupling file"
+../src/rrr_cpl_riv_lsm_lnk.py                                                  \
+     ../output/MIGBM_GGG/rapid_connect_MIGBM.csv                               \
+     ../output/MIGBM_GGG/rapid_catchment_as_riv_15s.csv                        \
+     ../output/MIGBM_GGG/GLDAS_VIC10_3H_20000101_20091231_utc.nc               \
+     ../output/MIGBM_GGG/rapid_coupling_MIGBM_GLDAS_tst.csv                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coupling file"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/rapid_coupling_MIGBM_GLDAS.csv                        \
+     ../output/MIGBM_GGG/rapid_coupling_MIGBM_GLDAS_tst.csv                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+   ../output/MIGBM_GGG/rapid_connect_MIGBM.csv                                 \
+   ../output/MIGBM_GGG/coords_MIGBM.csv                                        \
+   ../output/MIGBM_GGG/GLDAS_VIC10_3H_20000101_20091231_utc.nc                 \
+   ../output/MIGBM_GGG/rapid_coupling_MIGBM_GLDAS.csv                          \
+   ../output/MIGBM_GGG/m3_riv_MIGBM_20000101_20091231_VIC10_utc_tst.nc         \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/MIGBM_GGG/m3_riv_MIGBM_20000101_20091231_VIC10_utc.nc             \
+   ../output/MIGBM_GGG/m3_riv_MIGBM_20000101_20091231_VIC10_utc_tst.nc         \
+   1e-6                                                                        \
+   1e-1                                                                        \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MIGBM_GGG/*_tst.*
