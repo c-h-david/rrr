@@ -5,10 +5,11 @@
 
 #Purpose:
 #Given a run file with lon, lat, and time dimensions, and with lon, lat, RUNSF, 
-#and RUNSB variables(both in kg m-2); along with a start date of the following 
-#ISO 8601 format: '2000-01-01T00:00:00' and the duration of the time step, this 
-#program creates creates a new netCDF file that is CF-1.6 compliant and that 
-#includes time and time_bnds variables.
+#and RUNSB variables; along with a start date of the following ISO 8601 format:
+#'2000-01-01T00:00:00', the duration of the time step, and a value allowing for
+#the conversion between the input runoff units and kg m-2, this program creates
+#a new netCDF file that is CF-1.6 compliant and that includes time and time_bnds
+#variables.
 # - rrr_lsm_file2(lon,lat,time,nv)
 #   . RUNSF(lon,lat,time)
 #   . RUNSF(lon,lat,time)
@@ -38,21 +39,23 @@ import subprocess
 # 1 - rrr_lsm_file1
 # 2 - rrr_str_date
 # 3 - rrr_inc_secs
-# 4 - rrr_lsm_file2
+# 4 - ZS_conv
+# 5 - rrr_lsm_file2
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 5:
-     print('ERROR - 4 and only 4 arguments can be used')
+if IS_arg != 6:
+     print('ERROR - 5 and only 5 arguments can be used')
      raise SystemExit(22) 
 
 rrr_lsm_file1=sys.argv[1]
 rrr_str_date=sys.argv[2]
 rrr_inc_secs=int(sys.argv[3])
-rrr_lsm_file2=sys.argv[4]
+ZS_conv=eval(sys.argv[4])
+rrr_lsm_file2=sys.argv[5]
 
 
 #*******************************************************************************
@@ -62,6 +65,7 @@ print('Command line inputs')
 print('- '+rrr_lsm_file1)
 print('- '+rrr_str_date)
 print('- '+str(rrr_inc_secs))
+print('- '+str(ZS_conv))
 print('- '+rrr_lsm_file2)
 
 
@@ -230,8 +234,12 @@ print('- Copy data from existing netCDF file')
 
 lon[:]=f.variables['lon'][:]
 lat[:]=f.variables['lat'][:]
-RUNSF[:]=f.variables['RUNSF'][:]
-RUNSB[:]=f.variables['RUNSB'][:]
+if ZS_conv==1.0:
+     RUNSF[:]=f.variables['RUNSF'][:]
+     RUNSB[:]=f.variables['RUNSB'][:]
+else:
+     RUNSF[:]=f.variables['RUNSF'][:]*ZS_conv
+     RUNSB[:]=f.variables['RUNSB'][:]*ZS_conv
 
 #-------------------------------------------------------------------------------
 #Populate time data 
