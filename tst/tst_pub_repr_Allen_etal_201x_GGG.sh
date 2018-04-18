@@ -471,6 +471,33 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Update netCDF global attributes
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF global attributes"
+../src/rrr_cpl_riv_lsm_att.sh                                                  \
+   ../output/MIGBM_GGG/m3_riv_MIGBM_20000101_20091231_VIC10_utc_tst.nc         \
+   'RAPID data corresponding to the Mekong, Indus, and Ganges/Brahmaputra/Meghna Basins' \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ' '                                                                         \
+   6378137                                                                     \
+   298.257223563                                                               \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Clean up
