@@ -500,9 +500,151 @@ fi
 
 
 #*******************************************************************************
+#Timeseries, hydrographs and statistics
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Timeseries for observations
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for observations"
+../src/rrr_anl_hyd_obs.py                                                      \
+     ../output/MIGBM_GGG/Gauges_MIGBM_20000101_20091231_full_sort.shp          \
+     ../output/MIGBM_GGG/obs_tot_id_MIGBM_20000101_20091231_full.csv           \
+     ../output/MIGBM_GGG/Qobs_MIGBM_20000101_20091231_full.csv                 \
+     2000-01-01                                                                \
+     1                                                                         \
+     Observations                                                              \
+     ../output/MIGBM_GGG/analysis/timeseries_obs_tst.csv                       \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for observations"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/analysis/timeseries_obs.csv                           \
+     ../output/MIGBM_GGG/analysis/timeseries_obs_tst.csv                       \
+     1e-5                                                                      \
+     1e-6                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters p0
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters p0"
+../src/rrr_anl_hyd_mod.py                                                      \
+     ../output/MIGBM_GGG/Gauges_MIGBM_20000101_20091231_full_sort.shp          \
+     ../output/MIGBM_GGG/Qout_MIGBM_20000101_20091231_utc_p0_dtR1800s_n1_preonly.nc \
+     RAPID_p0                                                                  \
+     8                                                                         \
+     ../output/MIGBM_GGG/analysis/timeseries_rap_p0_tst.csv                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, with parameters p0"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/analysis/timeseries_rap_p0.csv                        \
+     ../output/MIGBM_GGG/analysis/timeseries_rap_p0_tst.csv                    \
+     1e-3                                                                      \
+     2e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Statistics for model simulations, with parameters p0, initialized
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, with parameters p0"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/MIGBM_GGG/Gauges_MIGBM_20000101_20091231_full_sort.shp          \
+     ../output/MIGBM_GGG/analysis/timeseries_obs.csv                           \
+     ../output/MIGBM_GGG/analysis/timeseries_rap_p0.csv                        \
+     ../output/MIGBM_GGG/analysis/stats_rap_p0_tst.csv                         \
+     2000-01-01                                                                \
+     2009-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, with parameters p0"
+./tst_cmp_csv.py                                                               \
+     ../output/MIGBM_GGG/analysis/stats_rap_p0.csv                             \
+     ../output/MIGBM_GGG/analysis/stats_rap_p0_tst.csv                         \
+     1e-5                                                                      \
+     1e-6                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for model simulations with, parameters p0
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for model simulations, with parameters p0"
+../src/rrr_anl_hyd_plt.py                                                      \
+     ../output/MIGBM_GGG/Gauges_MIGBM_20000101_20091231_full_sort.shp          \
+     ../output/MIGBM_GGG/analysis/timeseries_obs.csv                           \
+     ../output/MIGBM_GGG/analysis/timeseries_rap_p0.csv                        \
+     ../output/MIGBM_GGG/analysis/stats_rap_p0.csv                             \
+     ../output/MIGBM_GGG/analysis/hydrographs_rap_p0_tst/                      \
+     2000-01-01                                                                \
+     2009-12-31                                                                \
+     120000                                                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/MIGBM_GGG/analysis/hydrographs_rap_p0_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MIGBM_GGG/*_tst.*
+rm -f ../output/MIGBM_GGG/analysis/*_tst*.csv
 
 
 #*******************************************************************************
