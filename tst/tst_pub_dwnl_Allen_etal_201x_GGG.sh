@@ -188,7 +188,7 @@ folder="../output/MIGBM_GGG"
 list="                                                                         \
       bas_MIGBM.zip                                                            \
       coords_MIGBM.csv                                                         \
-      k_MIGBM_scl.csv                                                          \
+      k_MIGBM_0.csv                                                            \
       kfac_MIGBM_1km_hour.csv                                                  \
       rapid_catchment_as_riv_15s.csv                                           \
       rapid_connect_MIGBM.csv                                                  \
@@ -196,7 +196,7 @@ list="                                                                         \
       riv_MIGBM.zip                                                            \
       sort_MIGBM_topo.csv                                                      \
       xfac_MIGBM_0.1.csv                                                       \
-      x_MIGBM_scl.csv                                                          \
+      x_MIGBM_0.csv                                                            \
      "
 
 #-------------------------------------------------------------------------------

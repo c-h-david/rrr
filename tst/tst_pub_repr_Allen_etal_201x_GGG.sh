@@ -205,15 +205,15 @@ echo "- Creating p_0 files"
      ../output/MIGBM_GGG/xfac_MIGBM_0.1.csv                                    \
      0.2                                                                       \
      3                                                                         \
-     ../output/MIGBM_GGG/k_MIGBM_scl_tst.csv                                   \
-     ../output/MIGBM_GGG/x_MIGBM_scl_tst.csv                                   \
+     ../output/MIGBM_GGG/k_MIGBM_0_tst.csv                                     \
+     ../output/MIGBM_GGG/x_MIGBM_0_tst.csv                                     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing k_0 files"
 ./tst_cmp_csv.py                                                               \
-     ../output/MIGBM_GGG/k_MIGBM_scl.csv                                       \
-     ../output/MIGBM_GGG/k_MIGBM_scl_tst.csv                                   \
+     ../output/MIGBM_GGG/k_MIGBM_0.csv                                         \
+     ../output/MIGBM_GGG/k_MIGBM_0_tst.csv                                     \
      1e-6                                                                      \
      2e-2                                                                      \
      > $cmp_file
@@ -221,8 +221,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x
 
 echo "- Comparing x_0 files"
 ./tst_cmp_csv.py                                                               \
-     ../output/MIGBM_GGG/x_MIGBM_scl.csv                                       \
-     ../output/MIGBM_GGG/x_MIGBM_scl_tst.csv                                   \
+     ../output/MIGBM_GGG/x_MIGBM_0.csv                                         \
+     ../output/MIGBM_GGG/x_MIGBM_0_tst.csv                                     \
      1e-6                                                                      \
      2e-2                                                                      \
      > $cmp_file
