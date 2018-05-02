@@ -7,7 +7,7 @@
 #This program modifies some global attributes from a given netCDF file based on
 #command line inputs. 
 #Author:
-#Cedric H. David, 2016-2017
+#Cedric H. David, 2016-2018
 
 
 #*******************************************************************************

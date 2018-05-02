@@ -32,7 +32,7 @@
 #EPSG:4269   --> NAD83
 #ESRI:102008 --> NAD83/North America Albers Equal Area Conic
 #Author:
-#Cedric H. David, 2014-2017
+#Cedric H. David, 2014-2018
 
 
 #*******************************************************************************

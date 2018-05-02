@@ -11,7 +11,7 @@
 #of the new partial values. If CF metadata are present, they are all copied, 
 #except for the long_name to which "estimate of error for " is appended.
 #Author:
-#Cedric H. David, 2016-2017
+#Cedric H. David, 2016-2018
 
 
 #*******************************************************************************

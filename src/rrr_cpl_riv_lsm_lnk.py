@@ -12,7 +12,7 @@
 #   . Longitude index (1-based) at which to look for the runoff value 
 #   . Latitude index (1-based) at which to look for the runoff value 
 #Author:
-#Cedric H. David, 2011-2017
+#Cedric H. David, 2011-2018
 
 
 #*******************************************************************************

@@ -6,7 +6,7 @@
 #Purpose:
 #Compare one unique 1-D variable within two netCDF files.
 #Author:
-#Cedric H. David, 2016-2017
+#Cedric H. David, 2016-2018
 
 
 #*******************************************************************************

@@ -45,7 +45,7 @@
 # - 22 if there was a conversion problem
 # - 44 if one download is not successful
 #Author:
-#Cedric H. David, 2016-2017.
+#Cedric H. David, 2016-2018.
 
 
 #*******************************************************************************
