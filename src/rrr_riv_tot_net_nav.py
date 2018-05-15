@@ -141,6 +141,8 @@ for JS_riv_tot in range(IS_riv_tot):
                break
                #This break statement exits the for loop if no more downstream
      IM_riv_dwn_ix_rad[JS_riv_tot]=IV_riv_dwn_ix_rad
+     if IV_riv_tot_id[JS_riv_tot]==IS_riv_id:
+          IV_riv_dwn_ix_req=IV_riv_dwn_ix_rad
 
 print('- Ok')
 
@@ -173,6 +175,8 @@ for JS_riv_tot in range(IS_riv_tot):
                break
                #This break statement exits the for loop if no more downstream
      IM_riv_ups_ix_rad[JS_riv_tot]=IV_riv_ups_ix_rad
+     if IV_riv_tot_id[JS_riv_tot]==IS_riv_id:
+          IV_riv_ups_ix_req=IV_riv_ups_ix_rad
 
 print('- Ok')
 
@@ -185,22 +189,28 @@ print('Writing CSV files')
 IS_riv_ix=IM_hsh[IS_riv_id]
 IS_riv_dwn=len(IM_riv_dwn_ix_rad[IS_riv_ix])
 
+IS_riv_dwn=len(IV_riv_dwn_ix_req)
+
 with open(rrr_dwn_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
      for JS_riv_dwn in range(IS_riv_dwn):
           JS_riv_ix=IM_riv_dwn_ix_rad[IS_riv_ix][JS_riv_dwn]
+          JS_riv_ix=IV_riv_dwn_ix_req[JS_riv_dwn]
           JS_riv_id=IV_riv_tot_id[JS_riv_ix]
           csvwriter.writerow([JS_riv_id]) 
 
 IS_riv_ix=IM_hsh[IS_riv_id]
 IS_riv_ups=len(IM_riv_ups_ix_rad[IS_riv_ix])
 
+IS_riv_ups=len(IV_riv_ups_ix_req)
+
 with open(rrr_ups_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
      for JS_riv_ups in range(IS_riv_ups):
           JS_riv_ix=IM_riv_ups_ix_rad[IS_riv_ix][JS_riv_ups]
+          JS_riv_ix=IV_riv_ups_ix_req[JS_riv_ups]
           JS_riv_id=IV_riv_tot_id[JS_riv_ix]
           csvwriter.writerow([JS_riv_id]) 
 
