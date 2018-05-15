@@ -128,15 +128,19 @@ IM_riv_dwn_ix_rad=[[] for JS_riv_tot in range(IS_riv_tot)]
 #List that holds indexes for downstream of the reach located at index JS_riv_tot
 
 for JS_riv_tot in range(IS_riv_tot):
+     IV_riv_dwn_ix_rad=[]
+     #List of all indexes (within radius) downstream of the current index
      IS_riv_dwn_id=IV_riv_dwn_id[JS_riv_tot]
+     #ID of the river that is directly downstream of the current index
      for JS_riv_dwn in range(IS_riv_rad):
           if IS_riv_dwn_id != 0:
                IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
-               IM_riv_dwn_ix_rad[JS_riv_tot].append(IS_riv_dwn_ix)
+               IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
                IS_riv_dwn_id=IV_riv_dwn_id[IS_riv_dwn_ix]
           else:
                break
                #This break statement exits the for loop if no more downstream
+     IM_riv_dwn_ix_rad[JS_riv_tot]=IV_riv_dwn_ix_rad
 
 print('- Ok')
 
@@ -150,12 +154,15 @@ IM_riv_ups_ix_rad=[[] for JS_riv_tot in range(IS_riv_tot)]
 #List that holds indexes for upstream of the reach located at index JS_riv_tot
 
 for JS_riv_tot in range(IS_riv_tot):
+     IV_riv_ups_ix_rad=[]
+     #List of all indexes (within radius) upstream of the current index
      IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
+     #IDs of the river that is directly upstream of the current index
      for JS_riv_ups in range(IS_riv_rad):
           IV_riv_nxt_id=[]
           for JS_riv_ups_id in IV_riv_ups_id:
                JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
-               IM_riv_ups_ix_rad[JS_riv_tot].append(JS_riv_ups_ix)
+               IV_riv_ups_ix_rad.append(JS_riv_ups_ix)
                IV_riv_nxt_id=IV_riv_nxt_id                                     \
                             +IM_riv_ups_id[JS_riv_ups_ix]                      \
                                           [0:IV_riv_ups_nb[JS_riv_ups_ix]]
@@ -165,6 +172,7 @@ for JS_riv_tot in range(IS_riv_tot):
           else:
                break
                #This break statement exits the for loop if no more downstream
+     IM_riv_ups_ix_rad[JS_riv_tot]=IV_riv_ups_ix_rad
 
 print('- Ok')
 
