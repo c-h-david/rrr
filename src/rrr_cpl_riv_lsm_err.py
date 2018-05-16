@@ -418,6 +418,48 @@ if YS_opt=='once':
      ZM_vol_dev=ZM_vol_dif-ZV_vol_bia
 
      for JS_riv_tot in range(IS_riv_tot):
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Determination of downstream indexes
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          IV_riv_dwn_ix_rad=[]
+          #List of all indexes (within radius) downstream of the current index
+          IS_riv_dwn_id=IV_riv_dwn_id[JS_riv_tot]
+          #ID of the river that is directly downstream of the current index
+          for JS_riv_dwn in range(IS_riv_rad):
+               if IS_riv_dwn_id != 0:
+                    IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
+                    IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
+                    IS_riv_dwn_id=IV_riv_dwn_id[IS_riv_dwn_ix]
+                    #Update the ID to that of the next downstream river
+               else:
+                    break
+                    #This break statement exits the for loop if no more dnstream
+
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Determination of upstream indexes
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          IV_riv_ups_ix_rad=[]
+          #List of all indexes (within radius) upstream of the current index
+          IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
+          #IDs of the river that is directly upstream of the current index
+          for JS_riv_ups in range(IS_riv_rad):
+               IV_riv_nxt_id=[]
+               for JS_riv_ups_id in IV_riv_ups_id:
+                    JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
+                    IV_riv_ups_ix_rad.append(JS_riv_ups_ix)
+                    IV_riv_nxt_id=IV_riv_nxt_id                                \
+                                 +IM_riv_ups_id[JS_riv_ups_ix]                 \
+                                               [0:IV_riv_ups_nb[JS_riv_ups_ix]]
+                                 #The + here is used for concatenation of lists
+               if len(IV_riv_nxt_id)!=0:
+                    IV_riv_ups_id=IV_riv_nxt_id
+               else:
+                    break
+                    #This break statement exits the for loop if no more upstream
+
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Computation of covariances
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           ZV_vol_cov=numpy.zeros(IS_riv_tot)
           #A 1-D array with all the covariances for the reach at JS_riv_tot
           for JS_time in range(IS_time):
@@ -440,6 +482,48 @@ if YS_opt=='once':
 if YS_opt=='incr':
 
      for JS_riv_tot in range(IS_riv_tot):
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Determination of downstream indexes
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          IV_riv_dwn_ix_rad=[]
+          #List of all indexes (within radius) downstream of the current index
+          IS_riv_dwn_id=IV_riv_dwn_id[JS_riv_tot]
+          #ID of the river that is directly downstream of the current index
+          for JS_riv_dwn in range(IS_riv_rad):
+               if IS_riv_dwn_id != 0:
+                    IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
+                    IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
+                    IS_riv_dwn_id=IV_riv_dwn_id[IS_riv_dwn_ix]
+                    #Update the ID to that of the next downstream river
+               else:
+                    break
+                    #This break statement exits the for loop if no more dnstream
+
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Determination of upstream indexes
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          IV_riv_ups_ix_rad=[]
+          #List of all indexes (within radius) upstream of the current index
+          IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
+          #IDs of the river that is directly upstream of the current index
+          for JS_riv_ups in range(IS_riv_rad):
+               IV_riv_nxt_id=[]
+               for JS_riv_ups_id in IV_riv_ups_id:
+                    JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
+                    IV_riv_ups_ix_rad.append(JS_riv_ups_ix)
+                    IV_riv_nxt_id=IV_riv_nxt_id                                \
+                                 +IM_riv_ups_id[JS_riv_ups_ix]                 \
+                                               [0:IV_riv_ups_nb[JS_riv_ups_ix]]
+                                 #The + here is used for concatenation of lists
+               if len(IV_riv_nxt_id)!=0:
+                    IV_riv_ups_id=IV_riv_nxt_id
+               else:
+                    break
+                    #This break statement exits the for loop if no more upstream
+
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
+          #Computation of covariances
+          #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           ZV_vol_cov=numpy.zeros(IS_riv_tot)
           #A 1-D array with all the covariances for the reach at JS_riv_tot
           for JS_time in range(IS_time):
