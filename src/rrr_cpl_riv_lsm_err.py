@@ -429,7 +429,10 @@ if YS_opt=='once':
           #List of all indexes (within radius) downstream of the current index
           IS_riv_dwn_id=IV_riv_dwn_id[JS_riv_tot]
           #ID of the river that is directly downstream of the current index
-          for JS_riv_dwn in range(IS_riv_rad):
+          JS_riv_dwn=0
+          while JS_riv_dwn<IS_riv_rad:
+               JS_riv_dwn=JS_riv_dwn+1
+               #At large radius, a while loop is much faster than a for loop!
                if IS_riv_dwn_id != 0:
                     IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
                     IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
@@ -446,7 +449,10 @@ if YS_opt=='once':
           #List of all indexes (within radius) upstream of the current index
           IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
           #IDs of the river that is directly upstream of the current index
-          for JS_riv_ups in range(IS_riv_rad):
+          JS_riv_ups=0
+          while JS_riv_ups<IS_riv_rad:
+               JS_riv_ups=JS_riv_ups+1
+               #At large radius, a while loop is much faster than a for loop!
                IV_riv_nxt_id=[]
                for JS_riv_ups_id in IV_riv_ups_id:
                     JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
@@ -495,7 +501,10 @@ if YS_opt=='incr':
           #List of all indexes (within radius) downstream of the current index
           IS_riv_dwn_id=IV_riv_dwn_id[JS_riv_tot]
           #ID of the river that is directly downstream of the current index
-          for JS_riv_dwn in range(IS_riv_rad):
+          JS_riv_dwn=0
+          while JS_riv_dwn<IS_riv_rad:
+               JS_riv_dwn=JS_riv_dwn+1
+               #At large radius, a while loop is much faster than a for loop!
                if IS_riv_dwn_id != 0:
                     IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
                     IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
@@ -512,7 +521,10 @@ if YS_opt=='incr':
           #List of all indexes (within radius) upstream of the current index
           IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
           #IDs of the river that is directly upstream of the current index
-          for JS_riv_ups in range(IS_riv_rad):
+          JS_riv_ups=0
+          while JS_riv_ups<IS_riv_rad:
+               JS_riv_ups=JS_riv_ups+1
+               #At large radius, a while loop is much faster than a for loop!
                IV_riv_nxt_id=[]
                for JS_riv_ups_id in IV_riv_ups_id:
                     JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
