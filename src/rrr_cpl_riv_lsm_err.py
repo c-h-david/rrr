@@ -399,7 +399,7 @@ ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 #error is its square root.
 ZV_vol_cva=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
-ZV_vol_cvd=numpy.zeros(IS_riv_tot)
+ZV_vol_cve=numpy.zeros(IS_riv_tot)
 #The median  of the covariance between each river reach and all others.
 ZV_vol_cvn=numpy.zeros(IS_riv_tot)
 #The mininum of the covariance between each river reach and all others.
@@ -476,7 +476,7 @@ if YS_opt=='once':
           ZV_vol_cvo=numpy.delete(ZV_vol_cov,JS_riv_tot)
           #Removed the one variance element from the covariances
           ZV_vol_cva[JS_riv_tot]=numpy.mean(ZV_vol_cvo)
-          ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
+          ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
           ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
@@ -546,7 +546,7 @@ if YS_opt=='incr':
           ZV_vol_cvo=numpy.delete(ZV_vol_cov,JS_riv_tot)
           #Removed the one variance element from the covariances
           ZV_vol_cva[JS_riv_tot]=numpy.mean(ZV_vol_cvo)
-          ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
+          ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
           ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
@@ -599,7 +599,7 @@ with open(rrr_err_csv, 'wb') as csvfile:
                               ZV_vol_bia[JS_riv_tot],                          \
                               ZV_vol_sde[JS_riv_tot],                          \
                               ZV_vol_cva[JS_riv_tot],                          \
-                              ZV_vol_cvd[JS_riv_tot],                          \
+                              ZV_vol_cve[JS_riv_tot],                          \
                               ZV_vol_cvn[JS_riv_tot],                          \
                               ZV_vol_cvx[JS_riv_tot]])
 
