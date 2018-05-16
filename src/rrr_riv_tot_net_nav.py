@@ -134,6 +134,7 @@ for JS_riv_tot in range(IS_riv_tot):
                IS_riv_dwn_ix=IM_hsh[IS_riv_dwn_id]
                IV_riv_dwn_ix_rad.append(IS_riv_dwn_ix)
                IS_riv_dwn_id=IV_riv_dwn_id[IS_riv_dwn_ix]
+               #Update the ID to that of the next downstream river
           else:
                break
                #This break statement exits the for loop if no more downstream
@@ -169,6 +170,7 @@ for JS_riv_tot in range(IS_riv_tot):
                #This break statement exits the for loop if no more downstream
      if IV_riv_tot_id[JS_riv_tot]==IS_riv_id:
           IV_riv_ups_ix_req=IV_riv_ups_ix_rad
+          #Update the IDs to those of the next upstream rivers
 
 print('- Ok')
 
