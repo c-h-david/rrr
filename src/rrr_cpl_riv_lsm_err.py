@@ -328,6 +328,18 @@ else:
      
 
 #*******************************************************************************
+#Creating hash table
+#*******************************************************************************
+print('Creating hash table')
+
+IM_hsh={}
+for JS_riv_tot in range(IS_riv_tot):
+     IM_hsh[IV_riv_tot_id[JS_riv_tot]]=JS_riv_tot
+
+print("- Hash table created")
+
+
+#*******************************************************************************
 #Computing estimates of error
 #*******************************************************************************
 print('Computing estimates of error')
