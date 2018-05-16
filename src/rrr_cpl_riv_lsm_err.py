@@ -485,7 +485,10 @@ if YS_opt=='once':
           ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
-          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
+          if len(IV_riv_ups_ix_all)!=0:
+               ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
+          else:
+               ZV_vol_cvu[JS_riv_tot]=0
           for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
                ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
                                        ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
@@ -563,7 +566,10 @@ if YS_opt=='incr':
           ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
-          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
+          if len(IV_riv_ups_ix_all)!=0:
+               ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
+          else:
+               ZV_vol_cvu[JS_riv_tot]=0
           for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
                ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
                                        ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
