@@ -265,11 +265,39 @@ else:
 
 
 #*******************************************************************************
+#Reading connectivity file
+#*******************************************************************************
+print('Reading connectivity file')
+
+with open(rrr_con_csv,'r') as csvfile:
+     csvreader=csv.reader(csvfile)
+     IS_col=len(next(csvreader))
+     IS_max_up=IS_col-3
+
+print('- Maximum number of upstream reaches in rrr_con_file: '+str(IS_max_up))
+
+IV_riv_tot_id3=[]
+IV_riv_dwn_id=[]
+IV_riv_ups_nb=[]
+IM_riv_ups_id=[]
+with open(rrr_con_csv,'r') as csvfile:
+     csvreader=csv.reader(csvfile)
+     for row in csvreader:
+          IV_riv_tot_id3.append(int(row[0]))
+          IV_riv_dwn_id.append(int(row[1]))
+          IV_riv_ups_nb.append(int(row[2]))
+          IM_riv_ups_id.append([int(rivid) for rivid in row[3:]])
+
+IS_riv_tot3=len(IV_riv_tot_id3)
+print('- Number of river reaches in rrr_con_file: '+str(IS_riv_tot3))
+
+
+#*******************************************************************************
 #Check consistency
 #*******************************************************************************
 print('Check consistency')
 
-if IS_riv_tot1==IS_riv_tot2: 
+if IS_riv_tot1==IS_riv_tot2 and IS_riv_tot1==IS_riv_tot3:
      IS_riv_tot=IS_riv_tot1
      print('- Common number of river reaches: '+str(IS_riv_tot))
 else: 
@@ -283,7 +311,8 @@ else:
      print('ERROR - The number of time steps differ')
      raise SystemExit(22) 
      
-if (IV_riv_tot_id1==IV_riv_tot_id2).all(): 
+if (IV_riv_tot_id1==IV_riv_tot_id2).all() and                                  \
+   (IV_riv_tot_id1==IV_riv_tot_id3).all():
      IV_riv_tot_id=IV_riv_tot_id1
      print('- The river reach IDs are the same')
 else: 
