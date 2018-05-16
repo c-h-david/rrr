@@ -407,8 +407,8 @@ ZV_vol_cvx=numpy.zeros(IS_riv_tot)
 #The maximum of the covariance between each river reach and all others.
 ZV_vol_cvu=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others upstream.
-ZM_vol_cvd=numpy.zeros((IS_riv_tot,50))
-#The covariance between each river reach and 50 others downstream.
+ZM_vol_cvd=numpy.zeros((IS_riv_tot,IS_riv_rad))
+#The covariances between each river reach and others downstream (within radius).
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
@@ -486,7 +486,9 @@ if YS_opt=='once':
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
           ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
-          ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
+          for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
+               ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
+                                       ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
@@ -562,7 +564,9 @@ if YS_opt=='incr':
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
           ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
-          ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
+          for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
+               ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
+                                       ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
