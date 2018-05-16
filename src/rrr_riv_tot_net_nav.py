@@ -167,7 +167,7 @@ for JS_riv_tot in range(IS_riv_tot):
                IV_riv_ups_id=IV_riv_nxt_id
           else:
                break
-               #This break statement exits the for loop if no more downstream
+               #This break statement exits the for loop if no more upstream
      if IV_riv_tot_id[JS_riv_tot]==IS_riv_id:
           IV_riv_ups_ix_req=IV_riv_ups_ix_rad
           #Update the IDs to those of the next upstream rivers
