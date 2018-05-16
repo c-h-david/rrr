@@ -445,18 +445,18 @@ if YS_opt=='once':
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           #Determination of upstream indexes
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-          IV_riv_ups_ix_rad=[]
-          #List of all indexes (within radius) upstream of the current index
+          IV_riv_ups_ix_all=[]
+          #List of all indexes upstream of the current index
           IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
           #IDs of the river that is directly upstream of the current index
           JS_riv_ups=0
-          while JS_riv_ups<IS_riv_rad:
+          while JS_riv_ups<1000000000:
                JS_riv_ups=JS_riv_ups+1
                #At large radius, a while loop is much faster than a for loop!
                IV_riv_nxt_id=[]
                for JS_riv_ups_id in IV_riv_ups_id:
                     JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
-                    IV_riv_ups_ix_rad.append(JS_riv_ups_ix)
+                    IV_riv_ups_ix_all.append(JS_riv_ups_ix)
                     IV_riv_nxt_id=IV_riv_nxt_id                                \
                                  +IM_riv_ups_id[JS_riv_ups_ix]                 \
                                                [0:IV_riv_ups_nb[JS_riv_ups_ix]]
@@ -485,7 +485,7 @@ if YS_opt=='once':
           ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
-          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
+          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
           ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -517,18 +517,18 @@ if YS_opt=='incr':
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           #Determination of upstream indexes
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-          IV_riv_ups_ix_rad=[]
-          #List of all indexes (within radius) upstream of the current index
+          IV_riv_ups_ix_all=[]
+          #List of all indexes upstream of the current index
           IV_riv_ups_id=IM_riv_ups_id[JS_riv_tot][0:IV_riv_ups_nb[JS_riv_tot]]
           #IDs of the river that is directly upstream of the current index
           JS_riv_ups=0
-          while JS_riv_ups<IS_riv_rad:
+          while JS_riv_ups<1000000000:
                JS_riv_ups=JS_riv_ups+1
                #At large radius, a while loop is much faster than a for loop!
                IV_riv_nxt_id=[]
                for JS_riv_ups_id in IV_riv_ups_id:
                     JS_riv_ups_ix=IM_hsh[JS_riv_ups_id]
-                    IV_riv_ups_ix_rad.append(JS_riv_ups_ix)
+                    IV_riv_ups_ix_all.append(JS_riv_ups_ix)
                     IV_riv_nxt_id=IV_riv_nxt_id                                \
                                  +IM_riv_ups_id[JS_riv_ups_ix]                 \
                                                [0:IV_riv_ups_nb[JS_riv_ups_ix]]
@@ -561,7 +561,7 @@ if YS_opt=='incr':
           ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
-          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
+          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
           ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
