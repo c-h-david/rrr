@@ -7,8 +7,9 @@
 #Given one file with estimates of time-varying external inflow (in m^3) into the
 #river network, and another similar file assumed to contain the "true" values of
 #the same quantities, along with a multiplying factor allowing to convert the
-#inputs into m^3/s, this program computes the corresponding bias, standard
-#error, and error convariances and saves these values in a new CSV file.
+#inputs into m^3/s, a connectivity file, and a radius of search (number of river
+#reaches), this program computes the corresponding bias, standard error, and
+#error convariances and saves these values in a new CSV file.
 #Author:
 #Cedric H. David, 2018-2018
 
@@ -29,22 +30,26 @@ import csv
 # 2 - rrr_tru_ncf
 # 3 - ZS_conv
 # 4 - YS_opt
-# 5 - rrr_err_csv
+# 5 - rrr_con_csv
+# 6 - IS_riv_rad
+# 7 - rrr_err_csv
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 6:
-     print('ERROR - 5 and only 5 arguments must be used')
+if IS_arg != 8:
+     print('ERROR - 7 and only 7 arguments must be used')
      raise SystemExit(22) 
 
 rrr_mod_ncf=sys.argv[1]
 rrr_tru_ncf=sys.argv[2]
 ZS_conv=eval(sys.argv[3])
 YS_opt=sys.argv[4]
-rrr_err_csv=sys.argv[5]
+rrr_con_csv=sys.argv[5]
+IS_riv_rad=int(sys.argv[6])
+rrr_err_csv=sys.argv[7]
 
 
 #*******************************************************************************
@@ -55,6 +60,8 @@ print('- '+rrr_mod_ncf)
 print('- '+rrr_tru_ncf)
 print('- '+str(ZS_conv))
 print('- '+YS_opt)
+print('- '+rrr_con_csv)
+print('- '+str(IS_riv_rad))
 print('- '+rrr_err_csv)
 
 
@@ -66,14 +73,21 @@ try:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_mod_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 try:
      with open(rrr_tru_ncf) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_tru_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
+
+try:
+     with open(rrr_con_csv) as file:
+          pass
+except IOError as e:
+     print('ERROR - Unable to open '+rrr_con_csv)
+     raise SystemExit(22)
 
 
 #*******************************************************************************
