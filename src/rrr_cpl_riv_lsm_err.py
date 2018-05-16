@@ -395,7 +395,7 @@ print('- Computing error covariances')
 
 ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 #Another version of the standard error, which is used to check covariances here.
-#The variance is included in the variance/covarience matrix and the standard
+#The variance is included in the variance/covariance matrix and the standard
 #error is its square root.
 ZV_vol_cva=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
@@ -405,6 +405,10 @@ ZV_vol_cvn=numpy.zeros(IS_riv_tot)
 #The mininum of the covariance between each river reach and all others.
 ZV_vol_cvx=numpy.zeros(IS_riv_tot)
 #The maximum of the covariance between each river reach and all others.
+ZV_vol_cvu=numpy.zeros(IS_riv_tot)
+#The average of the covariance between each river reach and all others upstream.
+ZM_vol_cvd=numpy.zeros((IS_riv_tot,50))
+#The covariance between each river reach and 50 others downstream.
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
@@ -475,6 +479,8 @@ if YS_opt=='once':
           ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
+          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
+          ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
@@ -543,6 +549,8 @@ if YS_opt=='incr':
           ZV_vol_cvd[JS_riv_tot]=numpy.median(ZV_vol_cvo)
           ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
           ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
+          ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_rad])
+          ZM_vol_cvd[JS_riv_tot]=ZV_vol_cov[IV_riv_dwn_ix_rad[0:50]]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
