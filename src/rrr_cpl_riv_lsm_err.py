@@ -409,6 +409,8 @@ ZV_vol_cvu=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others upstream.
 ZM_vol_cvd=numpy.zeros((IS_riv_tot,IS_riv_rad))
 #The covariances between each river reach and others downstream (within radius).
+IV_ups_all=[0 for JS_riv_tot in range(IS_riv_tot)]
+#The number of all upstream river reaches
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
@@ -492,6 +494,7 @@ if YS_opt=='once':
           for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
                ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
                                        ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
+          IV_ups_all[JS_riv_tot]=len(IV_riv_ups_ix_all)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
@@ -573,6 +576,7 @@ if YS_opt=='incr':
           for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
                ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
                                        ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
+          IV_ups_all[JS_riv_tot]=len(IV_riv_ups_ix_all)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
