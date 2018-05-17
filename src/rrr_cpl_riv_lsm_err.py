@@ -617,7 +617,8 @@ print('Write summarized results in a file')
 with open(rrr_err_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid', 'modbar','trubar','bias','stderr','covavg',  \
-                         'covmed','covmin','covmax'])
+                         'covmed','covmin','covmax',                           \
+                         'nbupst','covupsavg','covdwn'])
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([IV_riv_tot_id[JS_riv_tot],                       \
                               ZV_vol_av1[JS_riv_tot],                          \
@@ -627,7 +628,10 @@ with open(rrr_err_csv, 'wb') as csvfile:
                               ZV_vol_cva[JS_riv_tot],                          \
                               ZV_vol_cve[JS_riv_tot],                          \
                               ZV_vol_cvn[JS_riv_tot],                          \
-                              ZV_vol_cvx[JS_riv_tot]])
+                              ZV_vol_cvx[JS_riv_tot],                          \
+                              IV_ups_all[JS_riv_tot],                          \
+                              ZV_vol_cvu[JS_riv_tot]    ]                      \
+                            +list(ZM_vol_cvd[JS_riv_tot]))
 
 
 #*******************************************************************************
