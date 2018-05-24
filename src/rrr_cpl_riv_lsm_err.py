@@ -220,6 +220,7 @@ print('- Done')
 print('Ensuring consistency in units')
 
 ZV_riv_tot_bia=numpy.sign(ZV_riv_tot_bia)*numpy.square(ZV_riv_tot_bia)
+ZV_riv_tot_sde=numpy.square(ZV_riv_tot_sde)
 
 print('- Done')
 
