@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #*******************************************************************************
-#rrr_cpl_riv_lsm_err.py
+#rrr_cpl_riv_lsm_bvc.py
 #*******************************************************************************
 
 #Purpose:
@@ -32,7 +32,7 @@ import csv
 # 4 - YS_opt
 # 5 - rrr_con_csv
 # 6 - IS_riv_rad
-# 7 - rrr_err_csv
+# 7 - rrr_bvc_csv
 
 
 #*******************************************************************************
@@ -49,7 +49,7 @@ ZS_conv=eval(sys.argv[3])
 YS_opt=sys.argv[4]
 rrr_con_csv=sys.argv[5]
 IS_riv_rad=int(sys.argv[6])
-rrr_err_csv=sys.argv[7]
+rrr_bvc_csv=sys.argv[7]
 
 
 #*******************************************************************************
@@ -62,7 +62,7 @@ print('- '+str(ZS_conv))
 print('- '+YS_opt)
 print('- '+rrr_con_csv)
 print('- '+str(IS_riv_rad))
-print('- '+rrr_err_csv)
+print('- '+rrr_bvc_csv)
 
 
 #*******************************************************************************
@@ -614,7 +614,7 @@ f2.close()
 #*******************************************************************************
 print('Write summarized results in a file')
 
-with open(rrr_err_csv, 'wb') as csvfile:
+with open(rrr_bvc_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid', 'modbar','trubar','bias','stderr','covavg',  \
                          'covmed','covmin','covmax',                           \
