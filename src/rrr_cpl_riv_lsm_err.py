@@ -185,6 +185,7 @@ print('- Number of downstream covariances: '+str(IS_riv_rad))
 IV_riv_tot_id2=numpy.zeros(IS_riv_tot2)
 ZV_riv_tot_bia=numpy.zeros(IS_riv_tot2)
 ZV_riv_tot_sde=numpy.zeros(IS_riv_tot2)
+ZV_riv_tot_cva=numpy.zeros(IS_riv_tot2)
 ZV_riv_tot_cvu=numpy.zeros(IS_riv_tot2)
 ZM_riv_tot_cvd=numpy.zeros((IS_riv_tot2,IS_riv_rad))
 
@@ -196,6 +197,7 @@ with open(rrr_bvc_csv,'r') as csvfile:
           IV_riv_tot_id2[JS_riv_tot]=row[0]
           ZV_riv_tot_bia[JS_riv_tot]=row[3]
           ZV_riv_tot_sde[JS_riv_tot]=row[4]
+          ZV_riv_tot_cva[JS_riv_tot]=row[5]
           ZV_riv_tot_cvu[JS_riv_tot]=row[10]
           ZM_riv_tot_cvd[JS_riv_tot]=row[11:]
           JS_riv_tot=JS_riv_tot+1
@@ -208,6 +210,7 @@ print('Scaling biases and variances/covariances')
 
 ZV_riv_tot_bia=ZV_riv_tot_bia*ZS_scl_bia
 ZV_riv_tot_sde=ZV_riv_tot_sde*ZS_scl_vcv
+ZV_riv_tot_cva=ZV_riv_tot_cva*ZS_scl_vcv
 ZV_riv_tot_cvu=ZV_riv_tot_cvu*ZS_scl_vcv
 ZM_riv_tot_cvd=ZM_riv_tot_cvd*ZS_scl_vcv
 
@@ -298,7 +301,7 @@ m3_riv_err.setncatts(attdict)
 print('- Populating new variable')
 m3_riv_err[0,:]=ZV_riv_tot_bia
 m3_riv_err[1,:]=ZV_riv_tot_sde
-m3_riv_err[2,:]=ZV_riv_tot_cvu
+m3_riv_err[2,:]=ZV_riv_tot_cva
 for JS_riv_rad in range(IS_riv_rad):
      m3_riv_err[3+JS_riv_rad,:]=ZM_riv_tot_cvd[:,JS_riv_rad]
 
