@@ -262,7 +262,7 @@ ZV_kfac=[float(0)] * IS_riv_tot
 ZV_xfac=[float(0)] * IS_riv_tot
 
 for JS_riv_tot in range(IS_riv_tot):
-     ZV_kfac[JS_riv_tot]=ZV_lengthkm[JS_riv_tot]*1000*3.6
+     ZV_kfac[JS_riv_tot]=ZV_lengthkm[JS_riv_tot]*1000*1.0
      ZV_xfac[JS_riv_tot]=0.1
 
 
