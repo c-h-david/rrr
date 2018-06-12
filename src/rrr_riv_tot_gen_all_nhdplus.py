@@ -129,11 +129,13 @@ nhd_riv_dbf.open()
 IV_riv_tot_id=[]
 ZV_lengthkm=[]
 YV_ftype=[]
+huc_8_list=[]
 for record in nhd_riv_dbf:
      if record['flowdir'].strip()=='With Digitized':
           IV_riv_tot_id.append(record['comid'])    
           ZV_lengthkm.append(record['lengthkm'])
           YV_ftype.append(str(record['ftype']).strip())
+          huc_8_list.append(str(record['reachcode'])[:8])
 #IV_riv_tot_id and ZV_lengthkm only correspond to reaches with known flow dir.
 IS_riv_tot=len(IV_riv_tot_id)
 
@@ -311,12 +313,12 @@ with open(rrr_con_file, 'wb') as csvfile:
 with open(rrr_kfc_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_kfac[JS_riv_tot]]) 
+          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_kfac[JS_riv_tot]]) 
 
 with open(rrr_xfc_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_xfac[JS_riv_tot]]) 
+          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_xfac[JS_riv_tot]]) 
 
 with open(rrr_srt_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
