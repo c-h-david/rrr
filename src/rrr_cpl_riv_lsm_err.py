@@ -7,7 +7,7 @@
 #Given a netCDF file with estimates of time-varying external inflow (in m^3)
 #into the river network, a CSV file with estimates of errors in the inflow (i.e.
 #bias, standard error, and covariances), along with two multiplying factors (one
-#for the bias and one for the variances/covariances), this program creates a new
+#for bias and one for square root of variance/covariance, this program creates a
 #netCDF file that is a copy of the initial netCDF that also includes estimates
 #of errors, which is to be used for uncertainty quantification and/or data
 #assimilation.
@@ -31,7 +31,7 @@ import shutil
 # 1 - rrr_mod_ncf
 # 2 - rrr_bvc_csv
 # 3 - ZS_scl_bia
-# 4 - ZS_scl_vcv
+# 4 - ZS_scl_sde
 # 5 - rrr_err_ncf
 
 
@@ -46,7 +46,7 @@ if IS_arg != 6:
 rrr_mod_ncf=sys.argv[1]
 rrr_bvc_csv=sys.argv[2]
 ZS_scl_bia=float(sys.argv[3])
-ZS_scl_vcv=float(sys.argv[4])
+ZS_scl_sde=float(sys.argv[4])
 rrr_err_ncf=sys.argv[5]
 
 
@@ -57,7 +57,7 @@ print('Command line inputs')
 print('- '+rrr_mod_ncf)
 print('- '+rrr_bvc_csv)
 print('- '+str(ZS_scl_bia))
-print('- '+str(ZS_scl_vcv))
+print('- '+str(ZS_scl_sde))
 print('- '+rrr_err_ncf)
 
 
@@ -209,10 +209,10 @@ with open(rrr_bvc_csv,'r') as csvfile:
 print('Scaling biases and variances/covariances')
 
 ZV_riv_tot_bia=ZV_riv_tot_bia*ZS_scl_bia
-ZV_riv_tot_sde=ZV_riv_tot_sde*ZS_scl_vcv
-ZV_riv_tot_cva=ZV_riv_tot_cva*ZS_scl_vcv
-ZV_riv_tot_cvu=ZV_riv_tot_cvu*ZS_scl_vcv
-ZM_riv_tot_cvd=ZM_riv_tot_cvd*ZS_scl_vcv
+ZV_riv_tot_sde=ZV_riv_tot_sde*ZS_scl_sde
+ZV_riv_tot_cva=ZV_riv_tot_cva*ZS_scl_sde**2
+ZV_riv_tot_cvu=ZV_riv_tot_cvu*ZS_scl_sde**2
+ZM_riv_tot_cvd=ZM_riv_tot_cvd*ZS_scl_sde**2
 
 print('- Done')
 
