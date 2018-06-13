@@ -189,12 +189,17 @@ for JS_fig in range(IS_fig):
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Compute percentile
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-     ZV_bia_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_bia,ZV_fix)),\
-                                    IV_pct)
-     ZV_STD_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_STD,ZV_fix)),\
-                                    IV_pct)
-     ZV_RMS_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_RMS,ZV_fix)),\
-                                    IV_pct)
+     if not numpy.isnan(ZV_fix).all():
+          ZV_bia_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_bia,   \
+                                         ZV_fix)),IV_pct)
+          ZV_STD_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_STD,   \
+                                         ZV_fix)),IV_pct)
+          ZV_RMS_cdf=numpy.nanpercentile(numpy.absolute(numpy.divide(ZV_RMS,   \
+                                         ZV_fix)),IV_pct)
+     else:
+          ZV_bia_cdf=[0*i for i in IV_pct]
+          ZV_STD_cdf=[0*i for i in IV_pct]
+          ZV_RMS_cdf=[0*i for i in IV_pct]
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Plot CDFs
