@@ -1,0 +1,39 @@
+#*******************************************************************************
+#.dockerignore
+#*******************************************************************************
+
+#Purpose:
+#The Docker program is informed here to ignore the following files while sending
+#files to the Docker daemon as the build context. Ignoring files helps decrease
+#time for build, pull and push of images; and runtime size for containers.
+#Author:
+#Cedric H. David, 2018-2018
+
+
+#*******************************************************************************
+#List of files that Docker will ignore
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#The input and output files stored in the sub-directories of input/ and output/
+#-------------------------------------------------------------------------------
+input/
+output/
+
+#-------------------------------------------------------------------------------
+#The files potentially added to the tst/ directory, except for some key files
+#-------------------------------------------------------------------------------
+tst/*
+!tst/tst_cmp_csv.py
+!tst/tst_cmp_n1d.py
+!tst/tst_cmp_ncf.py
+!tst/tst_cmp_shp.py
+!tst/tst_chk_srt.py
+!tst/tst_chk_ncf.py
+!tst/tst_prf_ncf.py
+!tst/tst_pub*
+
+
+#*******************************************************************************
+#End
+#*******************************************************************************
