@@ -229,6 +229,52 @@ print('- Done')
 
 
 #*******************************************************************************
+#Removing large outliers
+#*******************************************************************************
+print('Removing large outliers')
+
+ZS_riv_tot_bia_avg=numpy.average(numpy.abs(ZV_riv_tot_bia))
+ZS_riv_tot_sde_avg=numpy.average(numpy.abs(ZV_riv_tot_sde))
+ZS_riv_tot_cva_avg=numpy.average(numpy.abs(ZV_riv_tot_cva))
+ZS_riv_tot_cvu_avg=numpy.average(numpy.abs(ZV_riv_tot_cvu))
+
+for JS_riv_tot in range(IS_riv_tot2):
+     #--------------------------------------------------------------------------
+     if abs(ZV_riv_tot_bia[JS_riv_tot]) > 10000*ZS_riv_tot_bia_avg:
+          print('- WARNING - Excessive squared bias at rivid '                 \
+               +str(int(IV_riv_tot_id2[JS_riv_tot])))
+          print(' . Old value: '+ str(ZV_riv_tot_bia[JS_riv_tot]))
+          ZV_riv_tot_bia[JS_riv_tot]=numpy.sign(ZV_riv_tot_bia[JS_riv_tot])    \
+                                    *10000*ZS_riv_tot_bia_avg
+          print(' . New value: '+ str(ZV_riv_tot_bia[JS_riv_tot]))
+     #--------------------------------------------------------------------------
+     if abs(ZV_riv_tot_sde[JS_riv_tot]) > 10000*ZS_riv_tot_sde_avg:
+          print('- WARNING - Excessive variance at rivid '                     \
+               +str(int(IV_riv_tot_id2[JS_riv_tot])))
+          print(' . Old value: '+ str(ZV_riv_tot_sde[JS_riv_tot]))
+          ZV_riv_tot_sde[JS_riv_tot]=numpy.sign(ZV_riv_tot_sde[JS_riv_tot])    \
+                                    *10000*ZS_riv_tot_sde_avg
+          print(' . New value: '+ str(ZV_riv_tot_sde[JS_riv_tot]))
+     #--------------------------------------------------------------------------
+     if abs(ZV_riv_tot_cva[JS_riv_tot]) > 10000*ZS_riv_tot_cva_avg:
+          print('- WARNING - Excessive average covariance at rivid '           \
+               +str(int(IV_riv_tot_id2[JS_riv_tot])))
+          print(' . Old value: '+ str(ZV_riv_tot_cva[JS_riv_tot]))
+          ZV_riv_tot_cva[JS_riv_tot]=numpy.sign(ZV_riv_tot_cva[JS_riv_tot])    \
+                                    *10000*ZS_riv_tot_cva_avg
+          print(' . New value: '+ str(ZV_riv_tot_cva[JS_riv_tot]))
+     #--------------------------------------------------------------------------
+     if abs(ZV_riv_tot_cvu[JS_riv_tot]) > 10000*ZS_riv_tot_cvu_avg:
+          print('- WARNING - Excessive average upstream covariance at rivid '  \
+               +str(int(IV_riv_tot_id2[JS_riv_tot])))
+          print(' . Old value: '+ str(ZV_riv_tot_cvu[JS_riv_tot]))
+          ZV_riv_tot_cvu[JS_riv_tot]=numpy.sign(ZV_riv_tot_cvu[JS_riv_tot])    \
+                                    *10000*ZS_riv_tot_cvu_avg
+          print(' . New value: '+ str(ZV_riv_tot_cvu[JS_riv_tot]))
+     #--------------------------------------------------------------------------
+
+
+#*******************************************************************************
 #Checking consistency
 #*******************************************************************************
 print('Checking consistency')
