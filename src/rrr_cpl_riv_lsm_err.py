@@ -288,6 +288,9 @@ for JS_riv_tot in range(IS_riv_tot2):
                ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]=                          \
                              numpy.sign(ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]) \
                             *10000*ZV_riv_tot_cvd_avg[JS_riv_rad]
+     #--------------------------------------------------------------------------
+     #This replaces every value that exceeds 10000 times the corresponding basin
+     #average by the basin average
 
 
 #*******************************************************************************
