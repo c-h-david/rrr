@@ -255,7 +255,7 @@ for JS_riv_tot in range(IS_riv_tot2):
                +str(int(IV_riv_tot_id2[JS_riv_tot])))
           print(' . Old value: '+ str(ZV_riv_tot_bia[JS_riv_tot]))
           ZV_riv_tot_bia[JS_riv_tot]=numpy.sign(ZV_riv_tot_bia[JS_riv_tot])    \
-                                    *10000*ZS_riv_tot_bia_avg
+                                    *ZS_riv_tot_bia_avg
           print(' . New value: '+ str(ZV_riv_tot_bia[JS_riv_tot]))
      #--------------------------------------------------------------------------
      if abs(ZV_riv_tot_sde[JS_riv_tot]) > 10000*ZS_riv_tot_sde_avg:
@@ -263,7 +263,7 @@ for JS_riv_tot in range(IS_riv_tot2):
                +str(int(IV_riv_tot_id2[JS_riv_tot])))
           print(' . Old value: '+ str(ZV_riv_tot_sde[JS_riv_tot]))
           ZV_riv_tot_sde[JS_riv_tot]=numpy.sign(ZV_riv_tot_sde[JS_riv_tot])    \
-                                    *10000*ZS_riv_tot_sde_avg
+                                    *ZS_riv_tot_sde_avg
           print(' . New value: '+ str(ZV_riv_tot_sde[JS_riv_tot]))
      #--------------------------------------------------------------------------
      if abs(ZV_riv_tot_cva[JS_riv_tot]) > 10000*ZS_riv_tot_cva_avg:
@@ -271,7 +271,7 @@ for JS_riv_tot in range(IS_riv_tot2):
                +str(int(IV_riv_tot_id2[JS_riv_tot])))
           print(' . Old value: '+ str(ZV_riv_tot_cva[JS_riv_tot]))
           ZV_riv_tot_cva[JS_riv_tot]=numpy.sign(ZV_riv_tot_cva[JS_riv_tot])    \
-                                    *10000*ZS_riv_tot_cva_avg
+                                    *ZS_riv_tot_cva_avg
           print(' . New value: '+ str(ZV_riv_tot_cva[JS_riv_tot]))
      #--------------------------------------------------------------------------
      if abs(ZV_riv_tot_cvu[JS_riv_tot]) > 10000*ZS_riv_tot_cvu_avg:
@@ -279,7 +279,7 @@ for JS_riv_tot in range(IS_riv_tot2):
                +str(int(IV_riv_tot_id2[JS_riv_tot])))
           print(' . Old value: '+ str(ZV_riv_tot_cvu[JS_riv_tot]))
           ZV_riv_tot_cvu[JS_riv_tot]=numpy.sign(ZV_riv_tot_cvu[JS_riv_tot])    \
-                                    *10000*ZS_riv_tot_cvu_avg
+                                    *ZS_riv_tot_cvu_avg
           print(' . New value: '+ str(ZV_riv_tot_cvu[JS_riv_tot]))
      #--------------------------------------------------------------------------
      for JS_riv_rad in range(IS_riv_rad):
@@ -287,10 +287,10 @@ for JS_riv_tot in range(IS_riv_tot2):
             >10000*ZV_riv_tot_cvd_avg[JS_riv_rad]:
                ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]=                          \
                              numpy.sign(ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]) \
-                            *10000*ZV_riv_tot_cvd_avg[JS_riv_rad]
+                            *ZV_riv_tot_cvd_avg[JS_riv_rad]
      #--------------------------------------------------------------------------
      #This replaces every value that exceeds 10000 times the corresponding basin
-     #average by the basin average
+     #average of absolute values by this basin average, while keeping the sign
 
 
 #*******************************************************************************
