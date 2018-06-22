@@ -28,8 +28,8 @@ import json
 #*******************************************************************************
 # 1 - rrr_kfc_file
 # 2 - rrr_xfc_file
-# 3 - ZS_lk
-# 4 - ZS_lx
+# 3 - huc_8_map_k
+# 4 - huc_8_map_x
 # 5 - rrr_k_file
 # 6 - rrr_x_file
 
