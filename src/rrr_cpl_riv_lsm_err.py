@@ -192,7 +192,6 @@ ZM_riv_tot_cvd=numpy.zeros((IS_riv_tot2,IS_riv_rad))
 with open(rrr_bvc_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      YV_headers=next(csvreader)
-     JS_riv_tot=0
      for row in csvreader:
           IV_riv_tot_id2[JS_riv_tot]=row[0]
           ZV_riv_tot_bia[JS_riv_tot]=row[3]
@@ -200,7 +199,6 @@ with open(rrr_bvc_csv,'r') as csvfile:
           ZV_riv_tot_cva[JS_riv_tot]=row[5]
           ZV_riv_tot_cvu[JS_riv_tot]=row[10]
           ZM_riv_tot_cvd[JS_riv_tot]=row[11:]
-          JS_riv_tot=JS_riv_tot+1
 
 
 #*******************************************************************************
