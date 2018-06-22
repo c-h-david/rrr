@@ -229,6 +229,16 @@ print('- Done')
 
 
 #*******************************************************************************
+#Keeping only the absolute value in bias
+#*******************************************************************************
+print('Keeping only the absolute value in bias')
+
+ZV_riv_tot_bia=numpy.abs(ZV_riv_tot_bia)
+
+print('- Done')
+
+
+#*******************************************************************************
 #Removing large outliers
 #*******************************************************************************
 print('Removing large outliers')
