@@ -237,6 +237,16 @@ ZS_riv_tot_bia_avg=numpy.average(numpy.abs(ZV_riv_tot_bia))
 ZS_riv_tot_sde_avg=numpy.average(numpy.abs(ZV_riv_tot_sde))
 ZS_riv_tot_cva_avg=numpy.average(numpy.abs(ZV_riv_tot_cva))
 ZS_riv_tot_cvu_avg=numpy.average(numpy.abs(ZV_riv_tot_cvu))
+ZV_riv_tot_cvd_avg=numpy.average(numpy.abs(ZM_riv_tot_cvd),0)
+
+print('- Number of |squared biases|       exceeding 10000x the basin average: '\
+     +str(numpy.sum(numpy.abs(ZV_riv_tot_bia)>10000*ZS_riv_tot_bia_avg)))
+print('- Number of |variances|            exceeding 10000x the basin average: '\
+     +str(numpy.sum(numpy.abs(ZV_riv_tot_sde)>10000*ZS_riv_tot_sde_avg)))
+print('- Number of |average covariances|  exceeding 10000x the basin average: '\
+     +str(numpy.sum(numpy.abs(ZV_riv_tot_cva)>10000*ZS_riv_tot_cva_avg)))
+print('- Number of |upstream covariances| exceeding 10000x the basin average: '\
+     +str(numpy.sum(numpy.abs(ZV_riv_tot_cvu)>10000*ZS_riv_tot_cvu_avg)))
 
 for JS_riv_tot in range(IS_riv_tot2):
      #--------------------------------------------------------------------------
@@ -272,6 +282,12 @@ for JS_riv_tot in range(IS_riv_tot2):
                                     *10000*ZS_riv_tot_cvu_avg
           print(' . New value: '+ str(ZV_riv_tot_cvu[JS_riv_tot]))
      #--------------------------------------------------------------------------
+     for JS_riv_rad in range(IS_riv_rad):
+          if abs(ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad])                        \
+            >10000*ZV_riv_tot_cvd_avg[JS_riv_rad]:
+               ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]=                          \
+                             numpy.sign(ZM_riv_tot_cvd[JS_riv_tot,JS_riv_rad]) \
+                            *10000*ZV_riv_tot_cvd_avg[JS_riv_rad]
 
 
 #*******************************************************************************
