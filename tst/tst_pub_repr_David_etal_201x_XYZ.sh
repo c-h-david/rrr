@@ -260,6 +260,89 @@ fi
 
 
 #*******************************************************************************
+#Process Land surface model (LSM) data - Monthly
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Make the single large netCDF files CF compliant
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making the single netCDF files CF compliant"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc.nc4              \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc_cfc_tst.nc       \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Make the single large netCDF files CF compliant
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making the single netCDF files CF compliant"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc.nc4             \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc_tst.nc      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Make the single large netCDF files CF compliant
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making the single netCDF files CF compliant"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc.nc4              \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc_cfc_tst.nc       \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Process Land surface model (LSM) data
 #*******************************************************************************
 
@@ -404,6 +487,147 @@ fi
 echo "- Comparing to NOTHING"
 
 rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Coupling - Monthly
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Create volume file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
+   ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   1e-6                                                                        \
+   50                                                                          \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
+   ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc            \
+   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc          \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   1e-6                                                                        \
+   50                                                                          \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
+   ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   1e-6                                                                        \
+   50                                                                          \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create ensemble file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file"
+
+../src/rrr_cpl_riv_lsm_ens.py                                                  \
+     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc        \
+     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc         \
+     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc         \
+     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc     \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc           \
+   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc       \
+   1e-6                                                                        \
+   50                                                                          \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
