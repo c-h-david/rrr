@@ -89,15 +89,21 @@ elif 'FLComID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='FLComID'
 elif 'ARCID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='ARCID'
+elif 'ComID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='ComID'
 else:
-     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
+     print('ERROR - COMID_1, FLComID, ARCID, or ComID do not exist in '        \
+           +rrr_obs_shp)
      raise SystemExit(22) 
 if 'SOURCE_FEA' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='SOURCE_FEA'
 elif 'Code' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='Code'
+elif 'ReachCode' in rrr_obs_lay[0]['properties']:
+     YV_obs_cd='ReachCode'
 else:
-     print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
+     print('ERROR - SOURCE_FEA, Code, or ReachCode do not exist in '           \
+           +rrr_obs_shp)
      raise SystemExit(22)
 
 IV_obs_tot_id=[]
