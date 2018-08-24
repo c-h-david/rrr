@@ -4,12 +4,10 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a file with time-varying external inflow (in m^3) into the river network,
-#a percent value, and the name of a new netCDF file, this program computes the 
-#average value of external inflow for each river reach, multiplies by the 
-#desired percentage, and creates a copy of the previous file with the addition 
-#of the new partial values. If CF metadata are present, they are all copied, 
-#except for the long_name to which "estimate of error for " is appended.
+#Given a netCDF file with time-varying external inflow (in m^3) into the river
+#network, a list of river IDs that are upstream of a given river ID, and the
+#river ID itself; this program computes the lumped discharge and stores it in a
+#new CSV file.
 #Author:
 #Cedric H. David, 2018-2018
 
@@ -80,14 +78,14 @@ except IOError as e:
 #*******************************************************************************
 print('Reading netCDF file')
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 #Open netCDF file
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 f1 = netCDF4.Dataset(rrr_vol_ncf, 'r')
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 #Get dimension names and sizes
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 if 'COMID' in f1.dimensions:
      YS_rivid='COMID'
 elif 'rivid' in f1.dimensions:
@@ -110,9 +108,9 @@ else:
 IS_time=len(f1.dimensions[YS_time])
 print('- The number of time steps is: '+str(IS_time))
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 #Get variable names
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#-------------------------------------------------------------------------------
 if 'm3_riv' in f1.variables:
      YS_var='m3_riv'
 else:
