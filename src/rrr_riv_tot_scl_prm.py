@@ -20,6 +20,7 @@
 #*******************************************************************************
 import sys
 import csv
+import json
 
 
 #*******************************************************************************
@@ -27,8 +28,8 @@ import csv
 #*******************************************************************************
 # 1 - rrr_kfc_file
 # 2 - rrr_xfc_file
-# 3 - ZS_lk
-# 4 - ZS_lx
+# 3 - huc_8_map_k
+# 4 - huc_8_map_x
 # 5 - rrr_k_file
 # 6 - rrr_x_file
 
@@ -43,8 +44,8 @@ if IS_arg != 7:
 
 rrr_kfc_file=sys.argv[1]
 rrr_xfc_file=sys.argv[2]
-ZS_lk=float(sys.argv[3])
-ZS_lx=float(sys.argv[4])
+huc_8_map_k=json.loads(sys.argv[3])
+huc_8_map_x=json.loads(sys.argv[4])
 rrr_k_file=sys.argv[5]
 rrr_x_file=sys.argv[6]
 
@@ -55,8 +56,8 @@ rrr_x_file=sys.argv[6]
 print('Command line inputs')
 print('- '+rrr_kfc_file)
 print('- '+rrr_xfc_file)
-print('- '+str(ZS_lk))
-print('- '+str(ZS_lx))
+print('- '+json.dumps(huc_8_map_k))
+print('- '+json.dumps(huc_8_map_x))
 print('- '+rrr_k_file)
 print('- '+rrr_x_file)
 
@@ -88,10 +89,12 @@ print('Reading input files')
 #kfac file
 #-------------------------------------------------------------------------------
 ZV_kfac=[]
+huc_8_list_k=[]
 with open(rrr_kfc_file,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
-          ZV_kfac.append(float(row[0]))
+          huc_8_list_k.append(row[0])
+          ZV_kfac.append(float(row[1]))
 IS_riv_tot1=len(ZV_kfac)
 print('- Number of river reaches in rrr_kfc_file: '+str(IS_riv_tot1))
 
@@ -99,10 +102,12 @@ print('- Number of river reaches in rrr_kfc_file: '+str(IS_riv_tot1))
 #xfac file
 #-------------------------------------------------------------------------------
 ZV_xfac=[]
+huc_8_list_x=[]
 with open(rrr_xfc_file,'rb') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
-          ZV_xfac.append(float(row[0]))
+          huc_8_list_x.append(row[0])
+          ZV_xfac.append(float(row[1]))
 IS_riv_tot2=len(ZV_xfac)
 print('- Number of river reaches in rrr_xfc_file: '+str(IS_riv_tot2))
 
@@ -126,6 +131,8 @@ ZV_k=[float(0)] * IS_riv_tot
 ZV_x=[float(0)] * IS_riv_tot
 
 for JS_riv_tot in range(IS_riv_tot):
+     ZS_lk=huc_8_map_k[huc_8_list_k[JS_riv_tot]]
+     ZS_lx=huc_8_map_x[huc_8_list_x[JS_riv_tot]]
      ZV_k[JS_riv_tot]=ZV_kfac[JS_riv_tot]*ZS_lk
      ZV_x[JS_riv_tot]=ZV_xfac[JS_riv_tot]*ZS_lx
 

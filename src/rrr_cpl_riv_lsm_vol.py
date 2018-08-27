@@ -283,10 +283,11 @@ print('- Populate global attributes')
 dt=datetime.datetime.utcnow()
 dt=dt.replace(microsecond=0)
 #Current UTC time without the microseconds 
-vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
-vsn=vsn[0]
-vsn=vsn.rstrip()
+#vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
+#vsn=vsn[0]
+#vsn=vsn.rstrip()
 #Version of RRR
+vsn = "20171113"
 
 g.Conventions='CF-1.6'
 g.title=''

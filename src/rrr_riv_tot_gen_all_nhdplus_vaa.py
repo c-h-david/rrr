@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 #*******************************************************************************
 #rrr_riv_tot_gen_all_nhdplus.py
 #*******************************************************************************
@@ -34,7 +34,7 @@
 #the longitude/latitude file here instead of where catchments are processed 
 #because some river reaches do not have catchments. 
 #Author:
-#Cedric H. David, 2007-2018
+#Cedric H. David, 2007-2017
 
 
 #*******************************************************************************
@@ -43,6 +43,7 @@
 import sys
 import csv
 import dbf
+import pandas as pd
 import shapefile
 
 
@@ -155,16 +156,17 @@ IV_ToNode=[0]*IS_riv_tot
 IV_Divergence=[0]*IS_riv_tot
 IV_Hydroseq=[0]*IS_riv_tot
 
-nhd_VAA_dbf=dbf.Table(nhd_VAA_file)
-nhd_VAA_dbf.open()
+nhd_VAA_df = pd.read_csv(nhd_VAA_file, header=0)
+# nhd_VAA_dbf=dbf.Table(nhd_VAA_file)
+# nhd_VAA_dbf.open()
 
-for record in nhd_VAA_dbf:
-     if record['comid'] in IM_hsh0: 
-          JS_riv_tot=IM_hsh0[record['comid']]
-          IV_FromNode[JS_riv_tot]=record['fromnode']
-          IV_ToNode[JS_riv_tot]=record['tonode']
-          IV_Divergence[JS_riv_tot]=record['divergence']
-          IV_Hydroseq[JS_riv_tot]=record['hydroseq']
+for index, record in nhd_VAA_df.iterrows():
+     if record['ComID'] in IM_hsh0: 
+          JS_riv_tot=IM_hsh0[record['ComID']]
+          IV_FromNode[JS_riv_tot]=record['FromNode']
+          IV_ToNode[JS_riv_tot]=record['ToNode']
+          IV_Divergence[JS_riv_tot]=record['Divergence']
+          IV_Hydroseq[JS_riv_tot]=record['Hydroseq']
 
 #-------------------------------------------------------------------------------
 #Sorting the lists (optional)
@@ -313,12 +315,12 @@ with open(rrr_con_file, 'wb') as csvfile:
 with open(rrr_kfc_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_kfac[JS_riv_tot]]) 
+          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_kfac[JS_riv_tot]])
 
 with open(rrr_xfc_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_xfac[JS_riv_tot]]) 
+          csvwriter.writerow([huc_8_list[JS_riv_tot], ZV_xfac[JS_riv_tot]])
 
 with open(rrr_srt_file, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
