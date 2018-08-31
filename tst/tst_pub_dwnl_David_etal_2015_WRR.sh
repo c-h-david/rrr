@@ -234,6 +234,28 @@ do
 done
 fi
 
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
+folder="../output/HSmsp_WRR/analysis"
+list="                                                                         \
+      timeseries_USGS.csv                                                      \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "nldas" ] ||                           \
+   [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+fi
+
 
 #*******************************************************************************
 #Convert legacy files
