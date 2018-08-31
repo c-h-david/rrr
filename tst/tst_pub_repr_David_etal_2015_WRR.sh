@@ -194,6 +194,50 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Parameters guess
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating p_guess files"
+../src/rrr_riv_tot_scl_prm.py                                                  \
+     ../output/HSmsp_WRR/kfac_HSmsp_1km_hour.csv                               \
+     ../output/HSmsp_WRR/xfac_HSmsp_0.1.csv                                    \
+     0.3                                                                       \
+     3                                                                         \
+     ../output/HSmsp_WRR/k_HSmsp_pa_guess_tst.csv                              \
+     ../output/HSmsp_WRR/x_HSmsp_pa_guess_tst.csv                              \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing k_guess files"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/k_HSmsp_pa_guess.csv                                  \
+     ../output/HSmsp_WRR/k_HSmsp_pa_guess_tst.csv                              \
+     1e-6                                                                      \
+     2e-2                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing x_guess files"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/x_HSmsp_pa_guess.csv                                  \
+     ../output/HSmsp_WRR/x_HSmsp_pa_guess_tst.csv                              \
+     1e-6                                                                      \
+     2e-2                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Parameters 0
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -556,6 +600,7 @@ fi
 #Clean up
 #*******************************************************************************
 rm -f ../output/HSmsp_WRR/*_tst.*
+rm -f ../output/HSmsp_WRR/analysis/*_tst*.csv
 
 
 #*******************************************************************************
