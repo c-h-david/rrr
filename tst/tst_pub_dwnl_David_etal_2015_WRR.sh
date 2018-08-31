@@ -207,6 +207,9 @@ list="                                                                         \
       k_HSmsp_pa_phi1_2008_0.csv                                               \
       k_HSmsp_pa_phi1_2008_1.csv                                               \
       kfac_HSmsp_1km_hour.csv                                                  \
+      obs_HSmsp_Merge_Spatial_Join_2000_2009_full.zip                          \
+      obs_tot_id_HSmsp_2000_2009_full.csv                                      \
+      Qobs_HSmsp_2000_2009_full.csv                                            \
       rapid_catchment_na_riv_15s.csv                                           \
       rapid_connect_HSmsp.csv                                                  \
       riv_bas_id_HSmsp_topo.csv                                                \
@@ -245,6 +248,8 @@ fi
 if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ] ||                                \
    [ "$dwnl" == "hydrosheds" ]; then
 unzip -nq ../input/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join.zip -d ../input/HSmsp_WRR/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.zip -d ../output/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 unzip -nq ../output/HSmsp_WRR/bas_HSmsp.zip -d ../output/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
