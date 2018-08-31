@@ -201,6 +201,7 @@ folder="../output/HSmsp_WRR"
 list="                                                                         \
       bas_HSmsp.zip                                                            \
       coords_HSmsp.csv                                                         \
+      k_HSmsp_pa_guess.csv                                                     \
       k_HSmsp_pa_phi1_2008_0.csv                                               \
       k_HSmsp_pa_phi1_2008_1.csv                                               \
       kfac_HSmsp_1km_hour.csv                                                  \
@@ -210,6 +211,7 @@ list="                                                                         \
       riv_HSmsp.zip                                                            \
       sort_HSmsp_topo.csv                                                      \
       xfac_HSmsp_0.1.csv                                                       \
+      x_HSmsp_pa_guess.csv                                                     \
       x_HSmsp_pa_phi1_2008_0.csv                                               \
       x_HSmsp_pa_phi1_2008_1.csv                                               \
      "
