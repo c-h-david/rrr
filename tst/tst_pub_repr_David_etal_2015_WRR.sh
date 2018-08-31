@@ -647,6 +647,149 @@ fi
 
 
 #*******************************************************************************
+#Timeseries, hydrographs and statistics
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Timeseries for observations
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for observations"
+../src/rrr_anl_hyd_obs.py                                                      \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.shp       \
+     ../output/HSmsp_WRR/obs_tot_id_HSmsp_2000_2009_full.csv                   \
+     ../output/HSmsp_WRR/Qobs_HSmsp_2000_2009_full.csv                         \
+     2000-01-01                                                                \
+     1                                                                         \
+     USGS                                                                      \
+     ../output/HSmsp_WRR/analysis/timeseries_USGS_tst.csv                      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for observations"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/analysis/timeseries_USGS.csv                          \
+     ../output/HSmsp_WRR/analysis/timeseries_USGS_tst.csv                      \
+     1e-5                                                                      \
+     1e-6                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters pa_guess
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters pa_guess"
+../src/rrr_anl_hyd_mod.py                                                      \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.shp       \
+     ../output/HSmsp_WRR/Qout_HSmsp_2000_2009_VIC_NASA_sgl_pa_guess_n1_preonly_ilu.nc \
+     RAPID_pa_guess                                                            \
+     8                                                                         \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_guess_tst.csv              \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, with parameters pa_guess"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_guess.csv                  \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_guess_tst.csv              \
+     1e-3                                                                      \
+     2e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters pa_phi1_2008_0
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters pa_phi1_2008_0"
+../src/rrr_anl_hyd_mod.py                                                      \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.shp       \
+     ../output/HSmsp_WRR/Qout_HSmsp_2000_2009_VIC_NASA_sgl_pa_phi1_2008_0_n1_preonly_ilu.nc \
+     RAPID_pa_phi1_2008_0                                                      \
+     8                                                                         \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_0_tst.csv        \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, with parameters pa_phi1_2008_0"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_0.csv            \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_0_tst.csv        \
+     1e-3                                                                      \
+     2e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters pa_phi1_2008_1
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters pa_phi1_2008_1"
+../src/rrr_anl_hyd_mod.py                                                      \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.shp       \
+     ../output/HSmsp_WRR/Qout_HSmsp_2000_2009_VIC_NASA_sgl_pa_phi1_2008_1_n1_preonly_ilu.nc \
+     RAPID_pa_phi1_2008_1                                                            \
+     8                                                                         \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_1_tst.csv              \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, with parameters pa_phi1_2008_1"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_1.csv                  \
+     ../output/HSmsp_WRR/analysis/timeseries_rap_pa_phi1_2008_1_tst.csv              \
+     1e-3                                                                      \
+     2e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/HSmsp_WRR/*_tst.*
