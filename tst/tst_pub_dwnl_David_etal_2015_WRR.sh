@@ -174,12 +174,14 @@ fi
 URL="http://rapid-hub.org/data/CI/HSmsp_WRR"
 folder="../input/HSmsp_WRR"
 list="                                                                         \
+      obs_HSmsp_Merge_Spatial_Join.zip                                         \
      "
 
 #-------------------------------------------------------------------------------
 #Download process
 #-------------------------------------------------------------------------------
-if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ]; then
+if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "nldas" ] ||                           \
+   [ "$dwnl" == "hydrosheds" ] || [ "$dwnl" == "" ]; then
 mkdir -p $folder
 for file in $list
 do
@@ -242,6 +244,8 @@ fi
 
 if [ "$dwnl" == "rrr" ] || [ "$dwnl" == "" ] ||                                \
    [ "$dwnl" == "hydrosheds" ]; then
+unzip -nq ../input/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join.zip -d ../input/HSmsp_WRR/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 unzip -nq ../output/HSmsp_WRR/bas_HSmsp.zip -d ../output/HSmsp_WRR/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 unzip -nq ../output/HSmsp_WRR/riv_HSmsp.zip -d ../output/HSmsp_WRR/

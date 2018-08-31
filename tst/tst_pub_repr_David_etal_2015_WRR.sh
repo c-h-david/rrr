@@ -597,6 +597,56 @@ fi
 
 
 #*******************************************************************************
+#Gathering observations
+#*******************************************************************************
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Gathering observations"
+../src/rrr_obs_tot_nwisdv.py                                                   \
+     ../input/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join.shp                       \
+     2000-01-01                                                                \
+     2009-12-31                                                                \
+     ../output/HSmsp_WRR/obs_tot_id_HSmsp_2000_2009_full_tst.csv               \
+     ../output/HSmsp_WRR/Qobs_HSmsp_2000_2009_full_tst.csv                     \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full_tst.shp   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing gauges"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/obs_tot_id_HSmsp_2000_2009_full.csv                   \
+     ../output/HSmsp_WRR/obs_tot_id_HSmsp_2000_2009_full_tst.csv               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing shapefiles"
+./tst_cmp_shp.py                                                               \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full.shp       \
+     ../output/HSmsp_WRR/obs_HSmsp_Merge_Spatial_Join_2000_2009_full_tst.shp   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing observed flows"
+./tst_cmp_csv.py                                                               \
+     ../output/HSmsp_WRR/Qobs_HSmsp_2000_2009_full.csv                         \
+     ../output/HSmsp_WRR/Qobs_HSmsp_2000_2009_full_tst.csv                     \
+     1e-2                                                                      \
+     2e2                                                                       \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm $run_file
+rm $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/HSmsp_WRR/*_tst.*
