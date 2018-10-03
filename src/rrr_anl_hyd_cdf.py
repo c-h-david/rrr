@@ -205,11 +205,11 @@ for JS_fig in range(IS_fig):
      #Plot CDFs
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      plt.plot(ZV_bia_cdf, IV_pct, color='y', linestyle='dotted', linewidth=0.5,\
-              label='Relative Bias')
+              label='Normalized Absolute Bias')
      plt.plot(ZV_STD_cdf, IV_pct, color='b', linestyle='dotted', linewidth=0.5,\
-              label='Relative Standard Error')
+              label='Normalized STDE')
      plt.plot(ZV_RMS_cdf, IV_pct, color='g', linestyle='solid', linewidth=1,   \
-              label='Relative RMSE')
+              label='Normalized RMSE')
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Plot and annotate median values 
@@ -219,7 +219,7 @@ for JS_fig in range(IS_fig):
      plt.plot(ZS_x,ZS_y, color='y', marker='+')
      plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
-                         xytext=(-32,-1),                                      \
+                         xytext=(-13,-12),                                     \
                          textcoords='offset points',                           \
                          fontsize=6,                                           \
                          color='y')
@@ -229,7 +229,7 @@ for JS_fig in range(IS_fig):
      plt.plot(ZS_x,ZS_y, color='b', marker='+')
      plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
-                         xytext=(-32,-1),                                      \
+                         xytext=(-13,8),                                       \
                          textcoords='offset points',                           \
                          fontsize=6,                                           \
                          color='b')
@@ -251,7 +251,7 @@ for JS_fig in range(IS_fig):
      plt.ylim(0,100)
      plt.axes().yaxis.set_major_locator(tkr.MultipleLocator(25))
      plt.xlabel('Quantity normalized using mean simulated discharge (-)')
-     plt.ylabel('Probability (%)')
+     plt.ylabel('Proportion (%)')
      plt.legend(loc='lower right')
      plt.title(YS_title)
 
