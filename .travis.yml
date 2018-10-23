@@ -46,6 +46,7 @@ env:
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 1'
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh rrr' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 2 4'
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 5'
+- TST_PUB_DWNL='./tst_pub_dwnl_Emery_etal_201x_CCC.sh' TST_PUB_REPR='./tst_pub_repr_Emery_etal_201x_CCC.sh'
 
 
 #*******************************************************************************
