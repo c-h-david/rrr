@@ -42,7 +42,6 @@ env:
 - TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 1'
 - TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh rrr' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 2 6'
 - TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 7'
-- TST_PUB_DWNL='./tst_pub_dwnl_David_etal_2015_WRR.sh rrr' TST_PUB_REPR='./tst_pub_repr_David_etal_2015_WRR.sh 14 15'
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 1'
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh rrr' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 2 4'
 - TST_PUB_DWNL='./tst_pub_dwnl_Allen_etal_201x_GGG.sh hydrosheds' TST_PUB_REPR='./tst_pub_repr_Allen_etal_201x_GGG.sh 5'
