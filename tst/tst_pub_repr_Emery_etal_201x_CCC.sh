@@ -220,6 +220,36 @@ fi
 
 
 #*******************************************************************************
+#Contributing catchment information
+#*******************************************************************************
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating catchment file"
+../src/rrr_cat_tot_gen_one_nhdplus.py                                          \
+     ../input/San_Guad_CCC/catchment_Reg12.dbf                                 \
+     ../output/San_Guad_CCC/rapid_catchment_Reg12_tst.csv                      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing catchment file"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_CCC/rapid_catchment_Reg12.csv                          \
+     ../output/San_Guad_CCC/rapid_catchment_Reg12_tst.csv                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Gathering observations
 #*******************************************************************************
 unt=$((unt+1))

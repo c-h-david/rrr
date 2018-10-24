@@ -155,6 +155,7 @@ done
 URL="http://rapid-hub.org/data/CI/San_Guad_CCC"
 folder="../input/San_Guad_CCC"
 list="                                                                         \
+      catchment_Reg12.zip                                                      \
       NHDFlowline_San_Guad.zip                                                 \
       NHDFlowlineVAA_Reg12.dbf                                                 \
       StreamGageEvent_San_Guad_comid.zip                                       \
@@ -187,7 +188,7 @@ list="                                                                         \
       m3_riv_San_Guad_20100101_20131231_VIC0125_cst.nc                         \
       obs_tot_id_San_Guad_2010_2013_full.csv                                   \
       Qobs_San_Guad_2010_2013_full.csv                                         \
-      rapid_catchment_Reg12_arc.csv                                            \
+      rapid_catchment_Reg12.csv                                                \
       rapid_connect_San_Guad.csv                                               \
       rapid_coupling_San_Guad_NLDAS2_arc.csv                                   \
       riv_bas_id_San_Guad_hydroseq.csv                                         \
@@ -235,6 +236,9 @@ done
 #*******************************************************************************
 #Convert files
 #*******************************************************************************
+unzip -nq ../input/San_Guad_CCC/catchment_Reg12.zip -d ../input/San_Guad_CCC/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+
 unzip -nq ../input/San_Guad_CCC/NHDFlowline_San_Guad.zip -d ../input/San_Guad_CCC/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
