@@ -268,9 +268,48 @@ fi
 
 
 #*******************************************************************************
+#Timeseries, hydrographs and statistics
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Timeseries for observations
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for observations"
+../src/rrr_anl_hyd_obs.py                                                      \
+     ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_CCC/obs_tot_id_San_Guad_2010_2013_full.csv             \
+     ../output/San_Guad_CCC/Qobs_San_Guad_2010_2013_full.csv                   \
+     2010-01-01                                                                \
+     1                                                                         \
+     USGS                                                                      \
+     ../output/San_Guad_CCC/analysis/timeseries_obs_tst.csv                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for observations"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_CCC/analysis/timeseries_obs.csv                        \
+     ../output/San_Guad_CCC/analysis/timeseries_obs_tst.csv                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm $run_file
+rm $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
-rm -f ../output/San_Guad_CCC/*_tst.csv
+rm -f ../output/San_Guad_CCC/*_tst.*
 rm -f ../output/San_Guad_CCC/analysis/*_tst*.csv
 
 
