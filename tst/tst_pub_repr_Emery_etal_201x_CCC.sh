@@ -577,6 +577,41 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Compute bias, error variance, and error covariances - Monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Compute bias, error variance, and error covariances - Monthly"
+
+../src/rrr_cpl_riv_lsm_bvc.py                                                  \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4 \
+     1                                                                         \
+     incr                                                                      \
+     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     300                                                                       \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv  \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing bias, error, variance, and error covariances"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300.csv      \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv  \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Gathering observations

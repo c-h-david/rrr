@@ -193,6 +193,7 @@ list="                                                                         \
       m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4                      \
       m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4                     \
       m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4                      \
+      m3_riv_San_Guad_20100101_20131231_bvc_300.csv                            \
       m3_riv_San_Guad_20100101_20131231_VIC0125_cst.nc                         \
       obs_tot_id_San_Guad_2010_2013_full.csv                                   \
       Qobs_San_Guad_2010_2013_full.csv                                         \
