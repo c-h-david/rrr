@@ -415,6 +415,170 @@ fi
 
 
 #*******************************************************************************
+#Coupling
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Create coupling file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating coupling file"
+../src/rrr_cpl_riv_lsm_lnk.py                                                  \
+     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     ../output/San_Guad_CCC/rapid_catchment_Reg12.csv                          \
+     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS_tst.csv              \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coupling file"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS_tst.csv              \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Monthly - MOS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Monthly - MOS"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4 \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Monthly - NOAH
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Monthly - NOAH"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4            \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4 \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Monthly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Monthly - VIC"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Monthly - ENS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Monthly - ENS"
+
+../src/rrr_cpl_riv_lsm_ens.py                                                  \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4        \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4         \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4         \
+     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4     \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+   ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4           \
+   ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4       \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Gathering observations
 #*******************************************************************************
 unt=$((unt+1))

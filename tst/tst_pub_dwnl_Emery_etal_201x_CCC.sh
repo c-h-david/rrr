@@ -189,12 +189,16 @@ list="                                                                         \
       coords_San_Guad.csv                                                      \
       k_San_Guad_pa_guess.csv                                                  \
       kfac_San_Guad_1km_hour.csv                                               \
+      m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4                      \
+      m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4                      \
+      m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4                     \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4                      \
       m3_riv_San_Guad_20100101_20131231_VIC0125_cst.nc                         \
       obs_tot_id_San_Guad_2010_2013_full.csv                                   \
       Qobs_San_Guad_2010_2013_full.csv                                         \
       rapid_catchment_Reg12.csv                                                \
       rapid_connect_San_Guad.csv                                               \
-      rapid_coupling_San_Guad_NLDAS2_arc.csv                                   \
+      rapid_coupling_San_Guad_NLDAS.csv                                        \
       riv_bas_id_San_Guad_hydroseq.csv                                         \
       sort_San_Guad_hydroseq.csv                                               \
       StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.zip                \
