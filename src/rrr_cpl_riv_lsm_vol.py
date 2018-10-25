@@ -259,7 +259,7 @@ print('Process data')
 #Create netCDF file
 #-------------------------------------------------------------------------------
 print('- Create netCDF file')
-g = netCDF4.Dataset(rrr_vol_file, "w", format="NETCDF3_CLASSIC")
+g = netCDF4.Dataset(rrr_vol_file, "w", format="NETCDF4")
 
 ZS_fill_m3_riv=float(1e20)
 
