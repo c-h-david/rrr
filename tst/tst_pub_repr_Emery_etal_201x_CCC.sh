@@ -250,6 +250,171 @@ fi
 
 
 #*******************************************************************************
+#Process Land surface model (LSM) data - Monthly
+#*******************************************************************************
+mkdir -p ../output/NLDAS
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - MOS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - MOS"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/2010/NLDAS_MOS0125_M.A2010*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/2011/NLDAS_MOS0125_M.A2011*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/2012/NLDAS_MOS0125_M.A2012*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/2013/NLDAS_MOS0125_M.A2013*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc.nc4                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - NOAH
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - NOAH"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/2010/NLDAS_NOAH0125_M.A2010*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/2011/NLDAS_NOAH0125_M.A2011*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/2012/NLDAS_NOAH0125_M.A2012*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/2013/NLDAS_NOAH0125_M.A2013*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - VIC"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/2010/NLDAS_VIC0125_M.A2010*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/2011/NLDAS_VIC0125_M.A2011*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/2012/NLDAS_VIC0125_M.A2012*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/2013/NLDAS_VIC0125_M.A2013*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc.nc4                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Making concatenated file CF compliant - Monthly - MOS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making concatenated file CF compliant - Monthly - MOS"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc.nc4                 \
+     2010-01-01T00:00:00                                                       \
+     2629800                                                                   \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Making concatenated file CF compliant - Monthly - NOAH
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making concatenated file CF compliant - Monthly - NOAH"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4                \
+     2010-01-01T00:00:00                                                       \
+     2629800                                                                   \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4            \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Making concatenated file CF compliant - Monthly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+
+echo "- Making concatenated file CF compliant - Monthly - VIC"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc.nc4                 \
+     2010-01-01T00:00:00                                                       \
+     2629800                                                                   \
+     1                                                                         \
+     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Gathering observations
 #*******************************************************************************
 unt=$((unt+1))

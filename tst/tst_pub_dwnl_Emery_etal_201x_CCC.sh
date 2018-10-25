@@ -112,6 +112,8 @@ fld="../input/NLDAS"
 exp="NLDAS"
 frq="M"
 mod="                                                                          \
+     MOS                                                                       \
+     NOAH                                                                      \
      VIC                                                                       \
     "
 str=(                                                                          \
