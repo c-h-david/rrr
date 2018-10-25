@@ -6,10 +6,12 @@
 #Purpose:
 #Given one file with estimates of time-varying external inflow (in m^3) into the
 #river network, and another similar file assumed to contain the "true" values of
-#the same quantities, along with a multiplying factor allowing to convert the
-#inputs into m^3/s, a connectivity file, and a radius of search (number of river
+#the same quantities, along with a multiplying factor (allowing to convert the
+#units of inputs), a connectivity file, and a radius of search (number of river
 #reaches), this program computes the corresponding bias, standard error, and
 #error convariances and saves these values in a new CSV file.
+#Example: a factor of 1 retains the units (m^3), while a factor of 1./2629800
+#converts from monthly accumulated volume (m^3) to monthly flowrate (m^3/s).
 #Author:
 #Cedric H. David, 2018-2018
 
@@ -618,7 +620,7 @@ with open(rrr_bvc_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid', 'modbar','trubar','bias','stderr','covavg',  \
                          'covmed','covmin','covmax',                           \
-                         'nbupst','covupsavg','covdwn'])
+                         'nbupst','covupsavg','covdwn']+['cov']*(IS_riv_rad-1))
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([IV_riv_tot_id[JS_riv_tot],                       \
                               ZV_vol_av1[JS_riv_tot],                          \
