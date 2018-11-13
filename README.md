@@ -3,6 +3,8 @@
 
 [![Build Status](https://travis-ci.org/c-h-david/rrr.svg?branch=master)](https://travis-ci.org/c-h-david/rrr)
 
+[![Docker Build](https://img.shields.io/docker/automated/chdavid/rrr.svg)](https://hub.docker.com/r/chdavid/rrr/)
+
 The Reproducible Routing Rituals (RRR) is a Python and bash shell toolbox that 
 combines many repetitive pre and post-processing tasks that are common to 
 studying the movements of water on and underneath the land surface.  Such tasks 
