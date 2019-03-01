@@ -179,8 +179,8 @@ print('Generating XY plots')
 plt.scatter(ZV_stx_Bias,ZV_sty_Bias,marker='.',color='y',label='Bias')
 
 plt.plot(ZV_stx_Bias,ZV_fit_Bias,color='y',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_Bias,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_Bias,4)))
+         label='y='+str(round(ZS_slp_Bias,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_Bias,2)))
 
 plt.xlim(0,ZS_max)
 plt.ylim(0,ZS_max)
@@ -199,8 +199,8 @@ print('- Completed Bias')
 plt.scatter(ZV_stx_STDE,ZV_sty_STDE,marker='.',color='b',label='STDE')
 
 plt.plot(ZV_stx_STDE,ZV_fit_STDE,color='b',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_STDE,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_STDE,4)))
+         label='y='+str(round(ZS_slp_STDE,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_STDE,2)))
 
 plt.xlim(0,ZS_max)
 plt.ylim(0,ZS_max)
@@ -219,8 +219,8 @@ print('- Completed STDE')
 plt.scatter(ZV_stx_RMSE,ZV_sty_RMSE,marker='.',color='g',label='RMSE')
 
 plt.plot(ZV_stx_RMSE,ZV_fit_RMSE,color='g',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_RMSE,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_RMSE,4)))
+         label='y='+str(round(ZS_slp_RMSE,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_RMSE,2)))
 
 plt.xlim(0,ZS_max)
 plt.ylim(0,ZS_max)
@@ -239,20 +239,20 @@ print('- Completed RMSE')
 plt.scatter(ZV_stx_Bias,ZV_sty_Bias,marker='.',color='y',label='Bias')
 
 plt.plot(ZV_stx_Bias,ZV_fit_Bias,color='y',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_Bias,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_Bias,4)))
+         label='y='+str(round(ZS_slp_Bias,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_Bias,2)))
 
 plt.scatter(ZV_stx_STDE,ZV_sty_STDE,marker='.',color='b',label='STDE')
 
 plt.plot(ZV_stx_STDE,ZV_fit_STDE,color='b',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_STDE,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_STDE,4)))
+         label='y='+str(round(ZS_slp_STDE,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_STDE,2)))
 
 plt.scatter(ZV_stx_RMSE,ZV_sty_RMSE,marker='.',color='g',label='RMSE')
 
 plt.plot(ZV_stx_RMSE,ZV_fit_RMSE,color='g',linestyle='dotted',linewidth=0.5,   \
-         label='y='+str(round(ZS_slp_RMSE,4))+'x'+', '                         \
-              +r'$R^2=$'+str(round(ZS_R2_RMSE,4)))
+         label='y='+str(round(ZS_slp_RMSE,2))+'x'+', '                         \
+              +r'$R^2=$'+str(round(ZS_R2_RMSE,2)))
 
 plt.xlim(0,ZS_max)
 plt.ylim(0,ZS_max)
