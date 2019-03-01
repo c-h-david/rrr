@@ -219,9 +219,9 @@ for JS_fig in range(IS_fig):
      plt.plot(ZS_x,ZS_y, color='y', marker='+')
      plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
-                         xytext=(-13,-12),                                     \
+                         xytext=(-13,-16),                                     \
                          textcoords='offset points',                           \
-                         fontsize=6,                                           \
+                         fontsize=9,                                           \
                          color='y')
 
      ZS_x=round(ZV_STD_cdf[10],2)
@@ -229,9 +229,9 @@ for JS_fig in range(IS_fig):
      plt.plot(ZS_x,ZS_y, color='b', marker='+')
      plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
-                         xytext=(-13,8),                                       \
+                         xytext=(-13,12),                                      \
                          textcoords='offset points',                           \
-                         fontsize=6,                                           \
+                         fontsize=9,                                           \
                          color='b')
 
      ZS_x=round(ZV_RMS_cdf[10],2)
@@ -239,9 +239,9 @@ for JS_fig in range(IS_fig):
      plt.plot(ZS_x,ZS_y, color='g', marker='+')
      plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
-                         xytext=(6,-1),                                        \
+                         xytext=(10,-1),                                       \
                          textcoords='offset points',                           \
-                         fontsize=6,                                           \
+                         fontsize=9,                                           \
                          color='g')
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
