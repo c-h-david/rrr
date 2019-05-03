@@ -117,6 +117,21 @@ print('- Done')
 
 
 #*******************************************************************************
+#Checking that all statistics have same size
+#*******************************************************************************
+print('Checking that all statistics have same size')
+
+IS_stt=len(ZV_stx_RMSE)
+if len(ZV_stx_Bias)==IS_stt and len(ZV_stx_STDE)==IS_stt and                   \
+   len(ZV_sty_RMSE)==IS_stt and len(ZV_sty_Bias)==IS_stt and                   \
+   len(ZV_sty_STDE)==IS_stt:
+     print('- The common size of all statistics is: '+str(IS_stt))
+else:
+     print('ERROR - Statistics do not have same size')
+     raise SystemExit(22)
+
+
+#*******************************************************************************
 #Computing zero-intercept linear regressions and coefficients of determination
 #*******************************************************************************
 print('Computing zero-intercept linear regressions and coefficients of '+      \
