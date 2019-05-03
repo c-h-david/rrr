@@ -131,6 +131,34 @@ else:
      raise SystemExit(22)
 
 
+##*******************************************************************************
+##Optional: Removing smallest errors
+##*******************************************************************************
+#print('Optional: Removing smallest errors')
+#
+#ZS_thr=1
+#
+#IV_rem_Bias=[]
+#IV_rem_STDE=[]
+#IV_rem_RMSE=[]
+#for JS_stt in range(IS_stt):
+#     if ZV_stx_Bias[JS_stt]<ZS_thr or ZV_sty_Bias[JS_stt]<ZS_thr:
+#          IV_rem_Bias.append(JS_stt)
+#     if ZV_stx_STDE[JS_stt]<ZS_thr or ZV_sty_STDE[JS_stt]<ZS_thr:
+#          IV_rem_STDE.append(JS_stt)
+#     if ZV_stx_RMSE[JS_stt]<ZS_thr or ZV_sty_RMSE[JS_stt]<ZS_thr:
+#          IV_rem_RMSE.append(JS_stt)
+#
+#ZV_stx_Bias=numpy.delete(ZV_stx_Bias,IV_rem_Bias)
+#ZV_sty_Bias=numpy.delete(ZV_sty_Bias,IV_rem_Bias)
+#ZV_stx_STDE=numpy.delete(ZV_stx_STDE,IV_rem_STDE)
+#ZV_sty_STDE=numpy.delete(ZV_sty_STDE,IV_rem_STDE)
+#ZV_stx_RMSE=numpy.delete(ZV_stx_RMSE,IV_rem_RMSE)
+#ZV_sty_RMSE=numpy.delete(ZV_sty_RMSE,IV_rem_RMSE)
+#
+#print('- Removed all values smaller than: '+str(ZS_thr))
+
+
 #*******************************************************************************
 #Computing zero-intercept linear regressions and coefficients of determination
 #*******************************************************************************
