@@ -444,6 +444,41 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Compute biases, error variances, and error covariances
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Computing biases, error variances, and error covariances"
+
+../src/rrr_cpl_riv_lsm_bvc.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc4          \
+   1.0                                                                         \
+   incr                                                                        \
+   ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
+   50                                                                          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_tst.csv      \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing biases, error variances, and error covariances"
+./tst_cmp_csv.py                                                               \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol.csv          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_tst.csv      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Coupling
