@@ -99,28 +99,28 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_nhdplus.py                                          \
-     ../input/WSWM_XYZ/NHDFlowline_WSWM_Sort.dbf                               \
-     ../input/WSWM_XYZ/PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.dbf       \
+     ../input/WSWM_GRL/NHDFlowline_WSWM_Sort.dbf                               \
+     ../input/WSWM_GRL/PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.dbf       \
      12                                                                        \
-     ../output/WSWM_XYZ/rapid_connect_WSWM_tst.csv                             \
-     ../output/WSWM_XYZ/kfac_WSWM_1km_hour_tst.csv                             \
-     ../output/WSWM_XYZ/xfac_WSWM_0.1_tst.csv                                  \
-     ../output/WSWM_XYZ/sort_WSWM_hydroseq_tst.csv                             \
-     ../output/WSWM_XYZ/coords_WSWM_tst.csv                                    \
+     ../output/WSWM_GRL/rapid_connect_WSWM_tst.csv                             \
+     ../output/WSWM_GRL/kfac_WSWM_1km_hour_tst.csv                             \
+     ../output/WSWM_GRL/xfac_WSWM_0.1_tst.csv                                  \
+     ../output/WSWM_GRL/sort_WSWM_hydroseq_tst.csv                             \
+     ../output/WSWM_GRL/coords_WSWM_tst.csv                                    \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing connectivity"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                 \
-     ../output/WSWM_XYZ/rapid_connect_WSWM_tst.csv                             \
+     ../output/WSWM_GRL/rapid_connect_WSWM.csv                                 \
+     ../output/WSWM_GRL/rapid_connect_WSWM_tst.csv                             \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing kfac"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/kfac_WSWM_1km_hour.csv                                 \
-     ../output/WSWM_XYZ/kfac_WSWM_1km_hour_tst.csv                             \
+     ../output/WSWM_GRL/kfac_WSWM_1km_hour.csv                                 \
+     ../output/WSWM_GRL/kfac_WSWM_1km_hour_tst.csv                             \
      1e-9                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -128,22 +128,22 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x
 
 echo "- Comparing xfac"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/xfac_WSWM_0.1.csv                                      \
-     ../output/WSWM_XYZ/xfac_WSWM_0.1_tst.csv                                  \
+     ../output/WSWM_GRL/xfac_WSWM_0.1.csv                                      \
+     ../output/WSWM_GRL/xfac_WSWM_0.1_tst.csv                                  \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sorted IDs"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/sort_WSWM_hydroseq.csv                                 \
-     ../output/WSWM_XYZ/sort_WSWM_hydroseq_tst.csv                             \
+     ../output/WSWM_GRL/sort_WSWM_hydroseq.csv                                 \
+     ../output/WSWM_GRL/sort_WSWM_hydroseq_tst.csv                             \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coordinates"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/coords_WSWM.csv                                        \
-     ../output/WSWM_XYZ/coords_WSWM_tst.csv                                    \
+     ../output/WSWM_GRL/coords_WSWM.csv                                        \
+     ../output/WSWM_GRL/coords_WSWM_tst.csv                                    \
      1e-9                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -166,19 +166,19 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating p_ag files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
-     ../output/WSWM_XYZ/kfac_WSWM_1km_hour.csv                                 \
-     ../output/WSWM_XYZ/xfac_WSWM_0.1.csv                                      \
+     ../output/WSWM_GRL/kfac_WSWM_1km_hour.csv                                 \
+     ../output/WSWM_GRL/xfac_WSWM_0.1.csv                                      \
      0.3                                                                       \
      3.0                                                                       \
-     ../output/WSWM_XYZ/k_WSWM_ag_tst.csv                                      \
-     ../output/WSWM_XYZ/x_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/k_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/x_WSWM_ag_tst.csv                                      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing k_ag files"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/k_WSWM_ag.csv                                          \
-     ../output/WSWM_XYZ/k_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/k_WSWM_ag.csv                                          \
+     ../output/WSWM_GRL/k_WSWM_ag_tst.csv                                      \
      1e-6                                                                      \
      1e-2                                                                      \
      > $cmp_file
@@ -186,8 +186,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x
 
 echo "- Comparing x_ag files"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/x_WSWM_ag.csv                                          \
-     ../output/WSWM_XYZ/x_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/x_WSWM_ag.csv                                          \
+     ../output/WSWM_GRL/x_WSWM_ag_tst.csv                                      \
      1e-6                                                                      \
      1e-2                                                                      \
      > $cmp_file
@@ -210,17 +210,17 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sorted basin file"
 ../src/rrr_riv_bas_gen_one_nhdplus.py                                          \
-     ../input/WSWM_XYZ/NHDFlowline_WSWM_Sort.dbf                               \
-     ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                 \
-     ../output/WSWM_XYZ/sort_WSWM_hydroseq.csv                                 \
-     ../output/WSWM_XYZ/riv_bas_id_WSWM_hydroseq_tst.csv                       \
+     ../input/WSWM_GRL/NHDFlowline_WSWM_Sort.dbf                               \
+     ../output/WSWM_GRL/rapid_connect_WSWM.csv                                 \
+     ../output/WSWM_GRL/sort_WSWM_hydroseq.csv                                 \
+     ../output/WSWM_GRL/riv_bas_id_WSWM_hydroseq_tst.csv                       \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sorted basin file"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/riv_bas_id_WSWM_hydroseq.csv                           \
-     ../output/WSWM_XYZ/riv_bas_id_WSWM_hydroseq_tst.csv                       \
+     ../output/WSWM_GRL/riv_bas_id_WSWM_hydroseq.csv                           \
+     ../output/WSWM_GRL/riv_bas_id_WSWM_hydroseq_tst.csv                       \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -242,15 +242,15 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_nhdplus.py                                          \
-     ../input/WSWM_XYZ/Catchment_WSWM_Sort.dbf                                 \
-     ../output/WSWM_XYZ/rapid_catchment_WSWM_tst.csv                           \
+     ../input/WSWM_GRL/Catchment_WSWM_Sort.dbf                                 \
+     ../output/WSWM_GRL/rapid_catchment_WSWM_tst.csv                           \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing catchment file"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/rapid_catchment_WSWM_arc.csv                           \
-     ../output/WSWM_XYZ/rapid_catchment_WSWM_tst.csv                           \
+     ../output/WSWM_GRL/rapid_catchment_WSWM_arc.csv                           \
+     ../output/WSWM_GRL/rapid_catchment_WSWM_tst.csv                           \
      1e-5                                                                      \
      1e-3                                                                      \
      > $cmp_file
@@ -278,11 +278,11 @@ run_file=tmp_run_$unt.txt
 echo "- Making the single netCDF files CF compliant"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc.nc4              \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc.nc4              \
      1997-01-01T00:00:00                                                       \
      2628000                                                                   \
      1                                                                         \
-     ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc_cfc_tst.nc       \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc_tst.nc       \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -304,11 +304,11 @@ run_file=tmp_run_$unt.txt
 echo "- Making the single netCDF files CF compliant"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc.nc4             \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc.nc4             \
      1997-01-01T00:00:00                                                       \
      2628000                                                                   \
      1                                                                         \
-     ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc_tst.nc      \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc_tst.nc      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -330,11 +330,11 @@ run_file=tmp_run_$unt.txt
 echo "- Making the single netCDF files CF compliant"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc.nc4              \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc.nc4              \
      1997-01-01T00:00:00                                                       \
      2628000                                                                   \
      1                                                                         \
-     ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc_cfc_tst.nc       \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc_tst.nc       \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -359,8 +359,8 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 
 echo "- Converting GRIB to netCDF"
-for file in `find '../input/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_H.002/1997/'*/       \
-                  '../input/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_H.002/1998/'*/       \
+for file in `find '../input/WSWM_GRL/NLDAS2/NLDAS_VIC0125_H.002/1997/'*/       \
+                  '../input/WSWM_GRL/NLDAS2/NLDAS_VIC0125_H.002/1998/'*/       \
                    -name '*.grb'`
 
 do
@@ -370,7 +370,7 @@ do
                      lat_110                                                   \
                      SSRUN_110_SFC_ave2h                                       \
                      BGRUN_110_SFC_ave2h                                       \
-                     ../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_H.002/            \
+                     ../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_H.002/            \
                      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 done
@@ -397,9 +397,9 @@ for month in 01 02 03 04 05 06 07 08 09 10 11 12; do
 
 echo "  . Creating a concatenated & accumulated file for $year/$month"
 ../src/rrr_lsm_tot_cmb_acc.sh                                                  \
-../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_H.002/NLDAS_VIC0125_H.A${year}${month}*.nc\
+../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_H.002/NLDAS_VIC0125_H.A${year}${month}*.nc\
  3                                                                             \
-../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}.nc \
+../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}.nc \
       > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 done
@@ -427,10 +427,10 @@ for month in 01 02 03 04 05 06 07 08 09 10 11 12; do
 
 echo "  . Creating a CF compliant file for $year/$month"
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}.nc \
+../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}.nc \
  "$year-$month-01T00:00:00"                                                    \
  10800                                                                         \
-../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}_utc.nc \
+../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_${year}${month}_utc.nc \
       > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 done
@@ -452,10 +452,10 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 
 echo "  . Concatenating all large files"
-nc_file=../output/WSWM_XYZ/NLDAS_VIC0125_3H_19970101_19981231_utc.nc
+nc_file=../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_utc.nc
 if [ ! -e "$nc_file" ]; then
-ncrcat ../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_1997*_utc.nc \
-       ../output/WSWM_XYZ/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_1998*_utc.nc \
+ncrcat ../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_1997*_utc.nc \
+       ../output/WSWM_GRL/NLDAS2/NLDAS_VIC0125_3H/NLDAS_VIC0125_3H_1998*_utc.nc \
        -o $nc_file                                                             \
         > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -477,8 +477,8 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 
 echo "  . Shifting to local time"
-nc_file=../output/WSWM_XYZ/NLDAS_VIC0125_3H_19970101_19981231_utc.nc
-nc_file2=../output/WSWM_XYZ/NLDAS_VIC0125_3H_19970101_19981231_cst.nc
+nc_file=../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_utc.nc
+nc_file2=../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst.nc
 if [ ! -e "$nc_file2" ]; then
 ../src/rrr_lsm_tot_utc_shf.py                                                  \
        $nc_file                                                                \
@@ -511,18 +511,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
-   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
-   ../output/WSWM_XYZ/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc             \
-   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_GRL/coords_WSWM.csv                                          \
+   ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -545,18 +545,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
-   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
-   ../output/WSWM_XYZ/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc            \
-   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_GRL/coords_WSWM.csv                                          \
+   ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc            \
+   ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc          \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -579,18 +579,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
-   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
-   ../output/WSWM_XYZ/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc             \
-   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_GRL/coords_WSWM.csv                                          \
+   ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -614,17 +614,17 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Creating volume file"
 
 ../src/rrr_cpl_riv_lsm_ens.py                                                  \
-     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc        \
-     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc         \
-     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc         \
-     ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc     \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc        \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc         \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc         \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc     \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc       \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -652,17 +652,17 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating coupling file"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
-     ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                 \
-     ../output/WSWM_XYZ/rapid_catchment_WSWM_arc.csv                           \
-     ../output/WSWM_XYZ/NLDAS_VIC0125_3H_19970101_19981231_cst.nc              \
-     ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
+     ../output/WSWM_GRL/rapid_connect_WSWM.csv                                 \
+     ../output/WSWM_GRL/rapid_catchment_WSWM_arc.csv                           \
+     ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst.nc              \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coupling file"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                         \
-     ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                         \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -683,18 +683,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-   ../output/WSWM_XYZ/rapid_connect_WSWM.csv                                   \
-   ../output/WSWM_XYZ/coords_WSWM.csv                                          \
-   ../output/WSWM_XYZ/NLDAS_VIC0125_3H_19970101_19981231_cst.nc                \
-   ../output/WSWM_XYZ/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
+   ../output/WSWM_GRL/coords_WSWM.csv                                          \
+   ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst.nc                \
+   ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst.nc             \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst.nc             \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -717,7 +717,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Updating netCDF global attributes"
 ../src/rrr_cpl_riv_lsm_att.sh                                                  \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
    'RAPID data corresponding to the Western States Water Mission'              \
    'Jet Propulsion Laboratory, California Institute of Technology'             \
    ' '                                                                         \
@@ -744,16 +744,16 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Adding estimate of standard error"
 ../src/rrr_cpl_riv_lsm_avg.py                                                  \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
    10                                                                          \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p.nc         \
-   ../output/WSWM_XYZ/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -777,26 +777,26 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Gathering observations"
 ../src/rrr_obs_tot_nwisdv.py                                                   \
-     ../input/WSWM_XYZ/GageLoc_WSWM_with_dir.shp                               \
+     ../input/WSWM_GRL/GageLoc_WSWM_with_dir.shp                               \
      1997-01-01                                                                \
      1998-12-31                                                                \
-     ../output/WSWM_XYZ/obs_tot_id_WSWM_1997_1998_full_tst.csv                 \
-     ../output/WSWM_XYZ/Qobs_WSWM_1997_1998_full_tst.csv                       \
-     ../output/WSWM_XYZ/GageLoc_WSWM_with_dir_1997_1998_full_tst.shp           \
+     ../output/WSWM_GRL/obs_tot_id_WSWM_1997_1998_full_tst.csv                 \
+     ../output/WSWM_GRL/Qobs_WSWM_1997_1998_full_tst.csv                       \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_tst.shp           \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing gauges"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/obs_tot_id_WSWM_1997_1998_full.csv                     \
-     ../output/WSWM_XYZ/obs_tot_id_WSWM_1997_1998_full_tst.csv                 \
+     ../output/WSWM_GRL/obs_tot_id_WSWM_1997_1998_full.csv                     \
+     ../output/WSWM_GRL/obs_tot_id_WSWM_1997_1998_full_tst.csv                 \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing observed flows"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/Qobs_WSWM_1997_1998_full.csv                           \
-     ../output/WSWM_XYZ/Qobs_WSWM_1997_1998_full_tst.csv                       \
+     ../output/WSWM_GRL/Qobs_WSWM_1997_1998_full.csv                           \
+     ../output/WSWM_GRL/Qobs_WSWM_1997_1998_full_tst.csv                       \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -824,20 +824,20 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Timeseries for observations"
 ../src/rrr_anl_hyd_obs.py                                                      \
-     ../output/WSWM_XYZ/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
-     ../output/WSWM_XYZ/Qobs_WSWM_1997_1998_full.csv                           \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
+     ../output/WSWM_GRL/Qobs_WSWM_1997_1998_full.csv                           \
      1997-01-01                                                                \
      1                                                                         \
      USGS                                                                      \
-     ../output/WSWM_XYZ/analysis/timeseries_obs_tst.csv                        \
+     ../output/WSWM_GRL/analysis/timeseries_obs_tst.csv                        \
      10                                                                        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing timeseries for observations"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/analysis/timeseries_obs.csv                            \
-     ../output/WSWM_XYZ/analysis/timeseries_obs_tst.csv                        \
+     ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
+     ../output/WSWM_GRL/analysis/timeseries_obs_tst.csv                        \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -845,8 +845,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x
 
 echo "- Comparing uncertainty timeseries for observations"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/analysis/timeseries_obs_uq.csv                         \
-     ../output/WSWM_XYZ/analysis/timeseries_obs_tst_uq.csv                     \
+     ../output/WSWM_GRL/analysis/timeseries_obs_uq.csv                         \
+     ../output/WSWM_GRL/analysis/timeseries_obs_tst_uq.csv                     \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -869,18 +869,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Timeseries for model simulations, with parameters p0, initialized"
 ../src/rrr_anl_hyd_mod.py                                                      \
-     ../output/WSWM_XYZ/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
-     ../output/WSWM_XYZ/Qout_WSWM_729days_p0_dtR900s_n1_preonly_20170912_init_uq_0.5.nc \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
+     ../output/WSWM_GRL/Qout_WSWM_729days_p0_dtR900s_n1_preonly_20170912_init_uq_0.5.nc \
      RAPID_p0_init                                                             \
      8                                                                         \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init_tst.csv                \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing timeseries for model simulations, with parameters p0, initialized"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init_tst.csv                \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
      1e-3                                                                      \
      2e-3                                                                      \
      > $cmp_file
@@ -888,8 +888,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x
 
 echo "- Comparing uncertainty timeseries for model simulations, with parameters p0, initialized"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init_uq.csv                 \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init_tst_uq.csv             \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_uq.csv                 \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst_uq.csv             \
      1e-3                                                                      \
      2e-3                                                                      \
      > $cmp_file
@@ -912,10 +912,10 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Statistics for model simulations, with parameters p0, initialized"
 ../src/rrr_anl_hyd_sts.py                                                      \
-     ../output/WSWM_XYZ/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
-     ../output/WSWM_XYZ/analysis/timeseries_obs.csv                            \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_XYZ/analysis/stats_rap_p0_init_tst.csv                     \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
+     ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
+     ../output/WSWM_GRL/analysis/stats_rap_p0_init_tst.csv                     \
      1997-01-01                                                                \
      1998-12-30                                                                \
      > $run_file
@@ -923,8 +923,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing statistics for model simulations, with parameters p0, initialized"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_XYZ/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_XYZ/analysis/stats_rap_p0_init_tst.csv                     \
+     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
+     ../output/WSWM_GRL/analysis/stats_rap_p0_init_tst.csv                     \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -947,11 +947,11 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Hydrographs for model simulations, with parameters p0, initialized"
 ../src/rrr_anl_hyd_plt.py                                                      \
-     ../output/WSWM_XYZ/GageLoc_WSWM_with_dir_1997_1998_full_plot.shp          \
-     ../output/WSWM_XYZ/analysis/timeseries_obs.csv                            \
-     ../output/WSWM_XYZ/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_XYZ/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_XYZ/analysis/hydrographs_rap_p0_init_tst/                  \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_plot.shp          \
+     ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
+     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
+     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
+     ../output/WSWM_GRL/analysis/hydrographs_rap_p0_init_tst/                  \
      1997-01-01                                                                \
      1998-12-30                                                                \
      25000                                                                     \
@@ -960,7 +960,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/WSWM_XYZ/analysis/hydrographs_rap_p0_init_tst/
+rm -rf ../output/WSWM_GRL/analysis/hydrographs_rap_p0_init_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -978,14 +978,14 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Error CDFs for model simulations, with parameters p0, initialized"
 ../src/./rrr_anl_hyd_cdf.py                                                    \
-     ../output/WSWM_XYZ/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_XYZ/analysis/cdf_rap_p0_init_tst/                              \
+     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
+     ../output/WSWM_GRL/analysis/cdf_rap_p0_init_tst/                              \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/WSWM_XYZ/analysis/cdf_rap_p0_init_tst/
+rm -rf ../output/WSWM_GRL/analysis/cdf_rap_p0_init_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -996,8 +996,8 @@ fi
 #*******************************************************************************
 #Clean up
 #*******************************************************************************
-rm -f ../output/WSWM_XYZ/*_tst.csv
-rm -f ../output/WSWM_XYZ/analysis/*_tst*.csv
+rm -f ../output/WSWM_GRL/*_tst.csv
+rm -f ../output/WSWM_GRL/analysis/*_tst*.csv
 
 
 #*******************************************************************************

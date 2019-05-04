@@ -78,7 +78,7 @@ year="                                                                         \
       1997                                                                     \
       1998                                                                     \
      "
-folder="../input/WSWM_XYZ/NLDAS2"
+folder="../input/WSWM_GRL/NLDAS2"
 
 #-------------------------------------------------------------------------------
 #Download process
