@@ -278,6 +278,37 @@ fi
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
+#Create coupling file
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating coupling file"
+../src/rrr_cpl_riv_lsm_lnk.py                                                  \
+     ../output/WSWM_GRL/rapid_connect_WSWM.csv                                 \
+     ../output/WSWM_GRL/rapid_catchment_WSWM_arc.csv                           \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc4          \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coupling file"
+./tst_cmp_csv.py                                                               \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                         \
+     ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Create volume file, MOS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -290,7 +321,7 @@ echo "- Creating volume file, MOS"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
-   ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc4            \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
    > $run_file
@@ -324,7 +355,7 @@ echo "- Creating volume file, NOAH"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
-   ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc            \
+   ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc4           \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
    > $run_file
@@ -358,7 +389,7 @@ echo "- Creating volume file, VIC"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
-   ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc             \
+   ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc4            \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
    > $run_file
@@ -380,7 +411,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Create ensemble file
+#Create ensemble file, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -388,7 +419,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating volume file"
+echo "- Creating volume file, ENS"
 
 ../src/rrr_cpl_riv_lsm_ens.py                                                  \
      ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc        \
@@ -398,7 +429,7 @@ echo "- Creating volume file"
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing volume file"
+echo "- Comparing volume file, ENS"
 ./tst_cmp_ncf.py                                                               \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc           \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc       \
