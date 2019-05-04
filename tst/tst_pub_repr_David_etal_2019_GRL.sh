@@ -1,18 +1,22 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_repr_David_etal_201x_XYZ.sh
+#tst_pub_repr_David_etal_2019_GRL.sh
 #*******************************************************************************
 
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
-#David, Cédric H., et al. (201x)
-#xxx
+#David, Cédric H., Jonathan M. Hobbs, Michael J. Turmon, Charlotte M. Emery,
+#John T. Reager, and James S. Famiglietti (2019), Analytical Propagation of
+#Runoff Uncertainty into Discharge Uncertainty through a Large River Network,
+#Geophysical Research Letters.
 #DOI: xx.xxxx/xxxxxx
 #The files used are available from:
-#David, Cédric H., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#David, Cédric H., Jonathan M. Hobbs, Michael J. Turmon, Charlotte M. Emery,
+#John T. Reager, and James S. Famiglietti (2019), RRR/RAPID input and output
+#files corresponding to "Analytical Propagation of Runoff Uncertainty into
+#Discharge Uncertainty through a Large River Network", Zenodo.
+#DOI: 10.5281/zenodo.2665084
 #The following are the possible arguments:
 # - No argument: all unit tests are run
 # - One unique unit test number: this test is run
@@ -23,7 +27,7 @@
 # - 33 if a search failed 
 # - 99 if a comparison failed 
 #Author:
-#Cedric H. David, 2016-2018
+#Cedric H. David, 2016-2019
 
 
 #*******************************************************************************

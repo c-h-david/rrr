@@ -1,12 +1,14 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_David_etal_201x_XYZ.sh
+#tst_pub_dwnl_David_etal_2019_GRL.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
-#David, Cédric H., et al. (201x)
-#xxx
+#David, Cédric H., Jonathan M. Hobbs, Michael J. Turmon, Charlotte M. Emery,
+#John T. Reager, and James S. Famiglietti (2019), Analytical Propagation of
+#Runoff Uncertainty into Discharge Uncertainty through a Large River Network,
+#Geophysical Research Letters.
 #DOI: xx.xxxx/xxxxxx
 #This script also downloads a subset of the files from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
@@ -18,9 +20,11 @@
 #Research, 117, D03109
 #DOI: 10.1029/2011JD016048
 #The files used are available from:
-#David, Cédric H., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#David, Cédric H., Jonathan M. Hobbs, Michael J. Turmon, Charlotte M. Emery,
+#John T. Reager, and James S. Famiglietti (2019), RRR/RAPID input and output
+#files corresponding to "Analytical Propagation of Runoff Uncertainty into
+#Discharge Uncertainty through a Large River Network", Zenodo.
+#DOI: 10.5281/zenodo.2665084
 #and from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
 #Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
@@ -33,7 +37,7 @@
 # - 22 if there was a conversion problem
 # - 44 if one download is not successful
 #Author:
-#Cedric H. David, 2016-2018.
+#Cedric H. David, 2016-2019.
 
 
 #*******************************************************************************
