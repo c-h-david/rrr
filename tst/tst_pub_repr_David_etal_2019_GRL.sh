@@ -323,14 +323,14 @@ echo "- Creating volume file, MOS"
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
    ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc4            \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc4      \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file, MOS"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc4          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc_tst.nc4      \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -357,14 +357,14 @@ echo "- Creating volume file, NOAH"
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
    ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc4           \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc4     \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file, NOAH"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc          \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc4         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc_tst.nc4     \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -391,14 +391,14 @@ echo "- Creating volume file, VIC"
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
    ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc4            \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc4      \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file, VIC"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc_tst.nc4      \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
@@ -422,17 +422,17 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Creating volume file, ENS"
 
 ../src/rrr_cpl_riv_lsm_ens.py                                                  \
-     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc        \
-     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc         \
-     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc         \
-     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc     \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc4       \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc4        \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4        \
+     ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc4    \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file, ENS"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc       \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc4          \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc_tst.nc4      \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
