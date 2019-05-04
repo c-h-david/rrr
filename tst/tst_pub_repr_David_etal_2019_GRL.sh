@@ -462,7 +462,7 @@ echo "- Creating coupling file"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
      ../output/WSWM_GRL/rapid_connect_WSWM.csv                                 \
      ../output/WSWM_GRL/rapid_catchment_WSWM_arc.csv                           \
-     ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst.nc              \
+     ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst_cfc.nc4         \
      ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2_tst.csv                     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -493,16 +493,16 @@ echo "- Creating volume file"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    ../output/WSWM_GRL/coords_WSWM.csv                                          \
-   ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst.nc                \
+   ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst_cfc.nc4           \
    ../output/WSWM_GRL/rapid_coupling_WSWM_NLDAS2.csv                           \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_tst.nc4     \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst.nc             \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst.nc4         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_tst.nc4     \
    1e-6                                                                        \
    50                                                                          \
    > $cmp_file
