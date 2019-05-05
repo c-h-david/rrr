@@ -579,7 +579,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Add estimate of standard error
+#Add estimate of errors
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -587,20 +587,21 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Adding estimate of standard error"
-../src/rrr_cpl_riv_lsm_avg.py                                                  \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
-   10                                                                          \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
+echo "- Adding estimate of errors"
+../src/rrr_cpl_riv_lsm_err.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst.nc4         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50.csv      \
+   1.0                                                                         \
+   1.0                                                                         \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err_tst.nc4 \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
-./tst_cmp_ncf.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p.nc         \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_10p_tst.nc     \
-   1e-6                                                                        \
-   50                                                                          \
+./tst_cmp_n1d.py                                                               \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err.nc4     \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err_tst.nc4 \
+   m3_riv_err                                                                  \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
