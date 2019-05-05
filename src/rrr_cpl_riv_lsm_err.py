@@ -194,10 +194,10 @@ with open(rrr_bvc_csv,'r') as csvfile:
      JS_riv_tot=0
      for row in csvreader:
           IV_riv_tot_id2[JS_riv_tot]=row[0]
-          ZV_riv_tot_bia[JS_riv_tot]=row[3]
-          ZV_riv_tot_sde[JS_riv_tot]=row[4]
-          ZV_riv_tot_cva[JS_riv_tot]=row[5]
-          ZM_riv_tot_cvd[JS_riv_tot]=row[11:]
+          ZV_riv_tot_bia[JS_riv_tot]=row[1]
+          ZV_riv_tot_sde[JS_riv_tot]=row[2]
+          ZV_riv_tot_cva[JS_riv_tot]=row[3]
+          ZM_riv_tot_cvd[JS_riv_tot]=row[4:]
           JS_riv_tot=JS_riv_tot+1
 
 
