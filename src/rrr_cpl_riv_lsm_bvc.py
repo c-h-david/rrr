@@ -375,6 +375,8 @@ print('- Computing standard errors')
 ZV_vol_dif=numpy.zeros(IS_riv_tot)
 ZV_vol_sde=numpy.zeros(IS_riv_tot)
 
+ZV_vol_dmn=numpy.zeros(IS_time)
+
 for JS_time in range(IS_time):
      ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
      ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
@@ -385,6 +387,9 @@ for JS_time in range(IS_time):
      #The deviation between the current error and the mean error
      ZV_vol_sde=ZV_vol_sde+numpy.square(ZV_vol_dev)
      #Updating the value of the standard deviation of the error
+
+     ZV_vol_dmn[JS_time]=ZV_vol_dev.mean()
+     #The mean of deviations over all reaches, computed at each time step
 
 ZV_vol_sde=ZV_vol_sde/(IS_time-1)
 ZV_vol_sde=numpy.sqrt(ZV_vol_sde)
@@ -414,8 +419,6 @@ if YS_opt=='once':
 
      ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
      ZM_vol_dev=ZM_vol_dif-ZV_vol_bia
-
-     ZV_vol_dmn=numpy.mean(ZM_vol_dev,axis=1)
 
      for JS_riv_tot in range(IS_riv_tot):
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
