@@ -597,7 +597,7 @@ echo "- Adding estimate of errors"
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing volume file"
+echo "- Comparing estimate of errors"
 ./tst_cmp_n1d.py                                                               \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err.nc4     \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err_tst.nc4 \
