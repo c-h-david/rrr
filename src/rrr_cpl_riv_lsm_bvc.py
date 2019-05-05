@@ -461,6 +461,15 @@ if YS_opt=='once':
                ZS_vol_cva=ZS_vol_cva                                           \
                          +ZV_vol_dev[JS_riv_tot]*(ZV_vol_dmn[JS_time]          \
                          *IS_riv_tot-ZV_vol_dev[JS_riv_tot])/(IS_riv_tot-1)
+               #Note on trick used here: computing the average of all deviations
+               #except for the deviation of the current reach can be done from
+               #the average of all deviations if the following two quantities
+               #are both known:
+               # (1) the total number of deviations: IS_riv_tot
+               # (2) the one deviation to be removed: ZV_vol_dev[JS_riv_tot]
+               #It is computed as follows:
+               #  (ZV_vol_dmn[JS_time]*IS_riv_tot-ZV_vol_dev[JS_riv_tot])
+               # /(IS_riv_tot-1)
 
           ZV_vol_cvd=ZV_vol_cvd/(IS_time-1)
           ZS_vol_sd2=numpy.sqrt(ZS_vol_sd2/(IS_time-1))
