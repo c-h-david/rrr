@@ -401,18 +401,8 @@ ZV_vol_sd2=numpy.zeros(IS_riv_tot)
 #error is its square root.
 ZV_vol_cva=numpy.zeros(IS_riv_tot)
 #The average of the covariance between each river reach and all others.
-ZV_vol_cve=numpy.zeros(IS_riv_tot)
-#The median  of the covariance between each river reach and all others.
-ZV_vol_cvn=numpy.zeros(IS_riv_tot)
-#The mininum of the covariance between each river reach and all others.
-ZV_vol_cvx=numpy.zeros(IS_riv_tot)
-#The maximum of the covariance between each river reach and all others.
-ZV_vol_cvu=numpy.zeros(IS_riv_tot)
-#The average of the covariance between each river reach and all others upstream.
 ZM_vol_cvd=numpy.zeros((IS_riv_tot,IS_riv_rad))
 #The covariances between each river reach and others downstream (within radius).
-IV_ups_all=[0 for JS_riv_tot in range(IS_riv_tot)]
-#The number of all upstream river reaches
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files all at once
@@ -618,21 +608,13 @@ print('Write summarized results in a file')
 
 with open(rrr_bvc_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
-     csvwriter.writerow(['rivid', 'modbar','trubar','bias','stderr','covavg',  \
-                         'covmed','covmin','covmax',                           \
-                         'nbupst','covupsavg','covdwn']+['cov']*(IS_riv_rad-1))
+     csvwriter.writerow(['rivid', 'bias','stderr','covavg']+                   \
+                        ['covdwn']*(IS_riv_rad))
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([IV_riv_tot_id[JS_riv_tot],                       \
-                              ZV_vol_av1[JS_riv_tot],                          \
-                              ZV_vol_av2[JS_riv_tot],                          \
                               ZV_vol_bia[JS_riv_tot],                          \
                               ZV_vol_sde[JS_riv_tot],                          \
-                              ZV_vol_cva[JS_riv_tot],                          \
-                              ZV_vol_cve[JS_riv_tot],                          \
-                              ZV_vol_cvn[JS_riv_tot],                          \
-                              ZV_vol_cvx[JS_riv_tot],                          \
-                              IV_ups_all[JS_riv_tot],                          \
-                              ZV_vol_cvu[JS_riv_tot]    ]                      \
+                              ZV_vol_cva[JS_riv_tot]]                          \
                             +list(ZM_vol_cvd[JS_riv_tot]))
 
 
