@@ -415,6 +415,8 @@ if YS_opt=='once':
      ZM_vol_dif=ZM_vol_in1-ZM_vol_in2
      ZM_vol_dev=ZM_vol_dif-ZV_vol_bia
 
+     ZV_vol_dmn=numpy.mean(ZM_vol_dev,axis=1)
+
      for JS_riv_tot in range(IS_riv_tot):
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           #Determination of downstream indexes
