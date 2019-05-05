@@ -462,14 +462,16 @@ echo "- Computing biases, error variances, and error covariances"
    once                                                                        \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    50                                                                          \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_tst.csv      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50_tst.csv  \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing biases, error variances, and error covariances"
 ./tst_cmp_csv.py                                                               \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol.csv          \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_tst.csv      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50.csv      \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50_tst.csv  \
+   1e-6                                                                        \
+   1e-2                                                                        \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
