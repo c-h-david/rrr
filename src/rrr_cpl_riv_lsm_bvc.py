@@ -441,13 +441,13 @@ if YS_opt=='once':
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           ZS_vol_sd2=0
           ZS_vol_cva=0
-          ZV_vol_cov=numpy.zeros(len(IV_riv_dwn_ix_rad))
+          ZV_vol_cvd=numpy.zeros(len(IV_riv_dwn_ix_rad))
           #A 1-D array with all downstream covariances for reach at JS_riv_tot
 
           for JS_time in range(IS_time):
                ZV_vol_dev=ZM_vol_dev[JS_time,:]
 
-               ZV_vol_cov=ZV_vol_cov                                           \
+               ZV_vol_cvd=ZV_vol_cvd                                           \
                          +ZV_vol_dev[JS_riv_tot]*ZV_vol_dev[IV_riv_dwn_ix_rad]
 
                ZS_vol_sd2=ZS_vol_sd2                                           \
@@ -457,7 +457,7 @@ if YS_opt=='once':
                          +ZV_vol_dev[JS_riv_tot]*(ZV_vol_dmn[JS_time]          \
                          *IS_riv_tot-ZV_vol_dev[JS_riv_tot])/(IS_riv_tot-1)
 
-          ZV_vol_cov=ZV_vol_cov/(IS_time-1)
+          ZV_vol_cvd=ZV_vol_cvd/(IS_time-1)
           ZS_vol_sd2=numpy.sqrt(ZS_vol_sd2/(IS_time-1))
           ZS_vol_cva=ZS_vol_cva/(IS_time-1)
 
@@ -465,7 +465,7 @@ if YS_opt=='once':
           ZV_vol_sd2[JS_riv_tot]=ZS_vol_sd2
           ZV_vol_cva[JS_riv_tot]=ZS_vol_cva
           for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
-               ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=ZV_vol_cov[JS_riv_dwn]
+               ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=ZV_vol_cvd[JS_riv_dwn]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Computation by reading netCDF files incrementally
