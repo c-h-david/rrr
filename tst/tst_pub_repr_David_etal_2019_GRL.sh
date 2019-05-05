@@ -459,7 +459,7 @@ echo "- Computing biases, error variances, and error covariances"
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4          \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc4          \
    1.0                                                                         \
-   incr                                                                        \
+   once                                                                        \
    ../output/WSWM_GRL/rapid_connect_WSWM.csv                                   \
    50                                                                          \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_tst.csv      \
