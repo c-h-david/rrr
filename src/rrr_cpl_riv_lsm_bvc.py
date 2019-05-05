@@ -501,8 +501,11 @@ if YS_opt=='incr':
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           #Computation of covariances
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
-          ZV_vol_cov=numpy.zeros(IS_riv_tot)
-          #A 1-D array with all the covariances for the reach at JS_riv_tot
+          ZS_vol_sd2=0
+          ZS_vol_cva=0
+          ZV_vol_cvd=numpy.zeros(len(IV_riv_dwn_ix_rad))
+          #A 1-D array with all downstream covariances for reach at JS_riv_tot
+
           for JS_time in range(IS_time):
                ZV_vol_in1=f1.variables[YS_var1][JS_time,:]*ZS_conv
                ZV_vol_in2=f2.variables[YS_var2][JS_time,:]*ZS_conv
@@ -510,24 +513,7 @@ if YS_opt=='incr':
                ZV_vol_dif=ZV_vol_in1-ZV_vol_in2
                ZV_vol_dev=ZV_vol_dif-ZV_vol_bia
 
-               ZV_vol_cov=ZV_vol_cov+ZV_vol_dev[JS_riv_tot]*ZV_vol_dev
-
-          ZV_vol_cov=ZV_vol_cov/(IS_time-1)
-          ZV_vol_sd2[JS_riv_tot]=numpy.sqrt(ZV_vol_cov[JS_riv_tot])
-          ZV_vol_cvo=numpy.delete(ZV_vol_cov,JS_riv_tot)
-          #Removed the one variance element from the covariances
-          ZV_vol_cva[JS_riv_tot]=numpy.mean(ZV_vol_cvo)
-          ZV_vol_cve[JS_riv_tot]=numpy.median(ZV_vol_cvo)
-          ZV_vol_cvn[JS_riv_tot]=numpy.min(ZV_vol_cvo)
-          ZV_vol_cvx[JS_riv_tot]=numpy.max(ZV_vol_cvo)
-          if len(IV_riv_ups_ix_all)!=0:
-               ZV_vol_cvu[JS_riv_tot]=numpy.mean(ZV_vol_cov[IV_riv_ups_ix_all])
-          else:
-               ZV_vol_cvu[JS_riv_tot]=0
-          for JS_riv_dwn in range(len(IV_riv_dwn_ix_rad)):
-               ZM_vol_cvd[JS_riv_tot][JS_riv_dwn]=                             \
-                                       ZV_vol_cov[IV_riv_dwn_ix_rad[JS_riv_dwn]]
-          IV_ups_all[JS_riv_tot]=len(IV_riv_ups_ix_all)
+          #STOPPED HERE: Reading from two netCDFs is too time consuming!
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Skipping covariance computation
