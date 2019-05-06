@@ -1,75 +1,146 @@
-#/bin/bash
+#!/usr/bin/env python
 #*******************************************************************************
-#rrr_cpl_riv_lsm_att.sh
+#rrr_cpl_riv_lsm_att.py
 #*******************************************************************************
 
 #Purpose:
-#This program modifies some global attributes from a given netCDF file based on
-#command line inputs. 
+#Given and netCDF file and a list of attributes (title, institution, comment,
+#semi major axis, and inverse flattening), this program updates the attributes
+#of the netCDF file.
 #Author:
-#Cedric H. David, 2016-2018
+#Cedric H. David, 2019-2019
+
+
+#*******************************************************************************
+#Import Python modules
+#*******************************************************************************
+import sys
+import netCDF4
 
 
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - nc_file
-# 2 - title
-# 3 - institution
-# 4 - comment
-# 5 - semi_major_axis
-# 6 - inverse_flattening
+# 1 - rrr_dat_ncf
+# 2 - rrr_tit_str
+# 3 - rrr_ins_str
+# 4 - rrr_com_str
+# 5 - ZS_sem
+# 6 - ZS_inv
 
 
 #*******************************************************************************
-#Check command line inputs
+#Get command line arguments
 #*******************************************************************************
-if [ "$#" -ne "6" ]; then
-     echo "A total of 6 arguments must be provided" 1>&2
-     exit 22
-fi 
-#Check that 6 arguments were provided 
+IS_arg=len(sys.argv)
+if IS_arg != 7:
+     print('ERROR - 6 and only 6 arguments can be used')
+     raise SystemExit(22)
 
-if [ ! -e "$1" ]; then
-     echo "Input file $1 doesn't exist" 1>&2
-     exit 22
-fi
-#Check that the input file exists
-
-
-#*******************************************************************************
-#Assign command line arguments to local variables
-#*******************************************************************************
-nc_file=$1
-title=$2
-institution=$3
-comment=$4
-semi_major_axis=$5
-inverse_flattening=$6
-#Command line arguments
+rrr_dat_ncf=sys.argv[1]
+rrr_tit_str=sys.argv[2]
+rrr_ins_str=sys.argv[3]
+rrr_com_str=sys.argv[4]
+ZS_sem=float(sys.argv[5])
+ZS_inv=float(sys.argv[6])
 
 
 #*******************************************************************************
 #Print input information
 #*******************************************************************************
-echo 'Command line inputs'
-echo '- nc_file           :' $nc_file
-echo '- title             :' $title
-echo '- institution       :' $institution
-echo '- comment           :' $comment
-echo '- semi_major_axis   :' $semi_major_axis
-echo '- inverse_flattening:' $inverse_flattening
+print('Command line inputs')
+print('- '+rrr_dat_ncf)
+print('- '+rrr_tit_str)
+print('- '+rrr_ins_str)
+print('- '+rrr_com_str)
+print('- '+str(ZS_sem))
+print('- '+str(ZS_inv))
 
 
 #*******************************************************************************
-#Edit global attributes
+#Check if files exist
 #*******************************************************************************
-ncatted -h -a title,global,m,c,"$title" $nc_file
-ncatted -h -a institution,global,m,c,"$institution" $nc_file
-ncatted -h -a comment,global,m,c,"$comment" $nc_file
-ncatted -h -a semi_major_axis,crs,m,c,"$semi_major_axis" $nc_file
-ncatted -h -a inverse_flattening,crs,m,c,"$inverse_flattening" $nc_file
-#-h for not updating "history", -a for "attribute", m is modify, c is character
+try:
+     with open(rrr_dat_ncf) as file:
+          pass
+except IOError as e:
+     print('ERROR - Unable to open '+rrr_dat_ncf)
+     raise SystemExit(22)
+
+
+#*******************************************************************************
+#Modifying attributes
+#*******************************************************************************
+print('Modifying attributes')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Open netCDF file
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+f = netCDF4.Dataset(rrr_dat_ncf, 'r+')
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Modify global attributes
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+#Note: Attributes of type "Character" need be deleted before modified if the
+#number of characters is different!
+
+if 'Conventions' in f.ncattrs():
+     rrr_con_str=f.getncattr('Conventions')
+     f.delncattr('Conventions')
+     f.setncattr('Conventions',rrr_con_str)
+
+if 'title' in f.ncattrs():
+     #rrr_tit_str
+     f.delncattr('title')
+     f.setncattr('title',rrr_tit_str)
+
+if 'institution' in f.ncattrs():
+     #rrr_ins_str
+     f.delncattr('institution')
+     f.setncattr('institution',rrr_ins_str)
+
+if 'source' in f.ncattrs():
+     rrr_sou_str=f.getncattr('source')
+     f.delncattr('source')
+     f.setncattr('source',rrr_sou_str)
+
+if 'history' in f.ncattrs():
+     rrr_his_str=f.getncattr('history')
+     f.delncattr('history')
+     f.setncattr('history',rrr_his_str)
+
+if 'references' in f.ncattrs():
+     rrr_ref_str=f.getncattr('references')
+     f.delncattr('references')
+     f.setncattr('references',rrr_ref_str)
+
+if 'comment' in f.ncattrs():
+     #rrr_com_str
+     f.delncattr('comment')
+     f.setncattr('comment',rrr_com_str)
+
+if 'featureType' in f.ncattrs():
+     rrr_fea_str=f.getncattr('featureType')
+     f.delncattr('featureType')
+     f.setncattr('featureType',rrr_fea_str)
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Modify crs attributes
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if 'crs' in f.variables:
+     crs=f.variables['crs']
+     if 'semi_major_axis' in crs.ncattrs():
+          crs.setncattr('semi_major_axis',ZS_sem)
+
+     if 'inverse_flattening' in crs.ncattrs():
+          crs.setncattr('inverse_flattening',ZS_inv)
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Close netCDF file
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+f.close()
+#Closing the new netCDF file allows populating all data
 
 
 #*******************************************************************************
