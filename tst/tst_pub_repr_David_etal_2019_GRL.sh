@@ -552,7 +552,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Update netCDF global attributes 
+#Update netCDF attributes
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -560,12 +560,12 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Updating netCDF global attributes"
-../src/rrr_cpl_riv_lsm_att.sh                                                  \
-   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_cst_tst.nc         \
+echo "- Updating netCDF attributes"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst.nc4         \
    'RAPID data corresponding to the Western States Water Mission'              \
    'Jet Propulsion Laboratory, California Institute of Technology'             \
-   ' '                                                                         \
+   ''                                                                          \
    6378137                                                                     \
    298.257222101                                                               \
    > $run_file
