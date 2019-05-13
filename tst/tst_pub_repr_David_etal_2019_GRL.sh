@@ -164,30 +164,30 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating p_ag files"
+echo "- Creating pag files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
      ../output/WSWM_GRL/kfac_WSWM_1km_hour.csv                                 \
      ../output/WSWM_GRL/xfac_WSWM_0.1.csv                                      \
      0.3                                                                       \
      3.0                                                                       \
-     ../output/WSWM_GRL/k_WSWM_ag_tst.csv                                      \
-     ../output/WSWM_GRL/x_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/k_WSWM_pag_tst.csv                                     \
+     ../output/WSWM_GRL/x_WSWM_pag_tst.csv                                     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing k_ag files"
+echo "- Comparing k_pag files"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/k_WSWM_ag.csv                                          \
-     ../output/WSWM_GRL/k_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/k_WSWM_pag.csv                                         \
+     ../output/WSWM_GRL/k_WSWM_pag_tst.csv                                     \
      1e-6                                                                      \
      1e-2                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing x_ag files"
+echo "- Comparing x_pag files"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/x_WSWM_ag.csv                                          \
-     ../output/WSWM_GRL/x_WSWM_ag_tst.csv                                      \
+     ../output/WSWM_GRL/x_WSWM_pag.csv                                         \
+     ../output/WSWM_GRL/x_WSWM_pag_tst.csv                                     \
      1e-6                                                                      \
      1e-2                                                                      \
      > $cmp_file
