@@ -851,7 +851,7 @@ echo "- Comparing statistics for model simulations, with parameters pag, initial
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly.csv                \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_tst.csv            \
      1e-6                                                                      \
-     1e-1                                                                      \
+     1e-5                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
