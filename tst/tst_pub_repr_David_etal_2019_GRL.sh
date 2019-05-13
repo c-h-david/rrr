@@ -925,7 +925,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Error CDFs for model simulations with, parameters pag, initialized
+#Error CDFs for model simulations with, parameters pag, initialized, daily
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -933,7 +933,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Error CDFs for model simulations, with parameters pag, initialized"
+echo "- Error CDFs for model simulations, with parameters pag, initialized, daily"
 ../src/./rrr_anl_hyd_cdf.py                                                    \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
      ../output/WSWM_GRL/analysis/cdf_rap_pag_init_tst/                         \
@@ -943,6 +943,56 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing to NOTHING"
 
 rm -rf ../output/WSWM_GRL/analysis/cdf_rap_pag_init_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs for model simulations with, parameters pag, initialized, monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs for model simulations, with parameters pag, initialized, monthly"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly.csv                \
+     ../output/WSWM_GRL/analysis/cdf_rap_pag_init_monthly_tst/                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/WSWM_GRL/analysis/cdf_rap_pag_init_monthly_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Error CDFs from uncertainty propagation, monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Error CDFs from uncertainty propagation, monthly"
+../src/./rrr_anl_hyd_cdf.py                                                    \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err.csv            \
+     ../output/WSWM_GRL/analysis/cdf_rap_pag_init_monthly_err_tst/             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/WSWM_GRL/analysis/cdf_rap_pag_init_monthly_err_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
