@@ -660,7 +660,7 @@ fi
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#Timeseries for observations
+#Timeseries for observations, daily
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -668,7 +668,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Timeseries for observations"
+echo "- Timeseries for observations, daily"
 ../src/rrr_anl_hyd_obs.py                                                      \
      ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp               \
      ../output/WSWM_GRL/obs_tot_id_WSWM_1997_1998_full.csv                     \
@@ -680,7 +680,7 @@ echo "- Timeseries for observations"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing timeseries for observations"
+echo "- Comparing timeseries for observations, daily"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
      ../output/WSWM_GRL/analysis/timeseries_obs_tst.csv                        \
@@ -696,7 +696,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Timeseries for model simulations, with parameters pag, initialized
+#Timeseries for observations, monthly
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -704,7 +704,38 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Timeseries for model simulations, with parameters pag, initialized"
+echo "- Timeseries for observations, monthly"
+../src/rrr_anl_hyd_avg.py                                                      \
+     ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
+     ../output/WSWM_GRL/analysis/timeseries_obs_monthly_tst.csv                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for observations, monthly"
+./tst_cmp_csv.py                                                               \
+     ../output/WSWM_GRL/analysis/timeseries_obs_monthly.csv                    \
+     ../output/WSWM_GRL/analysis/timeseries_obs_monthly_tst.csv                \
+     1e-5                                                                      \
+     1e-6                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters pag, initialized, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters pag, initialized, daily"
 ../src/rrr_anl_hyd_mod.py                                                      \
      ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp               \
      ../output/WSWM_GRL/Qout_WSWM_729days_pag_dtR900s_n1_preonly_init_err.nc   \
@@ -714,12 +745,43 @@ echo "- Timeseries for model simulations, with parameters pag, initialized"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing timeseries for model simulations, with parameters pag, initialized"
+echo "- Comparing timeseries for model simulations, with parameters pag, initialized, daily"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
      ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_tst.csv               \
      1e-3                                                                      \
      2e-3                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, with parameters pag, initialized, monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, with parameters pag, initialized, monthly"
+../src/rrr_anl_hyd_avg.py                                                      \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_monthly_tst.csv       \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, with parameters pag, initialized, monthly"
+./tst_cmp_csv.py                                                               \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_monthly.csv           \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_monthly_tst.csv       \
+     1e-5                                                                      \
+     2e-6                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -740,7 +802,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Statistics for model simulations, with parameters pag, initialized"
 ../src/rrr_anl_hyd_sts.py                                                      \
-     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp               \
      ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
      ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_tst.csv                    \
@@ -753,8 +815,8 @@ echo "- Comparing statistics for model simulations, with parameters pag, initial
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_tst.csv                    \
-     1e-5                                                                      \
      1e-6                                                                      \
+     1e-1                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
