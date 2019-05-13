@@ -670,13 +670,13 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Timeseries for observations"
 ../src/rrr_anl_hyd_obs.py                                                      \
-     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp               \
+     ../output/WSWM_GRL/obs_tot_id_WSWM_1997_1998_full.csv                     \
      ../output/WSWM_GRL/Qobs_WSWM_1997_1998_full.csv                           \
      1997-01-01                                                                \
      1                                                                         \
      USGS                                                                      \
      ../output/WSWM_GRL/analysis/timeseries_obs_tst.csv                        \
-     10                                                                        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -684,15 +684,6 @@ echo "- Comparing timeseries for observations"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
      ../output/WSWM_GRL/analysis/timeseries_obs_tst.csv                        \
-     1e-5                                                                      \
-     1e-6                                                                      \
-     > $cmp_file
-x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-
-echo "- Comparing uncertainty timeseries for observations"
-./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/analysis/timeseries_obs_uq.csv                         \
-     ../output/WSWM_GRL/analysis/timeseries_obs_tst_uq.csv                     \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -715,8 +706,8 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Timeseries for model simulations, with parameters p0, initialized"
 ../src/rrr_anl_hyd_mod.py                                                      \
-     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
-     ../output/WSWM_GRL/Qout_WSWM_729days_p0_dtR900s_n1_preonly_20170912_init_uq_0.5.nc \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp          \
+     ../output/WSWM_GRL/Qout_WSWM_729days_pag_dtR900s_n1_preonly_init_err.nc   \
      RAPID_p0_init                                                             \
      8                                                                         \
      ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
@@ -727,15 +718,6 @@ echo "- Comparing timeseries for model simulations, with parameters p0, initiali
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
      ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
-     1e-3                                                                      \
-     2e-3                                                                      \
-     > $cmp_file
-x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
-
-echo "- Comparing uncertainty timeseries for model simulations, with parameters p0, initialized"
-./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_uq.csv                 \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst_uq.csv             \
      1e-3                                                                      \
      2e-3                                                                      \
      > $cmp_file
