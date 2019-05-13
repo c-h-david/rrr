@@ -164,7 +164,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating pag files"
+echo "- Creating parameters pag files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
      ../output/WSWM_GRL/kfac_WSWM_1km_hour.csv                                 \
      ../output/WSWM_GRL/xfac_WSWM_0.1.csv                                      \
@@ -453,7 +453,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Computing biases, error variances, and error covariances"
+echo "- Creatingting biases, error variances, and error covariances"
 
 ../src/rrr_cpl_riv_lsm_bvc.py                                                  \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4          \
@@ -696,7 +696,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Timeseries for model simulations, with parameters p0, initialized
+#Timeseries for model simulations, with parameters pag, initialized
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -704,20 +704,20 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Timeseries for model simulations, with parameters p0, initialized"
+echo "- Timeseries for model simulations, with parameters pag, initialized"
 ../src/rrr_anl_hyd_mod.py                                                      \
-     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp          \
+     ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.shp               \
      ../output/WSWM_GRL/Qout_WSWM_729days_pag_dtR900s_n1_preonly_init_err.nc   \
-     RAPID_p0_init                                                             \
+     RAPID_init                                                                \
      8                                                                         \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_tst.csv               \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing timeseries for model simulations, with parameters p0, initialized"
+echo "- Comparing timeseries for model simulations, with parameters pag, initialized"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init_tst.csv                \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init_tst.csv               \
      1e-3                                                                      \
      2e-3                                                                      \
      > $cmp_file
@@ -730,7 +730,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Statistics for model simulations, with parameters p0, initialized
+#Statistics for model simulations, with parameters pag, initialized
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -738,21 +738,21 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Statistics for model simulations, with parameters p0, initialized"
+echo "- Statistics for model simulations, with parameters pag, initialized"
 ../src/rrr_anl_hyd_sts.py                                                      \
      ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_Sort.shp          \
      ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_GRL/analysis/stats_rap_p0_init_tst.csv                     \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_tst.csv                    \
      1997-01-01                                                                \
      1998-12-30                                                                \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing statistics for model simulations, with parameters p0, initialized"
+echo "- Comparing statistics for model simulations, with parameters pag, initialized"
 ./tst_cmp_csv.py                                                               \
-     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_GRL/analysis/stats_rap_p0_init_tst.csv                     \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_tst.csv                    \
      1e-5                                                                      \
      1e-6                                                                      \
      > $cmp_file
@@ -765,7 +765,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations with, parameters p0, initialized
+#Hydrographs for model simulations with, parameters pag, initialized
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -773,13 +773,13 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, with parameters p0, initialized"
+echo "- Hydrographs for model simulations, with parameters pag, initialized"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_plot.shp          \
      ../output/WSWM_GRL/analysis/timeseries_obs.csv                            \
-     ../output/WSWM_GRL/analysis/timeseries_rap_p0_init.csv                    \
-     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_GRL/analysis/hydrographs_rap_p0_init_tst/                  \
+     ../output/WSWM_GRL/analysis/timeseries_rap_pag_init.csv                   \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
+     ../output/WSWM_GRL/analysis/hydrographs_rap_pag_init_tst/                 \
      1997-01-01                                                                \
      1998-12-30                                                                \
      25000                                                                     \
@@ -788,7 +788,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/WSWM_GRL/analysis/hydrographs_rap_p0_init_tst/
+rm -rf ../output/WSWM_GRL/analysis/hydrographs_rap_pag_init_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -796,7 +796,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Error CDFs for model simulations with, parameters p0, initialized
+#Error CDFs for model simulations with, parameters pag, initialized
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -804,16 +804,16 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Error CDFs for model simulations, with parameters p0, initialized"
+echo "- Error CDFs for model simulations, with parameters pag, initialized"
 ../src/./rrr_anl_hyd_cdf.py                                                    \
-     ../output/WSWM_GRL/analysis/stats_rap_p0_init.csv                         \
-     ../output/WSWM_GRL/analysis/cdf_rap_p0_init_tst/                              \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
+     ../output/WSWM_GRL/analysis/cdf_rap_pag_init_tst/                         \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/WSWM_GRL/analysis/cdf_rap_p0_init_tst/
+rm -rf ../output/WSWM_GRL/analysis/cdf_rap_pag_init_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -825,6 +825,7 @@ fi
 #Clean up
 #*******************************************************************************
 rm -f ../output/WSWM_GRL/*_tst.csv
+rm -f ../output/WSWM_GRL/*_tst.nc4
 rm -f ../output/WSWM_GRL/analysis/*_tst*.csv
 
 
