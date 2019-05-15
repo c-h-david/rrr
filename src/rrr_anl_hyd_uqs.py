@@ -225,15 +225,16 @@ with open(rrr_uqs_csv, 'wb') as csvfile:
                          'STDE','Nash','Correl']) 
      for JS_obs_tot in range(IS_obs_tot):
           IS_riv_bas_id=IV_obs_tot_id_srt[JS_obs_tot]
-          csvwriter.writerow([IS_riv_bas_id,                                   \
-                              round(-9999,2),                                  \
-                              round(ZV_riv_bas_aQ[IM_hsh[IS_riv_bas_id]],2),   \
-                              round(ZV_riv_bas_rQ[IM_hsh[IS_riv_bas_id]],2),   \
-                              round(ZV_riv_bas_bQ[IM_hsh[IS_riv_bas_id]],2),   \
-                              round(ZV_riv_bas_sQ[IM_hsh[IS_riv_bas_id]],2),   \
-                              round(-9999,2),                                  \
-                              round(-9999,2),                                  \
-                             ]) 
+          if IS_riv_bas_id in IM_hsh:
+             csvwriter.writerow([IS_riv_bas_id,                                \
+                                 round(-9999,2),                               \
+                                 round(ZV_riv_bas_aQ[IM_hsh[IS_riv_bas_id]],2),\
+                                 round(ZV_riv_bas_rQ[IM_hsh[IS_riv_bas_id]],2),\
+                                 round(ZV_riv_bas_bQ[IM_hsh[IS_riv_bas_id]],2),\
+                                 round(ZV_riv_bas_sQ[IM_hsh[IS_riv_bas_id]],2),\
+                                 round(-9999,2),                               \
+                                 round(-9999,2),                               \
+                                ])
 
 
 #*******************************************************************************
