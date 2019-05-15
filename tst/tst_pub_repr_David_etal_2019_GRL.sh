@@ -999,6 +999,62 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Scatter plots actual daily vs actual monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots actual daily vs actual monthly"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly.csv                \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init.csv                        \
+     "Actual daily errors as a function of actual monthly errors"              \
+     2000                                                                      \
+     ../output/WSWM_GRL/analysis/xyp_rap_p0_init_monthly_rap_p0_init_tst/      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/WSWM_GRL/analysis/xyp_rap_p0_init_monthly_rap_p0_init_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Scatter plots estimated monthly vs actual monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots estimated monthly vs actual monthly"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly.csv                \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err.csv            \
+     "Estimated monthly errors as a function of actual monthly errors"         \
+     2000                                                                      \
+     ../output/WSWM_GRL/analysis/xyp_rap_p0_init_monthly_rap_p0_init_monthly_err_tst/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/WSWM_GRL/analysis/xyp_rap_p0_init_monthly_rap_p0_init_monthly_err_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Clean up
