@@ -89,6 +89,29 @@ unt=0
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
+#Check NHDPlus nodes
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Checking NHDPlus nodes"
+../src/rrr_riv_tot_chk_nod_nhdplus.py                                          \
+     ../input/WSWM_GRL/NHDFlowline_WSWM_Sort.shp                               \
+     ../input/WSWM_GRL/PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.dbf       \
+     ../input/WSWM_GRL/PlusFlow_WSWM.dbf                                       \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Connectivity, base parameters, coordinates, sort
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
