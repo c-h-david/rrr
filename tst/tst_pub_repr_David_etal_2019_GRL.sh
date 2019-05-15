@@ -445,6 +445,114 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Update netCDF attributes, MOS, M
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes, MOS, M"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc4          \
+   'RAPID data corresponding to the Western States Water Mission'              \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   6378137                                                                     \
+   298.257222101                                                               \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Update netCDF attributes, NOAH, M
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes, NOAH, M"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc4         \
+   'RAPID data corresponding to the Western States Water Mission'              \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   6378137                                                                     \
+   298.257222101                                                               \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Update netCDF attributes, VIC, M
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes, VIC, M"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4          \
+   'RAPID data corresponding to the Western States Water Mission'              \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   6378137                                                                     \
+   298.257222101                                                               \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Update netCDF attributes, ENS, M
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes, ENS, M"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc4          \
+   'RAPID data corresponding to the Western States Water Mission'              \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   6378137                                                                     \
+   298.257222101                                                               \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Compute biases, error variances, and error covariances
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -552,7 +660,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Update netCDF attributes
+#Update netCDF attributes, VIC, 3H
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -560,7 +668,7 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Updating netCDF attributes"
+echo "- Updating netCDF attributes, VIC, 3H"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
    ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst.nc4         \
    'RAPID data corresponding to the Western States Water Mission'              \
