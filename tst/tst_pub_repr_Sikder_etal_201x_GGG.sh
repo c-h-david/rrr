@@ -1,16 +1,16 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_repr_Allen_etal_201x_GGG.sh
+#tst_pub_repr_Sikder_etal_201x_GGG.sh
 #*******************************************************************************
 
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
-#Allen, George H., et al. (201x)
+#Sikder, Md. Safat, et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #The files used are available from:
-#Allen, George H., et al. (201x)
+#Sikder, Md. Safat, et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #The following are the possible arguments:

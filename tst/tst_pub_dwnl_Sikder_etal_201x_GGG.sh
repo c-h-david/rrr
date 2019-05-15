@@ -1,11 +1,11 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_Allen_etal_201x_GGG.sh
+#tst_pub_dwnl_Sikder_etal_201x_GGG.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
-#Allen, George H., et al. (201x)
+#Sikder, Md. Safat, et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #This script also downloads a subset of the files from:
@@ -20,7 +20,7 @@
 #93–94.
 #DOI:10.1029/2008EO100001.
 #The files used are available from:
-#Allen, George H., et al. (201x)
+#Sikder, Md. Safat, et al. (201x)
 #xxx
 #DOI: xx.xxxx/xxxxxx
 #and from:
