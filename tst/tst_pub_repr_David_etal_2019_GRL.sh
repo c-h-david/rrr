@@ -1002,6 +1002,38 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Statistics from uncertainty propagation, monthly, all reaches
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics from uncertainty propagation, monthly, all reaches"
+../src/rrr_anl_hyd_uqs.py                                                      \
+     ../input/WSWM_GRL/NHDFlowline_WSWM_Sort.shp                               \
+     ../output/WSWM_GRL/Qout_WSWM_729days_pag_dtR900s_n1_preonly_init_err.nc   \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err_all_reaches_tst.csv \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics from uncertainty propagation, monthly, all reaches"
+./tst_cmp_csv.py                                                               \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err_all_reaches.csv \
+     ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err_all_reaches_tst.csv \
+     1e-6                                                                      \
+     1e-5                                                                      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Hydrographs for model simulations with, parameters pag, initialized
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
