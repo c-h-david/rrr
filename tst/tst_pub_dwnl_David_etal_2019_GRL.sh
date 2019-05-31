@@ -124,6 +124,37 @@ done
 
 
 #*******************************************************************************
+#Download RRR analysis files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="https://zenodo.org/record/2665084/files"
+folder="../output/WSWM_GRL/analysis"
+list="                                                                         \
+      stats_rap_pag_init_monthly_err_all_reaches.csv                           \
+      stats_rap_pag_init_monthly_err.csv                                       \
+      stats_rap_pag_init_monthly.csv                                           \
+      stats_rap_pag_init.csv                                                   \
+      timeseries_obs_monthly.csv                                               \
+      timeseries_obs.csv                                                       \
+      timeseries_rap_pag_init_monthly.csv                                      \
+      timeseries_rap_pag_init.csv                                              \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+
+
+#*******************************************************************************
 #Convert legacy files
 #*******************************************************************************
 #N/A
