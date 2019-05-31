@@ -58,8 +58,8 @@ list="                                                                         \
       Catchment_WSWM_Sort.zip                                                  \
       GageLoc_WSWM_with_dir.zip                                                \
       NHDFlowline_WSWM_Sort.zip                                                \
-      PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.zip                        \
       PlusFlow_WSWM.zip                                                        \
+      PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.zip                        \
      "
 
 #-------------------------------------------------------------------------------
