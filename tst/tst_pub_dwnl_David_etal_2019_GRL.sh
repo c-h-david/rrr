@@ -9,29 +9,13 @@
 #John T. Reager, and James S. Famiglietti (2019), Analytical Propagation of
 #Runoff Uncertainty into Discharge Uncertainty through a Large River Network,
 #Geophysical Research Letters.
-#DOI: xx.xxxx/xxxxxx
-#This script also downloads a subset of the files from:
-#Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
-#Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
-#Dennis Lettenmaier, Victor Koren, Qingyun Duan, Kingtse Mo, Yun Fan, and David 
-#Mocko (2012), Continental-scale water and energy flux analysis and validation 
-#for the North American Land Data Assimilation System project phase 2 (NLDAS-2):
-#1. Intercomparison and application of model products,  Journal of Geophysical 
-#Research, 117, D03109
-#DOI: 10.1029/2011JD016048
+#DOI: 10.1029/2019GL083342
 #The files used are available from:
 #David, Cédric H., Jonathan M. Hobbs, Michael J. Turmon, Charlotte M. Emery,
 #John T. Reager, and James S. Famiglietti (2019), RRR/RAPID input and output
 #files corresponding to "Analytical Propagation of Runoff Uncertainty into
 #Discharge Uncertainty through a Large River Network", Zenodo.
 #DOI: 10.5281/zenodo.2665084
-#and from:
-#Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
-#Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
-#Dennis Lettenmaier, Victor Koren, Qingyun Duan, Kingtse Mo, Yun Fan, and David 
-#Mocko (2012), Continental-scale water and energy flux analysis and validation 
-#for the North American Land Data Assimilation System project phase 2 (NLDAS-2).
-#ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
@@ -54,12 +38,10 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
-echo "                          ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/"
-echo "which correspond to   :   http://dx.doi.org/xx.xxxx/xxxxxx"
-echo "                          http://dx.doi.org/10.1029/2011JD016048"
+echo "Downloading files from:   http://dx.doi.org/10.5281/zenodo.2665084"
+echo "which correspond to   :   http://dx.doi.org/10.1029/2019GL083342"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
-echo "Please cite these four DOIs if using these files for your publications."
+echo "Please cite these two DOIs if using these files for your publications."
 echo "********************"
 
 
