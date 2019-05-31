@@ -157,7 +157,23 @@ done
 #*******************************************************************************
 #Convert legacy files
 #*******************************************************************************
-#N/A
+unzip -nq ../input/WSWM_GRL/Catchment_WSWM_Sort.zip -d ../input/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../input/WSWM_GRL/GageLoc_WSWM_with_dir.zip -d ../input/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../input/WSWM_GRL/NHDFlowline_WSWM_Sort.zip -d ../input/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../input/WSWM_GRL/PlusFlow_WSWM.zip -d ../input/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../input/WSWM_GRL/PlusFlowlineVAA_WSWM_Sort_fixed_Node_50233399.zip -d ../input/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+
+unzip -nq ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full_plot.zip -d ../output/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../output/WSWM_GRL/GageLoc_WSWM_with_dir_1997_1998_full.zip -d ../output/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+unzip -nq ../output/WSWM_GRL/m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50.zip -d ../output/WSWM_GRL/
+if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
 
 #*******************************************************************************
