@@ -74,6 +74,56 @@ done
 
 
 #*******************************************************************************
+#Download RRR output files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="https://zenodo.org/record/2665084/files"
+folder="../output/WSWM_GRL"
+list="                                                                         \
+      coords_WSWM.csv                                                          \
+      GageLoc_WSWM_with_dir_1997_1998_full_plot.zip                            \
+      GageLoc_WSWM_with_dir_1997_1998_full.zip                                 \
+      k_WSWM_pag.csv                                                           \
+      kfac_WSWM_1km_hour.csv                                                   \
+      m3_riv_WSWM_19970101_19981231_ENS0125_M_utc.nc4                          \
+      m3_riv_WSWM_19970101_19981231_ERR0125_M_vol_R50.zip                      \
+      m3_riv_WSWM_19970101_19981231_MOS0125_M_utc.nc4                          \
+      m3_riv_WSWM_19970101_19981231_NOAH0125_M_utc.nc4                         \
+      m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst_err.nc4                     \
+      m3_riv_WSWM_19970101_19981231_VIC0125_3H_cst.nc4                         \
+      m3_riv_WSWM_19970101_19981231_VIC0125_M_utc.nc4                          \
+      NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc4                            \
+      NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc4                           \
+      NLDAS_VIC0125_3H_19970101_19981231_cst_cfc.nc4                           \
+      NLDAS_VIC0125_3H_19970101_19981231_utc_cfc.nc4                           \
+      NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc4                            \
+      obs_tot_id_WSWM_1997_1998_full.csv                                       \
+      Qobs_WSWM_1997_1998_full.csv                                             \
+      Qout_WSWM_729days_pag_dtR900s_n1_preonly_init_err.nc                     \
+      rapid_catchment_WSWM_arc.csv                                             \
+      rapid_connect_WSWM.csv                                                   \
+      rapid_coupling_WSWM_NLDAS2.csv                                           \
+      riv_bas_id_WSWM_hydroseq.csv                                             \
+      sort_WSWM_hydroseq.csv                                                   \
+      x_WSWM_pag.csv                                                           \
+      xfac_WSWM_0.1.csv                                                        \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+
+
+#*******************************************************************************
 #Convert legacy files
 #*******************************************************************************
 #N/A
