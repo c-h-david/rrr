@@ -1922,7 +1922,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_full_range_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_full_range_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -1953,7 +1953,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -1984,7 +1984,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2015,7 +2015,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2046,7 +2046,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2077,7 +2077,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp10_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp10_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
