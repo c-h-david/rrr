@@ -95,49 +95,49 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating all domain files"
 ../src/rrr_riv_tot_gen_all_nhdplus.py                                          \
-     ../input/San_Guad_CCC/NHDFlowline_San_Guad.dbf                            \
-     ../input/San_Guad_CCC/NHDFlowlineVAA_Reg12.dbf                            \
+     ../input/San_Guad_JHM2/NHDFlowline_San_Guad.dbf                           \
+     ../input/San_Guad_JHM2/NHDFlowlineVAA_Reg12.dbf                           \
      4                                                                         \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad_tst.csv                     \
-     ../output/San_Guad_CCC/kfac_San_Guad_1km_hour_tst.csv                     \
-     ../output/San_Guad_CCC/xfac_San_Guad_0.1_tst.csv                          \
-     ../output/San_Guad_CCC/sort_San_Guad_hydroseq_tst.csv                     \
-     ../output/San_Guad_CCC/coords_San_Guad_tst.csv                            \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad_tst.csv                    \
+     ../output/San_Guad_JHM2/kfac_San_Guad_1km_hour_tst.csv                    \
+     ../output/San_Guad_JHM2/xfac_San_Guad_0.1_tst.csv                         \
+     ../output/San_Guad_JHM2/sort_San_Guad_hydroseq_tst.csv                    \
+     ../output/San_Guad_JHM2/coords_San_Guad_tst.csv                           \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing connectivity"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad_tst.csv                     \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad_tst.csv                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing kfac"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/kfac_San_Guad_1km_hour.csv                         \
-     ../output/San_Guad_CCC/kfac_San_Guad_1km_hour_tst.csv                     \
+     ../output/San_Guad_JHM2/kfac_San_Guad_1km_hour.csv                        \
+     ../output/San_Guad_JHM2/kfac_San_Guad_1km_hour_tst.csv                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing xfac"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/xfac_San_Guad_0.1.csv                              \
-     ../output/San_Guad_CCC/xfac_San_Guad_0.1_tst.csv                          \
+     ../output/San_Guad_JHM2/xfac_San_Guad_0.1.csv                             \
+     ../output/San_Guad_JHM2/xfac_San_Guad_0.1_tst.csv                         \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sorted IDs"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/sort_San_Guad_hydroseq.csv                         \
-     ../output/San_Guad_CCC/sort_San_Guad_hydroseq_tst.csv                     \
+     ../output/San_Guad_JHM2/sort_San_Guad_hydroseq.csv                        \
+     ../output/San_Guad_JHM2/sort_San_Guad_hydroseq_tst.csv                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coordinates"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
-     ../output/San_Guad_CCC/coords_San_Guad_tst.csv                            \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
+     ../output/San_Guad_JHM2/coords_San_Guad_tst.csv                           \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -158,26 +158,26 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating p_pa_guess files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
-     ../output/San_Guad_CCC/kfac_San_Guad_1km_hour.csv                         \
-     ../output/San_Guad_CCC/xfac_San_Guad_0.1.csv                              \
+     ../output/San_Guad_JHM2/kfac_San_Guad_1km_hour.csv                        \
+     ../output/San_Guad_JHM2/xfac_San_Guad_0.1.csv                             \
      0.35                                                                      \
      3.00                                                                      \
-     ../output/San_Guad_CCC/k_San_Guad_pa_guess_tst.csv                        \
-     ../output/San_Guad_CCC/x_San_Guad_pa_guess_tst.csv                        \
+     ../output/San_Guad_JHM2/k_San_Guad_pa_guess_tst.csv                       \
+     ../output/San_Guad_JHM2/x_San_Guad_pa_guess_tst.csv                       \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing k_pa_guess files"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/k_San_Guad_pa_guess.csv                            \
-     ../output/San_Guad_CCC/k_San_Guad_pa_guess_tst.csv                        \
+     ../output/San_Guad_JHM2/k_San_Guad_pa_guess.csv                           \
+     ../output/San_Guad_JHM2/k_San_Guad_pa_guess_tst.csv                       \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing x_pa_guess files"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/x_San_Guad_pa_guess.csv                            \
-     ../output/San_Guad_CCC/x_San_Guad_pa_guess_tst.csv                        \
+     ../output/San_Guad_JHM2/x_San_Guad_pa_guess.csv                           \
+     ../output/San_Guad_JHM2/x_San_Guad_pa_guess_tst.csv                       \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -198,17 +198,17 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sorted basin file"
 ../src/rrr_riv_bas_gen_one_nhdplus.py                                          \
-     ../input/San_Guad_CCC/NHDFlowline_San_Guad.dbf                            \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/sort_San_Guad_hydroseq.csv                         \
-     ../output/San_Guad_CCC/riv_bas_id_San_Guad_hydroseq_tst.csv               \
+     ../input/San_Guad_JHM2/NHDFlowline_San_Guad.dbf                           \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/sort_San_Guad_hydroseq.csv                        \
+     ../output/San_Guad_JHM2/riv_bas_id_San_Guad_hydroseq_tst.csv              \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sorted basin file"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/riv_bas_id_San_Guad_hydroseq.csv                   \
-     ../output/San_Guad_CCC/riv_bas_id_San_Guad_hydroseq_tst.csv               \
+     ../output/San_Guad_JHM2/riv_bas_id_San_Guad_hydroseq.csv                  \
+     ../output/San_Guad_JHM2/riv_bas_id_San_Guad_hydroseq_tst.csv              \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -230,15 +230,15 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating catchment file"
 ../src/rrr_cat_tot_gen_one_nhdplus.py                                          \
-     ../input/San_Guad_CCC/catchment_Reg12.dbf                                 \
-     ../output/San_Guad_CCC/rapid_catchment_Reg12_tst.csv                      \
+     ../input/San_Guad_JHM2/catchment_Reg12.dbf                                \
+     ../output/San_Guad_JHM2/rapid_catchment_Reg12_tst.csv                     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing catchment file"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/rapid_catchment_Reg12.csv                          \
-     ../output/San_Guad_CCC/rapid_catchment_Reg12_tst.csv                      \
+     ../output/San_Guad_JHM2/rapid_catchment_Reg12.csv                         \
+     ../output/San_Guad_JHM2/rapid_catchment_Reg12_tst.csv                     \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -429,17 +429,17 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating coupling file"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/rapid_catchment_Reg12.csv                          \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/rapid_catchment_Reg12.csv                         \
      ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS_tst.csv              \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS_tst.csv             \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coupling file"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS_tst.csv              \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS_tst.csv             \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -460,18 +460,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file - Monthly - MOS"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
      ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4             \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4 \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -492,18 +492,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file - Monthly - NOAH"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
      ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4            \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4 \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -524,18 +524,18 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file - Monthly - VIC"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
-     ../output/San_Guad_CCC/coords_San_Guad.csv                                \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
      ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
-     ../output/San_Guad_CCC/rapid_coupling_San_Guad_NLDAS.csv                  \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -557,17 +557,17 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Creating volume file - Monthly - ENS"
 
 ../src/rrr_cpl_riv_lsm_ens.py                                                  \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4        \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4         \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4         \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4     \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4        \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4         \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4         \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4     \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4           \
-   ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4       \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4           \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4       \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -589,20 +589,20 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Compute bias, error variance, and error covariances - Monthly"
 
 ../src/rrr_cpl_riv_lsm_bvc.py                                                  \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4 \
      1                                                                         \
      incr                                                                      \
-     ../output/San_Guad_CCC/rapid_connect_San_Guad.csv                         \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      300                                                                       \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv  \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing bias, error, variance, and error covariances"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300.csv      \
-     ../output/San_Guad_CCC/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv  \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300.csv     \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -624,33 +624,33 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Gathering observations"
 ../src/rrr_obs_tot_nwisdv.py                                                   \
-     ../input/San_Guad_CCC/StreamGageEvent_San_Guad_comid.shp                  \
+     ../input/San_Guad_JHM2/StreamGageEvent_San_Guad_comid.shp                 \
      2010-01-01                                                                \
      2013-12-31                                                                \
-     ../output/San_Guad_CCC/obs_tot_id_San_Guad_2010_2013_full_tst.csv         \
-     ../output/San_Guad_CCC/Qobs_San_Guad_2010_2013_full_tst.csv               \
-     ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013_tst.shp \
+     ../output/San_Guad_JHM2/obs_tot_id_San_Guad_2010_2013_full_tst.csv        \
+     ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full_tst.csv              \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013_tst.shp \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing gauges"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/obs_tot_id_San_Guad_2010_2013_full.csv             \
-     ../output/San_Guad_CCC/obs_tot_id_San_Guad_2010_2013_full_tst.csv         \
+     ../output/San_Guad_JHM2/obs_tot_id_San_Guad_2010_2013_full.csv            \
+     ../output/San_Guad_JHM2/obs_tot_id_San_Guad_2010_2013_full_tst.csv        \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing observed flows"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/Qobs_San_Guad_2010_2013_full.csv                   \
-     ../output/San_Guad_CCC/Qobs_San_Guad_2010_2013_full_tst.csv               \
+     ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full.csv                  \
+     ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full_tst.csv              \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing shapefile"
 ./tst_cmp_shp.py                                                               \
-     ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
-     ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013_tst.shp \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013_tst.shp \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -676,20 +676,20 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Timeseries for observations"
 ../src/rrr_anl_hyd_obs.py                                                      \
-     ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
-     ../output/San_Guad_CCC/obs_tot_id_San_Guad_2010_2013_full.csv             \
-     ../output/San_Guad_CCC/Qobs_San_Guad_2010_2013_full.csv                   \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/obs_tot_id_San_Guad_2010_2013_full.csv            \
+     ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full.csv                  \
      2010-01-01                                                                \
      1                                                                         \
      USGS                                                                      \
-     ../output/San_Guad_CCC/analysis/timeseries_obs_tst.csv                    \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing timeseries for observations"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_CCC/analysis/timeseries_obs.csv                        \
-     ../output/San_Guad_CCC/analysis/timeseries_obs_tst.csv                    \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -703,8 +703,8 @@ fi
 #*******************************************************************************
 #Clean up
 #*******************************************************************************
-rm -f ../output/San_Guad_CCC/*_tst.*
-rm -f ../output/San_Guad_CCC/analysis/*_tst*.csv
+rm -f ../output/San_Guad_JHM2/*_tst.*
+rm -f ../output/San_Guad_JHM2/analysis/*_tst*.csv
 
 
 #*******************************************************************************
