@@ -699,6 +699,67 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, exp00, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/34"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, exp00, daily"
+../src/rrr_anl_hyd_mod.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/Qout_San_Guad_exp00.nc                            \
+     RAPID_exp00                                                               \
+     8                                                                         \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_tst.csv             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, exp00, daily"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_tst.csv             \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Timeseries for model simulations, exp00, monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/34"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Timeseries for model simulations, exp00, monthly"
+../src/rrr_anl_hyd_avg.py                                                      \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly_tst.csv     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing timeseries for model simulations, exp00, monthly"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly.csv         \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly_tst.csv     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Clean up
