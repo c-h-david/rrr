@@ -19,31 +19,33 @@
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#Not needed for Travis CI
+#Code management
 #-------------------------------------------------------------------------------
-python-pip
-python-dev
-g++
 git
 vim
-unzip
-wget
+zip
 
 #-------------------------------------------------------------------------------
-#Needed for Travis CI
+#Code building
 #-------------------------------------------------------------------------------
-libhdf5-dev
-libnetcdf-dev
-netcdf-bin
-nco
-libgdal-dev
-gdal-bin
-libav-tools 
-libfreetype6-dev
-libxml2-dev 
-libxslt1-dev
-libffi-dev
+python-dev
+python-tk
+gcc
+g++
 libspatialindex-dev
+libgeos-dev
+libxml2-dev
+libxslt1-dev
+libgdal-dev
+ffmpeg
+
+#-------------------------------------------------------------------------------
+#Code testing
+#-------------------------------------------------------------------------------
+wget
+ca-certificates
+unzip
+netcdf-bin
 
 
 #*******************************************************************************

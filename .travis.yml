@@ -14,25 +14,9 @@
 #*******************************************************************************
 #System specifications for Travis CI
 #*******************************************************************************
-sudo: false              #Activates the Travis CI container-based infrastructure
-language: python         #Sets the language to Python
-python:                  #Specifies which versions of Python to be used
-  - "2.7"
-addons:
-  apt:
-    packages:
-    - libhdf5-dev        #HDF5 library
-    - libnetcdf-dev      #netCDF library
-    - netcdf-bin         #netCDF binaries
-    - nco                #netCDF Operators
-    - libgdal-dev        #GDAL library
-    - gdal-bin           #GDAL binaries
-    - libav-tools        #Audio/Video tools (avconv is similar to ffmpeg)
-    - libfreetype6-dev   #Freetype library (to render fonts)
-    - libxml2-dev        #XML library
-    - libxslt1-dev       #XSLT library (to convert XMLs)
-    - libffi-dev         #FFI library (Foreign Function Interface)
-    - libspatialindex-dev #Spatial index library (needed for rtree)
+os: linux
+language: shell
+#This configuration can be validated at: https://config.travis-ci.com/explore
 
 
 #*******************************************************************************
@@ -51,6 +35,21 @@ before_install:
 #Create .netrc file for secure downloads (users need their own credentials)
 #-------------------------------------------------------------------------------
 - echo "machine urs.earthdata.nasa.gov login $NETRC_LOGIN_EDATA password $NETRC_PSWRD_EDATA" >> ~/.netrc
+
+#-------------------------------------------------------------------------------
+#Install operating system dependencies
+#-------------------------------------------------------------------------------
+- sudo apt-get update
+- sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' requirements.apt)
+
+#-------------------------------------------------------------------------------
+#General environment details
+#-------------------------------------------------------------------------------
+- apt-get --version
+- apt list --installed
+- which python
+- python --version
+- python -c "import site; print(site.getsitepackages())"
 
 #-------------------------------------------------------------------------------
 #Creating directory for installation of prerequisites
@@ -85,7 +84,13 @@ before_install:
 #*******************************************************************************
 install:
 - cd $TRAVIS_BUILD_DIR
-- pip install -r requirements.pip
+- wget https://bootstrap.pypa.io/get-pip.py
+- sudo python get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
+- rm get-pip.py
+- which pip
+- pip --version
+- sudo pip install --no-cache-dir `grep 'numpy==' requirements.pip`
+- sudo pip install --no-cache-dir -r requirements.pip
 
 
 #*******************************************************************************

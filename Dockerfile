@@ -26,7 +26,7 @@
 #*******************************************************************************
 #Operating System
 #*******************************************************************************
-FROM ubuntu:trusty
+FROM debian:stretch-slim
 
 
 #*******************************************************************************
@@ -47,9 +47,15 @@ RUN  apt-get update && \
 #*******************************************************************************
 #Python requirements
 #*******************************************************************************
-RUN  pip install $(grep setuptools requirements.pip) && \
-     pip install $(grep numpy requirements.pip) && \
-     pip install -r requirements.pip
+ADD https://bootstrap.pypa.io/get-pip.py .
+RUN python get-pip.py --no-cache-dir \
+    `grep 'pip==' requirements.pip` \
+    `grep 'setuptools==' requirements.pip` \
+    `grep 'wheel==' requirements.pip` && \
+    rm get-pip.py
+
+RUN pip install --no-cache-dir `grep 'numpy==' requirements.pip` && \
+    pip install --no-cache-dir -r requirements.pip
 
 
 #*******************************************************************************
