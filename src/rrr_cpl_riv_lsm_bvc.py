@@ -13,7 +13,7 @@
 #Example: a factor of 1 retains the units (m^3), while a factor of 1./2629800
 #converts from monthly accumulated volume (m^3) to monthly flowrate (m^3/s).
 #Author:
-#Cedric H. David, 2018-2018
+#Cedric H. David, 2018-2020
 
 
 #*******************************************************************************

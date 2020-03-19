@@ -9,7 +9,7 @@
 #creates a series of XY plots that include linear regressions and save the plots
 #as pdf files in the directory.
 #Author:
-#Cedric H. David, 2018-2018
+#Cedric H. David, 2018-2020
 
 
 #*******************************************************************************

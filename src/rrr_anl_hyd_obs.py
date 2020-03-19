@@ -11,7 +11,7 @@
 #table of hydrographs indexed by station rivid. An optional percentage integer
 #can also be given to compute a similar uncertainty table.
 #Author:
-#Cedric H. David, 2016-2018
+#Cedric H. David, 2016-2020
 
 
 #*******************************************************************************

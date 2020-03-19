@@ -18,7 +18,7 @@
 #Note that the runoff file is assumed to have units of mm. That is, it contains
 #an equivalent water height accumulated over the runoff time step.
 #Author:
-#Cedric H. David, 2011-2018
+#Cedric H. David, 2011-2020
 
 
 #*******************************************************************************

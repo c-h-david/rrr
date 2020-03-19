@@ -23,7 +23,7 @@
 # - 33 if a search failed 
 # - 99 if a comparison failed 
 #Authors:
-#George H. Allen, Cedric H. David, 2017-2018
+#George H. Allen, Cedric H. David, 2017-2020
 
 
 #*******************************************************************************

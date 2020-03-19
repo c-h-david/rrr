@@ -10,7 +10,7 @@
 #also produces two csv files containing the downstream and upstream reaches
 #(within radius) for the specific river ID requested.
 #Author:
-#Cedric H. David, 2018-2018
+#Cedric H. David, 2018-2020
 
 
 #*******************************************************************************

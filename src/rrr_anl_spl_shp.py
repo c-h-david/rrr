@@ -7,7 +7,7 @@
 #Given a polygon shapefile that contains mean times, and a river shapefile, this
 #script subsamples the rivers based on the polygons.  
 #Authors:
-#Etienne Fluet Chouinard, Cedric H. David, 2016-2018
+#Etienne Fluet Chouinard, Cedric H. David, 2016-2020
 
 
 #*******************************************************************************

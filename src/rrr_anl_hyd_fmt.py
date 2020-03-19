@@ -11,7 +11,7 @@
 #days), and a name; this program creates one csv file that contains a summary 
 #table of hydrographs indexed by station rivid. 
 #Author:
-#Cedric H. David, 2016-2018
+#Cedric H. David, 2016-2020
 
 
 #*******************************************************************************

@@ -6,7 +6,7 @@
 #This script sumbsamples river model outputs based on prior subsampling of
 #the river network based on polygons and their mean times.
 #Author:
-#Etienne Fluet Chouinard, Cedric H. David, 2016-2018
+#Etienne Fluet Chouinard, Cedric H. David, 2016-2020
 
 
 #*******************************************************************************

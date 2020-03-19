@@ -13,7 +13,7 @@
 #image is given (with the same coordinate system as the shapefile and provided
 #as an 8bit or 24Bit RGB image), it will be added as a background of the video. 
 #Authors:
-#Klemen Cotar, Ashish Mahabal, Cedric H. David, 2016-2018
+#Klemen Cotar, Ashish Mahabal, Cedric H. David, 2016-2020
 
 
 #*******************************************************************************

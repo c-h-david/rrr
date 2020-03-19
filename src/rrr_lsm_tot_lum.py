@@ -15,7 +15,7 @@
 #quantities are also given.
 #averaging.
 #Author:
-#Cedric H. David, 2018-2018
+#Cedric H. David, 2018-2020
 
 
 #*******************************************************************************

@@ -13,7 +13,7 @@
 #If uncertainty information is provided in the netCDF file, another csv file is
 #also generated.
 #Author:
-#Cedric H. David, 2011-2018
+#Cedric H. David, 2011-2020
 
 
 #*******************************************************************************

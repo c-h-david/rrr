@@ -38,7 +38,7 @@
 # - 22 if there was a conversion problem
 # - 44 if one download is not successful
 #Author:
-#George H. Allen, Cedric H. David, 2017-2018.
+#George H. Allen, Cedric H. David, 2017-2020.
 
 
 #*******************************************************************************
