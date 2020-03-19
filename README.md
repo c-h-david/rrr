@@ -5,7 +5,7 @@
 
 [![Build Status](https://travis-ci.org/c-h-david/rrr.svg?branch=master)](https://travis-ci.org/c-h-david/rrr)
 
-[![Docker Build](https://img.shields.io/docker/cloud/build/chdavid/rrr.svg)](https://hub.docker.com/r/chdavid/rrr/)
+[![Docker Build](https://img.shields.io/docker/cloud/build/chdavid/rrr.svg)](https://hub.docker.com/r/chdavid/rrr/tags)
 
 The Reproducible Routing Rituals (RRR) is a Python and bash shell toolbox that 
 combines many repetitive pre and post-processing tasks that are common to 
@@ -72,7 +72,7 @@ The beauty of Docker is that there is **no need to install anymore packages**.
 RRR is ready to go! To run it, just use:
 
 ```
-$ docker run --rm --name rrr -it chdavid/rrr
+$ docker run --rm -it chdavid/rrr
 ```
 
 ## Testing with Docker
@@ -124,7 +124,7 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 > one by one, for example:
 >
 > ```
-> $ ssudo apt-get install -y --no-install-recommends python-dev
+> $ sudo apt-get install -y --no-install-recommends python-dev
 >```
 
 ### Install Python packages
