@@ -49,8 +49,8 @@ echo "********************"
 #*******************************************************************************
 if [ "$#" = "0" ]; then
      fst=1
-     lst=99
-     echo "Performing all unit tests: 1-99"
+     lst=34
+     echo "Performing all unit tests: $1-$2"
      echo "********************"
 fi 
 #Perform all unit tests if no options are given 
