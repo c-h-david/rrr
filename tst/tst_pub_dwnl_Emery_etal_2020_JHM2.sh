@@ -161,8 +161,8 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_CCC"
-folder="../input/San_Guad_CCC"
+URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+folder="../input/San_Guad_JHM2"
 list="                                                                         \
       catchment_Reg12.zip                                                      \
       NHDFlowline_San_Guad.zip                                                 \
@@ -188,8 +188,8 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_CCC"
-folder="../output/San_Guad_CCC"
+URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+folder="../output/San_Guad_JHM2"
 list="                                                                         \
       coords_San_Guad.csv                                                      \
       k_San_Guad_2004_1.csv                                                    \
@@ -230,8 +230,8 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_CCC"
-folder="../output/San_Guad_CCC/analysis"
+URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+folder="../output/San_Guad_JHM2/analysis"
 list="                                                                         \
       timeseries_obs.csv                                                       \
      "
@@ -250,16 +250,16 @@ done
 #*******************************************************************************
 #Convert files
 #*******************************************************************************
-unzip -nq ../input/San_Guad_CCC/catchment_Reg12.zip -d ../input/San_Guad_CCC/
+unzip -nq ../input/San_Guad_JHM2/catchment_Reg12.zip -d ../input/San_Guad_JHM2/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
-unzip -nq ../input/San_Guad_CCC/NHDFlowline_San_Guad.zip -d ../input/San_Guad_CCC/
+unzip -nq ../input/San_Guad_JHM2/NHDFlowline_San_Guad.zip -d ../input/San_Guad_JHM2/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
-unzip -nq ../input/San_Guad_CCC/StreamGageEvent_San_Guad_comid.zip -d ../input/San_Guad_CCC/
+unzip -nq ../input/San_Guad_JHM2/StreamGageEvent_San_Guad_comid.zip -d ../input/San_Guad_JHM2/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
-unzip -nq ../output/San_Guad_CCC/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.zip -d ../output/San_Guad_CCC/
+unzip -nq ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.zip -d ../output/San_Guad_JHM2/
 if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 
 
