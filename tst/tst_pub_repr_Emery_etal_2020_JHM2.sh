@@ -161,28 +161,32 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating p_pa_guess files"
+echo "- Creating p_2004_1 files"
 ../src/rrr_riv_tot_scl_prm.py                                                  \
      ../output/San_Guad_JHM2/kfac_San_Guad_1km_hour.csv                        \
      ../output/San_Guad_JHM2/xfac_San_Guad_0.1.csv                             \
-     0.35                                                                      \
-     3.00                                                                      \
-     ../output/San_Guad_JHM2/k_San_Guad_pa_guess_tst.csv                       \
-     ../output/San_Guad_JHM2/x_San_Guad_pa_guess_tst.csv                       \
+     0.131042                                                                  \
+     2.58128                                                                   \
+     ../output/San_Guad_JHM2/k_San_Guad_2004_1_tst.csv                         \
+     ../output/San_Guad_JHM2/x_San_Guad_2004_1_tst.csv                         \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing k_pa_guess files"
+echo "- Comparing k_2004_1 files"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_JHM2/k_San_Guad_pa_guess.csv                           \
-     ../output/San_Guad_JHM2/k_San_Guad_pa_guess_tst.csv                       \
+     ../output/San_Guad_JHM2/k_San_Guad_2004_1.csv                             \
+     ../output/San_Guad_JHM2/k_San_Guad_2004_1_tst.csv                         \
+     1e-6                                                                      \
+     1e-3                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing x_pa_guess files"
+echo "- Comparing x_2004_1 files"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_JHM2/x_San_Guad_pa_guess.csv                           \
-     ../output/San_Guad_JHM2/x_San_Guad_pa_guess_tst.csv                       \
+     ../output/San_Guad_JHM2/x_San_Guad_2004_1.csv                             \
+     ../output/San_Guad_JHM2/x_San_Guad_2004_1_tst.csv                         \
+     1e-6                                                                      \
+     1e-3                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
