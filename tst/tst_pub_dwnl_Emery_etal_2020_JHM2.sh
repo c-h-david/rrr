@@ -1,13 +1,15 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_Emery_etal_201x_JHM2.sh
+#tst_pub_dwnl_Emery_etal_2020_JHM2.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
-#Emery, Charlotte M., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#Emery, Charlotte M., Cedric H. David, Kostas M. Andreadis, Michael J. Turmon,
+#John T. Reager, Jonathan M. Hobbs, Ming Pan, James S. Famiglietti,
+#R. Edward Beighley, and Matthew Rodell (2020), Underlying Fundamentals of
+#Kalman Filtering for River Network Modeling,
+#DOI: 10.1175/JHM-D-19-0084.1
 #This script also downloads a subset of the files from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
 #Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
@@ -18,9 +20,12 @@
 #Research, 117, D03109
 #DOI: 10.1029/2011JD016048
 #The files used are available from:
-#Emery, Charlotte M., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#Emery, Charlotte M., Cedric H. David, Kostas M. Andreadis, Michael J. Turmon,
+#John T. Reager, Jonathan M. Hobbs, Ming Pan, James S. Famiglietti,
+#R. Edward Beighley, and Matthew Rodell (2020), RRR/RAPID input and output files
+#for "Underlying Fundamentals of Kalman Filtering for River Network Modeling",
+#Zenodo.
+#DOI: xx.xxxx/xxxxxxxxxxxx
 #and from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
 #Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
@@ -52,7 +57,7 @@
 echo "********************"
 echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
 echo "                          ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/"
-echo "which correspond to   :   http://dx.doi.org/xx.xxxx/xxxxxx"
+echo "which correspond to   :   http://dx.doi.org/10.1175/JHM-D-19-0084.1"
 echo "                          http://dx.doi.org/10.1029/2011JD016048"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
 echo "Please cite these four DOIs if using these files for your publications."

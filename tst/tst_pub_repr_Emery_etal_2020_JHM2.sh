@@ -1,18 +1,23 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_repr_Emery_etal_201x_JHM2.sh
+#tst_pub_repr_Emery_etal_2020_JHM2.sh
 #*******************************************************************************
 
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
-#Emery, Charlotte M., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#Emery, Charlotte M., Cedric H. David, Kostas M. Andreadis, Michael J. Turmon,
+#John T. Reager, Jonathan M. Hobbs, Ming Pan, James S. Famiglietti,
+#R. Edward Beighley, and Matthew Rodell (2020), Underlying Fundamentals of
+#Kalman Filtering for River Network Modeling,
+#DOI: 10.1175/JHM-D-19-0084.1
 #The files used are available from:
-#Emery, Charlotte M., et al. (201x)
-#xxx
-#DOI: xx.xxxx/xxxxxx
+#Emery, Charlotte M., Cedric H. David, Kostas M. Andreadis, Michael J. Turmon,
+#John T. Reager, Jonathan M. Hobbs, Ming Pan, James S. Famiglietti,
+#R. Edward Beighley, and Matthew Rodell (2020), RRR/RAPID input and output files
+#for "Underlying Fundamentals of Kalman Filtering for River Network Modeling",
+#Zenodo.
+#DOI: xx.xxxx/xxxxxxxxxxxx
 #The following are the possible arguments:
 # - No argument: all unit tests are run
 # - One unique unit test number: this test is run
@@ -36,7 +41,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Reproducing files for: http://dx.doi.org/xx.xxxx/xxxxxx"
+echo "Reproducing files for: http://dx.doi.org/10.1175/JHM-D-19-0084.1"
 echo "********************"
 
 
@@ -46,7 +51,7 @@ echo "********************"
 if [ "$#" = "0" ]; then
      fst=1
      lst=99
-     echo "Performing all unit tests: 1-99"
+     echo "Performing all unit tests: $1-$2"
      echo "********************"
 fi 
 #Perform all unit tests if no options are given 
