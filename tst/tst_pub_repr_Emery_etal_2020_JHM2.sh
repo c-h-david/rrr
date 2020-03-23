@@ -649,14 +649,14 @@ echo "- Compute bias, error variance, and error covariances - Monthly"
      once                                                                      \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      286                                                                       \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286_tst.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286_tst.csv \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing bias, error, variance, and error covariances"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286.csv     \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286_tst.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286_tst.csv \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
