@@ -646,17 +646,17 @@ echo "- Compute bias, error variance, and error covariances - Monthly"
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4 \
      1                                                                         \
-     incr                                                                      \
+     once                                                                      \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
-     300                                                                       \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv \
+     286                                                                       \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286_tst.csv \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing bias, error, variance, and error covariances"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300.csv     \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_300_tst.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286.csv     \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_bvc_286_tst.csv \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
