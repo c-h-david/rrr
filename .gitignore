@@ -25,6 +25,7 @@ output/
 tst/*
 !tst/tst_cmp_csv.py
 !tst/tst_cmp_n1d.py
+!tst/tst_cmp_n3d.py
 !tst/tst_cmp_ncf.py
 !tst/tst_cmp_shp.py
 !tst/tst_chk_srt.py
