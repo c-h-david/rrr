@@ -270,6 +270,7 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Concatenating multiple files - Monthly - MOS"
 
@@ -279,13 +280,19 @@ echo "- Concatenating multiple files - Monthly - MOS"
      ../input/NLDAS/NLDAS_MOS0125_M.002/2012/NLDAS_MOS0125_M.A2012*.002.grb.SUB.nc4 \
      ../input/NLDAS/NLDAS_MOS0125_M.002/2013/NLDAS_MOS0125_M.A2013*.002.grb.SUB.nc4 \
      1                                                                         \
-     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc.nc4                 \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_tst.nc4     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated multiple files - Monthly - MOS"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc.nc4         \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_tst.nc4     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -297,6 +304,7 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Concatenating multiple files - Monthly - NOAH"
 
@@ -306,13 +314,19 @@ echo "- Concatenating multiple files - Monthly - NOAH"
      ../input/NLDAS/NLDAS_NOAH0125_M.002/2012/NLDAS_NOAH0125_M.A2012*.002.grb.SUB.nc4 \
      ../input/NLDAS/NLDAS_NOAH0125_M.002/2013/NLDAS_NOAH0125_M.A2013*.002.grb.SUB.nc4 \
      1                                                                         \
-     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4                \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_tst.nc4    \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated multiple files - Monthly - NOAH"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4        \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_tst.nc4    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -324,6 +338,7 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Concatenating multiple files - Monthly - VIC"
 
@@ -333,13 +348,19 @@ echo "- Concatenating multiple files - Monthly - VIC"
      ../input/NLDAS/NLDAS_VIC0125_M.002/2012/NLDAS_VIC0125_M.A2012*.002.grb.SUB.nc4 \
      ../input/NLDAS/NLDAS_VIC0125_M.002/2013/NLDAS_VIC0125_M.A2013*.002.grb.SUB.nc4 \
      1                                                                         \
-     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc.nc4                 \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_tst.nc4     \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated multiple files - Monthly - VIC"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc.nc4         \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_tst.nc4     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -351,21 +372,29 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Making concatenated file CF compliant - Monthly - MOS"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc.nc4                 \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc.nc4         \
      2010-01-01T00:00:00                                                       \
      2629800                                                                   \
      1                                                                         \
-     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_cfc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated file CF compliant - Monthly - MOS"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_cfc_tst.nc4 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -377,21 +406,29 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Making concatenated file CF compliant - Monthly - NOAH"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4                \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc.nc4        \
      2010-01-01T00:00:00                                                       \
      2629800                                                                   \
      1                                                                         \
-     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4            \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc_tst.nc4\
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated file CF compliant - Monthly - NOAH"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4    \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc_tst.nc4\
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -403,21 +440,29 @@ unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
 echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
 
 echo "- Making concatenated file CF compliant - Monthly - VIC"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc.nc4                 \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc.nc4         \
      2010-01-01T00:00:00                                                       \
      2629800                                                                   \
      1                                                                         \
-     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_cfc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing to NOTHING"
+echo "- Comparing concatenated file CF compliant - Monthly - VIC"
+./tst_cmp_n3d.py                                                               \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_cfc_tst.nc4 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -440,7 +485,7 @@ echo "- Creating coupling file"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      ../output/San_Guad_JHM2/rapid_catchment_Reg12.csv                         \
-     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4     \
      ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS_tst.csv             \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -471,7 +516,7 @@ echo "- Creating volume file - Monthly - MOS"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
-     ../output/NLDAS/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4             \
+     ../output/San_Guad_JHM2/NLDAS_MOS0125_M_20100101_20131231_utc_cfc.nc4     \
      ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc_tst.nc4 \
      > $run_file
@@ -503,7 +548,7 @@ echo "- Creating volume file - Monthly - NOAH"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
-     ../output/NLDAS/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4            \
+     ../output/San_Guad_JHM2/NLDAS_NOAH0125_M_20100101_20131231_utc_cfc.nc4    \
      ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc_tst.nc4 \
      > $run_file
@@ -535,8 +580,8 @@ echo "- Creating volume file - Monthly - VIC"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
-     ../output/NLDAS/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4             \
-     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                  \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
