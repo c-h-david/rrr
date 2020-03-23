@@ -486,6 +486,9 @@ if YS_opt=='once':
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 if YS_opt=='incr':
 
+     print('ERROR - The incr runtime option does not currently work')
+     raise SystemExit(22)
+
      for JS_riv_tot in range(IS_riv_tot):
           #-   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -   -
           #Determination of downstream indexes
@@ -545,7 +548,7 @@ if ZS_rdif_max<=5e-6:
           +' different methods: '+str(ZS_rdif_max))
 else:
      print('ERROR - Unacceptable max relative difference in standard errors '  \
-           'using two different methods')
+           'using two different methods: '+str(ZS_rdif_max))
      if YS_opt!='skip': raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
