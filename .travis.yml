@@ -51,33 +51,6 @@ before_install:
 - python --version
 - python -c "import site; print(site.getsitepackages())"
 
-#-------------------------------------------------------------------------------
-#Creating directory for installation of prerequisites
-#-------------------------------------------------------------------------------
-- cd $TRAVIS_BUILD_DIR
-- mkdir ../installz
-- cd ../installz
-- export INSTALLZ_DIR=$PWD
-
-#-------------------------------------------------------------------------------
-#Installing NCL 6.3.0
-#-------------------------------------------------------------------------------
-- cd $INSTALLZ_DIR
-- wget "https://www.earthsystemgrid.org/dataset/ncl.630.1/file/ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz"
-- mkdir ncl_ncarg-6.3.0-install
-- ls
-- tar -xf ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz --directory=ncl_ncarg-6.3.0-install
-
-#-------------------------------------------------------------------------------
-#Exporting environment variables 
-#-------------------------------------------------------------------------------
-- export NCARG_ROOT=$INSTALLZ_DIR/ncl_ncarg-6.3.0-install/
-
-#-------------------------------------------------------------------------------
-#Exporting directories with library-related executables to $PATH
-#-------------------------------------------------------------------------------
-- export PATH=$PATH:/$NCARG_ROOT/bin
-
 
 #*******************************************************************************
 #Installing RRR

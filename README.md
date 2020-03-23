@@ -154,27 +154,6 @@ $ sudo pip install --no-cache-dir -r requirements.pip
 > $ sudo pip install dbf==0.96.5
 > ```
 
-### Install NCL
-The NCAR Command Language (NCL) can be downloaded using:
-
-```
-$ mkdir $HOME/installz
-$ cd $HOME/installz
-$ wget "https://www.earthsystemgrid.org/download/fileDownload.html?logicalFileId=8201fa1a-cd9b-11e4-bb80-00c0f03d5b7c" -O ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz
-$ mkdir ncl_ncarg-6.3.0-install
-$ tar -xf ncl_ncarg-6.3.0.Linux_Debian6.0_x86_64_nodap_gcc445.tar.gz --directory=ncl_ncarg-6.3.0-install
-```
-
-Then, the environment should be updated using:
-
-```
-$ export NCARG_ROOT=$HOME/installz/ncl_ncarg-6.3.0-install
-$ export PATH=$PATH:$NCARG_ROOT/bin
-```
-
-> Note that these two lines can also be added in `~/.bash_aliases` so that the 
-> environment variables persist.
-
 ## Testing on Ubuntu
 Testing scripts are currently under development.
 
