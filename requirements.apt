@@ -38,6 +38,7 @@ libxml2-dev
 libxslt1-dev
 libgdal-dev
 ffmpeg
+nco
 
 #-------------------------------------------------------------------------------
 #Code testing
