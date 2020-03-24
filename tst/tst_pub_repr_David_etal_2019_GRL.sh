@@ -290,6 +290,138 @@ fi
 #Process Land surface model (LSM) data - Monthly
 #*******************************************************************************
 
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - MOS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - MOS"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/1997/NLDAS_MOS0125_M.A1997*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_MOS0125_M.002/1998/NLDAS_MOS0125_M.A1998*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_tst.nc4          \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Making concatenated file CF compliant - Monthly - MOS"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_tst.nc4          \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc_tst.nc4      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing concatenated file CF compliant - Monthly - MOS"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc.nc4          \
+     ../output/WSWM_GRL/NLDAS_MOS0125_M_19970101_19981231_utc_cfc_tst.nc4      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - NOAH
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - NOAH"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/1997/NLDAS_NOAH0125_M.A1997*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_NOAH0125_M.002/1998/NLDAS_NOAH0125_M.A1998*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_tst.nc4         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Making concatenated file CF compliant - Monthly - NOAH"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_tst.nc4         \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc_tst.nc4     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing concatenated file CF compliant - Monthly - NOAH"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc.nc4         \
+     ../output/WSWM_GRL/NLDAS_NOAH0125_M_19970101_19981231_utc_cfc_tst.nc4     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - VIC"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/1997/NLDAS_VIC0125_M.A1997*.002.grb.SUB.nc4 \
+     ../input/NLDAS/NLDAS_VIC0125_M.002/1998/NLDAS_VIC0125_M.A1998*.002.grb.SUB.nc4 \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_tst.nc4          \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Making concatenated file CF compliant - Monthly - VIC"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_tst.nc4          \
+     1997-01-01T00:00:00                                                       \
+     2628000                                                                   \
+     1                                                                         \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc_tst.nc4      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing concatenated file CF compliant - Monthly - VIC"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc.nc4          \
+     ../output/WSWM_GRL/NLDAS_VIC0125_M_19970101_19981231_utc_cfc_tst.nc4      \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Process Land surface model (LSM) data
