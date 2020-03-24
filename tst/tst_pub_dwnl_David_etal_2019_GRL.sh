@@ -46,6 +46,90 @@ echo "********************"
 
 
 #*******************************************************************************
+#Download NLDAS2 hourly files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+fld="../input/NLDAS"
+exp="NLDAS"
+frq="H"
+mod="                                                                          \
+     VIC                                                                       \
+    "
+str=(                                                                          \
+    "1997-01-01T00:00:00"                                                      \
+    )
+end=(                                                                          \
+    "1997-01-01T23:59:59"                                                      \
+    )
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+mkdir -p $fld
+ndl=${#str[@]}
+#ndl is the number of download intervals
+
+for mod in $mod
+do
+for (( idl=0; idl<${ndl}; idl++ ));
+do
+     echo "Downloading NLDAS2 hourly data for $mod, from" ${str[$idl]} "to"    \
+           ${end[$idl]}
+     ../src/rrr_lsm_tot_ldas.py $exp $mod $frq ${str[$idl]} ${end[$idl]} $fld > tmp_dwl
+     if [ $? -gt 0 ] ; then echo "Problem downloading" && cat tmp_dwl >&2 ; exit 44 ; fi
+     rm tmp_dwl
+done
+done
+
+
+#*******************************************************************************
+#Download NLDAS2 monthly files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+fld="../input/NLDAS"
+exp="NLDAS"
+frq="M"
+mod="                                                                          \
+     MOS                                                                       \
+     NOAH                                                                      \
+     VIC                                                                       \
+    "
+str=(                                                                          \
+    "1997-01-01T00:00:00"                                                      \
+    "1998-01-01T00:00:00"                                                      \
+    )
+end=(                                                                          \
+    "1997-12-31T23:59:59"                                                      \
+    "1998-12-31T23:59:59"                                                      \
+    )
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+mkdir -p $fld
+ndl=${#str[@]}
+#ndl is the number of download intervals
+
+for mod in $mod
+do
+for (( idl=0; idl<${ndl}; idl++ ));
+do
+     echo "Downloading NLDAS2 monthly data for $mod, from" ${str[$idl]} "to"   \
+           ${end[$idl]}
+     ../src/rrr_lsm_tot_ldas.py $exp $mod $frq ${str[$idl]} ${end[$idl]} $fld > tmp_dwl
+     if [ $? -gt 0 ] ; then echo "Problem downloading" && cat tmp_dwl >&2 ; exit 44 ; fi
+     rm tmp_dwl
+done
+done
+
+
+#*******************************************************************************
 #Download RRR input files
 #*******************************************************************************
 
