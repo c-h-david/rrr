@@ -473,6 +473,41 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Shifting to local time - 3-hourly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Shifting to local time - 3-hourly - VIC"
+nc_file=../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_utc_cfc.nc4
+nc_file2=../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst_cfc_tst.nc4
+if [ ! -e "$nc_file2" ]; then
+../src/rrr_lsm_tot_utc_shf.py                                                  \
+       $nc_file                                                                \
+       2                                                                       \
+       $nc_file2                                                               \
+       > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+fi
+
+echo "- Comparing shifting to local time - 3-hourly - VIC"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst_cfc.nc4         \
+     ../output/WSWM_GRL/NLDAS_VIC0125_3H_19970101_19981231_cst_cfc_tst.nc4     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Coupling - Monthly
