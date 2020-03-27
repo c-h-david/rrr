@@ -297,7 +297,11 @@ for JS_time in range(IS_time):
      ZS_adif_max=max(numpy.max(ZM_drsb_abs),ZS_adif_max)
 
      ZM_drsb_squ=numpy.square(ZM_drsb_abs,where=~ZM_drsb_abs.mask)
-     ZM_rsb_1squ=numpy.square(ZM_rsb_1,where=~ZM_rsb_1.mask)
+     if (numpy.ma.is_masked(ZM_rsb_1)):
+          ZM_rsb_1squ=numpy.square(ZM_rsb_1,where=~ZM_rsb_1.mask)
+     else:
+          ZM_rsb_1squ=numpy.square(ZM_rsb_1)
+
      ZS_rdif= math.sqrt( numpy.sum(ZM_drsb_squ)                                \
                         /numpy.sum(ZM_rsb_1squ))
      ZS_rdif_max=max(ZS_rdif,ZS_rdif_max)
