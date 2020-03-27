@@ -279,7 +279,10 @@ for JS_time in range(IS_time):
 
      ZS_adif_max=max(numpy.max(ZM_drsf_abs),ZS_adif_max)
 
-     ZM_drsf_squ=numpy.square(ZM_drsf_abs,where=~ZM_drsf_abs.mask)
+     if (numpy.ma.is_masked(ZM_drsf_abs)):
+          ZM_drsf_squ=numpy.square(ZM_drsf_abs,where=~ZM_drsf_abs.mask)
+     else:
+          ZM_drsf_squ=numpy.square(ZM_drsf_abs)
      if (numpy.ma.is_masked(ZM_rsf_1)):
           ZM_rsf_1squ=numpy.square(ZM_rsf_1,where=~ZM_rsf_1.mask)
      else:
@@ -296,7 +299,10 @@ for JS_time in range(IS_time):
 
      ZS_adif_max=max(numpy.max(ZM_drsb_abs),ZS_adif_max)
 
-     ZM_drsb_squ=numpy.square(ZM_drsb_abs,where=~ZM_drsb_abs.mask)
+     if (numpy.ma.is_masked(ZM_drsb_abs)):
+          ZM_drsb_squ=numpy.square(ZM_drsb_abs,where=~ZM_drsb_abs.mask)
+     else:
+          ZM_drsb_squ=numpy.square(ZM_drsb_abs)
      if (numpy.ma.is_masked(ZM_rsb_1)):
           ZM_rsb_1squ=numpy.square(ZM_rsb_1,where=~ZM_rsb_1.mask)
      else:
