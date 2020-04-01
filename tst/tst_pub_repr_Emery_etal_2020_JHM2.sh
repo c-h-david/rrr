@@ -2104,6 +2104,138 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Statistics for model simulations, exp18, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp18, daily"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp18.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp18_tst.csv                  \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp18, daily"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp18.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp18_tst.csv                  \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Statistics for model simulations, exp19, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp19, daily"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp19.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp19_tst.csv                  \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp19, daily"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp19.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp19_tst.csv                  \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Statistics for model simulations, exp20, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp20, daily"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp20.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp20_tst.csv                  \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp20, daily"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp20.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp20_tst.csv                  \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Statistics for model simulations, exp21, daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp21, daily"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp21.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp21_tst.csv                  \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp21, daily"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp21.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp21_tst.csv                  \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Hydrographs for model simulations, exp00, full range
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
