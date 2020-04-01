@@ -196,7 +196,7 @@ for JS_obs_all in range(IS_obs_all):
      #--------------------------------------------------------------------------
      tree = etree.fromstring(data.content)
      if len(tree) < 2:
-          print('   . '+str(JS_obs_all)+'/'+str(IS_obs_all)+' '                \
+          print('   . '+str(JS_obs_all+1)+'/'+str(IS_obs_all)+' '              \
                        +str(IV_obs_all_code[JS_obs_all])+' has no data')
      else: 
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
