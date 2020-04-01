@@ -288,6 +288,12 @@ rrr_obs_sch=rrr_obs_lay.schema
 rrr_ful_sch=rrr_obs_sch.copy()
 print('- Schema copied')
 
+rrr_ful_sch['properties']['DAY1']='int:9'
+rrr_ful_sch['properties']['DAYN']='int:9'
+#There is an error in the NHDPlus properties for DAY1 and DAYN. They are
+#initially declared as float:19.11, but should really be integers instead.
+print('- Schema fixed')
+
 rrr_ful_lay=fiona.open(rrr_ful_shp, 'w',                                       \
                        crs=rrr_ful_crs,                                        \
                        driver='ESRI Shapefile',                                \
