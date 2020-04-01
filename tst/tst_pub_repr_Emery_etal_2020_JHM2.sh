@@ -314,7 +314,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc \
      ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -335,19 +335,19 @@ run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating volume file - Monthly - ENS"
-
-../src/rrr_cpl_riv_lsm_ens.py                                                  \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4        \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4         \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4         \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4     \
-   > $run_file
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
+     ../output/San_Guad_JHM2/NLDAS_ENS0125_M_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4 \
+     > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file"
 ./tst_cmp_ncf.py                                                               \
-   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4           \
-   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4       \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
