@@ -358,6 +358,101 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Create coupling file - Daily - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating coupling file - Daily - VIC"
+../src/rrr_cpl_riv_lsm_lnk.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/rapid_catchment_Reg12.csv                         \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_D_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS_tst.csv             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coupling file"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS_tst.csv             \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Daily - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Daily - VIC"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
+     ../output/San_Guad_JHM2/NLDAS_VIC0125_D_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_D_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_D_utc.nc \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_D_utc_tst.nc4 \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Create volume file - Daily - ENS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating volume file - Daily - ENS"
+../src/rrr_cpl_riv_lsm_vol.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     ../output/San_Guad_JHM2/coords_San_Guad.csv                               \
+     ../output/San_Guad_JHM2/NLDAS_ENS0125_D_20100101_20131231_utc_cfc.nc4     \
+     ../output/San_Guad_JHM2/rapid_coupling_San_Guad_NLDAS.csv                 \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_D_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing volume file"
+./tst_cmp_ncf.py                                                               \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_D_utc.nc \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_D_utc_tst.nc4 \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Create coupling file - 3-hourly - VIC
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
