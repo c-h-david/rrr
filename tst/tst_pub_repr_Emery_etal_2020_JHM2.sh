@@ -515,6 +515,11 @@ echo "Success"
 echo "********************"
 fi
 
+
+#*******************************************************************************
+#Estimating and including runoff errors
+#*******************************************************************************
+
 #-------------------------------------------------------------------------------
 #Compute bias, error variance, and error covariances - Monthly
 #-------------------------------------------------------------------------------
@@ -527,20 +532,154 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Compute bias, error variance, and error covariances - Monthly"
 
 ../src/rrr_cpl_riv_lsm_bvc.py                                                  \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4 \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4 \
-     1                                                                         \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc \
+     3.805e-7                                                                  \
      once                                                                      \
      ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
      286                                                                       \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286_tst.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_flw_R286_tst.csv \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing bias, error, variance, and error covariances"
 ./tst_cmp_csv.py                                                               \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286.csv \
-     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_vol_R286_tst.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_flw_R286.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_flw_R286_tst.csv \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Compute bias, error variance, and error covariances - Daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Compute bias, error variance, and error covariances - Daily"
+
+../src/rrr_cpl_riv_lsm_bvc.py                                                  \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_D_utc.nc \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ENS0125_D_utc.nc \
+     1.15741e-5                                                                 \
+     once                                                                      \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     286                                                                       \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286_tst.csv \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing bias, error, variance, and error covariances"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286.csv \
+     ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286_tst.csv \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Add estimate of errors - Monthly
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Adding estimate of errors - Monthly"
+../src/rrr_cpl_riv_lsm_err.py                                                  \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_M_flw_R286.csv \
+   2628028.8                                                                   \
+   2628028.8                                                                   \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_M_tst.nc4 \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing estimate of errors"
+./tst_cmp_n1d.py                                                               \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_M.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_M_tst.nc4 \
+   m3_riv_err                                                                  \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Add estimate of errors - Daily
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Adding estimate of errors - Daily"
+../src/rrr_cpl_riv_lsm_err.py                                                  \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286.csv \
+   86400                                                                       \
+   86400                                                                       \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_tst.nc4 \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing estimate of errors"
+./tst_cmp_n1d.py                                                               \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_tst.nc4 \
+   m3_riv_err                                                                  \
+   > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Add estimate of errors - Daily scaled
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Adding estimate of errors - Daily scaled"
+../src/rrr_cpl_riv_lsm_err.py                                                  \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286.csv \
+   168750                                                                      \
+   222910.217                                                                  \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_scl_tst.nc4 \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing estimate of errors"
+./tst_cmp_n1d.py                                                               \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_scl.nc \
+   ../output/San_Guad_JHM2/m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_scl_tst.nc4 \
+   m3_riv_err                                                                  \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
