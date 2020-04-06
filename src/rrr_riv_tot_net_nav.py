@@ -8,7 +8,9 @@
 #and a specific river ID, this program determines all of the upstream and
 #downstream reaches within the requested radius (for the entire network) and
 #also produces two csv files containing the downstream and upstream reaches
-#(within radius) for the specific river ID requested.
+#(within radius) for the specific river ID requested. Note that the river ID of
+#interest is also included in the csv files, and that the radius count starts at
+#zero for the ID of interest.
 #Author:
 #Cedric H. David, 2018-2020
 
@@ -191,6 +193,7 @@ IS_riv_dwn=len(IV_riv_dwn_ix_req)
 with open(rrr_dwn_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
+     csvwriter.writerow([IS_riv_id])
      for JS_riv_dwn in range(IS_riv_dwn):
           JS_riv_ix=IV_riv_dwn_ix_req[JS_riv_dwn]
           JS_riv_id=IV_riv_tot_id[JS_riv_ix]
@@ -201,6 +204,7 @@ IS_riv_ups=len(IV_riv_ups_ix_req)
 with open(rrr_ups_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
+     csvwriter.writerow([IS_riv_id])
      for JS_riv_ups in range(IS_riv_ups):
           JS_riv_ix=IV_riv_ups_ix_req[JS_riv_ups]
           JS_riv_id=IV_riv_tot_id[JS_riv_ix]
