@@ -114,39 +114,39 @@ with open(rrr_tbl_csv, 'w') as csvfile:
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           #Compute average and median values of Nash Sutcliffe Efficiency
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          ZS_tot_avg=round(df_tot['Nash'].mean(),3)
-          ZS_tot_med=round(df_tot['Nash'].median(),3)
-          ZS_use_avg=round(df_use['Nash'].mean(),3)
-          ZS_use_med=round(df_use['Nash'].median(),3)
-          ZS_oth_avg=round(df_oth['Nash'].mean(),3)
-          ZS_oth_med=round(df_oth['Nash'].median(),3)
+          ZS_tot_avg=df_tot['Nash'].mean()
+          ZS_tot_med=df_tot['Nash'].median()
+          ZS_use_avg=df_use['Nash'].mean()
+          ZS_use_med=df_use['Nash'].median()
+          ZS_oth_avg=df_oth['Nash'].mean()
+          ZS_oth_med=df_oth['Nash'].median()
 
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           #Reformat values for clean writing
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           IS_threshold=-1000
           if ZS_tot_avg > IS_threshold:
-               YS_tot_avg=str(ZS_tot_avg)
+               YS_tot_avg='%.3f'%ZS_tot_avg
           else:
                YS_tot_avg='-Inf'
           if ZS_tot_med > IS_threshold:
-               YS_tot_med=str(ZS_tot_med)
+               YS_tot_med='%.3f'%ZS_tot_med
           else:
                YS_tot_med='-Inf'
           if ZS_use_avg > IS_threshold:
-               YS_use_avg=str(ZS_use_avg)
+               YS_use_avg='%.3f'%ZS_use_avg
           else:
                YS_use_avg='-Inf'
           if ZS_use_med > IS_threshold:
-               YS_use_med=str(ZS_use_med)
+               YS_use_med='%.3f'%ZS_use_med
           else:
                YS_use_med='-Inf'
           if ZS_oth_avg > IS_threshold:
-               YS_oth_avg=str(ZS_oth_avg)
+               YS_oth_avg='%.3f'%ZS_oth_avg
           else:
                YS_oth_avg='-Inf'
           if ZS_oth_med > IS_threshold:
-               YS_oth_med=str(ZS_oth_med)
+               YS_oth_med='%.3f'%ZS_oth_med
           else:
                YS_oth_med='-Inf'
 
