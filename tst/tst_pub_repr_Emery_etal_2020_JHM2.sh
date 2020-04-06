@@ -2236,6 +2236,57 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Summary table for Nash Sutcliffe Efficiency
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Summary table for Nash Sutcliffe Efficiency"
+../src/rrr_anl_hyd_sts_tbl.py                                                  \
+     ../output/San_Guad_JHM2/obs_use_id_San_Guad_2010_2013_23.csv              \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp01.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp02.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp03.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp04.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp05.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp06.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp07.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp08.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp09.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp10.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp11.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp12.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp13.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp14.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp15.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp16.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp17.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp18.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp19.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp20.csv                      \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp21.csv                      \
+     ../output/San_Guad_JHM2/analysis/nash_table_exp00_exp21_tst.csv           \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing summary table for Nash Sutcliffe Efficiency"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/nash_table_exp00_exp21.csv               \
+     ../output/San_Guad_JHM2/analysis/nash_table_exp00_exp21_tst.csv           \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Hydrographs for model simulations, exp00, full range
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
