@@ -227,6 +227,162 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Tracing downstream/upstream: Guadalupe at Victoria - 25 reaches
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Tracing downstream/upstream: Guadalupe at Victoria - 25 reaches"
+../src/rrr_riv_tot_net_nav.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     25                                                                        \
+     1639225                                                                   \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_25_tst.csv                 \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_25_tst.csv                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing downstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_25.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_25_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing upstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_25.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_25_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Tracing downstream/upstream: Guadalupe at Victoria - 50 reaches
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Tracing downstream/upstream: Guadalupe at Victoria - 50 reaches"
+../src/rrr_riv_tot_net_nav.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     50                                                                        \
+     1639225                                                                   \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_50_tst.csv                 \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_50_tst.csv                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing downstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_50.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_dwn_50_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing upstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_50.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_1639225_ups_50_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Tracing downstream/upstream: San Antonio at Goliad - 25 reaches
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Tracing downstream/upstream: San Antonio at Goliad - 25 reaches"
+../src/rrr_riv_tot_net_nav.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     25                                                                        \
+     3840125                                                                   \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_25_tst.csv                 \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_25_tst.csv                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing downstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_25.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_25_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing upstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_25.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_25_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Tracing downstream/upstream: San Antonio at Goliad - 50 reaches
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Tracing downstream/upstream: San Antonio at Goliad - 50 reaches"
+../src/rrr_riv_tot_net_nav.py                                                  \
+     ../output/San_Guad_JHM2/rapid_connect_San_Guad.csv                        \
+     50                                                                        \
+     3840125                                                                   \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_50_tst.csv                 \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_50_tst.csv                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing downstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_50.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_dwn_50_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing upstream"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_50.csv                     \
+     ../output/San_Guad_JHM2/riv_bas_id_3840125_ups_50_tst.csv                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Contributing catchment information
