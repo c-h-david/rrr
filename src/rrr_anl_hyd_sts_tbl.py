@@ -126,27 +126,27 @@ with open(rrr_tbl_csv, 'w') as csvfile:
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           IS_threshold=-1000
           if ZS_tot_avg > IS_threshold:
-               YS_tot_avg='%.3f'%ZS_tot_avg
+               YS_tot_avg='%.2f'%ZS_tot_avg
           else:
                YS_tot_avg='-Inf'
           if ZS_tot_med > IS_threshold:
-               YS_tot_med='%.3f'%ZS_tot_med
+               YS_tot_med='%.2f'%ZS_tot_med
           else:
                YS_tot_med='-Inf'
           if ZS_use_avg > IS_threshold:
-               YS_use_avg='%.3f'%ZS_use_avg
+               YS_use_avg='%.2f'%ZS_use_avg
           else:
                YS_use_avg='-Inf'
           if ZS_use_med > IS_threshold:
-               YS_use_med='%.3f'%ZS_use_med
+               YS_use_med='%.2f'%ZS_use_med
           else:
                YS_use_med='-Inf'
           if ZS_oth_avg > IS_threshold:
-               YS_oth_avg='%.3f'%ZS_oth_avg
+               YS_oth_avg='%.2f'%ZS_oth_avg
           else:
                YS_oth_avg='-Inf'
           if ZS_oth_med > IS_threshold:
-               YS_oth_med='%.3f'%ZS_oth_med
+               YS_oth_med='%.2f'%ZS_oth_med
           else:
                YS_oth_med='-Inf'
 
