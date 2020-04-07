@@ -2443,7 +2443,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp00, full range
+#Hydrographs for model simulations, exp00, 4 years
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -2451,13 +2451,13 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, exp00, full range"
+echo "- Hydrographs for model simulations, exp00, 4 years"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
      ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp00.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_full_range_tst/  \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_4years_tst/        \
      2010-01-01                                                                \
      2013-12-31                                                                \
      2000                                                                      \
@@ -2466,7 +2466,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_full_range_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_4years_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2474,7 +2474,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp00
+#Hydrographs for model simulations, exp00, 1 year
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -2482,22 +2482,22 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, exp00"
+echo "- Hydrographs for model simulations, exp00, 1 year"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
      ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp00.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_tst/               \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_1year_tst/         \
      2010-01-01                                                                \
-     2011-12-31                                                                \
+     2010-12-31                                                                \
      1000                                                                      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_1year_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2505,7 +2505,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp04
+#Hydrographs for model simulations, exp04, 1 year
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -2513,22 +2513,22 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, exp04"
+echo "- Hydrographs for model simulations, exp04, 1 year"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
      ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp04.csv                 \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp04.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_tst/               \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_1year_tst/         \
      2010-01-01                                                                \
-     2011-12-31                                                                \
+     2010-12-31                                                                \
      1000                                                                      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_1year_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2536,7 +2536,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp08
+#Hydrographs for model simulations, exp00, 6 months
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -2544,22 +2544,84 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, exp08"
+echo "- Hydrographs for model simulations, exp00, 6 months"
+../src/rrr_anl_hyd_plt.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00.csv                      \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_6months_tst/       \
+     2010-01-01                                                                \
+     2010-06-30                                                                \
+     1000                                                                      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp00_6months_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for model simulations, exp04, 6 months
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for model simulations, exp04, 6 months"
+../src/rrr_anl_hyd_plt.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp04.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp04.csv                      \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_6months_tst/       \
+     2010-01-01                                                                \
+     2010-06-30                                                                \
+     1000                                                                      \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp04_6months_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Hydrographs for model simulations, exp08, 6 months
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Hydrographs for model simulations, exp08, 6 months"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
      ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp08.csv                 \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp08.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_tst/               \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_6months_tst/       \
      2010-01-01                                                                \
-     2011-12-31                                                                \
+     2010-06-30                                                                \
      1000                                                                      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp08_6months_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2567,7 +2629,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp09
+#Hydrographs for model simulations, exp09, 6 months
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -2575,53 +2637,22 @@ echo "Running unit test $unt/x"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Hydrographs for model simulations, exp09"
+echo "- Hydrographs for model simulations, exp09, 6 months"
 ../src/rrr_anl_hyd_plt.py                                                      \
      ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
      ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp09.csv                 \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp09.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_tst/               \
+     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_6months_tst/       \
      2010-01-01                                                                \
-     2011-12-31                                                                \
+     2010-06-30                                                                \
      1000                                                                      \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_tst/
-rm -f $run_file
-rm -f $cmp_file
-echo "Success"
-echo "********************"
-fi
-
-#-------------------------------------------------------------------------------
-#Hydrographs for model simulations, exp10
-#-------------------------------------------------------------------------------
-unt=$((unt+1))
-if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/x"
-run_file=tmp_run_$unt.txt
-cmp_file=tmp_cmp_$unt.txt
-
-echo "- Hydrographs for model simulations, exp10"
-../src/rrr_anl_hyd_plt.py                                                      \
-     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
-     ../output/San_Guad_JHM2/analysis/timeseries_obs.csv                       \
-     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp10.csv                 \
-     ../output/San_Guad_JHM2/analysis/stats_rap_exp10.csv                      \
-     ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp10_tst/               \
-     2010-01-01                                                                \
-     2011-12-31                                                                \
-     1000                                                                      \
-     > $run_file
-x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
-
-echo "- Comparing to NOTHING"
-
-rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp10_tst/
+rm -rf ../output/San_Guad_JHM2/analysis/hydrographs_rap_exp09_6months_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
