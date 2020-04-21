@@ -1728,6 +1728,39 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Statistics for model simulations, exp00, daily, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp00, daily, BUG_DO_NOT_USE"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs_BUG_DO_NOT_USE.csv        \
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00.csv                 \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE_tst.csv   \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp00, daily, BUG_DO_NOT_USE"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE.csv       \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE_tst.csv   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Statistics for model simulations, exp00, monthly
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -1751,6 +1784,39 @@ echo "- Comparing statistics for model simulations, exp00, monthly"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly.csv              \
      ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_tst.csv          \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Statistics for model simulations, exp00, monthly, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Statistics for model simulations, exp00, monthly, BUG_DO_NOT_USE"
+../src/rrr_anl_hyd_sts.py                                                      \
+     ../output/San_Guad_JHM2/StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.shp \
+     ../output/San_Guad_JHM2/analysis/timeseries_obs_monthly_BUG_DO_NOT_USE.csv\
+     ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly.csv         \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_BUG_DO_NOT_USE_tst.csv \
+     2010-01-01                                                                \
+     2013-12-31                                                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing statistics for model simulations, exp00, monthly"
+./tst_cmp_csv.py                                                               \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_BUG_DO_NOT_USE.csv \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_BUG_DO_NOT_USE_tst.csv \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -2623,6 +2689,34 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Scatter plots estimated monthly vs actual monthly, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots estimated monthly vs actual monthly, BUG_DO_NOT_USE"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_BUG_DO_NOT_USE.csv \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_err_M.csv                \
+     "Estimated monthly errors as a function of actual monthly errors, BUG_DO_NOT_USE" \
+     170                                                                       \
+     ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_monthly_BUG_DO_NOT_USE_rap_exp00_err_M_tst/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_monthly_ERR_DO_NOT_USE_rap_exp00_err_M_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Scatter plots actual daily vs actual monthly
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -2644,6 +2738,34 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing to NOTHING"
 
 rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_monthly_rap_exp00_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Scatter plots actual daily vs actual monthly, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots actual daily vs actual monthly, BUG_DO_NOT_USE"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_monthly_BUG_DO_NOT_USE.csv \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE.csv       \
+     "Actual daily errors as a function of actual monthly errors, BUG_DO_NOT_USE" \
+     170                                                                       \
+     ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_monthly_BUG_DO_NOT_USE_rap_exp00_BUG_DO_NOT_USE_tst/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_monthly_BUG_DO_NOT_USE_rap_exp00_BUG_DO_NOT_USE_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2679,6 +2801,34 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Scatter plots estimated daily vs actual daily, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots estimated daily vs actual daily, BUG_DO_NOT_USE"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE.csv       \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_err_D.csv                \
+     "Estimated daily errors as a function of actual daily errors, BUG_DO_NOT_USE"\
+     170                                                                       \
+     ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_BUG_DO_NOT_USE_rap_exp00_err_D_tst/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_BUG_DO_NOT_USE_rap_exp00_err_D_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Scatter plots estimated daily scaled vs actual daily
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
@@ -2700,6 +2850,34 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing to NOTHING"
 
 rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_rap_exp00_err_D_scl_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Scatter plots estimated daily scaled vs actual daily, BUG_DO_NOT_USE
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/x"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Scatter plots estimated daily scaled vs actual daily, BUG_DO_NOT_USE"
+../src/./rrr_anl_hyd_xyp.py                                                    \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_BUG_DO_NOT_USE.csv       \
+     ../output/San_Guad_JHM2/analysis/stats_rap_exp00_err_D_scl.csv            \
+     "Estimated daily scaled errors as a function of actual daily errors, BUG_DO_NOT_USE" \
+     200                                                                       \
+     ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_BUG_DO_NOT_USE_rap_exp00_err_D_scl_tst/ \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -rf ../output/San_Guad_JHM2/analysis/xyp_rap_exp00_BUG_DO_NOT_USE_rap_exp00_err_D_scl_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
