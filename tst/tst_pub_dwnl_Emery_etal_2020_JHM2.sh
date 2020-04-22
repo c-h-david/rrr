@@ -102,24 +102,67 @@ URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
 folder="../output/San_Guad_JHM2"
 list="                                                                         \
       coords_San_Guad.csv                                                      \
-      k_San_Guad_2004_1.csv                                                    \
       kfac_San_Guad_1km_hour.csv                                               \
-      m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc4                      \
-      m3_riv_San_Guad_20100101_20131231_MOS0125_M_utc.nc4                      \
-      m3_riv_San_Guad_20100101_20131231_NOAH0125_M_utc.nc4                     \
-      m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc4                      \
-      m3_riv_San_Guad_20100101_20131231_bvc_300.csv                            \
-      m3_riv_San_Guad_20100101_20131231_VIC0125_cst.nc                         \
+      k_San_Guad_2004_1.csv                                                    \
+      m3_riv_San_Guad_20100101_20131231_ENS0125_D_utc.nc                       \
+      m3_riv_San_Guad_20100101_20131231_ENS0125_M_utc.nc                       \
+      m3_riv_San_Guad_20100101_20131231_ERR0125_D_flw_R286.csv                 \
+      m3_riv_San_Guad_20100101_20131231_ERR0125_M_flw_R286.csv                 \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D.nc           \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_D_scl.nc       \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc_err_R286_M.nc           \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_3H_utc.nc                      \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_D_utc.nc                       \
+      m3_riv_San_Guad_20100101_20131231_VIC0125_M_utc.nc                       \
+      NLDAS_ENS0125_D_20100101_20131231_utc_cfc.nc4                            \
+      NLDAS_ENS0125_M_20100101_20131231_utc_cfc.nc4                            \
+      NLDAS_VIC0125_3H_20100101_20131231_utc_cfc.nc4                           \
+      NLDAS_VIC0125_D_20100101_20131231_utc_cfc.nc4                            \
+      NLDAS_VIC0125_M_20100101_20131231_utc_cfc.nc4                            \
       obs_tot_id_San_Guad_2010_2013_full.csv                                   \
+      obs_use_id_San_Guad_2010_2013_23.csv                                     \
       Qobs_San_Guad_2010_2013_full.csv                                         \
+      Qout_San_Guad_exp00_err_D.nc                                             \
+      Qout_San_Guad_exp00_err_D_scl.nc                                         \
+      Qout_San_Guad_exp00_err_M.nc                                             \
+      Qout_San_Guad_exp00.nc                                                   \
+      Qout_San_Guad_exp01.nc                                                   \
+      Qout_San_Guad_exp02.nc                                                   \
+      Qout_San_Guad_exp03.nc                                                   \
+      Qout_San_Guad_exp04.nc                                                   \
+      Qout_San_Guad_exp05.nc                                                   \
+      Qout_San_Guad_exp06.nc                                                   \
+      Qout_San_Guad_exp07.nc                                                   \
+      Qout_San_Guad_exp08.nc                                                   \
+      Qout_San_Guad_exp09.nc                                                   \
+      Qout_San_Guad_exp10.nc                                                   \
+      Qout_San_Guad_exp11.nc                                                   \
+      Qout_San_Guad_exp12.nc                                                   \
+      Qout_San_Guad_exp13.nc                                                   \
+      Qout_San_Guad_exp14.nc                                                   \
+      Qout_San_Guad_exp15.nc                                                   \
+      Qout_San_Guad_exp16.nc                                                   \
+      Qout_San_Guad_exp17.nc                                                   \
+      Qout_San_Guad_exp18.nc                                                   \
+      Qout_San_Guad_exp19.nc                                                   \
+      Qout_San_Guad_exp20.nc                                                   \
+      Qout_San_Guad_exp21.nc                                                   \
       rapid_catchment_Reg12.csv                                                \
       rapid_connect_San_Guad.csv                                               \
       rapid_coupling_San_Guad_NLDAS.csv                                        \
+      riv_bas_id_1639225_dwn_25.csv                                            \
+      riv_bas_id_1639225_dwn_50.csv                                            \
+      riv_bas_id_1639225_ups_25.csv                                            \
+      riv_bas_id_1639225_ups_50.csv                                            \
+      riv_bas_id_3840125_dwn_25.csv                                            \
+      riv_bas_id_3840125_dwn_50.csv                                            \
+      riv_bas_id_3840125_ups_25.csv                                            \
+      riv_bas_id_3840125_ups_50.csv                                            \
       riv_bas_id_San_Guad_hydroseq.csv                                         \
       sort_San_Guad_hydroseq.csv                                               \
       StreamGageEvent_San_Guad_comid_withdir_full_2010_2013.zip                \
-      x_San_Guad_2004_1.csv                                                    \
       xfac_San_Guad_0.1.csv                                                    \
+      x_San_Guad_2004_1.csv                                                    \
      "
 
 #-------------------------------------------------------------------------------
