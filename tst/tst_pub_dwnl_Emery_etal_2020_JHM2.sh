@@ -186,7 +186,62 @@ done
 URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
 folder="../output/San_Guad_JHM2/analysis"
 list="                                                                         \
+      nash_table_exp00_exp21.csv                                               \
+      stats_rap_exp00_BUG_DO_NOT_USE.csv                                       \
+      stats_rap_exp00.csv                                                      \
+      stats_rap_exp00_err_D.csv                                                \
+      stats_rap_exp00_err_D_scl.csv                                            \
+      stats_rap_exp00_err_M.csv                                                \
+      stats_rap_exp00_monthly_BUG_DO_NOT_USE.csv                               \
+      stats_rap_exp00_monthly.csv                                              \
+      stats_rap_exp01.csv                                                      \
+      stats_rap_exp02.csv                                                      \
+      stats_rap_exp03.csv                                                      \
+      stats_rap_exp04.csv                                                      \
+      stats_rap_exp05.csv                                                      \
+      stats_rap_exp06.csv                                                      \
+      stats_rap_exp07.csv                                                      \
+      stats_rap_exp08.csv                                                      \
+      stats_rap_exp09.csv                                                      \
+      stats_rap_exp10.csv                                                      \
+      stats_rap_exp11.csv                                                      \
+      stats_rap_exp12.csv                                                      \
+      stats_rap_exp13.csv                                                      \
+      stats_rap_exp14.csv                                                      \
+      stats_rap_exp15.csv                                                      \
+      stats_rap_exp16.csv                                                      \
+      stats_rap_exp17.csv                                                      \
+      stats_rap_exp18.csv                                                      \
+      stats_rap_exp19.csv                                                      \
+      stats_rap_exp20.csv                                                      \
+      stats_rap_exp21.csv                                                      \
+      timeseries_obs_BUG_DO_NOT_USE.csv                                        \
       timeseries_obs.csv                                                       \
+      timeseries_obs_monthly_BUG_DO_NOT_USE.csv                                \
+      timeseries_obs_monthly.csv                                               \
+      timeseries_rap_exp00.csv                                                 \
+      timeseries_rap_exp00_monthly.csv                                         \
+      timeseries_rap_exp01.csv                                                 \
+      timeseries_rap_exp02.csv                                                 \
+      timeseries_rap_exp03.csv                                                 \
+      timeseries_rap_exp04.csv                                                 \
+      timeseries_rap_exp05.csv                                                 \
+      timeseries_rap_exp06.csv                                                 \
+      timeseries_rap_exp07.csv                                                 \
+      timeseries_rap_exp08.csv                                                 \
+      timeseries_rap_exp09.csv                                                 \
+      timeseries_rap_exp10.csv                                                 \
+      timeseries_rap_exp11.csv                                                 \
+      timeseries_rap_exp12.csv                                                 \
+      timeseries_rap_exp13.csv                                                 \
+      timeseries_rap_exp14.csv                                                 \
+      timeseries_rap_exp15.csv                                                 \
+      timeseries_rap_exp16.csv                                                 \
+      timeseries_rap_exp17.csv                                                 \
+      timeseries_rap_exp18.csv                                                 \
+      timeseries_rap_exp19.csv                                                 \
+      timeseries_rap_exp20.csv                                                 \
+      timeseries_rap_exp21.csv                                                 \
      "
 
 #-------------------------------------------------------------------------------
