@@ -877,6 +877,8 @@ echo "- Comparing observed flows"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full.csv                  \
      ../output/San_Guad_JHM2/Qobs_San_Guad_2010_2013_full_tst.csv              \
+     5e-2                                                                      \
+     2e-2                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
