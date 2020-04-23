@@ -8,7 +8,8 @@
 #Emery, Charlotte M., Cedric H. David, Kostas M. Andreadis, Michael J. Turmon,
 #John T. Reager, Jonathan M. Hobbs, Ming Pan, James S. Famiglietti,
 #R. Edward Beighley, and Matthew Rodell (2020), Underlying Fundamentals of
-#Kalman Filtering for River Network Modeling,
+#Kalman Filtering for River Network Modeling, Journal of Hydrometeorology, 21,
+#453-474
 #DOI: 10.1175/JHM-D-19-0084.1
 #This script also downloads a subset of the files from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
@@ -25,14 +26,14 @@
 #R. Edward Beighley, and Matthew Rodell (2020), RRR/RAPID input and output files
 #for "Underlying Fundamentals of Kalman Filtering for River Network Modeling",
 #Zenodo.
-#DOI: xx.xxxx/xxxxxxxxxxxx
+#DOI: 10.5281/zenodo.3688691
 #and from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
 #Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
 #Dennis Lettenmaier, Victor Koren, Qingyun Duan, Kingtse Mo, Yun Fan, and David 
 #Mocko (2012), Continental-scale water and energy flux analysis and validation 
 #for the North American Land Data Assimilation System project phase 2 (NLDAS-2).
-#ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/
+#https://urs.earthdata.nasa.gov
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
@@ -55,10 +56,10 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Downloading files from:   http://dx.doi.org/xx.xxxx/xxxxxx"
-echo "                          ftp://hydro1.sci.gsfc.nasa.gov/data/s4pa/NLDAS/"
-echo "which correspond to   :   http://dx.doi.org/10.1175/JHM-D-19-0084.1"
-echo "                          http://dx.doi.org/10.1029/2011JD016048"
+echo "Downloading files from:   https://dx.doi.org/10.5281/zenodo.3688691"
+echo "                          https://urs.earthdata.nasa.gov"
+echo "which correspond to   :   https://dx.doi.org/10.1175/JHM-D-19-0084.1"
+echo "                          https://dx.doi.org/10.1029/2011JD016048"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
 echo "Please cite these four DOIs if using these files for your publications."
 echo "********************"
@@ -71,7 +72,7 @@ echo "********************"
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+URL="https://zenodo.org/record/3688691"
 folder="../input/San_Guad_JHM2"
 list="                                                                         \
       catchment_Reg12.zip                                                      \
@@ -98,7 +99,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+URL="https://zenodo.org/record/3688691"
 folder="../output/San_Guad_JHM2"
 list="                                                                         \
       coords_San_Guad.csv                                                      \
@@ -183,7 +184,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="http://rapid-hub.org/data/CI/San_Guad_JHM2"
+URL="https://zenodo.org/record/3688691"
 folder="../output/San_Guad_JHM2/analysis"
 list="                                                                         \
       nash_table_exp00_exp21.csv                                               \
