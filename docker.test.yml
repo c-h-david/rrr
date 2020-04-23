@@ -31,8 +31,8 @@ sut:
      #(rrr) and the service name (sut, i.e. 'system under test')
      command: bash -xc "echo machine urs.earthdata.nasa.gov login $NETRC_LOGIN_EDATA password $NETRC_PSWRD_EDATA >> ~/.netrc;"\
                        "cd ./tst/;"\
-                       "./tst_pub_dwnl_David_etal_2015_WRR.sh rrr;"\ 
-                       "./tst_pub_repr_David_etal_2015_WRR.sh 2 6"
+                       "./tst_pub_dwnl_Emery_etal_2020_JHM2.sh;"\ 
+                       "./tst_pub_repr_Emery_etal_2020_JHM2.sh"
      #bash -c (string) allows to make the code more readable here
      #bash -x (verbose) allows to make the commands more readable at runtime
      volumes:
