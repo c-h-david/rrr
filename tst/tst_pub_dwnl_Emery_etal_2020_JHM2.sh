@@ -72,7 +72,7 @@ echo "********************"
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691"
+URL="https://zenodo.org/record/3688691/files"
 folder="../input/San_Guad_JHM2"
 list="                                                                         \
       catchment_Reg12.zip                                                      \
@@ -99,7 +99,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691"
+URL="https://zenodo.org/record/3688691/files"
 folder="../output/San_Guad_JHM2"
 list="                                                                         \
       coords_San_Guad.csv                                                      \
@@ -184,7 +184,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691"
+URL="https://zenodo.org/record/3688691/files"
 folder="../output/San_Guad_JHM2/analysis"
 list="                                                                         \
       nash_table_exp00_exp21.csv                                               \
