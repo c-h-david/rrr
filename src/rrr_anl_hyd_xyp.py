@@ -19,6 +19,8 @@ import sys
 import os.path
 import pandas
 import numpy
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
