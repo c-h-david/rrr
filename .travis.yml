@@ -23,7 +23,7 @@ language: shell
 #Environment variables for different tests on multiple Travis CI workers 
 #*******************************************************************************
 env:
-- TST_PUB_DWNL='travis_wait 30 ./tst_pub_dwnl_Emery_etal_2020_JHM2.sh' TST_PUB_REPR='travis_wait 30 ./tst_pub_repr_Emery_etal_2020_JHM2.sh'
+- TST_PUB_DWNL='travis_wait 40 ./tst_pub_dwnl_Emery_etal_2020_JHM2.sh' TST_PUB_REPR='./tst_pub_repr_Emery_etal_2020_JHM2.sh'
 
 
 #*******************************************************************************
