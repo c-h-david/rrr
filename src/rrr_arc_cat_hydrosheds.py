@@ -22,17 +22,10 @@ import arcpy
 #*******************************************************************************
 #Declaration of variables
 #*******************************************************************************
-arc_dir_ras = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HShma\\tmp\\na_dir_15s_San_Guad.img'
-arc_riv_shp = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HShma\\tmp\\na_riv_15s_San_Guad.shp'
-arc_cat_shp = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HShma\\tmp\\na_cat_15s_San_Guad.shp'
+arc_dir_ras = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\na_dir_15s\\na_dir_15s'
+arc_riv_shp = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\na_riv_15s.shp'
+arc_cat_shp = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HydroSHEDS\\shp\\na_cat_15s.shp'
 
-#arc_dir_ras = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\as_dir_15s\\as_dir_15s'
-#arc_riv_shp = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\as_riv_15s.shp'
-#arc_cat_shp = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HydroSHEDS\\shp\\as_cat_15s.shp'
-
-#arc_dir_ras = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\ca_dir_15s\\ca_dir_15s'
-#arc_riv_shp = 'Z:\\Data\\Work\\Research\\GIS\\Datasets\\HydroSHEDS\\original\\usgs.gov\\unzip\\ca_riv_15s.shp'
-#arc_cat_shp = 'Z:\\Data\\Work\\Research\\GIS\\Projects\\HydroSHEDS\\shp\\ca_cat_15s.shp'
 
 #*******************************************************************************
 #Temporary variables
