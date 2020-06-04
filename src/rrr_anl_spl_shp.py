@@ -4,10 +4,11 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a polygon shapefile that contains mean times, and a river shapefile, this
-#script subsamples the rivers based on the polygons.  
+#Given a polyline/polygon shapefile that contains mean times, and a river
+#shapefile, this script subsamples the rivers based on the polygon/polyline
+#features.
 #Authors:
-#Etienne Fluet Chouinard, Cedric H. David, 2016-2020
+#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2020
 
 
 #*******************************************************************************
@@ -102,7 +103,7 @@ print('Open rrr_pol_shp')
 
 rrr_pol_lay=fiona.open(rrr_pol_shp, 'r')
 IS_pol_tot=len(rrr_pol_lay)
-print('- The number of polygon features is: '+str(IS_pol_tot))
+print('- The number of polyline/polygon features is: '+str(IS_pol_tot))
 
 
 #*******************************************************************************
@@ -124,7 +125,7 @@ for rrr_riv_feat in rrr_riv_lay:
 print('Find intersections')
 
 IS_spl_cnt=0
-#The total count of river features completely contained in polygon features
+#The total count of river features intersecting with polyline/polygon features
 
 IM_spl_cnt={}
 IM_spl_tim={}
@@ -144,10 +145,10 @@ for rrr_pol_feat in rrr_pol_lay:
           #---------------------------------------------------------------------
           rrr_riv_feat=rrr_riv_lay[riv_fid]
           riv_shy=shapely.geometry.shape(rrr_riv_feat['geometry'])
-          if pol_shy.contains(riv_shy):
+          if pol_shy.intersects(riv_shy):
                #----------------------------------------------------------------
                #print('riv_fid='+str(riv_fid)+                                 \
-               #      ' is completely inside of pol_fid='+str(pol_fid))
+               #      ' intersects with pol_fid='+str(pol_fid))
                #----------------------------------------------------------------
                IS_spl_cnt=IS_spl_cnt+1
                IS_riv_id=int(rrr_riv_feat['properties'][YV_riv_id])
@@ -155,8 +156,8 @@ for rrr_pol_feat in rrr_pol_lay:
                IM_spl_cnt[IS_riv_id]=IM_spl_cnt[IS_riv_id]+1
                IM_spl_tim[IS_riv_id].append(ZS_pol_tim)
 
-print('- The number of river features completely contained in polygon features'\
-      +' is: '+str(IS_spl_cnt))
+print('- The number of river features intersecting with the polyline/polygon'  \
+      +' features is: '+str(IS_spl_cnt))
 
 
 #*******************************************************************************
