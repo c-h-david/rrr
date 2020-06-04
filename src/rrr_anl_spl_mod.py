@@ -4,9 +4,10 @@
 #*******************************************************************************
 #Purpose:
 #This script sumbsamples river model outputs based on prior subsampling of
-#the river network based on polygons and their mean times.
+#the river network based on polylines/polygons and their mean times and on the
+#time (second) required to complete one cycle.
 #Author:
-#Etienne Fluet Chouinard, Cedric H. David, 2016-2020
+#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2020
 
 
 #*******************************************************************************
@@ -37,20 +38,23 @@ ZS_TauR=10800
 #*******************************************************************************
 # 1 - rrr_mod_nc1
 # 2 - rrr_spl_csv
-# 3 - rrr_mod_nc2
+# 3 - ZS_cyc_tim				#S3:2332800;SaralEvn:3023999.928
+						#J3J2J1TP:856706.44;SWOT:1802700
+# 4 - rrr_mod_nc2
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 4:
-     print('ERROR - 3 and only 3 arguments can be used')
+if IS_arg != 5:
+     print('ERROR - 4 and only 4 arguments can be used')
      raise SystemExit(22) 
 
 rrr_mod_nc1=sys.argv[1]
 rrr_spl_csv=sys.argv[2]
-rrr_mod_nc2=sys.argv[3]
+ZS_cyc_tim=float(sys.argv[3])
+rrr_mod_nc2=sys.argv[4]
 
 
 #*******************************************************************************
@@ -59,6 +63,7 @@ rrr_mod_nc2=sys.argv[3]
 print('Command line inputs')
 print('- '+rrr_mod_nc1)
 print('- '+rrr_spl_csv)
+print('- '+str(ZS_cyc_tim))
 print('- '+rrr_mod_nc2)
 
 
@@ -208,7 +213,7 @@ rivid = f2.createDimension(YV_rivid, IS_riv_tot2)
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 rivid = f2.createVariable(YV_rivid,"i4",(YV_rivid,))
 
-time = f2.createVariable(YV_time,"f4",(YV_time,))
+time = f2.createVariable(YV_time,"i4",(YV_time,))
 
 if '_FillValue' in  f1.variables[YV_var].ncattrs(): 
      ZS_fill=f1.variables[YV_var]._FillValue
@@ -235,7 +240,6 @@ if YV_time in f1.variables:
 for YV_att in f1.variables[YV_var].ncattrs():
      f2.variables[YV_var].setncattr(                                           \
                                 YV_att,f1.variables[YV_var].getncattr(YV_att))
-
 #-------------------------------------------------------------------------------
 #Initialize netCDF variables
 #-------------------------------------------------------------------------------
@@ -278,7 +282,7 @@ for JS_riv_tot2 in range(IS_riv_tot2):
                var[JS_time2,JS_riv_tot2]=                                      \
                                       f1.variables[YV_var][JS_time2,JS_riv_tot1]
                #Extract the value for the netCDF file
-               ZS_spl_tim=ZS_spl_tim+1802700
+               ZS_spl_tim=ZS_spl_tim+ZS_cyc_tim
                #Update to the next cycle
 
 
