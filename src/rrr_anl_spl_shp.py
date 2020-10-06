@@ -17,6 +17,7 @@
 import sys
 import fiona
 import shapely.geometry
+import shapely.prepared
 import rtree
 import csv
 
@@ -138,6 +139,7 @@ for JS_riv_tot in range(IS_riv_tot):
 for rrr_pol_feat in rrr_pol_lay:
      pol_fid=int(rrr_pol_feat['id'])
      pol_shy=shapely.geometry.shape(rrr_pol_feat['geometry'])
+     pol_pre=shapely.prepared.prep(pol_shy)
      for riv_fid in [int(x) for x in list(index.intersection(pol_shy.bounds))]:
           #---------------------------------------------------------------------
           #print('The bounds of riv_fid='+str(riv_fid)+                        \
@@ -145,7 +147,7 @@ for rrr_pol_feat in rrr_pol_lay:
           #---------------------------------------------------------------------
           rrr_riv_feat=rrr_riv_lay[riv_fid]
           riv_shy=shapely.geometry.shape(rrr_riv_feat['geometry'])
-          if pol_shy.intersects(riv_shy):
+          if pol_pre.intersects(riv_shy):
                #----------------------------------------------------------------
                #print('riv_fid='+str(riv_fid)+                                 \
                #      ' intersects with pol_fid='+str(pol_fid))
