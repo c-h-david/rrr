@@ -16,6 +16,7 @@
 #*******************************************************************************
 import sys
 import fiona
+import progressbar
 import shapely.geometry
 import shapely.prepared
 import rtree
@@ -92,9 +93,27 @@ else:
      print('ERROR - Neither COMID, ComID, nor ARCID exist in '+rrr_riv_shp)
      raise SystemExit(22) 
 
-IV_riv_tot_id=[]
+prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot-1,                           \
+        widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
+
+prg_bar.start()
+IV_riv_fid=[0]*IS_riv_tot
+hsh_riv_prp={}
+hsh_riv_shy={}
+hsh_riv_bnd={}
+IV_riv_tot_id=[0]*IS_riv_tot
 for JS_riv_tot in range(IS_riv_tot):
-     IV_riv_tot_id.append(int(rrr_riv_lay[JS_riv_tot]['properties'][YV_riv_id]))
+     prg_bar.update(JS_riv_tot)
+     riv_fea=rrr_riv_lay[JS_riv_tot]
+     riv_fid=int(riv_fea['id'])
+     riv_prp=riv_fea['properties']
+     riv_shy=shapely.geometry.shape(riv_fea['geometry'])
+     IV_riv_fid[JS_riv_tot]=riv_fid
+     IV_riv_tot_id[JS_riv_tot]=int(riv_prp[YV_riv_id])
+     hsh_riv_prp[riv_fid]=riv_prp
+     hsh_riv_shy[riv_fid]=riv_shy
+     hsh_riv_bnd[riv_fid]=riv_shy.bounds
+print('')
 
 
 #*******************************************************************************
@@ -106,18 +125,43 @@ rrr_pol_lay=fiona.open(rrr_pol_shp, 'r')
 IS_pol_tot=len(rrr_pol_lay)
 print('- The number of polyline/polygon features is: '+str(IS_pol_tot))
 
+prg_bar=progressbar.ProgressBar(maxval=IS_pol_tot-1,                           \
+        widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
+
+prg_bar.start()
+IV_pol_fid=[0]*IS_pol_tot
+hsh_pol_prp={}
+hsh_pol_shy={}
+hsh_pol_bnd={}
+for JS_pol_tot in range(IS_pol_tot):
+     prg_bar.update(JS_pol_tot)
+     pol_fea=rrr_pol_lay[JS_pol_tot]
+     pol_fid=int(pol_fea['id'])
+     pol_prp=pol_fea['properties']
+     pol_shy=shapely.geometry.shape(pol_fea['geometry'])
+     IV_pol_fid[JS_pol_tot]=pol_fid
+     hsh_pol_prp[pol_fid]=pol_prp
+     hsh_pol_shy[pol_fid]=pol_shy
+     hsh_pol_bnd[pol_fid]=pol_shy.bounds
+print('')
+
 
 #*******************************************************************************
 #Create spatial index for the bounds of each river feature
 #*******************************************************************************
 print('Create spatial index for the bounds of each river feature')
 
+prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot-1,                           \
+        widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
+
+prg_bar.start()
 index=rtree.index.Index()
-for rrr_riv_feat in rrr_riv_lay:
-     riv_fid=int(rrr_riv_feat['id'])
+for JS_riv_tot in range(IS_riv_tot):
+     prg_bar.update(JS_riv_tot)
+     riv_fid=IV_riv_fid[JS_riv_tot]
+     index.insert(riv_fid,hsh_riv_bnd[riv_fid])
      #the first argument of index.insert has to be 'int', not 'long' or 'str'
-     riv_geom=shapely.geometry.shape(rrr_riv_feat['geometry'])
-     index.insert(riv_fid, riv_geom.bounds)
+print('')
 
 
 #*******************************************************************************
@@ -136,25 +180,33 @@ for JS_riv_tot in range(IS_riv_tot):
      IM_spl_tim[IV_riv_tot_id[JS_riv_tot]]=[]
      #A hash table associating each river reach ID with the subsample times 
 
-for rrr_pol_feat in rrr_pol_lay:
-     pol_fid=int(rrr_pol_feat['id'])
-     pol_shy=shapely.geometry.shape(rrr_pol_feat['geometry'])
+prg_bar=progressbar.ProgressBar(maxval=IS_pol_tot-1,                           \
+        widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
+
+prg_bar.start()
+for JS_pol_tot in range(IS_pol_tot):
+     prg_bar.update(JS_pol_tot)
+     pol_fid=IV_pol_fid[JS_pol_tot]
+     pol_prp=hsh_pol_prp[pol_fid]
+     pol_shy=hsh_pol_shy[pol_fid]
+     pol_bnd=hsh_pol_bnd[pol_fid]
      pol_pre=shapely.prepared.prep(pol_shy)
-     for riv_fid in [int(x) for x in list(index.intersection(pol_shy.bounds))]:
+     IV_riv_ids=[int(x) for x in list(index.intersection(pol_bnd))]
+     for riv_fid in IV_riv_ids:
           #---------------------------------------------------------------------
           #print('The bounds of riv_fid='+str(riv_fid)+                        \
           #      ' intersect with the bounds of pol_fid='+str(pol_fid))
           #---------------------------------------------------------------------
-          rrr_riv_feat=rrr_riv_lay[riv_fid]
-          riv_shy=shapely.geometry.shape(rrr_riv_feat['geometry'])
+          riv_shy=hsh_riv_shy[riv_fid]
+          riv_prp=hsh_riv_prp[riv_fid]
           if pol_pre.intersects(riv_shy):
                #----------------------------------------------------------------
                #print('riv_fid='+str(riv_fid)+                                 \
                #      ' intersects with pol_fid='+str(pol_fid))
                #----------------------------------------------------------------
                IS_spl_cnt=IS_spl_cnt+1
-               IS_riv_id=int(rrr_riv_feat['properties'][YV_riv_id])
-               ZS_pol_tim=float(rrr_pol_feat['properties']['Mean_time'])
+               IS_riv_id=int(riv_prp[YV_riv_id])
+               ZS_pol_tim=float(pol_prp['Mean_time'])
                IM_spl_cnt[IS_riv_id]=IM_spl_cnt[IS_riv_id]+1
                IM_spl_tim[IS_riv_id].append(ZS_pol_tim)
 
