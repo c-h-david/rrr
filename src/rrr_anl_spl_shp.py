@@ -235,6 +235,15 @@ rrr_spl_sch['properties']['SUBSAMPLES']='int:9'
 #print(rrr_spl_sch)
 print('- Schema copied')
 
+if 'DSContArea' in rrr_spl_sch['properties']:
+     rrr_spl_sch['properties']['DSContArea']='float:24.5'
+     #Default for MERIT Hydro v01 Basins v01 is 'float:24.15' is inadequate
+if 'USContArea' in rrr_spl_sch['properties']:
+     rrr_spl_sch['properties']['USContArea']='float:24.5'
+     #Default for MERIT Hydro v01 Basins v01 is 'float:24.15' is inadequate
+#print(rrr_spl_sch)
+print('- Known schema issues fixed')
+
 rrr_spl_lay=fiona.open(rrr_spl_shp, 'w',                                       \
                        crs=rrr_spl_crs,                                        \
                        driver='ESRI Shapefile',                                \
