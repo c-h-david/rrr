@@ -96,7 +96,7 @@ else:
 prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot-1,                           \
         widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
 
-prg_bar.start()
+#prg_bar.start()
 IV_riv_fid=[0]*IS_riv_tot
 hsh_riv_prp={}
 hsh_riv_geo={}
@@ -104,7 +104,7 @@ hsh_riv_shy={}
 hsh_riv_bnd={}
 IV_riv_tot_id=[0]*IS_riv_tot
 for JS_riv_tot in range(IS_riv_tot):
-     prg_bar.update(JS_riv_tot)
+     #prg_bar.update(JS_riv_tot)
      riv_fea=rrr_riv_lay[JS_riv_tot]
      riv_fid=int(riv_fea['id'])
      riv_prp=riv_fea['properties']
@@ -116,7 +116,7 @@ for JS_riv_tot in range(IS_riv_tot):
      hsh_riv_geo[riv_fid]=riv_geo
      hsh_riv_shy[riv_fid]=riv_shy
      hsh_riv_bnd[riv_fid]=riv_shy.bounds
-print('')
+#print('')
 
 
 #*******************************************************************************
@@ -131,13 +131,13 @@ print('- The number of polyline/polygon features is: '+str(IS_pol_tot))
 prg_bar=progressbar.ProgressBar(maxval=IS_pol_tot-1,                           \
         widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
 
-prg_bar.start()
+#prg_bar.start()
 IV_pol_fid=[0]*IS_pol_tot
 hsh_pol_prp={}
 hsh_pol_shy={}
 hsh_pol_bnd={}
 for JS_pol_tot in range(IS_pol_tot):
-     prg_bar.update(JS_pol_tot)
+     #prg_bar.update(JS_pol_tot)
      pol_fea=rrr_pol_lay[JS_pol_tot]
      pol_fid=int(pol_fea['id'])
      pol_prp=pol_fea['properties']
@@ -146,7 +146,7 @@ for JS_pol_tot in range(IS_pol_tot):
      hsh_pol_prp[pol_fid]=pol_prp
      hsh_pol_shy[pol_fid]=pol_shy
      hsh_pol_bnd[pol_fid]=pol_shy.bounds
-print('')
+#print('')
 
 
 #*******************************************************************************
@@ -157,14 +157,14 @@ print('Create spatial index for the bounds of each river feature')
 prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot-1,                           \
         widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
 
-prg_bar.start()
+#prg_bar.start()
 index=rtree.index.Index()
 for JS_riv_tot in range(IS_riv_tot):
-     prg_bar.update(JS_riv_tot)
+     #prg_bar.update(JS_riv_tot)
      riv_fid=IV_riv_fid[JS_riv_tot]
      index.insert(riv_fid,hsh_riv_bnd[riv_fid])
      #the first argument of index.insert has to be 'int', not 'long' or 'str'
-print('')
+#print('')
 
 
 #*******************************************************************************
@@ -186,9 +186,9 @@ for JS_riv_tot in range(IS_riv_tot):
 prg_bar=progressbar.ProgressBar(maxval=IS_pol_tot-1,                           \
         widgets=[progressbar.Bar('=','- [',']'),' ',progressbar.Percentage()])
 
-prg_bar.start()
+#prg_bar.start()
 for JS_pol_tot in range(IS_pol_tot):
-     prg_bar.update(JS_pol_tot)
+     #prg_bar.update(JS_pol_tot)
      pol_fid=IV_pol_fid[JS_pol_tot]
      pol_prp=hsh_pol_prp[pol_fid]
      pol_shy=hsh_pol_shy[pol_fid]
@@ -212,7 +212,7 @@ for JS_pol_tot in range(IS_pol_tot):
                ZS_pol_tim=float(pol_prp['Mean_time'])
                IM_spl_cnt[IS_riv_id]=IM_spl_cnt[IS_riv_id]+1
                IM_spl_tim[IS_riv_id].append(ZS_pol_tim)
-print('')
+#print('')
 
 print('- The number of river features intersecting with the polyline/polygon'  \
       +' features is: '+str(IS_spl_cnt))
@@ -237,10 +237,10 @@ print('- Schema copied')
 
 if 'DSContArea' in rrr_spl_sch['properties']:
      rrr_spl_sch['properties']['DSContArea']='float:24.5'
-     #Default for MERIT Hydro v01 Basins v01 is 'float:24.15' is inadequate
+     #Default for MERIT Hydro v00 Basins v01 is 'float:24.15' is inadequate
 if 'USContArea' in rrr_spl_sch['properties']:
      rrr_spl_sch['properties']['USContArea']='float:24.5'
-     #Default for MERIT Hydro v01 Basins v01 is 'float:24.15' is inadequate
+     #Default for MERIT Hydro v00 Basins v01 is 'float:24.15' is inadequate
 #print(rrr_spl_sch)
 print('- Known schema issues fixed')
 
