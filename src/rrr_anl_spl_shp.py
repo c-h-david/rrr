@@ -99,6 +99,7 @@ prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot-1,                           \
 prg_bar.start()
 IV_riv_fid=[0]*IS_riv_tot
 hsh_riv_prp={}
+hsh_riv_geo={}
 hsh_riv_shy={}
 hsh_riv_bnd={}
 IV_riv_tot_id=[0]*IS_riv_tot
@@ -107,10 +108,12 @@ for JS_riv_tot in range(IS_riv_tot):
      riv_fea=rrr_riv_lay[JS_riv_tot]
      riv_fid=int(riv_fea['id'])
      riv_prp=riv_fea['properties']
-     riv_shy=shapely.geometry.shape(riv_fea['geometry'])
+     riv_geo=riv_fea['geometry']
+     riv_shy=shapely.geometry.shape(riv_geo)
      IV_riv_fid[JS_riv_tot]=riv_fid
      IV_riv_tot_id[JS_riv_tot]=int(riv_prp[YV_riv_id])
      hsh_riv_prp[riv_fid]=riv_prp
+     hsh_riv_geo[riv_fid]=riv_geo
      hsh_riv_shy[riv_fid]=riv_shy
      hsh_riv_bnd[riv_fid]=riv_shy.bounds
 print('')
@@ -209,6 +212,7 @@ for JS_pol_tot in range(IS_pol_tot):
                ZS_pol_tim=float(pol_prp['Mean_time'])
                IM_spl_cnt[IS_riv_id]=IM_spl_cnt[IS_riv_id]+1
                IM_spl_tim[IS_riv_id].append(ZS_pol_tim)
+print('')
 
 print('- The number of river features intersecting with the polyline/polygon'  \
       +' features is: '+str(IS_spl_cnt))
@@ -239,13 +243,13 @@ rrr_spl_lay=fiona.open(rrr_spl_shp, 'w',                                       \
 print('- New shapefile created')
 
 for JS_riv_tot in range(IS_riv_tot):
-     rrr_riv_feat=rrr_riv_lay[JS_riv_tot]
-     rrr_spl_prp=rrr_riv_feat['properties']
+     riv_fid=IV_riv_fid[JS_riv_tot]
+     rrr_spl_prp=hsh_riv_prp[riv_fid]
      rrr_spl_prp['SUBSAMPLES']=IM_spl_cnt[IV_riv_tot_id[JS_riv_tot]]
-     rrr_spl_geom=rrr_riv_feat['geometry']
+     rrr_spl_geo=hsh_riv_geo[riv_fid]
      rrr_spl_lay.write({                                                       \
                         'properties': rrr_spl_prp,                             \
-                        'geometry': rrr_spl_geom,                              \
+                        'geometry': rrr_spl_geo,                               \
                         })
 print('- New shapefile populated')
 
