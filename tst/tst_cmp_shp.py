@@ -136,7 +136,8 @@ for JS_old_tot in range(IS_old_tot):
      for YS_old_prp in YV_old_prp:
           if rrr_old_prp[YS_old_prp]!=rrr_new_prp[YS_old_prp]:
                print('ERROR - The attributes of features are different for '+  \
-                     'index: '+str(JS_old_tot)+', attribute: '+str(JS_old_att))
+                     'index: '+str(JS_old_tot)+', attribute: '+str(YS_old_prp))
+               raise SystemExit(99)
             
 print('Success!!!')
 
