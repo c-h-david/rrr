@@ -116,7 +116,7 @@ for JS_riv_tot in range(IS_riv_tot):
      hsh_riv_geo[riv_fid]=riv_geo
      hsh_riv_shy[riv_fid]=riv_shy
      hsh_riv_bnd[riv_fid]=riv_shy.bounds
-#print('')
+#prg_bar.finish()
 
 
 #*******************************************************************************
@@ -146,7 +146,7 @@ for JS_pol_tot in range(IS_pol_tot):
      hsh_pol_prp[pol_fid]=pol_prp
      hsh_pol_shy[pol_fid]=pol_shy
      hsh_pol_bnd[pol_fid]=pol_shy.bounds
-#print('')
+#prg_bar.finish()
 
 
 #*******************************************************************************
@@ -164,7 +164,7 @@ for JS_riv_tot in range(IS_riv_tot):
      riv_fid=IV_riv_fid[JS_riv_tot]
      index.insert(riv_fid,hsh_riv_bnd[riv_fid])
      #the first argument of index.insert has to be 'int', not 'long' or 'str'
-#print('')
+#prg_bar.finish()
 
 
 #*******************************************************************************
@@ -212,7 +212,7 @@ for JS_pol_tot in range(IS_pol_tot):
                ZS_pol_tim=float(pol_prp['Mean_time'])
                IM_spl_cnt[IS_riv_id]=IM_spl_cnt[IS_riv_id]+1
                IM_spl_tim[IS_riv_id].append(ZS_pol_tim)
-#print('')
+#prg_bar.finish()
 
 print('- The number of river features intersecting with the polyline/polygon'  \
       +' features is: '+str(IS_spl_cnt))
