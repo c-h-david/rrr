@@ -21,6 +21,7 @@ import calendar
 import numpy
 import os.path
 import subprocess
+import progressbar
 
 
 #*******************************************************************************
@@ -261,7 +262,13 @@ for JS_time2 in range(IS_time2):
 #Populate netCDF variables
 #-------------------------------------------------------------------------------
 print('- Populate netCDF variables')
+
+prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot2-1,                          \
+        widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+
+prg_bar.start()
 for JS_riv_tot2 in range(IS_riv_tot2):
+     prg_bar.update(JS_riv_tot2)
      for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
           #Every river ID/mean time pair from rrr_spl_csv is accessed here.
 
@@ -281,9 +288,11 @@ for JS_riv_tot2 in range(IS_riv_tot2):
                #The index of the time value closest to mean time is now known
                var[JS_time2,JS_riv_tot2]=                                      \
                                       f1.variables[YV_var][JS_time2,JS_riv_tot1]
+
                #Extract the value for the netCDF file
                ZS_spl_tim=ZS_spl_tim+ZS_cyc_tim
                #Update to the next cycle
+prg_bar.finish()
 
 
 #*******************************************************************************
