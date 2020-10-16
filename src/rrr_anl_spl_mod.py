@@ -173,6 +173,7 @@ print('Creating hash table')
 IM_hsh={}
 for JS_riv_tot1 in range(IS_riv_tot1):
      IM_hsh[IV_riv_tot_id1[JS_riv_tot1]]=JS_riv_tot1
+     #This hash table relates a given rivid with its index in rrr_mod_nc1
 
 
 #*******************************************************************************
@@ -281,7 +282,11 @@ for JS_riv_tot2 in range(IS_riv_tot2):
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           #Find temporal index over each possible subsample cycle
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          ZS_spl_tim=IM_spl_tim[JS_riv_tot2][JS_spl_cnt]
+          ZS_spl_tim=IM_spl_tim[JS_riv_tot2][JS_spl_cnt]+ZV_time1[0]
+          #Starting sampling at the beginning of simulation period (ZV_time1[0])
+          #hence assuming that the orbit cycle and the simulation both start at
+          #the same time.
+
           while ZS_spl_tim<ZV_time1[IS_time1-1]+ZS_TauR:
 
                JS_time2=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
