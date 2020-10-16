@@ -319,6 +319,197 @@ fi
 
 
 #*******************************************************************************
+#Sampling of river discharge simulations for various coverage files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Sampling for J3J2J1TP_nadir
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for J3J2J1TP_nadir"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_J3J2J1TP_nadir.csv                                \
+     856706.44                                                                 \
+     ../output/MERIT_WRR/Qout_J3J2J1TP_nadir_tst.nc                            \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_J3J2J1TP_nadir.nc                                \
+     ../output/MERIT_WRR/Qout_J3J2J1TP_nadir_tst.nc                            \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for S3A_nadir
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for S3A_nadir"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_S3A_nadir.csv                                     \
+     2332800.00                                                                \
+     ../output/MERIT_WRR/Qout_S3A_nadir_tst.nc                                 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_S3A_nadir.nc                                     \
+     ../output/MERIT_WRR/Qout_S3A_nadir_tst.nc                                 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for S3A3Bmerged_nadir
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for S3A3Bmerged_nadir"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_S3A3Bmerged_nadir.csv                             \
+     2332800.00                                                                \
+     ../output/MERIT_WRR/Qout_S3A3Bmerged_nadir_tst.nc                         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_S3A3Bmerged_nadir.nc                             \
+     ../output/MERIT_WRR/Qout_S3A3Bmerged_nadir_tst.nc                         \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SaralEnv_nadir
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SaralEnv_nadir"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_SaralEnv_nadir.csv                                \
+     3023999.928                                                               \
+     ../output/MERIT_WRR/Qout_SaralEnv_nadir_tst.nc                            \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SaralEnv_nadir.nc                                \
+     ../output/MERIT_WRR/Qout_SaralEnv_nadir_tst.nc                            \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SWOT_nadir
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SWOT_nadir"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_SWOT_nadir.csv                                    \
+     1802700.00                                                                \
+     ../output/MERIT_WRR/Qout_SWOT_nadir_tst.nc                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SWOT_nadir.nc                                    \
+     ../output/MERIT_WRR/Qout_SWOT_nadir_tst.nc                                \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SWOT_swath
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SWOT_swath"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_SWOT_swath.csv                                    \
+     1802700.00                                                                \
+     ../output/MERIT_WRR/Qout_SWOT_swath_tst.nc                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing coverage file (.shp)"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SWOT_swath.nc                                    \
+     ../output/MERIT_WRR/Qout_SWOT_swath_tst.nc                                \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MERIT_WRR/*_tst.*

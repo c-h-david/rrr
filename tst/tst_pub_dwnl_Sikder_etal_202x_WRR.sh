@@ -94,6 +94,12 @@ list="                                                                         \
       orbit_coverage_SARAL.tar.gz                                              \
       orbit_coverage_Sentinel3.tar.gz                                          \
       orbit_coverage_SWOT_swath.tar.gz                                         \
+      orbit_spl_JASON.tar.gz                                                   \
+      orbit_spl_SARAL.tar.gz                                                   \
+      orbit_spl_Sentinel3.tar.gz                                               \
+      orbit_spl_Sentinel3A.tar.gz                                              \
+      orbit_spl_SWOT_nadir.tar.gz                                              \
+      orbit_spl_SWOT_swath.tar.gz                                              \
      "
 
 #-------------------------------------------------------------------------------
