@@ -489,7 +489,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SWOT_swath"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
-     ../output/MERIT_WRR/seq_SWOT_swath.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_swath_fix.csv                                \
      1802700.00                                                                \
      ../output/MERIT_WRR/Qout_SWOT_swath_tst.nc                                \
      > $run_file
