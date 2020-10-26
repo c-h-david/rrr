@@ -170,9 +170,9 @@ print('- The total number of subsample/river reach pairs is: '+str(IS_spl_tot))
 #*******************************************************************************
 print('Creating hash table')
 
-IM_hsh={}
+IH_hsh1={}
 for JS_riv_tot1 in range(IS_riv_tot1):
-     IM_hsh[IV_riv_tot_id1[JS_riv_tot1]]=JS_riv_tot1
+     IH_hsh1[IV_riv_tot_id1[JS_riv_tot1]]=JS_riv_tot1
      #This hash table relates a given rivid with its index in rrr_mod_nc1
 
 print('- Done')
@@ -304,7 +304,7 @@ for JS_riv_tot2 in range(IS_riv_tot2):
           #Find spatial index
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           IS_riv_id=IV_riv_tot_id2[JS_riv_tot2]
-          JS_riv_tot1=IM_hsh[IS_riv_id]
+          JS_riv_tot1=IH_hsh1[IS_riv_id]
 
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           #Find temporal index over each possible subsample cycle
