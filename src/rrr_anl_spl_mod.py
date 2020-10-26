@@ -175,6 +175,33 @@ for JS_riv_tot1 in range(IS_riv_tot1):
      IM_hsh[IV_riv_tot_id1[JS_riv_tot1]]=JS_riv_tot1
      #This hash table relates a given rivid with its index in rrr_mod_nc1
 
+print('- Done')
+
+
+#*******************************************************************************
+#Reorganizing subsamples chronologically for faster I/O
+#*******************************************************************************
+print('Reorganizing subsamples chronologically for faster I/O')
+
+ZH_spl={}
+for JS_riv_tot2 in range(IS_riv_tot2):
+     for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
+          ZH_spl[IM_spl_tim[JS_riv_tot2][JS_spl_cnt]]=[]
+#Each meantime value now has a key in the Python dictionary
+
+for JS_riv_tot2 in range(IS_riv_tot2):
+     for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
+          ZH_spl[IM_spl_tim[JS_riv_tot2][JS_spl_cnt]]                          \
+               .append(IV_riv_tot_id2[JS_riv_tot2])
+#Each meantime value now has a list of all associated river IDs
+
+ZV_time3=ZH_spl.keys()
+ZV_time3.sort()
+#The list of meantime values sorted in chronological order
+IS_time3=len(ZV_time3)
+
+print('- The number of meantime values in subsample file is: '+str(IS_time3))
+
 
 #*******************************************************************************
 #Generating rrr_mod_nc2 based on rrr_mod_nc1 and rrr_spl_csv
