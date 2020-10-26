@@ -166,14 +166,19 @@ print('- The total number of subsample/river reach pairs is: '+str(IS_spl_tot))
 
 
 #*******************************************************************************
-#Creating hash table
+#Creating hash tables
 #*******************************************************************************
-print('Creating hash table')
+print('Creating hash tables')
 
 IH_hsh1={}
 for JS_riv_tot1 in range(IS_riv_tot1):
      IH_hsh1[IV_riv_tot_id1[JS_riv_tot1]]=JS_riv_tot1
      #This hash table relates a given rivid with its index in rrr_mod_nc1
+
+IH_hsh2={}
+for JS_riv_tot2 in range(IS_riv_tot2):
+     IH_hsh2[IV_riv_tot_id2[JS_riv_tot2]]=JS_riv_tot2
+     #This hash table relates a given rivid with its index in rrr_spl_csv
 
 print('- Done')
 
