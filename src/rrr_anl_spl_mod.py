@@ -184,9 +184,9 @@ print('- Done')
 
 
 #*******************************************************************************
-#Reorganizing subsamples chronologically for faster I/O
+#Reorganizing subsamples chronologically in a dictionary for faster I/O
 #*******************************************************************************
-print('Reorganizing subsamples chronologically for faster I/O')
+print('Reorganizing subsamples chronologically in a dictionary for faster I/O')
 
 ZH_spl={}
 for JS_riv_tot2 in range(IS_riv_tot2):
@@ -206,6 +206,34 @@ ZV_time3.sort()
 IS_time3=len(ZV_time3)
 
 print('- The number of meantime values in subsample file is: '+str(IS_time3))
+
+
+#*******************************************************************************
+#Reorganizing subsamples dictionary following river IDs for faster I/O
+#*******************************************************************************
+print('Reorganizing subsamples dictionary following river IDs for faster I/O')
+
+for JS_time3 in range(IS_time3):
+     ZS_time3=ZV_time3[JS_time3]
+     IV_ids=ZH_spl[ZS_time3]
+     IS_ids=len(IV_ids)
+     IV_idx=[]
+     #--------------------------------------------------------------------------
+     #If river IDs are sorted following IV_riv_tot_id1
+     #--------------------------------------------------------------------------
+     #for JS_ids in range(IS_ids):
+     #     IV_idx.append(IH_hsh1[IV_ids[JS_ids]])
+     #IV_idx.sort()
+     #ZH_spl[ZS_time3]=[IV_riv_tot_id1[JS_idx] for JS_idx in IV_idx]
+     #--------------------------------------------------------------------------
+     #If river IDs are sorted following IV_riv_tot_id2
+     #--------------------------------------------------------------------------
+     for JS_ids in range(IS_ids):
+          IV_idx.append(IH_hsh2[IV_ids[JS_ids]])
+     IV_idx.sort()
+     ZH_spl[ZS_time3]=[IV_riv_tot_id2[JS_idx] for JS_idx in IV_idx]
+
+print('- Done')
 
 
 #*******************************************************************************
