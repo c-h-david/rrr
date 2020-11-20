@@ -41,7 +41,7 @@ ZS_TauR=10800
 # 2 - rrr_spl_csv
 # 3 - ZS_cyc_tim				#S3:2332800;SaralEvn:3023999.928
 						#J3J2J1TP:856706.44;SWOT:1802700
-# 4 - rrr_mod_nc2
+# 4 - rrr_mod_nc4
 
 
 #*******************************************************************************
@@ -55,7 +55,7 @@ if IS_arg != 5:
 rrr_mod_nc1=sys.argv[1]
 rrr_spl_csv=sys.argv[2]
 ZS_cyc_tim=float(sys.argv[3])
-rrr_mod_nc2=sys.argv[4]
+rrr_mod_nc4=sys.argv[4]
 
 
 #*******************************************************************************
@@ -65,7 +65,7 @@ print('Command line inputs')
 print('- '+rrr_mod_nc1)
 print('- '+rrr_spl_csv)
 print('- '+str(ZS_cyc_tim))
-print('- '+rrr_mod_nc2)
+print('- '+rrr_mod_nc4)
 
 
 #*******************************************************************************
@@ -237,21 +237,21 @@ print('- Done')
 
 
 #*******************************************************************************
-#Generating rrr_mod_nc2 based on rrr_mod_nc1 and rrr_spl_csv
+#Generating rrr_mod_nc4 based on rrr_mod_nc1 and rrr_spl_csv
 #*******************************************************************************
-print('Generating rrr_mod_nc2 based on rrr_mod_nc1 and rrr_spl_csv')
+print('Generating rrr_mod_nc4 based on rrr_mod_nc1 and rrr_spl_csv')
 
 #-------------------------------------------------------------------------------
 #Create netCDF file
 #-------------------------------------------------------------------------------
 print('- Create netCDF file')
-f2 = netCDF4.Dataset(rrr_mod_nc2, "w", format="NETCDF3_CLASSIC")
+f4 = netCDF4.Dataset(rrr_mod_nc4, "w", format="NETCDF3_CLASSIC")
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Global attributes
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for YV_att in f1.ncattrs():
-     f2.setncattr(YV_att,f1.getncattr(YV_att))
+     f4.setncattr(YV_att,f1.getncattr(YV_att))
 
 vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
 vsn=vsn[0]
@@ -259,23 +259,22 @@ vsn=vsn.rstrip()
 #Version of RRR
 
 if 'source' in f1.ncattrs():
-     f2.source=f1.source+'; RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+     f4.source=f1.source+'; RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
 else:
-     f2.source='RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+     f4.source='RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Dimensions
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-time = f2.createDimension(YV_time, None)
-rivid = f2.createDimension(YV_rivid, IS_riv_tot2)
-#The dimension of the new netCDF file is not IS_riv_tot1, it is IS_riv_tot2!!!
+time = f4.createDimension(YV_time, None)
+rivid = f4.createDimension(YV_rivid, IS_riv_tot2)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Variables
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-rivid = f2.createVariable(YV_rivid,"i4",(YV_rivid,))
+rivid = f4.createVariable(YV_rivid,"i4",(YV_rivid,))
 
-time = f2.createVariable(YV_time,"i4",(YV_time,))
+time = f4.createVariable(YV_time,"i4",(YV_time,))
 
 if '_FillValue' in  f1.variables[YV_var].ncattrs(): 
      ZS_fill=f1.variables[YV_var]._FillValue
@@ -285,23 +284,24 @@ else:
      #This produces 'f4' for float32 which is needed to get default_fillvals
      ZS_fill=netCDF4.default_fillvals[YV_var_type]
      print(' . The fill value is: '+str(ZS_fill))
-var = f2.createVariable(YV_var,"f4",(YV_time,YV_rivid,),fill_value=ZS_fill)
+var = f4.createVariable(YV_var,"f4",(YV_time,YV_rivid,),fill_value=ZS_fill)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Variable attributes
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for YV_att in f1.variables[YV_rivid].ncattrs():
-     f2.variables[YV_rivid].setncattr(                                         \
+     f4.variables[YV_rivid].setncattr(                                         \
                                 YV_att,f1.variables[YV_rivid].getncattr(YV_att))
 
 if YV_time in f1.variables:
      for YV_att in f1.variables[YV_time].ncattrs():
-          f2.variables[YV_time].setncattr(                                     \
+          f4.variables[YV_time].setncattr(                                     \
                                 YV_att,f1.variables[YV_time].getncattr(YV_att))
 
 for YV_att in f1.variables[YV_var].ncattrs():
-     f2.variables[YV_var].setncattr(                                           \
+     f4.variables[YV_var].setncattr(                                           \
                                 YV_att,f1.variables[YV_var].getncattr(YV_att))
+
 #-------------------------------------------------------------------------------
 #Initialize netCDF variables
 #-------------------------------------------------------------------------------
@@ -309,14 +309,14 @@ print('- Initialize netCDF variables')
 rivid[:]=IV_riv_tot_id2
 #Populate the river IDs of the subsampled file in the subsampled netCDF file
 
-ZV_time2=ZV_time1
-time[:]=ZV_time2
+ZV_time4=ZV_time1
+time[:]=ZV_time4
 #Populate the times of the original netCDF file in the subsampled netCDF file, 
 #or with those built from hardcoded values
 
-IS_time2=IS_time1
-for JS_time2 in range(IS_time2):
-     var[JS_time2,:]=[ZS_fill]*IS_riv_tot2
+IS_time4=IS_time1
+for JS_time4 in range(IS_time4):
+     var[JS_time4,:]=[ZS_fill]*IS_riv_tot2
 #Initialize all variable values (Qout or V) that are being subsampled to NoData
 
 #-------------------------------------------------------------------------------
@@ -367,7 +367,7 @@ print('Close all netCDF files')
 
 f1.close()
 #Not sure if that does anything
-f2.close()
+f4.close()
 #Closing the new netCDF file allows populating all data 
 
 
