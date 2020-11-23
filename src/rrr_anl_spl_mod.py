@@ -41,7 +41,7 @@ ZS_TauR=10800
 # 2 - rrr_spl_csv
 # 3 - ZS_cyc_tim				#S3:2332800;SaralEvn:3023999.928
 						#J3J2J1TP:856706.44;SWOT:1802700
-# 4 - rrr_mod_nc4
+# 4 - rrr_mod_nc3
 
 
 #*******************************************************************************
@@ -55,7 +55,7 @@ if IS_arg != 5:
 rrr_mod_nc1=sys.argv[1]
 rrr_spl_csv=sys.argv[2]
 ZS_cyc_tim=float(sys.argv[3])
-rrr_mod_nc4=sys.argv[4]
+rrr_mod_nc3=sys.argv[4]
 
 
 #*******************************************************************************
@@ -65,7 +65,7 @@ print('Command line inputs')
 print('- '+rrr_mod_nc1)
 print('- '+rrr_spl_csv)
 print('- '+str(ZS_cyc_tim))
-print('- '+rrr_mod_nc4)
+print('- '+rrr_mod_nc3)
 
 
 #*******************************************************************************
@@ -237,21 +237,21 @@ print('- Done')
 
 
 #*******************************************************************************
-#Generating rrr_mod_nc4 based on rrr_mod_nc1 and rrr_spl_csv
+#Generating rrr_mod_nc3 based on rrr_mod_nc1 and rrr_spl_csv
 #*******************************************************************************
-print('Generating rrr_mod_nc4 based on rrr_mod_nc1 and rrr_spl_csv')
+print('Generating rrr_mod_nc3 based on rrr_mod_nc1 and rrr_spl_csv')
 
 #-------------------------------------------------------------------------------
 #Create netCDF file
 #-------------------------------------------------------------------------------
 print('- Create netCDF file')
-f4 = netCDF4.Dataset(rrr_mod_nc4, "w", format="NETCDF3_CLASSIC")
+f3 = netCDF4.Dataset(rrr_mod_nc3, "w", format="NETCDF3_CLASSIC")
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Global attributes
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for YV_att in f1.ncattrs():
-     f4.setncattr(YV_att,f1.getncattr(YV_att))
+     f3.setncattr(YV_att,f1.getncattr(YV_att))
 
 vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
 vsn=vsn[0]
@@ -259,22 +259,22 @@ vsn=vsn.rstrip()
 #Version of RRR
 
 if 'source' in f1.ncattrs():
-     f4.source=f1.source+'; RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+     f3.source=f1.source+'; RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
 else:
-     f4.source='RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
+     f3.source='RRR: '+vsn+', file: '+os.path.basename(rrr_mod_nc1)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Dimensions
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-time = f4.createDimension(YV_time, None)
-rivid = f4.createDimension(YV_rivid, IS_riv_tot2)
+time = f3.createDimension(YV_time, None)
+rivid = f3.createDimension(YV_rivid, IS_riv_tot2)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Variables
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-rivid = f4.createVariable(YV_rivid,"i4",(YV_rivid,))
+rivid = f3.createVariable(YV_rivid,"i4",(YV_rivid,))
 
-time = f4.createVariable(YV_time,"i4",(YV_time,))
+time = f3.createVariable(YV_time,"i4",(YV_time,))
 
 if '_FillValue' in  f1.variables[YV_var].ncattrs(): 
      ZS_fill=f1.variables[YV_var]._FillValue
@@ -284,22 +284,22 @@ else:
      #This produces 'f4' for float32 which is needed to get default_fillvals
      ZS_fill=netCDF4.default_fillvals[YV_var_type]
      print(' . The fill value is: '+str(ZS_fill))
-var = f4.createVariable(YV_var,"f4",(YV_time,YV_rivid,),fill_value=ZS_fill)
+var = f3.createVariable(YV_var,"f4",(YV_time,YV_rivid,),fill_value=ZS_fill)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Variable attributes
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for YV_att in f1.variables[YV_rivid].ncattrs():
-     f4.variables[YV_rivid].setncattr(                                         \
+     f3.variables[YV_rivid].setncattr(                                         \
                                 YV_att,f1.variables[YV_rivid].getncattr(YV_att))
 
 if YV_time in f1.variables:
      for YV_att in f1.variables[YV_time].ncattrs():
-          f4.variables[YV_time].setncattr(                                     \
+          f3.variables[YV_time].setncattr(                                     \
                                 YV_att,f1.variables[YV_time].getncattr(YV_att))
 
 for YV_att in f1.variables[YV_var].ncattrs():
-     f4.variables[YV_var].setncattr(                                           \
+     f3.variables[YV_var].setncattr(                                           \
                                 YV_att,f1.variables[YV_var].getncattr(YV_att))
 
 #-------------------------------------------------------------------------------
@@ -309,14 +309,14 @@ print('- Initialize netCDF variables')
 rivid[:]=IV_riv_tot_id2
 #Populate the river IDs of the subsampled file in the subsampled netCDF file
 
-ZV_time4=ZV_time1
-time[:]=ZV_time4
+ZV_time3=ZV_time1
+time[:]=ZV_time3
 #Populate the times of the original netCDF file in the subsampled netCDF file, 
 #or with those built from hardcoded values
 
-IS_time4=IS_time1
-for JS_time4 in range(IS_time4):
-     var[JS_time4,:]=[ZS_fill]*IS_riv_tot2
+IS_time3=IS_time1
+for JS_time3 in range(IS_time3):
+     var[JS_time3,:]=[ZS_fill]*IS_riv_tot2
 #Initialize all variable values (Qout or V) that are being subsampled to NoData
 
 #-------------------------------------------------------------------------------
@@ -324,7 +324,7 @@ for JS_time4 in range(IS_time4):
 #-------------------------------------------------------------------------------
 print('- Populate netCDF variables')
 
-IS_cyc=int((ZV_time4[IS_time4-1]+ZS_TauR-ZV_time4[0])/ZS_cyc_tim)+1
+IS_cyc=int((ZV_time3[IS_time3-1]+ZS_TauR-ZV_time3[0])/ZS_cyc_tim)+1
 #Total integer number of complete cycles needed to fully cover simulation
 #(note that a value of 1 was added in the integer here to round up)
 
@@ -338,14 +338,14 @@ for JS_cyc in range(IS_cyc):
      for JS_mea_tim in range(IS_mea_tim):
           #Here we're looping on mean times sequentially in increasing order
           ZS_mea_tim=ZV_mea_tim[JS_mea_tim]
-          ZS_spl_tim=ZV_time4[0]+JS_cyc*ZS_cyc_tim+ZS_mea_tim
-          if (ZS_spl_tim<=ZV_time4[IS_time4-1]+ZS_TauR):
+          ZS_spl_tim=ZV_time3[0]+JS_cyc*ZS_cyc_tim+ZS_mea_tim
+          if (ZS_spl_tim<=ZV_time3[IS_time3-1]+ZS_TauR):
                #Here we're copying the value for each of the sampled river IDs
-               JS_time4=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
+               JS_time3=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
                IV_ids=ZH_mea_tim[ZS_mea_tim]
                IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
                IV_idx4=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
-               var[JS_time4,IV_idx4]=f1.variables[YV_var][JS_time4,IV_idx1]
+               var[JS_time3,IV_idx4]=f1.variables[YV_var][JS_time3,IV_idx1]
 prg_bar.finish()
 
 
@@ -356,7 +356,7 @@ print('Close all netCDF files')
 
 f1.close()
 #Not sure if that does anything
-f4.close()
+f3.close()
 #Closing the new netCDF file allows populating all data 
 
 
