@@ -324,39 +324,28 @@ for JS_time4 in range(IS_time4):
 #-------------------------------------------------------------------------------
 print('- Populate netCDF variables')
 
-prg_bar=progressbar.ProgressBar(maxval=IS_riv_tot2-1,                          \
+IS_cyc=int((ZV_time4[IS_time4-1]+ZS_TauR-ZV_time4[0])/ZS_cyc_tim)+1
+#Total integer number of complete cycles needed to fully cover simulation
+#(note that a value of 1 was added in the integer here to round up)
+
+prg_bar=progressbar.ProgressBar(maxval=IS_cyc-1,                               \
         widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
 
 prg_bar.start()
-for JS_riv_tot2 in range(IS_riv_tot2):
-     prg_bar.update(JS_riv_tot2)
-     for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
-          #Every river ID/mean time pair from rrr_spl_csv is accessed here.
-
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          #Find spatial index
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          IS_riv_id=IV_riv_tot_id2[JS_riv_tot2]
-          JS_riv_tot1=IH_hsh1[IS_riv_id]
-
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          #Find temporal index over each possible subsample cycle
-          #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          ZS_spl_tim=IM_spl_tim[JS_riv_tot2][JS_spl_cnt]+ZV_time1[0]
-          #Starting sampling at the beginning of simulation period (ZV_time1[0])
-          #hence assuming that the orbit cycle and the simulation both start at
-          #the same time.
-
-          while ZS_spl_tim<ZV_time1[IS_time1-1]+ZS_TauR:
-
-               JS_time2=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
-               #The index of the time value closest to mean time is now known
-               var[JS_time2,JS_riv_tot2]=                                      \
-                                      f1.variables[YV_var][JS_time2,JS_riv_tot1]
-
-               #Extract the value for the netCDF file
-               ZS_spl_tim=ZS_spl_tim+ZS_cyc_tim
-               #Update to the next cycle
+for JS_cyc in range(IS_cyc):
+     #Here we're looping on all complete cycles sequentially
+     prg_bar.update(JS_cyc)
+     for JS_time3 in range(IS_time3):
+          #Here we're looping on mean times sequentially in increasing order
+          ZS_time3=ZV_time3[JS_time3]
+          ZS_spl_tim=ZV_time4[0]+JS_cyc*ZS_cyc_tim+ZS_time3
+          if (ZS_spl_tim<=ZV_time4[IS_time4-1]+ZS_TauR):
+               #Here we're copying the value for each of the sampled river IDs
+               JS_time4=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
+               IV_ids=ZH_spl[ZS_time3]
+               IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
+               IV_idx4=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
+               var[JS_time4,IV_idx4]=f1.variables[YV_var][JS_time4,IV_idx1]
 prg_bar.finish()
 
 
