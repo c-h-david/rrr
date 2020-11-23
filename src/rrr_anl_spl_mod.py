@@ -145,14 +145,14 @@ print('Open rrr_spl_csv')
 
 IV_riv_tot_id2=[]
 IV_spl_cnt=[]
-IM_spl_tim=[]
+IM_mea_tim=[]
 with open(rrr_spl_csv) as csv_file:
      reader=csv.reader(csv_file,dialect='excel',quoting=csv.QUOTE_NONNUMERIC)
      for row in reader:
           if len(row[2:])==int(row[1]):
                IV_riv_tot_id2.append(int(row[0]))
                IV_spl_cnt.append(int(row[1]))
-               IM_spl_tim.append(row[2:])
+               IM_mea_tim.append(row[2:])
           else:
                print('ERROR - This file is inconsistent: '+rrr_spl_csv)
                raise SystemExit(22) 
@@ -188,24 +188,24 @@ print('- Done')
 #*******************************************************************************
 print('Reorganizing subsamples chronologically in a dictionary for faster I/O')
 
-ZH_spl={}
+ZH_mea_tim={}
 for JS_riv_tot2 in range(IS_riv_tot2):
      for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
-          ZH_spl[IM_spl_tim[JS_riv_tot2][JS_spl_cnt]]=[]
+          ZH_mea_tim[IM_mea_tim[JS_riv_tot2][JS_spl_cnt]]=[]
 #Each meantime value now has a key in the Python dictionary
 
 for JS_riv_tot2 in range(IS_riv_tot2):
      for JS_spl_cnt in range(IV_spl_cnt[JS_riv_tot2]):
-          ZH_spl[IM_spl_tim[JS_riv_tot2][JS_spl_cnt]]                          \
+          ZH_mea_tim[IM_mea_tim[JS_riv_tot2][JS_spl_cnt]]                      \
                .append(IV_riv_tot_id2[JS_riv_tot2])
 #Each meantime value now has a list of all associated river IDs
 
-ZV_time3=ZH_spl.keys()
-ZV_time3.sort()
+ZV_mea_tim=ZH_mea_tim.keys()
+ZV_mea_tim.sort()
 #The list of meantime values sorted in chronological order
-IS_time3=len(ZV_time3)
+IS_mea_tim=len(ZV_mea_tim)
 
-print('- The number of meantime values in subsample file is: '+str(IS_time3))
+print('- The number of meantime values in subsample file is: '+str(IS_mea_tim))
 
 
 #*******************************************************************************
@@ -213,9 +213,9 @@ print('- The number of meantime values in subsample file is: '+str(IS_time3))
 #*******************************************************************************
 print('Reorganizing subsamples dictionary following river IDs for faster I/O')
 
-for JS_time3 in range(IS_time3):
-     ZS_time3=ZV_time3[JS_time3]
-     IV_ids=ZH_spl[ZS_time3]
+for JS_mea_tim in range(IS_mea_tim):
+     ZS_mea_tim=ZV_mea_tim[JS_mea_tim]
+     IV_ids=ZH_mea_tim[ZS_mea_tim]
      IS_ids=len(IV_ids)
      IV_idx=[]
      #--------------------------------------------------------------------------
@@ -224,14 +224,14 @@ for JS_time3 in range(IS_time3):
      #for JS_ids in range(IS_ids):
      #     IV_idx.append(IH_hsh1[IV_ids[JS_ids]])
      #IV_idx.sort()
-     #ZH_spl[ZS_time3]=[IV_riv_tot_id1[JS_idx] for JS_idx in IV_idx]
+     #ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id1[JS_idx] for JS_idx in IV_idx]
      #--------------------------------------------------------------------------
      #If river IDs are sorted following IV_riv_tot_id2
      #--------------------------------------------------------------------------
      for JS_ids in range(IS_ids):
           IV_idx.append(IH_hsh2[IV_ids[JS_ids]])
      IV_idx.sort()
-     ZH_spl[ZS_time3]=[IV_riv_tot_id2[JS_idx] for JS_idx in IV_idx]
+     ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id2[JS_idx] for JS_idx in IV_idx]
 
 print('- Done')
 
@@ -335,14 +335,14 @@ prg_bar.start()
 for JS_cyc in range(IS_cyc):
      #Here we're looping on all complete cycles sequentially
      prg_bar.update(JS_cyc)
-     for JS_time3 in range(IS_time3):
+     for JS_mea_tim in range(IS_mea_tim):
           #Here we're looping on mean times sequentially in increasing order
-          ZS_time3=ZV_time3[JS_time3]
-          ZS_spl_tim=ZV_time4[0]+JS_cyc*ZS_cyc_tim+ZS_time3
+          ZS_mea_tim=ZV_mea_tim[JS_mea_tim]
+          ZS_spl_tim=ZV_time4[0]+JS_cyc*ZS_cyc_tim+ZS_mea_tim
           if (ZS_spl_tim<=ZV_time4[IS_time4-1]+ZS_TauR):
                #Here we're copying the value for each of the sampled river IDs
                JS_time4=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
-               IV_ids=ZH_spl[ZS_time3]
+               IV_ids=ZH_mea_tim[ZS_mea_tim]
                IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
                IV_idx4=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
                var[JS_time4,IV_idx4]=f1.variables[YV_var][JS_time4,IV_idx1]
