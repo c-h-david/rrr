@@ -344,8 +344,8 @@ for JS_cyc in range(IS_cyc):
                JS_time3=numpy.searchsorted(ZV_time1,ZS_spl_tim)-1
                IV_ids=ZH_mea_tim[ZS_mea_tim]
                IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
-               IV_idx4=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
-               var[JS_time3,IV_idx4]=f1.variables[YV_var][JS_time3,IV_idx1]
+               IV_idx3=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
+               var[JS_time3,IV_idx3]=f1.variables[YV_var][JS_time3,IV_idx1]
 prg_bar.finish()
 
 
