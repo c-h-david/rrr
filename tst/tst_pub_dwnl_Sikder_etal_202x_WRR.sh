@@ -90,16 +90,23 @@ list="                                                                         \
       orbit_coverage_JASON.tar.gz                                              \
       orbit_coverage_Sentinel3A.tar.gz                                         \
       orbit_coverage_SWOT_nadir.tar.gz                                         \
-      sampling_csv_orbit.tar.gz                                                \
       orbit_coverage_SARAL.tar.gz                                              \
       orbit_coverage_Sentinel3.tar.gz                                          \
       orbit_coverage_SWOT_swath.tar.gz                                         \
+      sampling_csv_orbit.tar.gz                                                \
       orbit_spl_JASON.tar.gz                                                   \
       orbit_spl_SARAL.tar.gz                                                   \
       orbit_spl_Sentinel3.tar.gz                                               \
       orbit_spl_Sentinel3A.tar.gz                                              \
       orbit_spl_SWOT_nadir.tar.gz                                              \
       orbit_spl_SWOT_swath.tar.gz                                              \
+      sampling_csv_regular.tar.gz                                              \
+      regular_spl_3day.tar.gz                                                  \
+      regular_spl_5day.tar.gz                                                  \
+      regular_spl_10day.tar.gz                                                 \
+      regular_spl_21day.tar.gz                                                 \
+      regular_spl_27day.tar.gz                                                 \
+      regular_spl_35day.tar.gz                                                 \
      "
 
 #-------------------------------------------------------------------------------

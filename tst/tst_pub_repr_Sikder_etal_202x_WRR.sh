@@ -319,6 +319,197 @@ fi
 
 
 #*******************************************************************************
+#Sampling of river discharge simulations for various regular coverage files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Sampling for 3D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 3D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_3D.csv                                    \
+     259200                                                                    \
+     ../output/MERIT_WRR/Qout_reg_int_3D_tst.nc                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_3D.nc                                    \
+     ../output/MERIT_WRR/Qout_reg_int_3D_tst.nc                                \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for 5D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 5D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_5D.csv                                    \
+     432000                                                                    \
+     ../output/MERIT_WRR/Qout_reg_int_5D_tst.nc                                \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_5D.nc                                    \
+     ../output/MERIT_WRR/Qout_reg_int_5D_tst.nc                                \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for 10D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 10D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_10D.csv                                   \
+     864000                                                                    \
+     ../output/MERIT_WRR/Qout_reg_int_10D_tst.nc                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_10D.nc                                   \
+     ../output/MERIT_WRR/Qout_reg_int_10D_tst.nc                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for 21D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 21D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_21D.csv                                   \
+     1814400                                                                   \
+     ../output/MERIT_WRR/Qout_reg_int_21D_tst.nc                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_21D.nc                                   \
+     ../output/MERIT_WRR/Qout_reg_int_21D_tst.nc                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for 27D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 27D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_27D.csv                                   \
+     2332800                                                                   \
+     ../output/MERIT_WRR/Qout_reg_int_27D_tst.nc                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_27D.nc                                   \
+     ../output/MERIT_WRR/Qout_reg_int_27D_tst.nc                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for 35D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for 35D"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/GRADES_Q_125cms_20000101_20091231.nc                   \
+     ../output/MERIT_WRR/seq_reg_int_35D.csv                                   \
+     3024000                                                                   \
+     ../output/MERIT_WRR/Qout_reg_int_35D_tst.nc                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_reg_int_35D.nc                                   \
+     ../output/MERIT_WRR/Qout_reg_int_35D_tst.nc                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Sampling of river discharge simulations for various satellite coverage files
 #*******************************************************************************
 
