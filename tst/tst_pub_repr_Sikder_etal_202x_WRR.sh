@@ -319,7 +319,7 @@ fi
 
 
 #*******************************************************************************
-#Sampling of river discharge simulations for various coverage files
+#Sampling of river discharge simulations for various satellite coverage files
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ echo "- Sampling for J3J2J1TP_nadir"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_J3J2J1TP_nadir.nc                                \
      ../output/MERIT_WRR/Qout_J3J2J1TP_nadir_tst.nc                            \
@@ -371,7 +371,7 @@ echo "- Sampling for S3A_nadir"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_S3A_nadir.nc                                     \
      ../output/MERIT_WRR/Qout_S3A_nadir_tst.nc                                 \
@@ -402,7 +402,7 @@ echo "- Sampling for S3A3Bmerged_nadir"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_S3A3Bmerged_nadir.nc                             \
      ../output/MERIT_WRR/Qout_S3A3Bmerged_nadir_tst.nc                         \
@@ -433,7 +433,7 @@ echo "- Sampling for SaralEnv_nadir"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_SaralEnv_nadir.nc                                \
      ../output/MERIT_WRR/Qout_SaralEnv_nadir_tst.nc                            \
@@ -464,7 +464,7 @@ echo "- Sampling for SWOT_nadir"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_SWOT_nadir.nc                                    \
      ../output/MERIT_WRR/Qout_SWOT_nadir_tst.nc                                \
@@ -495,7 +495,7 @@ echo "- Sampling for SWOT_swath"
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.shp)"
+echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
      ../output/MERIT_WRR/Qout_SWOT_swath.nc                                    \
      ../output/MERIT_WRR/Qout_SWOT_swath_tst.nc                                \
