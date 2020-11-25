@@ -195,6 +195,8 @@ if 'IV_riv_tot1' in locals() and 'IV_riv_tot2' in locals():
 #-------------------------------------------------------------------------------
 ZS_rdif_max=0
 ZS_adif_max=0
+ZS_msk_1=False
+ZS_msk_2=False
 
 for JS_time in range(IS_time):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -204,10 +206,20 @@ for JS_time in range(IS_time):
      ZS_adif=0
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-#initializing
+#getting variables from netCDF files
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      ZV_Vol_1=f1.variables[rrr_ncf_var][JS_time,:]
      ZV_Vol_2=f2.variables[rrr_ncf_var][JS_time,:]
+
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#Converting masked values to -9999
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     if numpy.ma.is_masked(ZV_Vol_1):
+          ZV_Vol_1=numpy.ma.filled(ZV_Vol_1, fill_value=-9999)
+          ZS_msk_1=True
+     if numpy.ma.is_masked(ZV_Vol_2):
+          ZV_Vol_2=numpy.ma.filled(ZV_Vol_2, fill_value=-9999)
+          ZS_msk_2=True
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #Comparing difference values
@@ -227,6 +239,10 @@ for JS_time in range(IS_time):
 #*******************************************************************************
 #Print difference values and comparing values to tolerance
 #*******************************************************************************
+if ZS_msk_1: print('WARNING: masked values replaced by -9999 in '+rrr_ncf_file1)
+if ZS_msk_2: print('WARNING: Masked values replaced by -9999 in '+rrr_ncf_file2)
+if ZS_msk_1 or ZS_msk_2: print('-------------------------------')
+
 print('Max relative difference       :'+'{0:.2e}'.format(ZS_rdif_max))
 print('Max absolute difference       :'+'{0:.2e}'.format(ZS_adif_max))
 print('-------------------------------')
