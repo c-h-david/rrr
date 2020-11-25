@@ -332,10 +332,10 @@ IS_cyc=int((ZV_time3[IS_time3-1]+ZS_TauR-ZV_time3[0])/ZS_cyc_tim)+1
 prg_bar=progressbar.ProgressBar(maxval=IS_cyc-1,                               \
         widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
 
-prg_bar.start()
+#prg_bar.start()
 for JS_cyc in range(IS_cyc):
      #Here we're looping on all complete cycles sequentially
-     prg_bar.update(JS_cyc)
+     #prg_bar.update(JS_cyc)
      for JS_mea_tim in range(IS_mea_tim):
           #Here we're looping on mean times sequentially in increasing order
           ZS_mea_tim=ZV_mea_tim[JS_mea_tim]
@@ -350,7 +350,7 @@ for JS_cyc in range(IS_cyc):
                IV_idx3=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
                #If river IDs are sorted following IV_riv_tot_id2
                var[JS_time3,IV_idx3]=f1.variables[YV_var][JS_time3,IV_idx1]
-prg_bar.finish()
+#prg_bar.finish()
 
 
 #*******************************************************************************
