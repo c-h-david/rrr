@@ -42,6 +42,7 @@ pyshp==1.2.3
 rasterio==0.35.1
 requests==2.12.1
 Rtree==0.6.0
+scipy==1.2.3
 Shapely==1.5.15
 
 
