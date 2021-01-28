@@ -134,7 +134,7 @@ and can be installed with `pip`. But first, let's make sure that the latest
 version of `pip` is installed
 
 ```
-$ wget https://bootstrap.pypa.io/get-pip.py
+$ wget https://bootstrap.pypa.io/2.7/get-pip.py
 $ sudo python get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
 $ rm get-pip.py
 ```

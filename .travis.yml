@@ -57,7 +57,7 @@ before_install:
 #*******************************************************************************
 install:
 - cd $TRAVIS_BUILD_DIR
-- wget https://bootstrap.pypa.io/get-pip.py
+- wget https://bootstrap.pypa.io/2.7/get-pip.py
 - sudo python get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
 - rm get-pip.py
 - which pip
