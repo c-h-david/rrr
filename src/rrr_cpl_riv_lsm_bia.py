@@ -164,6 +164,13 @@ IM_hsh_bas={}
 for JS_riv_bas in range(IS_riv_bas):
      IM_hsh_bas[IV_riv_bas_id[JS_riv_bas]]=JS_riv_bas
 
+IV_riv_ix1=[IM_hsh_bas[IS_riv_id] for IS_riv_id in IV_riv_tot_id]
+IV_riv_ix2=[IM_hsh_tot[IS_riv_id] for IS_riv_id in IV_riv_bas_id]
+#These arrays allow for index mapping such that IV_riv_tot_id[JS_riv_tot]
+#                                              =IV_riv_bas_id[JS_riv_bas]
+#IV_riv_ix1[JS_riv_tot]=JS_riv_bas
+#IV_riv_ix2[JS_riv_bas]=JS_riv_tot
+
 print('- Hash tables created')
 
 
@@ -316,7 +323,12 @@ for JS_m3r_tim in range(IS_m3r_tim):
      ZV_m3r_avg=ZV_m3r_avg+ZV_m3r_tmp
 
 ZV_m3r_avg=ZV_m3r_avg/IS_m3r_tim
-ZV_Qex_avg=ZV_m3r_avg/ZS_TaR
+
+ZV_Vex_avg=ZV_m3r_avg[IV_riv_ix2]
+#External inflow from runoff is now sorted following IV_riv_bas_id
+
+ZV_Qex_avg=ZV_Vex_avg/ZS_TaR
+#Converted from accumulated volume to inflow
 
 #-------------------------------------------------------------------------------
 #Closing file
@@ -507,10 +519,7 @@ print('Creating new m3_riv file')
 #-------------------------------------------------------------------------------
 print('- Computing the constant shift in m3_riv values')
 
-IV_riv_idx=[IM_hsh_bas[IS_riv_id] for IS_riv_id in IV_riv_tot_id]
-#Indexes (Python, 0-based) of the reaches in the basin within the whole network
-
-ZV_dm3_avg=ZV_dQe_avg[IV_riv_idx]*ZS_TaR
+ZV_dm3_avg=ZV_dQe_avg[IV_riv_ix1]*ZS_TaR
 
 print(' . Done')
 
