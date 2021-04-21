@@ -47,7 +47,7 @@ RUN  apt-get update && \
 #*******************************************************************************
 #Python requirements
 #*******************************************************************************
-ADD https://bootstrap.pypa.io/2.7/get-pip.py .
+ADD https://bootstrap.pypa.io/pip/2.7/get-pip.py .
 RUN python get-pip.py --no-cache-dir \
     `grep 'pip==' requirements.pip` \
     `grep 'setuptools==' requirements.pip` \
