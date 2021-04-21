@@ -12,7 +12,7 @@
 #   . Longitude of catchment centroid 
 #   . Latitude of catchment centroid 
 #Author:
-#Cedric H. David, 2007-2020
+#Cedric H. David, 2007-2021
 
 
 #*******************************************************************************

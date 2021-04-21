@@ -12,7 +12,7 @@
 #of errors, which is to be used for uncertainty quantification and/or data
 #assimilation.
 #Author:
-#Cedric H. David, 2018-2020
+#Cedric H. David, 2018-2021
 
 
 #*******************************************************************************

@@ -9,7 +9,7 @@
 #river ID itself; this program computes the lumped discharge and stores it in a
 #new CSV file.
 #Author:
-#Cedric H. David, 2018-2020
+#Cedric H. David, 2018-2021
 
 
 #*******************************************************************************

@@ -8,7 +8,7 @@
 #program creates a series of graphs with cumulative distribution functions of 
 #the errors.
 #Author:
-#Cedric H. David, 2017-2020
+#Cedric H. David, 2017-2021
 
 
 #*******************************************************************************

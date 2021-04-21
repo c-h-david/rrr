@@ -12,7 +12,7 @@
 #script is useful to diagnose lengthy read operations that can be addressed by
 #setting alternate chunking options in netCDF4 files.
 #Author:
-#Cedric H. David, 2018-2020
+#Cedric H. David, 2018-2021
 
 
 #*******************************************************************************
