@@ -245,6 +245,12 @@ ZV_min=numpy.where(IV_npt>0,ZV_min,numpy.NaN)
 #-------------------------------------------------------------------------------
 print('Computing percentile')
 
+ZV_til=numpy.zeros(IS_riv_bas)
+
+for JS_riv_bas in range(IS_riv_bas):
+     ZV_hyd=f.variables[YS_out_name][IS_beg:IS_end+1,JS_riv_bas]
+     ZV_til[JS_riv_bas]=numpy.percentile(ZV_hyd,ZS_prc)
+
 
 #*******************************************************************************
 #Write CSV file
@@ -256,14 +262,16 @@ with open(rrr_map_csv, 'wb') as csvfile:
      IV_line=[YS_id_name,                                                      \
               YS_out_name+'_avg',                                              \
               YS_out_name+'_max',                                              \
-              YS_out_name+'_min']
+              YS_out_name+'_min',                                              \
+              YS_out_name+'_'+str(int(ZS_prc))+'p']
      csvwriter.writerow(IV_line) 
 
      for JS_riv_bas in range(IS_riv_bas):
           IV_line=[IV_riv_bas_id[JS_riv_bas],                                  \
                    round(ZV_avg[JS_riv_bas],2),                                \
                    round(ZV_max[JS_riv_bas],2),                                \
-                   round(ZV_min[JS_riv_bas],2)]
+                   round(ZV_min[JS_riv_bas],2),                                \
+                   round(ZV_til[JS_riv_bas],2)]
           csvwriter.writerow(IV_line) 
 
 
