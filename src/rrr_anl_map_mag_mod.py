@@ -4,12 +4,12 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a netCDF file from RAPID outputs and the name of a CSV file, this program
-#computes a series of metrics concerning the magnitude of the output variable
-#(e.g. river discharge) for each individual river reach and saves the output in
-#the CSV file. If optional ISO 8601 character strings for the beginning and the
-#end of the analysis are provided, the metrics are only computed over the
-#desired time range.
+#Given a netCDF file from RAPID outputs, the name of a CSV file, and a
+#percentile value, this program computes a series of metrics concerning the
+#magnitude of the output variable (e.g. river discharge) for each individual
+#river reach and saves the output in the CSV file. If optional ISO 8601
+#character strings for the beginning and the end of the analysis are provided,
+#the metrics are only computed over the desired time range.
 #Author:
 #Cedric H. David, 2021-2021
 
@@ -22,6 +22,7 @@ import netCDF4
 import numpy
 import datetime
 import calendar
+import heapq
 import csv
 
 
@@ -29,25 +30,27 @@ import csv
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
 # 1 - rrr_out_ncf
-# 2 - rrr_map_csv
-#(3)- rrr_beg_iso
-#(4)- rrr_end_iso
+# 2 - ZS_prc
+# 3 - rrr_map_csv
+#(4)- rrr_beg_iso
+#(5)- rrr_end_iso
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 3 or IS_arg > 5:
-     print('ERROR - A minimum of 2 and a maximum of 4 arguments can be used')
+if IS_arg < 4 or IS_arg > 6:
+     print('ERROR - A minimum of 3 and a maximum of 5 arguments can be used')
      raise SystemExit(22) 
 
 rrr_out_ncf=sys.argv[1]
-rrr_map_csv=sys.argv[2]
-if IS_arg>=4:
-     rrr_beg_iso=sys.argv[3]
+ZS_prc=float(sys.argv[2])
+rrr_map_csv=sys.argv[3]
 if IS_arg>=5:
-     rrr_end_iso=sys.argv[4]
+     rrr_beg_iso=sys.argv[4]
+if IS_arg>=6:
+     rrr_end_iso=sys.argv[5]
 
 
 #*******************************************************************************
@@ -55,10 +58,11 @@ if IS_arg>=5:
 #*******************************************************************************
 print('Command line inputs')
 print('- '+rrr_out_ncf)
+print('- '+str(ZS_prc))
 print('- '+rrr_map_csv)
-if IS_arg>=4:
-     print('- '+rrr_beg_iso)
 if IS_arg>=5:
+     print('- '+rrr_beg_iso)
+if IS_arg>=6:
      print('- '+rrr_end_iso)
 
 
@@ -198,9 +202,9 @@ else:
      raise SystemExit(22) 
 
 #-------------------------------------------------------------------------------
-#Perform analysis
+#Computing average, maximum, and minimum
 #-------------------------------------------------------------------------------
-print('Performing analysis')
+print('Computing average, maximum, and minimum')
 
 IV_one=numpy.ones(IS_riv_bas)
 IV_npt=numpy.zeros(IS_riv_bas)
@@ -235,6 +239,11 @@ ZV_max=numpy.where(IV_npt>0,ZV_max,numpy.NaN)
 #Replacing max value by NaN where there only masked data
 ZV_min=numpy.where(IV_npt>0,ZV_min,numpy.NaN)
 #Replacing max value by NaN where there only masked data
+
+#-------------------------------------------------------------------------------
+#Computing percentile
+#-------------------------------------------------------------------------------
+print('Computing percentile')
 
 
 #*******************************************************************************
