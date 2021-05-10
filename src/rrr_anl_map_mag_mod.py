@@ -258,10 +258,15 @@ for JS_riv_bas in range(IS_riv_bas):
      IS_npt=IV_npt[JS_riv_bas]
      #The number of points in the timeseries for this river reach
      if IS_npt>0: ZV_rat[JS_riv_bas]=ZS_kth*(IS_npt-1)-int(ZS_kth*(IS_npt-1))
-     if True:
+     if False:
           IS_nhp=IS_npt-int(ZS_kth*(IS_npt-1))
           #The number of elements to retain for percentile computation
           ZH_hea[JS_riv_bas]=[-999999999]*IS_nhp
+          heapq.heapify(ZH_hea[JS_riv_bas])
+     if True:
+          IS_nhp=int(ZS_kth*(IS_npt-1))+2
+          #The number of elements to retain for percentile computation
+          ZH_hea[JS_riv_bas]=[999999999]*IS_nhp
           heapq.heapify(ZH_hea[JS_riv_bas])
 
 for JS_time in range(IS_beg,IS_end+1):
@@ -273,13 +278,17 @@ for JS_time in range(IS_beg,IS_end+1):
           BV_yes=[True]*IS_riv_bas
      #locations where the netCDF values are not masked (~ inverts all booleans)
      for JS_riv_bas in range(IS_riv_bas):
-          if (BV_yes[JS_riv_bas] and True):
+          if (BV_yes[JS_riv_bas] and False):
                heapq.heappushpop(ZH_hea[JS_riv_bas],ZV_out[JS_riv_bas])
+          if (BV_yes[JS_riv_bas] and True):
+               heapq._heappushpop_max(ZH_hea[JS_riv_bas],ZV_out[JS_riv_bas])
 
 for JS_riv_bas in range(IS_riv_bas):
      ZS_rat=ZV_rat[JS_riv_bas]
-     if True:
+     if False:
           ZV_two=heapq.nsmallest(2,ZH_hea[JS_riv_bas])
+     if True:
+          ZV_two=heapq.nlargest(2,ZH_hea[JS_riv_bas])
      ZV_two.sort()
      ZV_til[JS_riv_bas]=ZV_two[0]+ZS_rat*(ZV_two[1]-ZV_two[0])
 
