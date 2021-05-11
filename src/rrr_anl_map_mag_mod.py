@@ -255,7 +255,8 @@ ZV_rat=numpy.zeros(IS_riv_bas)
 #List of ratios, one ratio per reach, used as weight between two percentiles
 ZH_hea=[[] for JS_riv_bas in range(IS_riv_bas)]
 #List of heaps, one heap per reach, each will be built with appropriate size
-ZV_til=numpy.zeros(IS_riv_bas)
+ZV_til=numpy.empty(IS_riv_bas)
+ZV_til[:]=numpy.nan
 #Initialized numpy array for percentile values
 
 for JS_riv_bas in range(IS_riv_bas):
@@ -288,13 +289,14 @@ for JS_time in range(IS_beg,IS_end+1):
                heapq._heappushpop_max(ZH_hea[JS_riv_bas],ZV_out[JS_riv_bas])
 
 for JS_riv_bas in range(IS_riv_bas):
-     ZS_rat=ZV_rat[JS_riv_bas]
-     if ZS_kth>=0.5:
-          ZV_two=heapq.nsmallest(2,ZH_hea[JS_riv_bas])
-     if ZS_kth<0.5:
-          ZV_two=heapq.nlargest(2,ZH_hea[JS_riv_bas])
-     ZV_two.sort()
-     ZV_til[JS_riv_bas]=ZV_two[0]+ZS_rat*(ZV_two[1]-ZV_two[0])
+     if IV_npt[JS_riv_bas]>0:
+          ZS_rat=ZV_rat[JS_riv_bas]
+          if ZS_kth>=0.5:
+               ZV_two=heapq.nsmallest(2,ZH_hea[JS_riv_bas])
+          if ZS_kth<0.5:
+               ZV_two=heapq.nlargest(2,ZH_hea[JS_riv_bas])
+          ZV_two.sort()
+          ZV_til[JS_riv_bas]=ZV_two[0]+ZS_rat*(ZV_two[1]-ZV_two[0])
 
 
 #*******************************************************************************
