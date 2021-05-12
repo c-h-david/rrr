@@ -183,11 +183,20 @@ elif 'rivid' in f2.variables:
 
 if 'IV_riv_tot1' in locals() and 'IV_riv_tot2' in locals():
      #This makes sure that both variables actually exist before comparing them
-     if numpy.array_equal(IV_riv_tot1[:],IV_riv_tot2[:]):
-          print('The rivids are the same')
+     if numpy.array_equal(IV_riv_tot1,IV_riv_tot2):
+          print('The rivids are the same, and sorted similarly')
      else:
-          print('ERROR: The rivids differ')
-          raise SystemExit(99) 
+          if numpy.array_equal(numpy.sort(IV_riv_tot1),numpy.sort(IV_riv_tot2)):
+               print('WARNING: The rivids are the same, but sorted differently')
+               IM_hsh={}
+               for JS_riv_tot in range(IS_riv_tot):
+                    IM_hsh[IV_riv_tot2[JS_riv_tot]]=JS_riv_tot
+               IV_loc=[]
+               for JS_riv_tot in range(IS_riv_tot):
+                    IV_loc.append(IM_hsh[IV_riv_tot1[JS_riv_tot]])
+          else:
+               print('ERROR: The rivids differ')
+               raise SystemExit(99)
      print('-------------------------------')
 
 #-------------------------------------------------------------------------------
@@ -210,6 +219,8 @@ for JS_time in range(IS_time):
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      ZV_Vol_1=f1.variables[rrr_ncf_var][JS_time,:]
      ZV_Vol_2=f2.variables[rrr_ncf_var][JS_time,:]
+     if 'IV_loc' in locals():
+          ZV_Vol_2=ZV_Vol_2[IV_loc]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #Converting masked values to -9999
