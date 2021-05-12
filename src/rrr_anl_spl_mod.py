@@ -307,8 +307,9 @@ for YV_att in f1.variables[YV_var].ncattrs():
 #-------------------------------------------------------------------------------
 print('- Initialize netCDF variables')
 #rivid[:]=IV_riv_tot_id1
+##If river IDs are sorted following IV_riv_tot_id1
 rivid[:]=IV_riv_tot_id2
-#Populate the river IDs of the subsampled file in the subsampled netCDF file
+#If river IDs are sorted following IV_riv_tot_id2
 
 ZV_time3=ZV_time1
 time[:]=ZV_time3
