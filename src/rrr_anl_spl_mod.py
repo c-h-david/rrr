@@ -326,7 +326,11 @@ for JS_time3 in range(IS_time3):
 #-------------------------------------------------------------------------------
 print('- Populate netCDF variables')
 
-IS_cyc=int((ZV_time3[IS_time3-1]+ZS_TauR-ZV_time3[0])/ZS_cyc_tim)+1
+ZS_cyc=(ZV_time3[IS_time3-1]+ZS_TauR-ZV_time3[0])/ZS_cyc_tim
+if ZS_cyc.is_integer():
+     IS_cyc=ZS_cyc
+else:
+     IS_cyc=int(ZS_cyc)+1
 #Total integer number of complete cycles needed to fully cover simulation
 #(note that a value of 1 was added in the integer here to round up)
 
