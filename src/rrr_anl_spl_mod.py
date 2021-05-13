@@ -221,17 +221,17 @@ for JS_mea_tim in range(IS_mea_tim):
      #--------------------------------------------------------------------------
      #If river IDs are sorted following IV_riv_tot_id1
      #--------------------------------------------------------------------------
-     #for JS_ids in range(IS_ids):
-     #     IV_idx.append(IH_hsh1[IV_ids[JS_ids]])
-     #IV_idx.sort()
-     #ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id1[JS_idx] for JS_idx in IV_idx]
+     for JS_ids in range(IS_ids):
+          IV_idx.append(IH_hsh1[IV_ids[JS_ids]])
+     IV_idx.sort()
+     ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id1[JS_idx] for JS_idx in IV_idx]
      #--------------------------------------------------------------------------
      #If river IDs are sorted following IV_riv_tot_id2
      #--------------------------------------------------------------------------
-     for JS_ids in range(IS_ids):
-          IV_idx.append(IH_hsh2[IV_ids[JS_ids]])
-     IV_idx.sort()
-     ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id2[JS_idx] for JS_idx in IV_idx]
+     #for JS_ids in range(IS_ids):
+     #     IV_idx.append(IH_hsh2[IV_ids[JS_ids]])
+     #IV_idx.sort()
+     #ZH_mea_tim[ZS_mea_tim]=[IV_riv_tot_id2[JS_idx] for JS_idx in IV_idx]
 
 print('- Done')
 
@@ -306,10 +306,10 @@ for YV_att in f1.variables[YV_var].ncattrs():
 #Initialize netCDF variables
 #-------------------------------------------------------------------------------
 print('- Initialize netCDF variables')
-#rivid[:]=IV_riv_tot_id1
-##If river IDs are sorted following IV_riv_tot_id1
-rivid[:]=IV_riv_tot_id2
-#If river IDs are sorted following IV_riv_tot_id2
+rivid[:]=IV_riv_tot_id1
+#If river IDs are sorted following IV_riv_tot_id1
+#rivid[:]=IV_riv_tot_id2
+##If river IDs are sorted following IV_riv_tot_id2
 
 ZV_time3=ZV_time1
 time[:]=ZV_time3
@@ -347,11 +347,11 @@ for JS_cyc in range(IS_cyc):
                IV_ids=ZH_mea_tim[ZS_mea_tim]
                IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-               #IV_idx3=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
-               ##If river IDs are sorted following IV_riv_tot_id1
+               IV_idx3=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
+               #If river IDs are sorted following IV_riv_tot_id1
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-               IV_idx3=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
-               #If river IDs are sorted following IV_riv_tot_id2
+               #IV_idx3=[IH_hsh2[IS_ids] for IS_ids in IV_ids]
+               ##If river IDs are sorted following IV_riv_tot_id2
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                var[JS_time3,IV_idx3]=f1.variables[YV_var][JS_time3,IV_idx1]
 #prg_bar.finish()
