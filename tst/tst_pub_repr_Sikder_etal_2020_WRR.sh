@@ -717,6 +717,7 @@ echo "- Analyzing magnitude metrics for TIM03D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM03D.nc                                        \
      75                                                                        \
+     TIM03D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -747,6 +748,7 @@ echo "- Analyzing magnitude metrics for TIM05D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM05D.nc                                        \
      75                                                                        \
+     TIM05D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -777,6 +779,7 @@ echo "- Analyzing magnitude metrics for TIM10D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM10D.nc                                        \
      75                                                                        \
+     TIM10D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -807,6 +810,7 @@ echo "- Analyzing magnitude metrics for TIM21D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM21D.nc                                        \
      75                                                                        \
+     TIM21D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -837,6 +841,7 @@ echo "- Analyzing magnitude metrics for TIM27D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM27D.nc                                        \
      75                                                                        \
+     TIM27D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -867,6 +872,7 @@ echo "- Analyzing magnitude metrics for TIM35D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TIM35D.nc                                        \
      75                                                                        \
+     TIM35D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -902,6 +908,7 @@ echo "- Analyzing magnitude metrics for TOPJAS"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_TOPJAS.nc                                        \
      75                                                                        \
+     TOPJAS                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -932,6 +939,7 @@ echo "- Analyzing magnitude metrics for SENT3A"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_SENT3A.nc                                        \
      75                                                                        \
+     SENT3A                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -962,6 +970,7 @@ echo "- Analyzing magnitude metrics for S3AS3B"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_S3AS3B.nc                                        \
      75                                                                        \
+     S3AS3B                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -992,6 +1001,7 @@ echo "- Analyzing magnitude metrics for ENVSRL"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_ENVSRL.nc                                        \
      75                                                                        \
+     ENVSRL                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -1022,6 +1032,7 @@ echo "- Analyzing magnitude metrics for SWOT_N"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_SWOT_N.nc                                        \
      75                                                                        \
+     SWOT_N                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -1052,6 +1063,7 @@ echo "- Analyzing magnitude metrics for SWOT_S"
 ../src/rrr_anl_map_mag_mod.py                                                  \
      ../output/MERIT_WRR/Qout_SWOT_S.nc                                        \
      75                                                                        \
+     SWOT_S                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi

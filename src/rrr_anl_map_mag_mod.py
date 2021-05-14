@@ -31,26 +31,28 @@ import csv
 #*******************************************************************************
 # 1 - rrr_out_ncf
 # 2 - ZS_prc
-# 3 - rrr_map_csv
-#(4)- rrr_beg_iso
-#(5)- rrr_end_iso
+# 3 - YS_title
+# 4 - rrr_map_csv
+#(5)- rrr_beg_iso
+#(6)- rrr_end_iso
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg < 4 or IS_arg > 6:
-     print('ERROR - A minimum of 3 and a maximum of 5 arguments can be used')
+if IS_arg < 5 or IS_arg > 7:
+     print('ERROR - A minimum of 4 and a maximum of 6 arguments can be used')
      raise SystemExit(22) 
 
 rrr_out_ncf=sys.argv[1]
 ZS_prc=float(sys.argv[2])
-rrr_map_csv=sys.argv[3]
-if IS_arg>=5:
-     rrr_beg_iso=sys.argv[4]
+YS_title=sys.argv[3]
+rrr_map_csv=sys.argv[4]
 if IS_arg>=6:
-     rrr_end_iso=sys.argv[5]
+     rrr_beg_iso=sys.argv[5]
+if IS_arg>=7:
+     rrr_end_iso=sys.argv[6]
 
 
 #*******************************************************************************
@@ -59,10 +61,11 @@ if IS_arg>=6:
 print('Command line inputs')
 print('- '+rrr_out_ncf)
 print('- '+str(ZS_prc))
+print('- '+YS_title)
 print('- '+rrr_map_csv)
-if IS_arg>=5:
-     print('- '+rrr_beg_iso)
 if IS_arg>=6:
+     print('- '+rrr_beg_iso)
+if IS_arg>=7:
      print('- '+rrr_end_iso)
 
 
@@ -306,7 +309,7 @@ print('Writing CSV file')
 
 with open(rrr_map_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
-     IV_line=[YS_id_name,                                                      \
+     IV_line=[YS_title,                                                        \
               YS_out_name+'_avg',                                              \
               YS_out_name+'_max',                                              \
               YS_out_name+'_min',                                              \
