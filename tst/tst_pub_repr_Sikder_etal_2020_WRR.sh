@@ -701,6 +701,38 @@ fi
 
 
 #*******************************************************************************
+#Analyzing magnitude metrics for reference
+#*******************************************************************************
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for GRADES"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     75                                                                        \
+     GRADES                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Analyzing magnitude metrics for various regular coverage files
 #*******************************************************************************
 
