@@ -1,23 +1,23 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_repr_Emery_etal_2020_JHM2.sh
+#tst_pub_repr_Sikder_etal_2020_WRR.sh
 #*******************************************************************************
 
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
-#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (202x), A Synthetic
-#Dataset Inspired by Satellite Altimetry and Impacts of Sampling on Global
+#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (2020), A Synthetic
+#Data Set Inspired by Satellite Altimetry and Impacts of Sampling on Global
 #Spaceborne Discharge Characterization.
-#DOI: xx.xxxx/xxxxxxxxxx
+#DOI: 10.1029/2020WR029035
 #The files used are available from:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
 #Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (202x), Input and
-#output files corresponding to "A Synthetic Dataset Inspired by Satellite
+#output files corresponding to "A Synthetic Data Set Inspired by Satellite
 #Altimetry and Impacts of Sampling on Global Spaceborne Discharge
 #Characterization", Zenodo.
-#DOI: 10.5281/zenodo.4064188
+#DOI: 10.5281/zenodo.3542269
 #The following are the possible arguments:
 # - No argument: all unit tests are run
 # - One unique unit test number: this test is run
@@ -41,7 +41,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Reproducing files for: https://dx.doi.org/xx.xxxx/xxxxxxxxxx"
+echo "Reproducing files for: https://doi.org/10.1029/2020WR029035"
 echo "********************"
 
 

@@ -1,22 +1,22 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_Sikder_etal_202x_WRR.sh
+#tst_pub_dwnl_Sikder_etal_2020_WRR.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
-#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (202x), A Synthetic
-#Dataset Inspired by Satellite Altimetry and Impacts of Sampling on Global
+#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (2020), A Synthetic
+#Data Set Inspired by Satellite Altimetry and Impacts of Sampling on Global
 #Spaceborne Discharge Characterization.
-#DOI: xx.xxxx/xxxxxxxxxx
+#DOI: 10.1029/2020WR029035
 #The files used are available from:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
 #Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (202x), Input and
-#output files corresponding to "A Synthetic Dataset Inspired by Satellite
+#output files corresponding to "A Synthetic Data Set Inspired by Satellite
 #Altimetry and Impacts of Sampling on Global Spaceborne Discharge
 #Characterization", Zenodo.
-#DOI: 10.5281/zenodo.4064188
+#DOI: 10.5281/zenodo.3542269
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
@@ -39,8 +39,8 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Downloading files from:   https://dx.doi.org/xx.xxxx/xxxxxxxxxx"
-echo "which correspond to   :   https://dx.doi.org/10.5281/zenodo.4064188"
+echo "Downloading files from:   https://doi.org/10.5281/zenodo.3542269"
+echo "which correspond to   :   https://doi.org/10.1029/2020WR029035"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
 echo "Please cite these four DOIs if using these files for your publications."
 echo "********************"
