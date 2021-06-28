@@ -504,7 +504,7 @@ fi
 
 
 #*******************************************************************************
-#Sampling of river discharge simulations for various regular coverage files
+#Sampling river discharge simulations for multiple temporal sampling sequences
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
@@ -695,7 +695,198 @@ fi
 
 
 #*******************************************************************************
-#Sampling of river discharge simulations for various satellite coverage files
+#Sampling river discharge simulations for multiple spatial sampling sequences
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Sampling for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPATPJ"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPATPJ.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPATPJ_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPATPJ.nc                                        \
+     ../output/MERIT_WRR/Qout_SPATPJ_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPAS3A"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPAS3A.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPAS3A_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPAS3A.nc                                        \
+     ../output/MERIT_WRR/Qout_SPAS3A_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPA3AB"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPA3AB.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPA3AB_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPA3AB.nc                                        \
+     ../output/MERIT_WRR/Qout_SPA3AB_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPAEVS"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPAEVS.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPAEVS_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPAEVS.nc                                        \
+     ../output/MERIT_WRR/Qout_SPAEVS_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPASWN"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPASWN.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPASWN_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPASWN.nc                                        \
+     ../output/MERIT_WRR/Qout_SPASWN_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sampling for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Sampling for SPASWS"
+../src/rrr_anl_spl_mod.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/seq_SPASWS.csv                                        \
+     86400                                                                     \
+     ../output/MERIT_WRR/Qout_SPASWS_tst.nc                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sampled netCDF"
+./tst_cmp_ncf.py                                                               \
+     ../output/MERIT_WRR/Qout_SPASWS.nc                                        \
+     ../output/MERIT_WRR/Qout_SPASWS_tst.nc                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Sampling river discharge simulations for multiple satellite sampling sequences
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
