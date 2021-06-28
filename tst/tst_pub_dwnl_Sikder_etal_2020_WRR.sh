@@ -1,18 +1,18 @@
 #!/bin/bash
 #*******************************************************************************
-#tst_pub_dwnl_Sikder_etal_2020_WRR.sh
+#tst_pub_dwnl_Sikder_etal_2021_WRR.sh
 #*******************************************************************************
 
 #Purpose:
 #This script downloads all the files corresponding to:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
-#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (2020), A Synthetic
+#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (2021), A Synthetic
 #Data Set Inspired by Satellite Altimetry and Impacts of Sampling on Global
 #Spaceborne Discharge Characterization.
 #DOI: 10.1029/2020WR029035
 #The files used are available from:
 #Sikder, M. Safat, Matthew Bonnema, Charlotte M. Emery, Cédric H. David, Peirong
-#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (202x), Input and
+#Lin, Ming Pan, Sylvain Biancamaria, and Michelle M. Gierach (2021), Input and
 #output files corresponding to "A Synthetic Data Set Inspired by Satellite
 #Altimetry and Impacts of Sampling on Global Spaceborne Discharge
 #Characterization", Zenodo.
