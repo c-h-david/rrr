@@ -86,11 +86,11 @@ unt=0
 
 
 #*******************************************************************************
-#Coverage files in .csv and .shp formats
+#Sequence and coverage files in .csv and .shp formats
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#Coverage files for TOPJAS
+#Sequence and coverage files for TOPJAS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -98,7 +98,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for TOPJAS"
+echo "- Creating sequence and coverage files for TOPJAS"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/TOPJAS.shp                                             \
@@ -114,7 +114,7 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
      ../output/MERIT_WRR/seq_TOPJAS_tst.csv                                    \
@@ -128,7 +128,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Coverage files for SENT3A
+#Sequence and coverage files for SENT3A
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -136,7 +136,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for SENT3A"
+echo "- Creating sequence and coverage files for SENT3A"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/SENT3A.shp                                             \
@@ -152,7 +152,7 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_SENT3A.csv                                        \
      ../output/MERIT_WRR/seq_SENT3A_tst.csv                                    \
@@ -166,7 +166,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Coverage files for S3AS3B
+#Sequence and coverage files for S3AS3B
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -174,7 +174,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for S3AS3B"
+echo "- Creating sequence and coverage files for S3AS3B"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/S3AS3B.shp                                             \
@@ -190,7 +190,7 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
      ../output/MERIT_WRR/seq_S3AS3B_tst.csv                                    \
@@ -204,7 +204,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Coverage files for ENVSRL
+#Sequence and coverage files for ENVSRL
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -212,7 +212,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for ENVSRL"
+echo "- Creating sequence and coverage files for ENVSRL"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/ENVSRL.shp                                             \
@@ -228,7 +228,7 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
      ../output/MERIT_WRR/seq_ENVSRL_tst.csv                                    \
@@ -242,7 +242,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Coverage files for SWOT_N
+#Sequence and coverage files for SWOT_N
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -250,7 +250,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for SWOT_N"
+echo "- Creating sequence and coverage files for SWOT_N"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/SWOT_N.shp                                             \
@@ -266,7 +266,7 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
      ../output/MERIT_WRR/seq_SWOT_N_tst.csv                                    \
@@ -280,7 +280,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Coverage files for SWOT_S
+#Sequence and coverage files for SWOT_S
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -288,7 +288,7 @@ echo "Running unit test $unt/$lst"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coverage files for SWOT_S"
+echo "- Creating sequence and coverage files for SWOT_S"
 ../src/rrr_anl_spl_shp.py                                                      \
      ../input/MERIT_WRR/MERIT_riv_Qmean_125cms.shp                             \
      ../input/MERIT_WRR/SWOT_S.shp                                             \
@@ -304,10 +304,195 @@ echo "- Comparing coverage file (.shp)"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
-echo "- Comparing coverage file (.csv)"
+echo "- Comparing sequence file (.csv)"
 diff                                                                           \
      ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
      ../output/MERIT_WRR/seq_SWOT_S_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Sequence files in .csv formats
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPATPJ"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPATPJ_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPATPJ.csv                                        \
+     ../output/MERIT_WRR/seq_SPATPJ_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPAS3A"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_SENT3A.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPAS3A_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPAS3A.csv                                        \
+     ../output/MERIT_WRR/seq_SPAS3A_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPA3AB"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPA3AB_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPA3AB.csv                                        \
+     ../output/MERIT_WRR/seq_SPA3AB_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPAEVS"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPAEVS_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPAEVS.csv                                        \
+     ../output/MERIT_WRR/seq_SPAEVS_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPASWN"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPASWN_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPASWN.csv                                        \
+     ../output/MERIT_WRR/seq_SPASWN_tst.csv                                    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Sequence file for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating sequence file for SPASWS"
+../src/rrr_anl_spl_csv.py                                                      \
+     ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
+     0.0                                                                       \
+     ../output/MERIT_WRR/seq_SPASWS_tst.csv                                    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing sequence file (.csv)"
+diff                                                                           \
+     ../output/MERIT_WRR/seq_SPASWS.csv                                        \
+     ../output/MERIT_WRR/seq_SPASWS_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
