@@ -1109,7 +1109,7 @@ fi
 
 
 #*******************************************************************************
-#Analyzing magnitude metrics for various regular coverage files
+#Analyzing magnitude metrics for multiple temporal sampling sequences
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
@@ -1300,7 +1300,198 @@ fi
 
 
 #*******************************************************************************
-#Analyzing magnitude metrics for various satellite coverage files
+#Analyzing magnitude metrics for multiple spatial sampling sequences
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPATPJ"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPATPJ.nc                                        \
+     75                                                                        \
+     SPATPJ                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPAS3A"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPAS3A.nc                                        \
+     75                                                                        \
+     SPAS3A                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPA3AB"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPA3AB.nc                                        \
+     75                                                                        \
+     SPA3AB                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPAEVS"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPAEVS.nc                                        \
+     75                                                                        \
+     SPAEVS                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPASWN"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPASWN.nc                                        \
+     75                                                                        \
+     SPASWN                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing magnitude metrics for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing magnitude metrics for SPASWS"
+../src/rrr_anl_map_mag_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPASWS.nc                                        \
+     75                                                                        \
+     SPASWS                                                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing magnitude metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Analyzing magnitude metrics for multiple satellite sampling sequences
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
