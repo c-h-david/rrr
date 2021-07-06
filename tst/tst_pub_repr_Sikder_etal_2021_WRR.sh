@@ -901,7 +901,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for TOPJAS"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
+     ../output/MERIT_WRR/seq_TOPJAS_chd.csv                                    \
      856706.44                                                                 \
      ../output/MERIT_WRR/Qout_TOPJAS_tst.nc                                    \
      > $run_file
@@ -909,7 +909,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_TOPJAS.nc                                        \
+     ../output/MERIT_WRR/Qout_TOPJAS_chd.nc                                    \
      ../output/MERIT_WRR/Qout_TOPJAS_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -932,7 +932,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SENT3A"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SENT3A.csv                                        \
+     ../output/MERIT_WRR/seq_SENT3A_chd.csv                                    \
      2332800.00                                                                \
      ../output/MERIT_WRR/Qout_SENT3A_tst.nc                                    \
      > $run_file
@@ -940,7 +940,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_SENT3A.nc                                        \
+     ../output/MERIT_WRR/Qout_SENT3A_chd.nc                                    \
      ../output/MERIT_WRR/Qout_SENT3A_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -963,7 +963,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for S3AS3B"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
+     ../output/MERIT_WRR/seq_S3AS3B_chd.csv                                    \
      2332800.00                                                                \
      ../output/MERIT_WRR/Qout_S3AS3B_tst.nc                                    \
      > $run_file
@@ -971,7 +971,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_S3AS3B.nc                                        \
+     ../output/MERIT_WRR/Qout_S3AS3B_chd.nc                                    \
      ../output/MERIT_WRR/Qout_S3AS3B_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -994,7 +994,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for ENVSRL"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
+     ../output/MERIT_WRR/seq_ENVSRL_chd.csv                                    \
      3023999.928                                                               \
      ../output/MERIT_WRR/Qout_ENVSRL_tst.nc                                    \
      > $run_file
@@ -1002,7 +1002,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_ENVSRL.nc                                        \
+     ../output/MERIT_WRR/Qout_ENVSRL_chd.nc                                    \
      ../output/MERIT_WRR/Qout_ENVSRL_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1025,7 +1025,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SWOT_N"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
+     ../output/MERIT_WRR/seq_SWOT_N_chd.csv                                    \
      1802700.00                                                                \
      ../output/MERIT_WRR/Qout_SWOT_N_tst.nc                                    \
      > $run_file
@@ -1033,7 +1033,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_SWOT_N.nc                                        \
+     ../output/MERIT_WRR/Qout_SWOT_N_chd.nc                                    \
      ../output/MERIT_WRR/Qout_SWOT_N_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1056,7 +1056,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SWOT_S"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
+     ../output/MERIT_WRR/seq_SWOT_S_chd.csv                                    \
      1802700.00                                                                \
      ../output/MERIT_WRR/Qout_SWOT_S_tst.nc                                    \
      > $run_file
@@ -1064,7 +1064,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sampled netCDF"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MERIT_WRR/Qout_SWOT_S.nc                                        \
+     ../output/MERIT_WRR/Qout_SWOT_S_chd.nc                                    \
      ../output/MERIT_WRR/Qout_SWOT_S_tst.nc                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
