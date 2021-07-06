@@ -1096,7 +1096,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1123,7 +1123,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM03D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM03D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM03D_chd.nc                                    \
      75                                                                        \
      TIM03D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_tst.csv                   \
@@ -1132,7 +1132,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1154,7 +1154,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM05D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM05D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM05D_chd.nc                                    \
      75                                                                        \
      TIM05D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_tst.csv                   \
@@ -1163,7 +1163,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1185,7 +1185,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM10D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM10D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM10D_chd.nc                                    \
      75                                                                        \
      TIM10D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_tst.csv                   \
@@ -1194,7 +1194,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1216,7 +1216,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM21D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM21D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM21D_chd.nc                                    \
      75                                                                        \
      TIM21D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_tst.csv                   \
@@ -1225,7 +1225,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1247,7 +1247,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM27D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM27D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM27D_chd.nc                                    \
      75                                                                        \
      TIM27D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_tst.csv                   \
@@ -1256,7 +1256,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1278,7 +1278,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TIM35D"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TIM35D.nc                                        \
+     ../output/MERIT_WRR/Qout_TIM35D_chd.nc                                    \
      75                                                                        \
      TIM35D                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_tst.csv                   \
@@ -1287,7 +1287,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1314,7 +1314,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPATPJ"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPATPJ.nc                                        \
+     ../output/MERIT_WRR/Qout_SPATPJ_chd.nc                                    \
      75                                                                        \
      SPATPJ                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_tst.csv                   \
@@ -1323,7 +1323,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1345,7 +1345,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPAS3A"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPAS3A.nc                                        \
+     ../output/MERIT_WRR/Qout_SPAS3A_chd.nc                                    \
      75                                                                        \
      SPAS3A                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_tst.csv                   \
@@ -1354,7 +1354,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1376,7 +1376,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPA3AB"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPA3AB.nc                                        \
+     ../output/MERIT_WRR/Qout_SPA3AB_chd.nc                                    \
      75                                                                        \
      SPA3AB                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_tst.csv                   \
@@ -1385,7 +1385,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1407,7 +1407,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPAEVS"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPAEVS.nc                                        \
+     ../output/MERIT_WRR/Qout_SPAEVS_chd.nc                                    \
      75                                                                        \
      SPAEVS                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_tst.csv                   \
@@ -1416,7 +1416,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1438,7 +1438,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPASWN"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPASWN.nc                                        \
+     ../output/MERIT_WRR/Qout_SPASWN_chd.nc                                    \
      75                                                                        \
      SPASWN                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_tst.csv                   \
@@ -1447,7 +1447,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1469,7 +1469,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SPASWS"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SPASWS.nc                                        \
+     ../output/MERIT_WRR/Qout_SPASWS_chd.nc                                    \
      75                                                                        \
      SPASWS                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_tst.csv                   \
@@ -1478,7 +1478,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1505,7 +1505,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for TOPJAS"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_TOPJAS.nc                                        \
+     ../output/MERIT_WRR/Qout_TOPJAS_chd.nc                                    \
      75                                                                        \
      TOPJAS                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_tst.csv                   \
@@ -1514,7 +1514,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1536,7 +1536,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SENT3A"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SENT3A.nc                                        \
+     ../output/MERIT_WRR/Qout_SENT3A_chd.nc                                    \
      75                                                                        \
      SENT3A                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_tst.csv                   \
@@ -1545,7 +1545,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1567,7 +1567,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for S3AS3B"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_S3AS3B.nc                                        \
+     ../output/MERIT_WRR/Qout_S3AS3B_chd.nc                                    \
      75                                                                        \
      S3AS3B                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_tst.csv                   \
@@ -1576,7 +1576,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1598,7 +1598,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for ENVSRL"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_ENVSRL.nc                                        \
+     ../output/MERIT_WRR/Qout_ENVSRL_chd.nc                                    \
      75                                                                        \
      ENVSRL                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_tst.csv                   \
@@ -1607,7 +1607,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1629,7 +1629,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SWOT_N"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SWOT_N.nc                                        \
+     ../output/MERIT_WRR/Qout_SWOT_N_chd.nc                                    \
      75                                                                        \
      SWOT_N                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_tst.csv                   \
@@ -1638,7 +1638,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1660,7 +1660,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Analyzing magnitude metrics for SWOT_S"
 ../src/rrr_anl_map_mag_mod.py                                                  \
-     ../output/MERIT_WRR/Qout_SWOT_S.nc                                        \
+     ../output/MERIT_WRR/Qout_SWOT_S_chd.nc                                    \
      75                                                                        \
      SWOT_S                                                                    \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_tst.csv                   \
@@ -1669,7 +1669,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_chd.csv                   \
      ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
