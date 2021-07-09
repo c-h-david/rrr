@@ -1682,6 +1682,592 @@ fi
 
 
 #*******************************************************************************
+#Analyzing event metrics for reference
+#*******************************************************************************
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for GRADES"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Analyzing event metrics for multiple temporal sampling sequences
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM03D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM03D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM03D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM03D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM03D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM03D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM05D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM05D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM05D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM05D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM05D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM05D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM10D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM10D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM10D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM10D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM10D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM10D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM21D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM21D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM21D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM21D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM21D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM21D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM27D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM27D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM27D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM27D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM27D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM27D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TIM35D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TIM35D"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TIM35D_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM35D_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TIM35D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM35D_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Analyzing event metrics for multiple spatial sampling sequences
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPATPJ"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPATPJ_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPATPJ_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPATPJ_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPATPJ_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPAS3A"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPAS3A_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPAS3A_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPAS3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPAS3A_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPA3AB"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPA3AB_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPA3AB_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPA3AB_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPA3AB_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPAEVS"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPAEVS_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPAEVS_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPAEVS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPAEVS_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPASWN"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPASWN_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWN_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWN_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWN_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SPASWS"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SPASWS_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWS_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWS_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Analyzing event metrics for multiple satellite sampling sequences
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for TOPJAS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for TOPJAS"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_TOPJAS_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TOPJAS_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_TOPJAS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TOPJAS_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SENT3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SENT3A"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SENT3A_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SENT3A_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SENT3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SENT3A_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for S3AS3B
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for S3AS3B"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_S3AS3B_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_S3AS3B_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_S3AS3B_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_S3AS3B_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for ENVSRL
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for ENVSRL"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_ENVSRL_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_ENVSRL_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_ENVSRL_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_ENVSRL_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SWOT_N
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SWOT_N"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SWOT_N_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_N_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_N_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_N_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Analyzing event metrics for SWOT_S
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Analyzing event metrics for SWOT_S"
+../src/rrr_anl_map_evt_mod.py                                                  \
+     ../output/MERIT_WRR/Qout_SWOT_S_chd.nc                                    \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_S_75p_tst.csv                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing event metrics"
+./tst_cmp_csv.py                                                               \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_S_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_S_75p_tst.csv                   \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MERIT_WRR/*_tst.*
