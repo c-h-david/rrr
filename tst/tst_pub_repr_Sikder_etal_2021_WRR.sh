@@ -109,14 +109,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_TOPJAS_chd.shp                               \
+     ../output/MERIT_WRR/coverage_TOPJAS.shp                                   \
      ../output/MERIT_WRR/coverage_TOPJAS_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_TOPJAS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
      ../output/MERIT_WRR/seq_TOPJAS_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -147,14 +147,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_SENT3A_chd.shp                               \
+     ../output/MERIT_WRR/coverage_SENT3A.shp                                   \
      ../output/MERIT_WRR/coverage_SENT3A_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SENT3A_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SENT3A.csv                                        \
      ../output/MERIT_WRR/seq_SENT3A_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -185,14 +185,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_S3AS3B_chd.shp                               \
+     ../output/MERIT_WRR/coverage_S3AS3B.shp                                   \
      ../output/MERIT_WRR/coverage_S3AS3B_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_S3AS3B_chd.csv                                    \
+     ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
      ../output/MERIT_WRR/seq_S3AS3B_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -223,14 +223,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_ENVSRL_chd.shp                               \
+     ../output/MERIT_WRR/coverage_ENVSRL.shp                                   \
      ../output/MERIT_WRR/coverage_ENVSRL_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_ENVSRL_chd.csv                                    \
+     ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
      ../output/MERIT_WRR/seq_ENVSRL_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -261,14 +261,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_SWOT_N_chd.shp                               \
+     ../output/MERIT_WRR/coverage_SWOT_N.shp                                   \
      ../output/MERIT_WRR/coverage_SWOT_N_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SWOT_N_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
      ../output/MERIT_WRR/seq_SWOT_N_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -299,14 +299,14 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing coverage file (.shp)"
 ./tst_cmp_shp.py                                                               \
-     ../output/MERIT_WRR/coverage_SWOT_S_chd.shp                               \
+     ../output/MERIT_WRR/coverage_SWOT_S.shp                                   \
      ../output/MERIT_WRR/coverage_SWOT_S_tst.shp                               \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SWOT_S_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
      ../output/MERIT_WRR/seq_SWOT_S_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -333,7 +333,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPATPJ"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_TOPJAS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPATPJ_tst.csv                                    \
      > $run_file
@@ -341,7 +341,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPATPJ_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPATPJ.csv                                        \
      ../output/MERIT_WRR/seq_SPATPJ_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -363,7 +363,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPAS3A"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_SENT3A_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SENT3A.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPAS3A_tst.csv                                    \
      > $run_file
@@ -371,7 +371,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPAS3A_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPAS3A.csv                                        \
      ../output/MERIT_WRR/seq_SPAS3A_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -393,7 +393,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPA3AB"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_S3AS3B_chd.csv                                    \
+     ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPA3AB_tst.csv                                    \
      > $run_file
@@ -401,7 +401,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPA3AB_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPA3AB.csv                                        \
      ../output/MERIT_WRR/seq_SPA3AB_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -423,7 +423,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPAEVS"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_ENVSRL_chd.csv                                    \
+     ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPAEVS_tst.csv                                    \
      > $run_file
@@ -431,7 +431,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPAEVS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPAEVS.csv                                        \
      ../output/MERIT_WRR/seq_SPAEVS_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -453,7 +453,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPASWN"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_SWOT_N_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPASWN_tst.csv                                    \
      > $run_file
@@ -461,7 +461,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPASWN_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPASWN.csv                                        \
      ../output/MERIT_WRR/seq_SPASWN_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -483,7 +483,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating sequence file for SPASWS"
 ../src/rrr_anl_spl_csv.py                                                      \
-     ../output/MERIT_WRR/seq_SWOT_S_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
      0.0                                                                       \
      ../output/MERIT_WRR/seq_SPASWS_tst.csv                                    \
      > $run_file
@@ -491,7 +491,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing sequence file (.csv)"
 diff                                                                           \
-     ../output/MERIT_WRR/seq_SPASWS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPASWS.csv                                        \
      ../output/MERIT_WRR/seq_SPASWS_tst.csv                                    \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -710,7 +710,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPATPJ"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPATPJ_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPATPJ.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPATPJ_tst.nc                                    \
      > $run_file
@@ -741,7 +741,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPAS3A"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPAS3A_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPAS3A.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPAS3A_tst.nc                                    \
      > $run_file
@@ -772,7 +772,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPA3AB"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPA3AB_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPA3AB.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPA3AB_tst.nc                                    \
      > $run_file
@@ -803,7 +803,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPAEVS"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPAEVS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPAEVS.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPAEVS_tst.nc                                    \
      > $run_file
@@ -834,7 +834,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPASWN"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPASWN_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPASWN.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPASWN_tst.nc                                    \
      > $run_file
@@ -865,7 +865,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SPASWS"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SPASWS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SPASWS.csv                                        \
      86400                                                                     \
      ../output/MERIT_WRR/Qout_SPASWS_tst.nc                                    \
      > $run_file
@@ -901,7 +901,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for TOPJAS"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_TOPJAS_chd.csv                                    \
+     ../output/MERIT_WRR/seq_TOPJAS.csv                                        \
      856706.44                                                                 \
      ../output/MERIT_WRR/Qout_TOPJAS_tst.nc                                    \
      > $run_file
@@ -932,7 +932,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SENT3A"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SENT3A_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SENT3A.csv                                        \
      2332800.00                                                                \
      ../output/MERIT_WRR/Qout_SENT3A_tst.nc                                    \
      > $run_file
@@ -963,7 +963,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for S3AS3B"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_S3AS3B_chd.csv                                    \
+     ../output/MERIT_WRR/seq_S3AS3B.csv                                        \
      2332800.00                                                                \
      ../output/MERIT_WRR/Qout_S3AS3B_tst.nc                                    \
      > $run_file
@@ -994,7 +994,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for ENVSRL"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_ENVSRL_chd.csv                                    \
+     ../output/MERIT_WRR/seq_ENVSRL.csv                                        \
      3023999.928                                                               \
      ../output/MERIT_WRR/Qout_ENVSRL_tst.nc                                    \
      > $run_file
@@ -1025,7 +1025,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SWOT_N"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SWOT_N_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_N.csv                                        \
      1802700.00                                                                \
      ../output/MERIT_WRR/Qout_SWOT_N_tst.nc                                    \
      > $run_file
@@ -1056,7 +1056,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Sampling for SWOT_S"
 ../src/rrr_anl_spl_mod.py                                                      \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/seq_SWOT_S_chd.csv                                    \
+     ../output/MERIT_WRR/seq_SWOT_S.csv                                        \
      1802700.00                                                                \
      ../output/MERIT_WRR/Qout_SWOT_S_tst.nc                                    \
      > $run_file
@@ -1096,7 +1096,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing magnitude metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
      ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -1693,14 +1693,14 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Analyzing event metrics for GRADES"
 ../src/rrr_anl_map_evt_mod.py                                                  \
      ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
-     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
      ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_tst.csv                   \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing event metrics"
 ./tst_cmp_csv.py                                                               \
-     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
      ../output/MERIT_WRR/analysis/map_evt_GRADES_75p_tst.csv                   \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
