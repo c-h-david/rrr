@@ -114,6 +114,7 @@ for JS_sts in range(IS_sts):
           df=pandas.read_csv(rrr_map_csv)
           YS_map=df.columns[0]
           ZV_sts=numpy.array(df[YS_sts].tolist())
+          if YS_sts[0]=='T': ZV_sts=ZV_sts/3600
           if not numpy.isnan(ZV_sts).all():
                ZV_cdf=numpy.nanpercentile(ZV_sts,IV_pct)
                ZS_mea=int(round(numpy.nanmean(ZV_sts)))
@@ -138,12 +139,34 @@ for JS_sts in range(IS_sts):
           plt.xlabel('Discharge ($m^3/s$)')
           plt.xscale('log')
 
+     if YS_sts[0]=='T':
+          plt.xlim(0,5000)
+          plt.xlabel('Event duration (h)')
+
+     if YS_sts[0]=='N':
+          plt.xlim(0,400)
+          plt.xlabel('Number of events (-)')
+
      plt.legend(loc='lower right',prop={'family': 'monospace'})
 
      YS_tit='Title'
      if YS_sts=='Qout_avg': YS_tit='Spatial Distribution of Mean Discharge'
      if YS_sts=='Qout_max': YS_tit='Spatial Distribution of Maximum Discharge'
      if YS_sts=='Qout_min': YS_tit='Spatial Distribution of Minimum Discharge'
+     if YS_sts[-1]=='p':    YS_tit='Spatial Distribution of '+YS_sts[-3:-1]    \
+                                  +' Percentile Discharge'
+     if YS_sts[0]=='T' and YS_sts[-4:]=='_avg':
+          YS_tit='Spatial Distribution of Mean Event Duration for '            \
+                +YS_sts[1:3]+' Percentile'
+     if YS_sts[0]=='T' and YS_sts[-4:]=='_max':
+          YS_tit='Spatial Distribution of Maximum Event Duration for '         \
+                +YS_sts[1:3]+' Percentile'
+     if YS_sts[0]=='T' and YS_sts[-4:]=='_min':
+          YS_tit='Spatial Distribution of Minimum Event Duration for '         \
+                +YS_sts[1:3]+' Percentile'
+     if YS_sts[0]=='N':
+          YS_tit='Spatial Distribution of Number of Events for '               \
+                +YS_sts[1:3]+' Percentile'
      plt.title(YS_tit)
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -157,14 +180,13 @@ for JS_sts in range(IS_sts):
 #-------------------------------------------------------------------------------
 print('- Plotting multiple spatial statistics over multiple experiments')
 
-if YV_sts[0][0]=='Q': YV_sts=['Qout_avg','Qout_max','Qout_min']
-if YV_sts[0][0]=='T': YV_sts=['Tevt_avg','Tevt_max','Tevt_min']
+YV_sts=YV_sts[0:3]
 
 for YS_sts in YV_sts:
      YS_col='k'
-     if YS_sts=='Qout_avg' or YS_sts=='Tevt_avg': YS_col='b'
-     if YS_sts=='Qout_max' or YS_sts=='Tevt_max': YS_col='r'
-     if YS_sts=='Qout_min' or YS_sts=='Tevt_min': YS_col='g'
+     if YS_sts[-4:]=='_avg': YS_col='b'
+     if YS_sts[-4:]=='_max': YS_col='r'
+     if YS_sts[-4:]=='_min': YS_col='g'
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Create curves
@@ -174,6 +196,7 @@ for YS_sts in YV_sts:
           df=pandas.read_csv(rrr_map_csv)
           YS_map=df.columns[0]
           ZV_sts=numpy.array(df[YS_sts].tolist())
+          if YS_sts[0]=='T': ZV_sts=ZV_sts/3600
           if not numpy.isnan(ZV_sts).all():
                ZV_cdf=numpy.nanpercentile(ZV_sts,IV_pct)
                ZS_mea=int(round(numpy.nanmean(ZV_sts)))
@@ -203,6 +226,10 @@ if YS_sts[0]=='Q':
      plt.xlim(10**0.5,10**6)
      plt.xlabel('Discharge ($m^3/s$)')
      plt.xscale('log')
+
+if YS_sts[0]=='T':
+     plt.xlim(0,5000)
+     plt.xlabel('Event duration (h)')
 
 plt.legend(loc='lower right',prop={'family': 'monospace'})
 
