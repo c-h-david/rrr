@@ -2268,6 +2268,73 @@ fi
 
 
 #*******************************************************************************
+#Figures
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Figures 2ac
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 2ac"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_TIM03D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TIM05D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TIM10D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TIM21D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TIM27D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TIM35D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig2ac_tst/                                  \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig2ac_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 2dg
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 2dg"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_TIM03D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM05D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM10D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM21D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM27D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TIM35D_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig2dg_tst/                                  \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig2dg_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Clean up
 #*******************************************************************************
 rm -f ../output/MERIT_WRR/*_tst.*
