@@ -268,12 +268,14 @@ for JS_time in range(IS_beg,IS_end+1):
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Testing if existing values are above threshold, otherwise same as before
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     BV_thr=numpy.greater_equal(ZV_out,ZV_thr,where=BV_out)
+     #Locations where a current value exists and is greater/equal to threshold
      BV_now=BV_bef
      #Assume BV_now is the same as BV_bef
-     BV_now=numpy.where(BV_out & (ZV_out>=ZV_thr),BV_tru,BV_now)
+     BV_now=numpy.where(BV_out & BV_thr,BV_tru,BV_now)
      #Set BV_now to True in locations where a value exists & exceeds threshold,
      #otherwise retain the previous value of BV_now
-     BV_now=numpy.where(BV_out & (ZV_out< ZV_thr),BV_fal,BV_now)
+     BV_now=numpy.where(BV_out & (~BV_thr),BV_fal,BV_now)
      #Set BV_now to False in locations where a value exists & does NOT exceed
      #threshold, otherwise retain the previous value of BV_now
 
