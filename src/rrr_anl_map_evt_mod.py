@@ -324,10 +324,10 @@ print('Writing CSV file')
 with open(rrr_evt_csv, 'wb') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      IV_line=[YS_title,                                                        \
-              'Tavg'+YS_thr[-4:],                                              \
-              'Tmax'+YS_thr[-4:],                                              \
-              'Tmin'+YS_thr[-4:],                                              \
-              'Nevt'+YS_thr[-4:]]
+              'T'+YS_thr[-3:]+'_avg',                                          \
+              'T'+YS_thr[-3:]+'_max',                                          \
+              'T'+YS_thr[-3:]+'_min',                                          \
+              'N'+YS_thr[-3:]]
      csvwriter.writerow(IV_line) 
 
      for JS_riv_bas in range(IS_riv_bas):
