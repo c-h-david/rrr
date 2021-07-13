@@ -251,6 +251,14 @@ ZV_max=numpy.zeros(IS_riv_bas)
 #Maximum duration of past events at each reach
 ZV_avg=numpy.zeros(IS_riv_bas)
 #Average duration of past events at each reach
+ZV_lst=numpy.zeros(IS_riv_bas)
+#Last available value
+IV_nls=numpy.zeros(IS_riv_bas)
+#Number of time steps since (and including) last available value
+IV_add=numpy.zeros(IS_riv_bas)
+#Number of time steps to add if using linear interpolation between NoData
+IV_sub=numpy.zeros(IS_riv_bas)
+#Number of time steps to substract if using linear interpolation between NoData
 
 for JS_time in range(IS_beg,IS_end+1):
      ZV_out=f.variables[YS_out_name][JS_time,:]
@@ -287,6 +295,21 @@ for JS_time in range(IS_beg,IS_end+1):
      ZV_cur=numpy.where(BV_now,ZV_cur+ZV_taR,ZV_cur)
      #Increase the duration of events where events are ongoing
 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Correcting for linear interpolation at beginning of events
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     IV_add=numpy.where((BV_now)&(~BV_bef),                                    \
+                        (IV_nls*(ZV_out-ZV_thr)/(ZV_out-ZV_lst)).astype(int),  \
+                        0*IV_one)
+     ZV_cur=numpy.where((BV_now)&(~BV_bef),ZV_cur+IV_add*ZV_taR,ZV_cur)
+
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Correcting for linear interpolation at end of events
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     IV_sub=numpy.where((~BV_now)&(BV_bef),                                    \
+                        (IV_nls*(ZV_out-ZV_thr)/(ZV_out-ZV_lst)).astype(int),  \
+                        0*IV_one)
+     ZV_cur=numpy.where((~BV_now)&(BV_bef),ZV_cur-IV_sub*ZV_taR,ZV_cur)
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Updating metrics at event completion
@@ -309,6 +332,10 @@ for JS_time in range(IS_beg,IS_end+1):
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Resetting values
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     ZV_lst=numpy.where(BV_out,ZV_out,ZV_lst)
+     #Replace last known value by current value where a current value exists
+     IV_nls=numpy.where(~BV_out,IV_nls+IV_one,IV_one)
+     #Incrementally grow the number of time steps since last known value
      ZV_cur=numpy.where(BV_now,ZV_cur,0*IV_one)
      #Retain values of current even duration unless the events have ended
      BV_bef=BV_now
