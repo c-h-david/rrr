@@ -327,7 +327,7 @@ for JS_time in range(IS_beg,IS_end+1):
      if JS_time==IS_end:
           ZV_avg=numpy.where(BV_now,ZV_avg+ZV_cur,ZV_avg)
           ZV_max=numpy.where(BV_now&(ZV_cur>ZV_max),ZV_cur,ZV_max)
-          ZV_min=numpy.where(BV_now&(ZV_cur<ZV_max),ZV_cur,ZV_min)
+          ZV_min=numpy.where(BV_now&(ZV_cur<ZV_min),ZV_cur,ZV_min)
           
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Resetting values
