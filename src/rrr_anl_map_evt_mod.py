@@ -262,7 +262,7 @@ for JS_time in range(IS_beg,IS_end+1):
      if numpy.ma.is_masked(ZV_out):
           BV_out=~ZV_out.mask
      else:
-          BV_out=[True]*IS_riv_bas
+          BV_out=numpy.ones(IS_riv_bas).astype(bool)
      #locations where the netCDF values are not masked (~ inverts all booleans)
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -280,30 +280,39 @@ for JS_time in range(IS_beg,IS_end+1):
      #threshold, otherwise retain the previous value of BV_now
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     #Updating metrics
+     #Updating current events
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      IV_evt=numpy.where((~BV_bef) & BV_now,IV_evt+IV_one,IV_evt)
-     #Increase number of event if there is one now and where there wasn't before
-     ZV_avg=numpy.where(BV_now,ZV_avg+ZV_taR,ZV_avg)
-     #Increase average time by time step duration where events exist, or retain
+     #Increase number of events where there is one now and there wasn't before
+     ZV_cur=numpy.where(BV_now,ZV_cur+ZV_taR,ZV_cur)
+     #Increase the duration of events where events are ongoing
+
+
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Updating metrics at event completion
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     ZV_avg=numpy.where((~BV_now)&(BV_bef),ZV_avg+ZV_cur,ZV_avg)
+     #Increase average time by event duration where events ended, or retain
      ZV_max=numpy.where((~BV_now)&(BV_bef)&(ZV_cur>ZV_max),ZV_cur,ZV_max)
      #Update value of maximum if an event ended (before zeroing current event)
      ZV_min=numpy.where((~BV_now)&(BV_bef)&(ZV_cur<ZV_min),ZV_cur,ZV_min)
      #Update value of minimum if an event ended (before zeroing current event)
-     ZV_cur=numpy.where(BV_now,ZV_cur+ZV_taR,0*IV_one)
-     #Increase current time by time step duration where events exist, or zero
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Updating metrics for last time step at locations where event still ongoing
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      if JS_time==IS_end:
+          ZV_avg=numpy.where(BV_now,ZV_avg+ZV_cur,ZV_avg)
           ZV_max=numpy.where(BV_now&(ZV_cur>ZV_max),ZV_cur,ZV_max)
           ZV_min=numpy.where(BV_now&(ZV_cur<ZV_max),ZV_cur,ZV_min)
           
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-     #Resetting the values of BV_bef
+     #Resetting values
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     ZV_cur=numpy.where(BV_now,ZV_cur,0*IV_one)
+     #Retain values of current even duration unless the events have ended
      BV_bef=BV_now
+     #Reset now/before status
 
 IV_evt=numpy.where(IV_evt==0,-9999,IV_evt)
 #Replacing number of values by -9999 only where there was 0 values to avoid
