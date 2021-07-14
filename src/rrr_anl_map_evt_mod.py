@@ -298,17 +298,21 @@ for JS_time in range(IS_beg,IS_end+1):
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Correcting for linear interpolation at beginning of events
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     ZV_den=numpy.where((BV_now)&(~BV_bef)&(~(ZV_out-ZV_lst==0)),ZV_out-ZV_lst,\
+                         IV_one)
      IV_add=numpy.where((BV_now)&(~BV_bef),                                    \
-                        (IV_nls*(ZV_out-ZV_thr)/(ZV_out-ZV_lst)).astype(int),  \
+                        (IV_nls*(ZV_out-ZV_thr)/(ZV_den)).astype(int),         \
                         0*IV_one)
      ZV_cur=numpy.where((BV_now)&(~BV_bef),ZV_cur+IV_add*ZV_taR,ZV_cur)
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Correcting for linear interpolation at end of events
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     ZV_den=numpy.where((~BV_now)&(BV_bef)&(~(ZV_lst-ZV_out==0)),ZV_lst-ZV_out,\
+                         IV_one)
      IV_sub=numpy.where((~BV_now)&(BV_bef),                                    \
                         IV_nls-IV_one-                                         \
-                        (IV_nls*(ZV_lst-ZV_thr)/(ZV_lst-ZV_out)).astype(int),  \
+                        (IV_nls*(ZV_lst-ZV_thr)/ZV_den).astype(int),           \
                         0*IV_one)
      ZV_cur=numpy.where((~BV_now)&(BV_bef),ZV_cur-IV_sub*ZV_taR,ZV_cur)
 
