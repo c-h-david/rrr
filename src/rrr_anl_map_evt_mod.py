@@ -253,8 +253,8 @@ ZV_avg=numpy.zeros(IS_riv_bas)
 #Average duration of past events at each reach
 ZV_lst=numpy.zeros(IS_riv_bas)
 #Last available value
-IV_nls=numpy.zeros(IS_riv_bas)
-#Number of time steps since (and including) last available value
+IV_nls=numpy.ones(IS_riv_bas)
+#Number of time steps since last available value
 IV_add=numpy.zeros(IS_riv_bas)
 #Number of time steps to add if using linear interpolation between NoData
 IV_sub=numpy.zeros(IS_riv_bas)
@@ -307,7 +307,8 @@ for JS_time in range(IS_beg,IS_end+1):
      #Correcting for linear interpolation at end of events
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      IV_sub=numpy.where((~BV_now)&(BV_bef),                                    \
-                        (IV_nls*(ZV_out-ZV_thr)/(ZV_out-ZV_lst)).astype(int),  \
+                        IV_nls-IV_one-                                         \
+                        (IV_nls*(ZV_lst-ZV_thr)/(ZV_lst-ZV_out)).astype(int),  \
                         0*IV_one)
      ZV_cur=numpy.where((~BV_now)&(BV_bef),ZV_cur-IV_sub*ZV_taR,ZV_cur)
 
