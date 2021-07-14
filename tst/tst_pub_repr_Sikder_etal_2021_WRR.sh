@@ -2333,6 +2333,330 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Figures 3a
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3a"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPATPJ_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_TOPJAS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3a_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3a_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 3b
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3b"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAEVS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_ENVSRL_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3b_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3b_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 3c
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3c"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPAS3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_SENT3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3c_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3c_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 3d
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3d"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPA3AB_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_S3AS3B_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3d_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3d_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 3e
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3e"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWN_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_N_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3e_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3e_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 3f
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 3f"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_mag_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_mag_SPASWS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_mag_SWOT_S_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig3f_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig3f_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4a
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4a"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPATPJ_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_TOPJAS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4a_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4a_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4b
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4b"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPAEVS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_ENVSRL_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4b_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4b_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4c
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4c"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPAS3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SENT3A_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4c_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4c_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4d
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4d"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPA3AB_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_S3AS3B_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4d_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4d_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4e
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4e"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWN_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_N_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4e_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4e_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Figures 4f
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Figures 4f"
+../src/rrr_anl_map_cdf.py                                                      \
+     ../output/MERIT_WRR/analysis/map_evt_GRADES_75p.csv                       \
+     ../output/MERIT_WRR/analysis/map_evt_SPASWS_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/map_evt_SWOT_S_75p_chd.csv                   \
+     ../output/MERIT_WRR/analysis/fig4f_tst/                                   \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+#rm -rf ../output/MERIT_WRR/analysis/fig4f_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Clean up
