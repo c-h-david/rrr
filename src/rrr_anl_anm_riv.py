@@ -181,16 +181,22 @@ except:
      print('ERROR - Unable to read ' + rrr_riv_file)
      raise SystemExit(22)
 
-if rrr_riv_shp.fields[1][0]!='COMID' and                                       \
-   rrr_riv_shp.fields[1][0]!='ComID' and                                       \
-   rrr_riv_shp.fields[1][0]!='ARCID':
+IS_fld=len(rrr_riv_shp.fields)
+for JS_fld in range(1,IS_fld):
+     if rrr_riv_shp.fields[JS_fld][0]=='COMID' or                              \
+        rrr_riv_shp.fields[JS_fld][0]=='ComID' or                              \
+        rrr_riv_shp.fields[JS_fld][0]=='ARCID':
+          IS_rid=JS_fld
+try:
+    IS_rid
+except NameError:
      print('ERROR - Neither COMID, ComID, nor ARCID exist in ' + rrr_riv_file)
      raise SystemExit(22)
-     #This ensure that the first usable attribute of the shapefile is indeed the
+     #This ensure that one attribute of the shapefile is the river ID, i.e. the
      #one we're looking for.  The first actual attribute (index [0]) corresponds
      #to 'DeletionFlag'. The indices of fields() and records() are shifted by 1.
 
-IV_riv_bas_id = [record[0] for record in rrr_riv_shp.records()]
+IV_riv_bas_id = [record[IS_rid-1] for record in rrr_riv_shp.records()]
 IS_riv_bas = len(IV_riv_bas_id)
 print(' . Number of reaches in rrr_riv_file: '+str(IS_riv_bas))
 
@@ -338,10 +344,10 @@ if 'rrr_img_file' in locals():
 #*******************************************************************************
 if BS_wid_auto:
      print('Finding maximum flow for best display')
-
      ZS_max=float(0)
      for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
-          ZS_max=max(ZS_max,max(f.variables[YV_var][JS_tim][IV_riv_bas_index]))
+          ZS_max=max(ZS_max,                                                   \
+                    numpy.nanmax(f.variables[YV_var][JS_tim][IV_riv_bas_index]))
      IS_wid_fac = int(ZS_max/20)
 
      print('- The maximum flow to be plotted is: '+str(ZS_max)+ ' m3/s')
