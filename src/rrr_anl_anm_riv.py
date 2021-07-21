@@ -285,7 +285,7 @@ for JS_riv_bas in range(IS_riv_bas):
 #The vertices of each individual polyline are now combined
 
 polyline_clc = matplotlib.collections.LineCollection(polyline_pts,             \
-                                                     colors='blue',            \
+                                                     colors='cyan',            \
                                                      linestyles='solid')
 #The line collection is now created
 
@@ -386,12 +386,14 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
                   date_str + ' UTC')
         #title
 
-        polyline_wdt = f.variables[YV_var][JS_tim][IV_riv_bas_index]/IS_wid_fac
+        polyline_wdt = f.variables[YV_var][JS_tim][IV_riv_bas_index]
         #This does not seem to be sped up by first reordering the polylines in  
         #the shapefile so that they are sorted similarly to the netCDF file
 
         polyline_wdt=numpy.ma.filled(polyline_wdt,fill_value=0)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
+
+        polyline_wdt=polyline_wdt/IS_wid_fac
 
         plt_clc.set_linewidths(polyline_wdt)
         #Scale thickness of each river reach by the magnitude of the variable
