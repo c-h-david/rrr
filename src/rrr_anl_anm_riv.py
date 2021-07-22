@@ -39,9 +39,15 @@ date_ini = datetime.datetime(1970, 1, 1, 0, 0)  # first time step in netCDF file
 date_stp = datetime.timedelta(0, 10800)         # time step duration in seconds
 #These are set at runtime from data and metadata if they exist in netCDF file
 
-IS_wid_fac = 50                                 # factor to limit river width 
 BS_wid_auto = True                              # set to False for manual choice
+ZS_Qmax = 400000                                # estimated max discharge Q
+ZS_Qmin = 100                                   # estimated min discharge Q
 #If added control is necessary on the width of river reaches
+
+ZS_Wmax = 2                                     # polyline width at max Q
+ZS_Wmin = 0.05                                  # polyline width at min Q
+#Testing suggests that anything below 0.05 points is invisible, and above 2
+#points has graphical artifacts for some river shapes
 
 
 #*******************************************************************************
@@ -343,15 +349,16 @@ if 'rrr_img_file' in locals():
 #Finding maximum flow for best display
 #*******************************************************************************
 if BS_wid_auto:
-     print('Finding maximum flow for best display')
-     ZS_max=float(0)
+     print('Finding maximum and minimum flow for best display')
+     ZS_Qmax=float(0)
      for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
-          ZS_max=max(ZS_max,                                                   \
-                    numpy.nanmax(f.variables[YV_var][JS_tim][IV_riv_bas_index]))
-     IS_wid_fac = int(ZS_max/20)
+          ZV_Qout=f.variables[YV_var][JS_tim][IV_riv_bas_index]
+          ZS_Qmax=max(ZS_Qmax,numpy.nanmax(ZV_Qout))
+else:
+     print('Maximum and minimum flow for best display are hard-coded')
 
-     print('- The maximum flow to be plotted is: '+str(ZS_max)+ ' m3/s')
-     print('- The width factor to be used is:    '+str(IS_wid_fac))
+print('- The maximum flow to be plotted is: '+str(ZS_Qmax)+ ' m3/s')
+print('- The minimum flow to be plotted is: '+str(ZS_Qmin)+ ' m3/s')
 
 
 #*******************************************************************************
@@ -386,16 +393,21 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
                   date_str + ' UTC')
         #title
 
-        polyline_wdt = f.variables[YV_var][JS_tim][IV_riv_bas_index]
+        ZV_Qout=f.variables[YV_var][JS_tim][IV_riv_bas_index]
         #This does not seem to be sped up by first reordering the polylines in  
         #the shapefile so that they are sorted similarly to the netCDF file
 
-        polyline_wdt=numpy.ma.filled(polyline_wdt,fill_value=0)
+        ZV_Qout=numpy.ma.filled(ZV_Qout,fill_value=0)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
 
-        polyline_wdt=polyline_wdt/IS_wid_fac
+        ZV_Qout=numpy.where(ZV_Qout<ZV_Qmin,ZV_Qmin,ZV_Qout)
+        #Replaces all values smaller than Qmin by Qmin
 
-        plt_clc.set_linewidths(polyline_wdt)
+        polyline_wid=ZS_Wmin+(ZS_Wmax-ZS_Wmin)*(ZV_Qout-ZS_Qmin)               \
+                                              /(ZS_Qmax-ZS_Qmin)
+        #Plot such that Qmin shows as Wmin and Qmax shows as Wmax
+
+        plt_clc.set_linewidths(polyline_wid)
         #Scale thickness of each river reach by the magnitude of the variable
 
         writer.grab_frame()
