@@ -350,10 +350,36 @@ if 'rrr_img_file' in locals():
 #*******************************************************************************
 if BS_wid_auto:
      print('Finding high and low flows for best display')
-     ZS_Qhig=float(0)
+
+     IV_one=numpy.ones(IS_riv_bas)
+     IV_npt=numpy.zeros(IS_riv_bas)
+     ZV_Qavg=numpy.zeros(IS_riv_bas)
+     ZV_Qmax=numpy.zeros(IS_riv_bas)
+     ZV_Qmin=numpy.ones(IS_riv_bas)*1000000000
      for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
           ZV_Qout=f.variables[YV_var][JS_tim][IV_riv_bas_index]
-          ZS_Qhig=max(ZS_Qhig,numpy.nanmax(ZV_Qout))
+          #read netCDF values
+          if numpy.ma.is_masked(ZV_Qout):
+               BV_yes=~ZV_Qout.mask
+          else:
+               BV_yes=[True]*IS_riv_bas
+          #locations where the netCDF values are not masked
+          IV_npt=numpy.where(BV_yes,IV_npt+IV_one,IV_npt)
+          #updating the number of actual values (i.e. not NaN) for each reach
+          ZV_Qavg=numpy.where(BV_yes,ZV_Qavg+ZV_Qout,ZV_Qavg)
+          #updating the average
+          ZV_Qmax=numpy.where((BV_yes)&(ZV_Qout>ZV_Qmax),ZV_Qout,ZV_Qmax)
+          #updating the maximum
+          ZV_Qmin=numpy.where((BV_yes)&(ZV_Qout<ZV_Qmin),ZV_Qout,ZV_Qmin)
+          #updating the minimum
+     IV_npt=numpy.where(IV_npt==0,-9999,IV_npt)
+     #Replacing number of values by -9999 only where there was 0 values to avoid
+     #runtime warning during division below
+     ZV_Qavg=numpy.where(IV_npt>0,ZV_Qavg/IV_npt,numpy.NaN)
+     #Dividing sum of values by number of values. Otherwise: NaN
+
+     ZS_Qhig=numpy.nanmax(ZV_Qmax)
+     ZS_Qlow=numpy.nanmin(ZV_Qavg)
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
 else:
