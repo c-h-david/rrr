@@ -40,12 +40,12 @@ date_stp = datetime.timedelta(0, 10800)         # time step duration in seconds
 #These are set at runtime from data and metadata if they exist in netCDF file
 
 BS_wid_auto = True                              # set to False for manual choice
-ZS_Qmax = 400000                                # estimated max discharge Q
-ZS_Qmin = 100                                   # estimated min discharge Q
+ZS_Qhig = 400000                                # estimated high discharge Q
+ZS_Qlow = 100                                   # estimated low discharge Q
 #If added control is necessary on the width of river reaches
 
-ZS_Wmax = 2                                     # polyline width at max Q
-ZS_Wmin = 0.05                                  # polyline width at min Q
+ZS_Whig = 2                                     # polyline width at high Q
+ZS_Wlow = 0.05                                  # polyline width at low Q
 #Testing suggests that anything below 0.05 points is invisible, and above 2
 #points has graphical artifacts for some river shapes
 
@@ -346,19 +346,23 @@ if 'rrr_img_file' in locals():
 
 
 #*******************************************************************************
-#Finding maximum flow for best display
+#Finding high and low flows for best display
 #*******************************************************************************
 if BS_wid_auto:
-     print('Finding maximum and minimum flow for best display')
-     ZS_Qmax=float(0)
+     print('Finding high and low flows for best display')
+     ZS_Qhig=float(0)
      for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
           ZV_Qout=f.variables[YV_var][JS_tim][IV_riv_bas_index]
-          ZS_Qmax=max(ZS_Qmax,numpy.nanmax(ZV_Qout))
+          ZS_Qhig=max(ZS_Qhig,numpy.nanmax(ZV_Qout))
+     ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
+     ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
 else:
-     print('Maximum and minimum flow for best display are hard-coded')
+     print('High and low flows for best display are hard-coded')
+     ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
+     ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
 
-print('- The maximum flow to be plotted is: '+str(ZS_Qmax)+ ' m3/s')
-print('- The minimum flow to be plotted is: '+str(ZS_Qmin)+ ' m3/s')
+print('- The estimate of high flow to be plotted is: '+str(ZS_Qhig)+ ' m3/s')
+print('- The estimate of low  flow to be plotted is: '+str(ZS_Qlow)+ ' m3/s')
 
 
 #*******************************************************************************
@@ -400,12 +404,12 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
         ZV_Qout=numpy.ma.filled(ZV_Qout,fill_value=0)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
 
-        ZV_Qout=numpy.where(ZV_Qout<ZV_Qmin,ZV_Qmin,ZV_Qout)
-        #Replaces all values smaller than Qmin by Qmin
+        ZV_Qout=numpy.where(ZV_Qout<ZV_Qlow,ZV_Qlow,ZV_Qout)
+        #Replaces all values smaller than Qlow by Qlow
 
-        polyline_wid=ZS_Wmin+(ZS_Wmax-ZS_Wmin)*(ZV_Qout-ZS_Qmin)               \
-                                              /(ZS_Qmax-ZS_Qmin)
-        #Plot such that Qmin shows as Wmin and Qmax shows as Wmax
+        polyline_wid=ZS_Wlow+(ZS_Whig-ZS_Wlow)*(ZV_Qout-ZS_Qlow)               \
+                                              /(ZS_Qhig-ZS_Qlow)
+        #Plot such that Qlow shows as Wlow and Qhig shows as Whig
 
         plt_clc.set_linewidths(polyline_wid)
         #Scale thickness of each river reach by the magnitude of the variable
