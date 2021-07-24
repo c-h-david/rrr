@@ -379,7 +379,7 @@ if BS_wid_auto:
      #Dividing sum of values by number of values. Otherwise: NaN
 
      ZS_Qhig=numpy.nanmax(ZV_Qmax)
-     ZS_Qlow=numpy.nanmin(ZV_Qavg)
+     ZS_Qlow=numpy.nanmean(ZV_Qavg)
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
 else:
@@ -415,6 +415,7 @@ print("- Video creation start: "                                               \
       +datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
+    ZV_one=numpy.ones(IS_riv_bas)
     for JS_tim in range(IS_tim_str, IS_tim_end, IS_tim_spl):
 
         date_str = (date_ini + date_stp*JS_tim).strftime("%Y-%m-%d %H:%M")
@@ -426,16 +427,24 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
         ZV_Qout=f.variables[YV_var][JS_tim][IV_riv_bas_index]
         #This does not seem to be sped up by first reordering the polylines in  
         #the shapefile so that they are sorted similarly to the netCDF file
+        if numpy.ma.is_masked(ZV_Qout):
+             BV_yes=~ZV_Qout.mask
+        else:
+             BV_yes=[True]*IS_riv_bas
+        #locations where the netCDF values are not masked
 
-        ZV_Qout=numpy.ma.filled(ZV_Qout,fill_value=0)
+        ZV_Qout=numpy.where(BV_yes,ZV_Qout,0*ZV_one)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
-
-        ZV_Qout=numpy.where(ZV_Qout<ZV_Qlow,ZV_Qlow,ZV_Qout)
-        #Replaces all values smaller than Qlow by Qlow
 
         polyline_wid=ZS_Wlow+(ZS_Whig-ZS_Wlow)*(ZV_Qout-ZS_Qlow)               \
                                               /(ZS_Qhig-ZS_Qlow)
         #Plot such that Qlow shows as Wlow and Qhig shows as Whig
+
+        polyline_wid=numpy.where(ZV_Qout>=ZV_Qlow,polyline_wid,ZS_Wlow*ZV_one)
+        #Sets width to Wlow if Qout<Qlow (avoids negative values in previous eq)
+
+        polyline_wid=numpy.where(BV_yes,polyline_wid,0*ZV_one)
+        #Sets width to zero if NoData
 
         plt_clc.set_linewidths(polyline_wid)
         #Scale thickness of each river reach by the magnitude of the variable
