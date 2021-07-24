@@ -382,6 +382,8 @@ if BS_wid_auto:
      ZS_Qlow=numpy.nanmean(ZV_Qavg)
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
+     #ZV_Qhig=ZV_Qmax
+     #ZV_Qlow=ZV_Qmin
 else:
      print('High and low flows for best display are hard-coded')
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
@@ -436,8 +438,8 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
         ZV_Qout=numpy.where(BV_yes,ZV_Qout,0*ZV_one)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
 
-        polyline_wid=ZS_Wlow+(ZS_Whig-ZS_Wlow)*(ZV_Qout-ZS_Qlow)               \
-                                              /(ZS_Qhig-ZS_Qlow)
+        polyline_wid=ZS_Wlow+(ZS_Whig-ZS_Wlow)*(ZV_Qout-ZV_Qlow)               \
+                                              /(ZV_Qhig-ZV_Qlow)
         #Plot such that Qlow shows as Wlow and Qhig shows as Whig
 
         polyline_wid=numpy.where(ZV_Qout>=ZV_Qlow,polyline_wid,ZS_Wlow*ZV_one)
