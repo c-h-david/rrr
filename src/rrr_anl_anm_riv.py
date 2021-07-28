@@ -385,14 +385,32 @@ if BS_wid_auto:
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
      ZV_Whig=ZS_Whig*numpy.ones(IS_riv_bas)
      ZV_Wlow=ZS_Wlow*numpy.ones(IS_riv_bas)
+
+     #ZV_Qhig=ZV_Qmax
+     #ZV_Qlow=ZV_Qmin
+     #ZV_Whig=ZS_Whig*numpy.ones(IS_riv_bas)
+     #ZV_Wlow=ZS_Wlow*numpy.ones(IS_riv_bas)
+
+     #ZV_Qhig=ZV_Qmax
+     #ZV_Qlow=ZV_Qmin
+     #ZV_Whig=numpy.zeros(IS_riv_bas)
+     #ZV_Wlow=numpy.zeros(IS_riv_bas)
+     #for ZS_prc in range(0,100,20):
+     #     ZS_Qbot=numpy.nanpercentile(ZV_Qavg,ZS_prc)
+     #     ZS_Qtop=numpy.nanpercentile(ZV_Qavg,ZS_prc+20)
+     #     for JS_riv_bas in range(IS_riv_bas):
+     #          ZS_Qavg=ZV_Qavg[JS_riv_bas]
+     #          if (ZS_Qavg>=ZS_Qbot) and (ZS_Qavg<=ZS_Qtop):
+     #               ZV_Wlow[JS_riv_bas]=ZS_Wlow+ZS_prc/100.*(ZS_Whig-ZS_Wlow)
+     #               ZV_Whig[JS_riv_bas]=ZS_Wlow+(ZS_prc+20)/100.               \
+     #                                          *(ZS_Whig-ZS_Wlow)
+
 else:
      print('High and low flows for best display are hard-coded')
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
      ZV_Whig=ZS_Whig*numpy.ones(IS_riv_bas)
      ZV_Wlow=ZS_Wlow*numpy.ones(IS_riv_bas)
-
-
 
 print('- The estimate of high flow to be plotted is: '+str(ZS_Qhig)+ ' m3/s')
 print('- The estimate of low  flow to be plotted is: '+str(ZS_Qlow)+ ' m3/s')
