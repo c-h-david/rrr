@@ -377,17 +377,22 @@ if BS_wid_auto:
      #runtime warning during division below
      ZV_Qavg=numpy.where(IV_npt>0,ZV_Qavg/IV_npt,numpy.NaN)
      #Dividing sum of values by number of values. Otherwise: NaN
-
      ZS_Qhig=numpy.nanmax(ZV_Qmax)
      ZS_Qlow=numpy.nanmean(ZV_Qavg)
+     #Finding an estimate of Qhig and Qlow, several other options exist here!
+
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
-     #ZV_Qhig=ZV_Qmax
-     #ZV_Qlow=ZV_Qmin
+     ZV_Whig=ZS_Whig*numpy.ones(IS_riv_bas)
+     ZV_Wlow=ZS_Wlow*numpy.ones(IS_riv_bas)
 else:
      print('High and low flows for best display are hard-coded')
      ZV_Qhig=ZS_Qhig*numpy.ones(IS_riv_bas)
      ZV_Qlow=ZS_Qlow*numpy.ones(IS_riv_bas)
+     ZV_Whig=ZS_Whig*numpy.ones(IS_riv_bas)
+     ZV_Wlow=ZS_Wlow*numpy.ones(IS_riv_bas)
+
+
 
 print('- The estimate of high flow to be plotted is: '+str(ZS_Qhig)+ ' m3/s')
 print('- The estimate of low  flow to be plotted is: '+str(ZS_Qlow)+ ' m3/s')
@@ -438,7 +443,7 @@ with writer.saving(plt_fig, rrr_vid_file, vid_dpi):
         ZV_Qout=numpy.where(BV_yes,ZV_Qout,0*ZV_one)
         #Replaces potential NoData values in the netCDF file by 0 for plotting
 
-        polyline_wid=ZS_Wlow+(ZS_Whig-ZS_Wlow)*(ZV_Qout-ZV_Qlow)               \
+        polyline_wid=ZV_Wlow+(ZV_Whig-ZV_Wlow)*(ZV_Qout-ZV_Qlow)               \
                                               /(ZV_Qhig-ZV_Qlow)
         #Plot such that Qlow shows as Wlow and Qhig shows as Whig
 
