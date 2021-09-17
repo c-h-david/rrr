@@ -245,7 +245,7 @@ print('Generating rrr_mod_nc3 based on rrr_mod_nc1 and rrr_spl_csv')
 #Create netCDF file
 #-------------------------------------------------------------------------------
 print('- Create netCDF file')
-f3 = netCDF4.Dataset(rrr_mod_nc3, "w", format="NETCDF3_CLASSIC")
+f3 = netCDF4.Dataset(rrr_mod_nc3, "w", format=f1.data_model)
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Global attributes
