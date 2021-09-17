@@ -347,10 +347,11 @@ for JS_cyc in range(IS_cyc):
           ZS_spl_tim=ZV_time3[0]+JS_cyc*ZS_cyc_tim+ZS_mea_tim
           if (ZS_spl_tim<=ZV_time3[IS_time3-1]+ZS_TauR):
                #Here we're copying the value for each of the sampled river IDs
-               JS_time3=numpy.searchsorted(ZV_time1,ZS_spl_tim,side='right')-1
-               if JS_time3<0 or JS_time3>IS_time3-1:
-                    print('ERROR: Unexpected JS_time3 value: '+str(JS_time3))
-                    raise SystemExit(22)
+               JS_time3=numpy.searchsorted(ZV_time1,ZS_spl_tim,side='left')-1
+               #JS_time3=numpy.searchsorted(ZV_time1,ZS_spl_tim,side='right')-1
+               #if JS_time3<0 or JS_time3>IS_time3-1:
+               #     print('ERROR: Unexpected JS_time3 value: '+str(JS_time3))
+               #     raise SystemExit(22)
                IV_ids=ZH_mea_tim[ZS_mea_tim]
                IV_idx1=[IH_hsh1[IS_ids] for IS_ids in IV_ids]
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
