@@ -1077,6 +1077,497 @@ fi
 
 
 #*******************************************************************************
+#Updating netCDF attributes for all sampling experiments
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM03D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM03D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM03D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 03 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM05D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM05D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM05D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 05 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM10D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM10D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM10D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 10 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM21D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM21D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM21D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 21 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM27D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM27D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM27D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 27 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TIM35D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TIM35D"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TIM35D_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled every 35 days'                             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPATPJ"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPATPJ_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following TOPEX & Jason groundtracks'\
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPAS3A"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPAS3A_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following Sentinel 3A groundtracks'  \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPA3AB"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPA3AB_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following Sentinel 3A/3B groundtracks'\
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPAEVS"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPAEVS_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following ENVISAT & SARAL groundtracks'\
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPASWN"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPASWN_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following SWOT nadir groundtracks'   \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SPASWS"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SPASWS_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled daily following SWOT swath groundtracks'\
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for TOPJAS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for TOPJAS"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_TOPJAS_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following TOPEX & Jason orbit'             \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SENT3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SENT3A"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SENT3A_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following Sentinel 3A orbit'               \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for S3AS3B
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for S3AS3B"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_S3AS3B_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following Sentinel 3A/3B orbit'            \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for ENVSRL
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for ENVSRL"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_ENVSRL_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following ENVISAT & SARAL orbit'           \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SWOT_N
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SWOT_N"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SWOT_N_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following SWOT nadir orbit'                \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Updating netCDF attributes for SWOT_S
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$lst"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes for SWOT_S"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+   ../output/MERIT_WRR/Qout_SWOT_S_chd.nc                                      \
+   'GRADES - Large Rivers - Sampled following SWOT swath orbit'                \
+   'Jet Propulsion Laboratory, California Institute of Technology'             \
+   ''                                                                          \
+   ''                                                                          \
+   ''                                                                          \
+   > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
 #Analyzing magnitude metrics for reference
 #*******************************************************************************
 unt=$((unt+1))
