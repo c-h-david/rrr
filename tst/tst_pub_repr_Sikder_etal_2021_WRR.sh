@@ -48,7 +48,7 @@ echo "********************"
 #*******************************************************************************
 #Select which unit tests to perform based on inputs to this shell script
 #*******************************************************************************
-tot=100
+tot=119
 if [ "$#" = "0" ]; then
      fst=1
      lst=$tot
@@ -3143,6 +3143,543 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing to NOTHING"
 
 rm -rf ../output/MERIT_WRR/analysis/fig4f_tst/
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+
+#*******************************************************************************
+#Animations
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Animation for GRADES
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for GRADES"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../input/MERIT_WRR/Qout_GRADES_Qmean_125cms_20000101_20091231.nc          \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_GRADES_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM03D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM03D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM03D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM03D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM05D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM05D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM05D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM05D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM10D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM10D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM10D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM10D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM21D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM21D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM21D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM21D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM27D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM27D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM27D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM27D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TIM35D
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TIM35D"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TIM35D_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TIM35D_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPATPJ
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPATPJ"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPATPJ_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPATPJ_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPAS3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPAS3A"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPAS3A_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPAS3A_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPA3AB
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPA3AB"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPA3AB_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPA3AB_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPAEVS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPAEVS"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPAEVS_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPAEVS_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPASWN
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPASWN"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPASWN_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPASWN_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SPASWS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SPASWS"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SPASWS_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SPASWS_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for TOPJAS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for TOPJAS"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_TOPJAS_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_TOPJAS_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SENT3A
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SENT3A"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SENT3A_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SENT3A_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for S3AS3B
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for S3AS3B"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_S3AS3B_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_S3AS3B_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for ENVSRL
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for ENVSRL"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_ENVSRL_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_ENVSRL_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SWOT_N
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SWOT_N"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SWOT_N_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SWOT_N_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Animation for SWOT_S
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Animation for SWOT_S"
+../src/rrr_anl_anm_riv.py                                                      \
+     ../output/MERIT_WRR/Qout_SWOT_S_mss.nc                                    \
+     ../input/MERIT_WRR/MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.shp  \
+     ../output/MERIT_WRR/anim_SWOT_S_Global_abs_mss_tst.mp4                    \
+     0                                                                         \
+     366                                                                       \
+     ../input/MERIT_WRR/Imagery_WGS84_Global.tif                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
