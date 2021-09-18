@@ -89,6 +89,128 @@ done
 URL="https://zenodo.org/record/5515650/files"
 folder="../output/MERIT_WRR"
 list="                                                                         \
+     coverage_TOPJAS.zip                                                       \
+     coverage_SENT3A.zip                                                       \
+     coverage_S3AS3B.zip                                                       \
+     coverage_ENVSRL.zip                                                       \
+     coverage_SWOT_N.zip                                                       \
+     coverage_SWOT_S.zip                                                       \
+     seq_TIM03D_mss.csv                                                        \
+     seq_TIM05D_mss.csv                                                        \
+     seq_TIM10D_mss.csv                                                        \
+     seq_TIM21D_mss.csv                                                        \
+     seq_TIM27D_mss.csv                                                        \
+     seq_TIM35D_mss.csv                                                        \
+     seq_SPATPJ.csv                                                            \
+     seq_SPAS3A.csv                                                            \
+     seq_SPA3AB.csv                                                            \
+     seq_SPAEVS.csv                                                            \
+     seq_SPASWN.csv                                                            \
+     seq_SPASWS.csv                                                            \
+     seq_TOPJAS.csv                                                            \
+     seq_SENT3A.csv                                                            \
+     seq_S3AS3B.csv                                                            \
+     seq_ENVSRL.csv                                                            \
+     seq_SWOT_N.csv                                                            \
+     seq_SWOT_S.csv                                                            \
+     Qout_TIM03D_mss.tar.gz                                                    \
+     Qout_TIM05D_mss.tar.gz                                                    \
+     Qout_TIM10D_mss.tar.gz                                                    \
+     Qout_TIM21D_mss.tar.gz                                                    \
+     Qout_TIM27D_mss.tar.gz                                                    \
+     Qout_TIM35D_mss.tar.gz                                                    \
+     Qout_SPATPJ_mss.tar.gz                                                    \
+     Qout_SPAS3A_mss.tar.gz                                                    \
+     Qout_SPA3AB_mss.tar.gz                                                    \
+     Qout_SPAEVS_mss.tar.gz                                                    \
+     Qout_SPASWN_mss.tar.gz                                                    \
+     Qout_SPASWS_mss.tar.gz                                                    \
+     Qout_TOPJAS_mss.tar.gz                                                    \
+     Qout_SENT3A_mss.tar.gz                                                    \
+     Qout_S3AS3B_mss.tar.gz                                                    \
+     Qout_ENVSRL_mss.tar.gz                                                    \
+     Qout_SWOT_N_mss.tar.gz                                                    \
+     Qout_SWOT_S_mss.tar.gz                                                    \
+     anim_GRADES_Global_abs_mss.mp4                                            \
+     anim_TIM03D_Global_abs_mss.mp4                                            \
+     anim_TIM05D_Global_abs_mss.mp4                                            \
+     anim_TIM10D_Global_abs_mss.mp4                                            \
+     anim_TIM21D_Global_abs_mss.mp4                                            \
+     anim_TIM27D_Global_abs_mss.mp4                                            \
+     anim_TIM35D_Global_abs_mss.mp4                                            \
+     anim_SPATPJ_Global_abs_mss.mp4                                            \
+     anim_SPAS3A_Global_abs_mss.mp4                                            \
+     anim_SPA3AB_Global_abs_mss.mp4                                            \
+     anim_SPAEVS_Global_abs_mss.mp4                                            \
+     anim_SPASWN_Global_abs_mss.mp4                                            \
+     anim_SPASWS_Global_abs_mss.mp4                                            \
+     anim_TOPJAS_Global_abs_mss.mp4                                            \
+     anim_SENT3A_Global_abs_mss.mp4                                            \
+     anim_S3AS3B_Global_abs_mss.mp4                                            \
+     anim_ENVSRL_Global_abs_mss.mp4                                            \
+     anim_SWOT_N_Global_abs_mss.mp4                                            \
+     anim_SWOT_S_Global_abs_mss.mp4                                            \
+     "
+
+#-------------------------------------------------------------------------------
+#Download process
+#-------------------------------------------------------------------------------
+mkdir -p $folder
+for file in $list
+do
+     wget -nv -nc $URL/$file -P $folder
+     if [ $? -gt 0 ] ; then echo "Problem downloading $file" >&2 ; exit 44 ; fi
+done
+
+
+#*******************************************************************************
+#Download RRR analysis files
+#*******************************************************************************
+
+#-------------------------------------------------------------------------------
+#Download parameters
+#-------------------------------------------------------------------------------
+URL="https://zenodo.org/record/5515650/files"
+folder="../output/MERIT_WRR/analysis"
+list="                                                                         \
+     map_mag_GRADES_75p.csv                                                    \
+     map_mag_TIM03D_75p_mss.csv                                                \
+     map_mag_TIM05D_75p_mss.csv                                                \
+     map_mag_TIM10D_75p_mss.csv                                                \
+     map_mag_TIM21D_75p_mss.csv                                                \
+     map_mag_TIM27D_75p_mss.csv                                                \
+     map_mag_TIM35D_75p_mss.csv                                                \
+     map_mag_SPATPJ_75p_mss.csv                                                \
+     map_mag_SPAS3A_75p_mss.csv                                                \
+     map_mag_SPA3AB_75p_mss.csv                                                \
+     map_mag_SPAEVS_75p_mss.csv                                                \
+     map_mag_SPASWN_75p_mss.csv                                                \
+     map_mag_SPASWS_75p_mss.csv                                                \
+     map_mag_TOPJAS_75p_mss.csv                                                \
+     map_mag_SENT3A_75p_mss.csv                                                \
+     map_mag_S3AS3B_75p_mss.csv                                                \
+     map_mag_ENVSRL_75p_mss.csv                                                \
+     map_mag_SWOT_N_75p_mss.csv                                                \
+     map_mag_SWOT_S_75p_mss.csv                                                \
+     map_evt_GRADES_75p.csv                                                    \
+     map_evt_TIM03D_75p_mss.csv                                                \
+     map_evt_TIM05D_75p_mss.csv                                                \
+     map_evt_TIM10D_75p_mss.csv                                                \
+     map_evt_TIM21D_75p_mss.csv                                                \
+     map_evt_TIM27D_75p_mss.csv                                                \
+     map_evt_TIM35D_75p_mss.csv                                                \
+     map_evt_SPATPJ_75p_mss.csv                                                \
+     map_evt_SPAS3A_75p_mss.csv                                                \
+     map_evt_SPA3AB_75p_mss.csv                                                \
+     map_evt_SPAEVS_75p_mss.csv                                                \
+     map_evt_SPASWN_75p_mss.csv                                                \
+     map_evt_SPASWS_75p_mss.csv                                                \
+     map_evt_TOPJAS_75p_mss.csv                                                \
+     map_evt_SENT3A_75p_mss.csv                                                \
+     map_evt_S3AS3B_75p_mss.csv                                                \
+     map_evt_ENVSRL_75p_mss.csv                                                \
+     map_evt_SWOT_N_75p_mss.csv                                                \
+     map_evt_SWOT_S_75p_mss.csv                                                \
      "
 
 #-------------------------------------------------------------------------------
@@ -105,9 +227,21 @@ done
 #*******************************************************************************
 #Convert files
 #*******************************************************************************
+for file in `ls ../input/MERIT_WRR/*.zip`
+do
+     unzip -nq $file -d ../input/MERIT_WRR/
+     if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+done
+
 for file in `ls ../input/MERIT_WRR/*.tar.gz`
 do
      tar -xzf $file --skip-old-files --directory ../input/MERIT_WRR/
+     if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+done
+
+for file in `ls ../output/MERIT_WRR/*.zip`
+do
+     unzip -nq $file -d ../output/MERIT_WRR/
      if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 done
 
