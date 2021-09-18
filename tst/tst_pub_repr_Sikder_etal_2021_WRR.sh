@@ -2786,7 +2786,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig2ac_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig2ac_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2817,7 +2817,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig2dg_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig2dg_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2844,7 +2844,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3a_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3a_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2871,7 +2871,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3b_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3b_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2898,7 +2898,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3c_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3c_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2925,7 +2925,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3d_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3d_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2952,7 +2952,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3e_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3e_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -2979,7 +2979,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig3f_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig3f_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3006,7 +3006,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4a_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4a_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3033,7 +3033,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4b_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4b_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3060,7 +3060,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4c_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4c_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3087,7 +3087,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4d_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4d_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3114,7 +3114,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4e_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4e_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
@@ -3141,7 +3141,7 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing to NOTHING"
 
-#rm -rf ../output/MERIT_WRR/analysis/fig4f_tst/
+rm -rf ../output/MERIT_WRR/analysis/fig4f_tst/
 rm -f $run_file
 rm -f $cmp_file
 echo "Success"
