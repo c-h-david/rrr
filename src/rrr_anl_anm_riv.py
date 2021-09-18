@@ -13,7 +13,7 @@
 #image is given (with the same coordinate system as the shapefile and provided
 #as an 8bit or 24Bit RGB image), it will be added as a background of the video. 
 #Authors:
-#Klemen Cotar, Ashish Mahabal, Cedric H. David, 2016-2021
+#Klemen Cotar, Ashish Mahabal, Cedric H. David, Md Safat Sikder, 2016-2021
 
 
 #*******************************************************************************
@@ -166,7 +166,8 @@ print(' . Number of time steps in rrr_mod_file: '+str(IS_tim_tot))
 
 if 'time' in f.variables:
      if f.variables['time'][0] != f.variables['time'][1]:
-          date_ini=datetime.datetime.fromtimestamp(f.variables['time'][0])
+          date_ini=datetime.datetime.utcfromtimestamp(f.variables['time'][0])
+          #Using utcfromtimestamp (not fromtimestamp) because times are epoch
           date_stp = datetime.timedelta(0,                                     \
                            float(f.variables['time'][1]-f.variables['time'][0]))
 
