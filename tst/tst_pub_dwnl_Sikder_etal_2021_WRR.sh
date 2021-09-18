@@ -56,14 +56,16 @@ echo "********************"
 URL="https://zenodo.org/record/5515650/files"
 folder="../input/MERIT_WRR"
 list="                                                                         \
-      GRADES_Q_125cms_20000101_20091231.tar.gz                                 \
-      orbit_shp_SARAL.tar.gz                                                   \
-      orbit_shp_Sentinel3.tar.gz                                               \
-      orbit_shp_SWOT_swath.tar.gz                                              \
-      orbit_shp_JASON.tar.gz                                                   \
-      orbit_shp_Sentinel3A.tar.gz                                              \
-      orbit_shp_SWOT_nadir.tar.gz                                              \
-      riv_network_shp.tar.gz                                                   \
+     MERIT_riv_Qmean_125cms.zip                                                \
+     MERIT_riv_Qmean_125cms_simplify_point_remove_1deg.zip                     \
+     Qout_GRADES_Qmean_125cms_20000101_20091231.nc                             \
+     TOPJAS.zip                                                                \
+     SENT3A.zip                                                                \
+     S3AS3B.zip                                                                \
+     ENVSRL.zip                                                                \
+     SWOT_N.zip                                                                \
+     SWOT_S.zip                                                                \
+     Imagery_WGS84_Global.tif                                                  \
      "
 
 #-------------------------------------------------------------------------------
@@ -87,26 +89,6 @@ done
 URL="https://zenodo.org/record/5515650/files"
 folder="../output/MERIT_WRR"
 list="                                                                         \
-      orbit_coverage_JASON.tar.gz                                              \
-      orbit_coverage_Sentinel3A.tar.gz                                         \
-      orbit_coverage_SWOT_nadir.tar.gz                                         \
-      orbit_coverage_SARAL.tar.gz                                              \
-      orbit_coverage_Sentinel3.tar.gz                                          \
-      orbit_coverage_SWOT_swath.tar.gz                                         \
-      sampling_csv_orbit.tar.gz                                                \
-      orbit_spl_JASON.tar.gz                                                   \
-      orbit_spl_SARAL.tar.gz                                                   \
-      orbit_spl_Sentinel3.tar.gz                                               \
-      orbit_spl_Sentinel3A.tar.gz                                              \
-      orbit_spl_SWOT_nadir.tar.gz                                              \
-      orbit_spl_SWOT_swath.tar.gz                                              \
-      sampling_csv_regular.tar.gz                                              \
-      regular_spl_3day.tar.gz                                                  \
-      regular_spl_5day.tar.gz                                                  \
-      regular_spl_10day.tar.gz                                                 \
-      regular_spl_21day.tar.gz                                                 \
-      regular_spl_27day.tar.gz                                                 \
-      regular_spl_35day.tar.gz                                                 \
      "
 
 #-------------------------------------------------------------------------------
