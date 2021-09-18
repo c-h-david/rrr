@@ -48,9 +48,10 @@ echo "********************"
 #*******************************************************************************
 #Select which unit tests to perform based on inputs to this shell script
 #*******************************************************************************
+tot=100
 if [ "$#" = "0" ]; then
      fst=1
-     lst=99
+     lst=$tot
      echo "Performing all unit tests: $1-$2"
      echo "********************"
 fi 
@@ -94,7 +95,7 @@ unt=0
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -132,7 +133,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -170,7 +171,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -208,7 +209,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -246,7 +247,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -284,7 +285,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -327,7 +328,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -357,7 +358,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -387,7 +388,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -417,7 +418,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -447,7 +448,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -477,7 +478,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -512,7 +513,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -543,7 +544,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -574,7 +575,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -605,7 +606,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -636,7 +637,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -667,7 +668,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -703,7 +704,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -734,7 +735,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -765,7 +766,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -796,7 +797,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -827,7 +828,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -858,7 +859,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -894,7 +895,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -925,7 +926,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -956,7 +957,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -987,7 +988,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1018,7 +1019,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1049,7 +1050,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1085,7 +1086,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1112,7 +1113,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1139,7 +1140,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1166,7 +1167,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1193,7 +1194,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1220,7 +1221,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1247,7 +1248,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1274,7 +1275,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1301,7 +1302,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1328,7 +1329,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1355,7 +1356,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1382,7 +1383,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1409,7 +1410,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1436,7 +1437,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1463,7 +1464,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1490,7 +1491,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1517,7 +1518,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1544,7 +1545,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1572,7 +1573,7 @@ fi
 #*******************************************************************************
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1608,7 +1609,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1639,7 +1640,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1670,7 +1671,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1701,7 +1702,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1732,7 +1733,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1763,7 +1764,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1799,7 +1800,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1830,7 +1831,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1861,7 +1862,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1892,7 +1893,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1923,7 +1924,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1954,7 +1955,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -1990,7 +1991,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2021,7 +2022,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2052,7 +2053,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2083,7 +2084,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2114,7 +2115,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2145,7 +2146,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2177,7 +2178,7 @@ fi
 #*******************************************************************************
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2212,7 +2213,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2242,7 +2243,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2272,7 +2273,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2302,7 +2303,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2332,7 +2333,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2362,7 +2363,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2397,7 +2398,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2427,7 +2428,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2457,7 +2458,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2487,7 +2488,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2517,7 +2518,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2547,7 +2548,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2582,7 +2583,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2612,7 +2613,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2642,7 +2643,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2672,7 +2673,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2702,7 +2703,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2732,7 +2733,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/$lst"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2767,7 +2768,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2798,7 +2799,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2829,7 +2830,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2856,7 +2857,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2883,7 +2884,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2910,7 +2911,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2937,7 +2938,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2964,7 +2965,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -2991,7 +2992,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -3018,7 +3019,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -3045,7 +3046,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -3072,7 +3073,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -3099,7 +3100,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
@@ -3126,7 +3127,7 @@ fi
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
-echo "Running unit test $unt/91"
+echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
