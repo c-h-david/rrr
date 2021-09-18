@@ -16,7 +16,7 @@
 #output files corresponding to "A Synthetic Data Set Inspired by Satellite
 #Altimetry and Impacts of Sampling on Global Spaceborne Discharge
 #Characterization", Zenodo.
-#DOI: 10.5281/zenodo.3542269
+#DOI: 10.5281/zenodo.5515650
 #The script returns the following exit codes
 # - 0  if all downloads are successful 
 # - 22 if there was a conversion problem
@@ -39,7 +39,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Downloading files from:   https://doi.org/10.5281/zenodo.3542269"
+echo "Downloading files from:   https://doi.org/10.5281/zenodo.5515650"
 echo "which correspond to   :   https://doi.org/10.1029/2020WR029035"
 echo "These files are under a Creative Commons Attribution (CC BY) license."
 echo "Please cite these four DOIs if using these files for your publications."
@@ -53,7 +53,7 @@ echo "********************"
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/4064188/files"
+URL="https://zenodo.org/record/5515650/files"
 folder="../input/MERIT_WRR"
 list="                                                                         \
       GRADES_Q_125cms_20000101_20091231.tar.gz                                 \
@@ -84,7 +84,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/4064188/files"
+URL="https://zenodo.org/record/5515650/files"
 folder="../output/MERIT_WRR"
 list="                                                                         \
       orbit_coverage_JASON.tar.gz                                              \
