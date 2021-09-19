@@ -17,7 +17,7 @@
 #output files corresponding to "A Synthetic Data Set Inspired by Satellite
 #Altimetry and Impacts of Sampling on Global Spaceborne Discharge
 #Characterization", Zenodo.
-#DOI: 10.5281/zenodo.3542269
+#DOI: 10.5281/zenodo.5516592
 #The following are the possible arguments:
 # - No argument: all unit tests are run
 # - One unique unit test number: this test is run
