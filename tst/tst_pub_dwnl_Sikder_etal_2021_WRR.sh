@@ -233,11 +233,11 @@ do
      if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
 done
 
-#for file in `ls ../input/MERIT_WRR/*.tar.gz`
-#do
-#     tar -xzf $file --skip-old-files --directory ../input/MERIT_WRR/
-#     if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
-#done
+for file in `ls ../input/MERIT_WRR/*.tar.gz`
+do
+     tar -xzf $file --skip-old-files --directory ../input/MERIT_WRR/
+     if [ $? -gt 0 ] ; then echo "Problem converting" >&2 ; exit 22 ; fi
+done
 
 for file in `ls ../output/MERIT_WRR/*.zip`
 do
