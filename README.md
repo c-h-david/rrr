@@ -89,7 +89,7 @@ installed, *i.e.* **no update** was performed, and **no upgrade** either.
 
 Note that the experienced users may find more up-to-date installation 
 instructions in
-[.travis.yml](https://github.com/c-h-david/rrr/blob/master/.travis.yml).
+[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/master/.github/workflows/github_actions_CI.yml).
 
 ### Download RRR
 First, make sure that `git` is installed: 
@@ -159,4 +159,4 @@ Testing scripts are currently under development.
 
 Note that the experienced users may find more up-to-date testing instructions 
 in
-[.travis.yml](https://github.com/c-h-david/rrr/blob/master/.travis.yml).
+[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/master/.github/workflows/github_actions_CI.yml).
