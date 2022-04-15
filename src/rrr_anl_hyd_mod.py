@@ -116,6 +116,8 @@ elif 'FLComID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='FLComID'
 elif 'ARCID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='ARCID'
+elif 'COMID' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='COMID'
 else:
      print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
      raise SystemExit(22) 

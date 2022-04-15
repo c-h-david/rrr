@@ -118,6 +118,8 @@ with fiona.open(rrr_obs_shp, 'r') as shpfile:
           YV_obs_id='FLComID'
      elif 'ARCID' in shpfile[0]['properties']:
           YV_obs_id='ARCID'
+     elif 'COMID' in shpfile[0]['properties']:
+          YV_obs_id='COMID'
      else:
           print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
           raise SystemExit(22) 
