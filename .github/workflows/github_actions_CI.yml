@@ -15,7 +15,6 @@
 #Name and specification of triggers
 #*******************************************************************************
 name: GitHub Actions CI
-
 on:
    push:
    pull_request:
@@ -36,9 +35,6 @@ jobs:
          include:
          - dwnl: ./tst_pub_dwnl_Emery_etal_2020_JHM2.sh
            repr: ./tst_pub_repr_Emery_etal_2020_JHM2.sh
-
-
-
 
     steps:
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -71,7 +67,7 @@ jobs:
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Install Python requirements
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-      - name: Install pip requirements
+      - name: Install Python requirements
         run: |
           sudo pip install --no-cache-dir `grep 'numpy==' requirements.pip`
           sudo pip install --no-cache-dir -r requirements.pip
@@ -86,13 +82,10 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           cd ./tst
-          echo "The current working directory is $PWD"
-          sudo chmod +x $TST_PUB_DWNL
-          sudo chmod +x $TST_PUB_REPR
-          $TST_PUB_DWNL
-          $TST_PUB_REPR
-      
-      
+          echo $TST_PUB_DWNL && $TST_PUB_DWNL
+          echo $TST_PUB_REPR && $TST_PUB_REPR
+
+
 #*******************************************************************************
 #End
 #*******************************************************************************
