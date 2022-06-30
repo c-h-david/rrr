@@ -73,7 +73,7 @@ print('Reading input files')
 #-------------------------------------------------------------------------------
 IV_riv_tot_id=[]
 IV_down_id=[]
-with open(rrr_con_file,'rb') as csvfile:
+with open(rrr_con_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_id.append(int(row[0]))
@@ -85,7 +85,7 @@ print('- Number of river reaches in rrr_con_file: '+str(IS_riv_tot))
 #rrr_riv_file
 #-------------------------------------------------------------------------------
 IV_riv_bas_id=[]
-with open(rrr_riv_file,'rb') as csvfile:
+with open(rrr_riv_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_bas_id.append(int(row[0]))

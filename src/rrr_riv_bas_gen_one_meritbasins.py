@@ -108,7 +108,7 @@ for JS_riv_bas in range(IS_riv_bas):
 #-------------------------------------------------------------------------------
 print('- Reading connectivity file')
 IV_riv_tot_id=[]
-with open(rrr_con_csv,'rb') as csvfile:
+with open(rrr_con_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_id.append(int(row[0]))
@@ -120,7 +120,7 @@ print(' . Number of river reaches in rrr_con_csv: '+str(IS_riv_tot1))
 #-------------------------------------------------------------------------------
 print('- Reading sort file')
 IV_riv_tot_sort=[]
-with open(rrr_srt_csv,'rb') as csvfile:
+with open(rrr_srt_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_sort.append(int(row[0]))

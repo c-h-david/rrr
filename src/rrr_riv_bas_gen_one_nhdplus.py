@@ -103,7 +103,7 @@ print('- Number of reaches with known dir: '+str(IS_riv_bas))
 #Connectivity file
 #-------------------------------------------------------------------------------
 IV_riv_tot_id=[]
-with open(rrr_con_file,'rb') as csvfile:
+with open(rrr_con_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_id.append(int(row[0]))
@@ -114,7 +114,7 @@ print('- Number of river reaches in rrr_con_file: '+str(IS_riv_tot1))
 #Sort file
 #-------------------------------------------------------------------------------
 IV_riv_tot_sort=[]
-with open(rrr_srt_file,'rb') as csvfile:
+with open(rrr_srt_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_riv_tot_sort.append(int(row[0]))

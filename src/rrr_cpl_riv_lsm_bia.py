@@ -352,7 +352,7 @@ print('- Done')
 #*******************************************************************************
 print('Reading observation file and computing average')
 
-with open(rrr_Qob_csv,'rb') as csvfile:
+with open(rrr_Qob_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      row=next(csvreader)
      IS_obs_tot=len(row)
@@ -360,7 +360,7 @@ print('- Number of gauges in rrr_Qob_csv: '+str(IS_obs_tot))
 
 ZV_Qob_avg=numpy.empty(IS_obs_tot)
 IS_Qob_tim=0
-with open(rrr_Qob_csv,'rb') as csvfile:
+with open(rrr_Qob_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           ZV_Qob_tmp=numpy.array([float(obs) for obs in row])

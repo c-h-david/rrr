@@ -170,7 +170,7 @@ for JS_obs_tot in range(IS_obs_tot):
      #Read timeseries from csv files
      #--------------------------------------------------------------------------
      ZV_Qhyd=[]
-     with open(rrr_hyd_csv,'rb') as csvfile:
+     with open(rrr_hyd_csv,'r') as csvfile:
           csvreader=csv.reader(csvfile)
           for row in csvreader:
                ZV_Qhyd.append(float(row[0]))

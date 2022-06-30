@@ -150,7 +150,7 @@ print('Read rrr_obs_csv')
 
 IV_obs_tot_id=[]
 
-with open(rrr_obs_csv,'rb') as csvfile:
+with open(rrr_obs_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           IV_obs_tot_id.append(int(row[0]))
@@ -167,7 +167,7 @@ print('Read rrr_flw_csv')
 ZM_obs=numpy.array([]).reshape(0,IS_obs_tot)
 #Initialize an empty array of size IS_obs_tot to store all hydrographs
 
-with open(rrr_flw_csv,'rb') as csvfile:
+with open(rrr_flw_csv,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           ZV_obs=[float(obs) for obs in row]

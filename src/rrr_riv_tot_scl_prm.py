@@ -88,7 +88,7 @@ print('Reading input files')
 #kfac file
 #-------------------------------------------------------------------------------
 ZV_kfac=[]
-with open(rrr_kfc_file,'rb') as csvfile:
+with open(rrr_kfc_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           ZV_kfac.append(float(row[0]))
@@ -99,7 +99,7 @@ print('- Number of river reaches in rrr_kfc_file: '+str(IS_riv_tot1))
 #xfac file
 #-------------------------------------------------------------------------------
 ZV_xfac=[]
-with open(rrr_xfc_file,'rb') as csvfile:
+with open(rrr_xfc_file,'r') as csvfile:
      csvreader=csv.reader(csvfile)
      for row in csvreader:
           ZV_xfac.append(float(row[0]))
