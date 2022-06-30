@@ -252,7 +252,7 @@ for JS_cat_tot in range(IS_cat_tot):
 #*******************************************************************************
 print('Writing files')
 
-with open(rrr_cat_csv, 'wb') as csvfile:
+with open(rrr_cat_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_cat_tot in range(IS_cat_tot):
           IV_line=[IV_cat_tot_id[JS_cat_tot],                                  \

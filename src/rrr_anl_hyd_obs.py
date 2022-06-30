@@ -214,7 +214,7 @@ IV_obs_loc=[IM_hsh[IV_obs_bas_id_srt[JS_obs_bas]]                              \
 #*******************************************************************************
 print('Write CSV file')
 
-with open(rrr_hyd_csv, 'wb') as csvfile:
+with open(rrr_hyd_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
      csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
@@ -224,7 +224,7 @@ with open(rrr_hyd_csv, 'wb') as csvfile:
 
 if ZS_pct_uq > 0:
      rrr_hyd_csv=rrr_hyd_csv[:-4]+'_uq.csv'
-     with open(rrr_hyd_csv, 'wb') as csvfile:
+     with open(rrr_hyd_csv, 'w') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
           #csvwriter.writerow([rrr_obs_str]+YV_obs_bas_cd_srt)
           csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)

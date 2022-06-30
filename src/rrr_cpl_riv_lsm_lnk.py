@@ -207,7 +207,7 @@ for JS_riv_tot in range(IS_riv_tot):
 #*******************************************************************************
 print('Writing file')
 
-with open(rrr_cpl_file, 'wb') as csvfile:
+with open(rrr_cpl_file, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           IV_line=[IV_riv_tot_id[JS_riv_tot],                                  \

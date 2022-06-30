@@ -159,7 +159,7 @@ print("- Done")
 #Writing new catchment file
 #*******************************************************************************
 print('Writing new catchment file')
-with open(rrr_cbs_csv, 'wb') as csvfile:
+with open(rrr_cbs_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_bas in range(IS_riv_bas):
           IV_line=[IV_cat_bas_id[JS_riv_bas],                                  \

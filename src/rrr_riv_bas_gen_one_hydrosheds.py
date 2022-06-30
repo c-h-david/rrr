@@ -174,7 +174,7 @@ IV_riv_bas_sort2, IV_riv_bas_id2=z
 #*******************************************************************************
 print('Writing file')
 
-with open(rrr_riv_csv, 'wb') as csvfile:
+with open(rrr_riv_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_bas in range(IS_riv_bas):
           csvwriter.writerow([IV_riv_bas_id2[JS_riv_bas]]) 

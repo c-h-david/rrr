@@ -74,7 +74,7 @@ name='ForecastWarnings-all.csv'
 #Saving data into csv file locally
 #-------------------------------------------------------------------------------
 print('- Saving '+name)
-with open(name, 'wb') as f:
+with open(name, 'w') as f:
      f.write(data.content)
 
 #-------------------------------------------------------------------------------

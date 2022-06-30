@@ -549,19 +549,19 @@ print(' . Done')
 ##*******************************************************************************
 ##Writing optional diagnosis files
 ##*******************************************************************************
-#with open('./Qri.csv', 'wb') as csvfile:
+#with open('./Qri.csv', 'w') as csvfile:
 #     csvwriter = csv.writer(csvfile, dialect='excel')
 #     csvwriter.writerow(['COMID','Qri_avg']) 
 #     for JS_riv_bas in range(IS_riv_bas):
 #          csvwriter.writerow([IV_riv_bas_id[JS_riv_bas],ZV_Qri_avg[JS_riv_bas]]) 
 #
-#with open('./Qrc.csv', 'wb') as csvfile:
+#with open('./Qrc.csv', 'w') as csvfile:
 #     csvwriter = csv.writer(csvfile, dialect='excel')
 #     csvwriter.writerow(['COMID','Qrc_avg']) 
 #     for JS_riv_bas in range(IS_riv_bas):
 #          csvwriter.writerow([IV_riv_bas_id[JS_riv_bas],ZV_Qrc_avg[JS_riv_bas]]) 
 #
-#with open('./Qob.csv', 'wb') as csvfile:
+#with open('./Qob.csv', 'w') as csvfile:
 #     csvwriter = csv.writer(csvfile, dialect='excel')
 #     csvwriter.writerow(['COMID','Qob_avg']) 
 #     for JS_obs_tot in range(IS_obs_tot):

@@ -173,8 +173,8 @@ print('  . Will compute statistics for: '+str(IS_M)+' time steps')
 #*******************************************************************************
 print('- Computing flow statistics')
 
-with open(rrr_sts_csv, 'wb') as csvfile:
-     #'wb' here ensures creation of a new file instead of appending.
+with open(rrr_sts_csv, 'w') as csvfile:
+     #'w' here ensures creation of a new file instead of appending.
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid','Qobsbar','Qmodbar','RMSE','Bias',            \
                          'STDE','Nash','Correl']) 

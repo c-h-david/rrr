@@ -190,7 +190,7 @@ print('Writing CSV files')
 
 IS_riv_dwn=len(IV_riv_dwn_ix_req)
 
-with open(rrr_dwn_csv, 'wb') as csvfile:
+with open(rrr_dwn_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
      csvwriter.writerow([IS_riv_id])
@@ -201,7 +201,7 @@ with open(rrr_dwn_csv, 'wb') as csvfile:
 
 IS_riv_ups=len(IV_riv_ups_ix_req)
 
-with open(rrr_ups_csv, 'wb') as csvfile:
+with open(rrr_ups_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid'])
      csvwriter.writerow([IS_riv_id])

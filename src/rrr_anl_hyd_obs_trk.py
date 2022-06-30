@@ -263,7 +263,7 @@ s.close()
 #*******************************************************************************
 print('Write CSV file')
 
-with open(rrr_hyd_csv, 'wb') as csvfile:
+with open(rrr_hyd_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      #csvwriter.writerow([rrr_out_str]+YV_obs_tot_cd_srt)
      csvwriter.writerow([rrr_out_str]+IV_obs_tot_id_srt)

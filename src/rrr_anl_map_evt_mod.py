@@ -364,7 +364,7 @@ IV_evt=numpy.where(IV_evt>0,IV_evt,numpy.NaN)
 #*******************************************************************************
 print('Writing CSV file')
 
-with open(rrr_evt_csv, 'wb') as csvfile:
+with open(rrr_evt_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      IV_line=[YS_title,                                                        \
               'T'+YS_thr[-3:]+'_avg',                                          \

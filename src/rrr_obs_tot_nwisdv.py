@@ -323,13 +323,13 @@ print('- New shapefile populated')
 print('Writing files')
 
 print(' - rrr_obs_csv')
-with open(rrr_obs_csv, 'wb') as csvfile:
+with open(rrr_obs_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_obs_tot in range(IS_obs_tot):
           csvwriter.writerow([IV_obs_tot_id[JS_obs_tot]]) 
 
 print(' - rrr_flw_csv')
-with open(rrr_flw_csv, 'wb') as csvfile:
+with open(rrr_flw_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_time in range(IS_time):
           csvwriter.writerow(ZM_obs_tot_data[JS_time]) 

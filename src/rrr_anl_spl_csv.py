@@ -113,7 +113,7 @@ print('- The total number of subsample/river reach pairs is: '+str(IS_sp2_tot))
 #*******************************************************************************
 print('Writing rrr_sp2_csv')
 
-with open(rrr_sp2_csv, 'wb') as csvfile:
+with open(rrr_sp2_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           IS_riv_id=IV_riv_tot_id[JS_riv_tot]

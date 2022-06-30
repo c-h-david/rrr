@@ -305,7 +305,7 @@ ZM_out_avg=ZM_out_avg.transpose()
 #*******************************************************************************
 print('Write CSV file')
 
-with open(rrr_hyd_csv, 'wb') as csvfile:
+with open(rrr_hyd_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      #csvwriter.writerow([rrr_out_str]+YV_obs_tot_cd_srt)
      csvwriter.writerow([rrr_out_str]+IV_obs_tot_id_srt)
@@ -327,7 +327,7 @@ if YS_uq_name!='' and                                                          \
                                *100
 
      rrr_hyd_csv=rrr_hyd_csv[:-4]+'_uq.csv'
-     with open(rrr_hyd_csv, 'wb') as csvfile:
+     with open(rrr_hyd_csv, 'w') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
           #csvwriter.writerow([rrr_out_str]+YV_obs_tot_cd_srt)
           csvwriter.writerow([rrr_out_str]+IV_obs_tot_id_srt)

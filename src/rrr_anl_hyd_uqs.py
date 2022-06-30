@@ -218,8 +218,8 @@ for JS_riv_bas in range(IS_riv_bas):
 #*******************************************************************************
 print('- Computing flow statistics')
 
-with open(rrr_uqs_csv, 'wb') as csvfile:
-     #'wb' here ensures creation of a new file instead of appending.
+with open(rrr_uqs_csv, 'w') as csvfile:
+     #'w' here ensures creation of a new file instead of appending.
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid','Qobsbar','Qmodbar','RMSE','Bias',            \
                          'STDE','Nash','Correl']) 

@@ -286,7 +286,7 @@ for JS_riv_tot in range(IS_riv_tot):
 #*******************************************************************************
 print('Writing files')
 
-with open(rrr_con_csv, 'wb') as csvfile:
+with open(rrr_con_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           IV_line=[IV_riv_tot_id[JS_riv_tot], 
@@ -295,22 +295,22 @@ with open(rrr_con_csv, 'wb') as csvfile:
           IV_line=IV_line+IM_up[JS_riv_tot]
           csvwriter.writerow(IV_line) 
 
-with open(rrr_kfc_csv, 'wb') as csvfile:
+with open(rrr_kfc_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([ZV_kfac[JS_riv_tot]]) 
 
-with open(rrr_xfc_csv, 'wb') as csvfile:
+with open(rrr_xfc_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([ZV_xfac[JS_riv_tot]]) 
 
-with open(rrr_srt_csv, 'wb') as csvfile:
+with open(rrr_srt_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([IV_top_sort[JS_riv_tot]]) 
 
-with open(rrr_crd_csv, 'wb') as csvfile:
+with open(rrr_crd_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           IV_line=[IV_riv_tot_id[JS_riv_tot], 

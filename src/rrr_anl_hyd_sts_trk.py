@@ -330,7 +330,7 @@ s.close()
 #*******************************************************************************
 print('Write CSV file')
 
-with open(rrr_sts_csv, 'wb') as csvfile:
+with open(rrr_sts_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid','Qobsbar','Qmodbar','RMSE','Bias',            \
                          'STDE','Nash','Correl']) 

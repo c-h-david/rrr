@@ -388,7 +388,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
                YS_name=YS_name.replace('attachment; filename=','')
                YS_name=YS_name.replace('"','')
                #The file name is extracted directly from requests.get() results
-               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               open(rrr_lsm_dir+YS_dir+YS_name, 'w').write(r.content)
                #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
@@ -465,7 +465,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
                YS_name=YS_name.replace('attachment; filename=','')
                YS_name=YS_name.replace('"','')
                #The file name is extracted directly from requests.get() results
-               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               open(rrr_lsm_dir+YS_dir+YS_name, 'w').write(r.content)
                #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime
@@ -542,7 +542,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
                YS_name=YS_name.replace('attachment; filename=','')
                YS_name=YS_name.replace('"','')
                #The file name is extracted directly from requests.get() results
-               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               open(rrr_lsm_dir+YS_dir+YS_name, 'w').write(r.content)
                #The file is written on local disk
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Increment current datetime

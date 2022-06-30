@@ -181,7 +181,7 @@ ZV_var_lum=ZV_var_lum/(ZV_time[1]-ZV_time[0])
 #*******************************************************************************
 print('Write rrr_hyd_csv file')
 
-with open(rrr_hyd_csv, 'wb') as csvfile:
+with open(rrr_hyd_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['Lumped',YS_riv_id])
      for JS_time in range(IS_time):

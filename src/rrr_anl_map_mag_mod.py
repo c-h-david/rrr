@@ -307,7 +307,7 @@ for JS_riv_bas in range(IS_riv_bas):
 #*******************************************************************************
 print('Writing CSV file')
 
-with open(rrr_map_csv, 'wb') as csvfile:
+with open(rrr_map_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      IV_line=[YS_title,                                                        \
               YS_out_name+'_avg',                                              \

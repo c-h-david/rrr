@@ -135,12 +135,12 @@ for JS_riv_tot in range(IS_riv_tot):
 #*******************************************************************************
 print('Writing files')
 
-with open(rrr_k_file, 'wb') as csvfile:
+with open(rrr_k_file, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([ZV_k[JS_riv_tot]]) 
 
-with open(rrr_x_file, 'wb') as csvfile:
+with open(rrr_x_file, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           csvwriter.writerow([ZV_x[JS_riv_tot]]) 

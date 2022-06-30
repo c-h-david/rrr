@@ -563,7 +563,7 @@ f2.close()
 #*******************************************************************************
 print('Write summarized results in a file')
 
-with open(rrr_bvc_csv, 'wb') as csvfile:
+with open(rrr_bvc_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid', 'bias','stderr','covavg']+                   \
                         ['covdwn']*(IS_riv_rad))

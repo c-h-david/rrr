@@ -271,7 +271,7 @@ print('- Closing rrr_spl_shp so that values are saved')
 #*******************************************************************************
 print('Writing rrr_spl_csv')
 
-with open(rrr_spl_csv, 'wb') as csvfile:
+with open(rrr_spl_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
           IS_riv_id=IV_riv_tot_id[JS_riv_tot]

@@ -408,7 +408,7 @@ print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_sqm))
 ##*******************************************************************************
 #print('Write rrr_var_csv')
 #
-#with open(rrr_var_csv, 'wb') as csvfile:
+#with open(rrr_var_csv, 'w') as csvfile:
 #     csvwriter = csv.writer(csvfile, dialect='excel')
 #     for JS_lsm_time in range(IS_lsm_time):
 #          IV_line=[YV_lsm_time[JS_lsm_time],ZV_var[JS_lsm_time]] 
