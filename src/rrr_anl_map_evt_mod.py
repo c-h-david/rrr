@@ -79,7 +79,7 @@ try:
      with open(rrr_mag_csv) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_out_csv)
+     print('ERROR - Unable to open '+rrr_mag_csv)
      raise SystemExit(22) 
 
 
