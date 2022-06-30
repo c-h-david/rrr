@@ -3,9 +3,11 @@
 
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg)](https://github.com/c-h-david/rrr/blob/master/LICENSE)
 
+[![Docker Images](https://img.shields.io/badge/docker-images-blue?logo=docker)](https://hub.docker.com/r/chdavid/rrr/tags)
+
 [![GitHub CI Status](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CI.yml/badge.svg)](https://github.com/c-h-david/rrr/actions)
 
-[![Docker Build](https://img.shields.io/docker/cloud/build/chdavid/rrr.svg)](https://hub.docker.com/r/chdavid/rrr/tags)
+[![GitHub CD Status](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CD.yml/badge.svg)](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CD.yml)
 
 The Reproducible Routing Rituals (RRR) is a Python and bash shell toolbox that 
 combines many repetitive pre and post-processing tasks that are common to 
