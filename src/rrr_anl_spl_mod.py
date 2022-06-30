@@ -256,6 +256,7 @@ for YV_att in f1.ncattrs():
 vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
 vsn=vsn[0]
 vsn=vsn.rstrip()
+vsn=vsn.decode()
 #Version of RRR
 
 if 'source' in f1.ncattrs():

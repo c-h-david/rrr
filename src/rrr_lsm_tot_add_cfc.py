@@ -177,6 +177,7 @@ dt=dt.replace(microsecond=0)
 vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
 vsn=vsn[0]
 vsn=vsn.rstrip()
+vsn=vsn.decode()
 #Version of RRR
 
 g.Conventions='CF-1.6'
