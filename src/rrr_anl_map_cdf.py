@@ -64,7 +64,7 @@ for JS_map in range(IS_map):
           with open(rrr_map_csv) as file:
                pass
      except IOError as e:
-          print('ERROR - Unable to open '+rrr_sts_csv)
+          print('ERROR - Unable to open '+rrr_map_csv)
           raise SystemExit(22)
 
 if not os.path.isdir(rrr_cdf_dir):
