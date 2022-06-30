@@ -81,9 +81,9 @@ rrr_mod_file = sys.argv[1]
 rrr_riv_file = sys.argv[2]
 rrr_vid_file = sys.argv[3]
 if IS_arg > 4:
-     IS_tim_str = long(sys.argv[4])
+     IS_tim_str = int(sys.argv[4])
 if IS_arg > 5:
-     IS_tim_end = long(sys.argv[5])
+     IS_tim_end = int(sys.argv[5])
 if IS_arg > 6:
      rrr_img_file = sys.argv[6]
 
