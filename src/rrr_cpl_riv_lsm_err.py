@@ -176,7 +176,9 @@ with open(rrr_bvc_csv,'r') as csvfile:
      YV_headers=next(csvreader)
      IS_riv_tot2=sum([1 for row in csvreader])
      #Counting the number of lines here allows for memory allocation below
-     IS_riv_rad=len(row)-4
+     for row in csvreader:
+         IS_riv_rad=len(row)-4
+         break
      #Same for the number of downstream covariances
 
 print('- Number of river reaches in rrr_bvc_csv: '+str(IS_riv_tot2))

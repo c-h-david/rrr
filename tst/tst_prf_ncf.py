@@ -88,7 +88,7 @@ if 'COMID' in f.dimensions:
 elif 'rivid' in f.dimensions:
      YS_rivid1='rivid'
 else:
-     print('ERROR - Neither COMID nor rivid exist in '+rrr_vol_mod)
+     print('ERROR - Neither COMID nor rivid exist in '+rrr_vol_ncf)
      raise SystemExit(22) 
 
 IS_riv_tot=len(f.dimensions[YS_rivid1])
@@ -99,7 +99,7 @@ if 'Time' in f.dimensions:
 elif 'time' in f.dimensions:
      YS_time='time'
 else:
-     print('ERROR - Neither Time nor time exist in '+rrr_vol_mod)
+     print('ERROR - Neither Time nor time exist in '+rrr_vol_ncf)
      raise SystemExit(22) 
 
 IS_time=len(f.dimensions[YS_time])
@@ -118,7 +118,7 @@ if 'm3_riv' in f.variables:
      YS_var='m3_riv'
      print('- The variable that will be accessed is: '+YS_var)
 else:
-     print('ERROR - m3_riv does not exist in '+rrr_vol_mod)
+     print('ERROR - m3_riv does not exist in '+rrr_vol_ncf)
      raise SystemExit(22) 
 
 #-------------------------------------------------------------------------------
