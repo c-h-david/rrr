@@ -219,7 +219,7 @@ else:
 print('- Making hash table')
 IM_hsh={}
 for JS_riv_bas in range(IS_riv_bas):
-     IM_hsh[IV_riv_bas_id[JS_riv_bas]]=JS_riv_bas
+     IM_hsh[int(IV_riv_bas_id[JS_riv_bas])]=JS_riv_bas
 
 #-------------------------------------------------------------------------------
 #Getting or making time variable values
