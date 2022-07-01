@@ -195,6 +195,7 @@ list="                                                                         \
       stats_rap_exp00_err_M.csv                                                \
       stats_rap_exp00_monthly_BUG_DO_NOT_USE.csv                               \
       stats_rap_exp00_monthly.csv                                              \
+      stats_rap_exp01_BUG_NETCDF4.csv                                          \
       stats_rap_exp01.csv                                                      \
       stats_rap_exp02.csv                                                      \
       stats_rap_exp03.csv                                                      \
@@ -222,6 +223,7 @@ list="                                                                         \
       timeseries_obs_monthly.csv                                               \
       timeseries_rap_exp00.csv                                                 \
       timeseries_rap_exp00_monthly.csv                                         \
+      timeseries_rap_exp01_BUG_NETCDF4.csv                                     \
       timeseries_rap_exp01.csv                                                 \
       timeseries_rap_exp02.csv                                                 \
       timeseries_rap_exp03.csv                                                 \
@@ -239,6 +241,7 @@ list="                                                                         \
       timeseries_rap_exp15.csv                                                 \
       timeseries_rap_exp16.csv                                                 \
       timeseries_rap_exp17.csv                                                 \
+      timeseries_rap_exp18_BUG_NETCDF4.csv                                     \
       timeseries_rap_exp18.csv                                                 \
       timeseries_rap_exp19.csv                                                 \
       timeseries_rap_exp20.csv                                                 \
