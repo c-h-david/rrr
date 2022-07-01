@@ -26,7 +26,7 @@
 #R. Edward Beighley, and Matthew Rodell (2020), RRR/RAPID input and output files
 #for "Underlying Fundamentals of Kalman Filtering for River Network Modeling",
 #Zenodo.
-#DOI: 10.5281/zenodo.3688691
+#DOI: 10.5281/zenodo.3688690
 #and from:
 #Xia, Youlong, Kenneth Mitchell, Michael Ek, Justin Sheffield, Brian Cosgrove,
 #Eric Wood, Lifeng Luo, Charles Alonge, Helin Wei, Jesse Meng, Ben Livneh, 
@@ -56,7 +56,7 @@
 #Publication message
 #*******************************************************************************
 echo "********************"
-echo "Downloading files from:   https://dx.doi.org/10.5281/zenodo.3688691"
+echo "Downloading files from:   https://dx.doi.org/10.5281/zenodo.3688690"
 echo "                          https://urs.earthdata.nasa.gov"
 echo "which correspond to   :   https://dx.doi.org/10.1175/JHM-D-19-0084.1"
 echo "                          https://dx.doi.org/10.1029/2011JD016048"
@@ -72,7 +72,7 @@ echo "********************"
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691/files"
+URL="https://zenodo.org/record/6789028/files"
 folder="../input/San_Guad_JHM2"
 list="                                                                         \
       catchment_Reg12.zip                                                      \
@@ -99,7 +99,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691/files"
+URL="https://zenodo.org/record/6789028/files"
 folder="../output/San_Guad_JHM2"
 list="                                                                         \
       coords_San_Guad.csv                                                      \
@@ -184,7 +184,7 @@ done
 #-------------------------------------------------------------------------------
 #Download parameters
 #-------------------------------------------------------------------------------
-URL="https://zenodo.org/record/3688691/files"
+URL="https://zenodo.org/record/6789028/files"
 folder="../output/San_Guad_JHM2/analysis"
 list="                                                                         \
       nash_table_exp00_exp21.csv                                               \
