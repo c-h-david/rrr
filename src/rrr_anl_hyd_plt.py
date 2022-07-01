@@ -280,12 +280,13 @@ for JS_obs_tot in range(IS_obs_tot):
           YS_mod_nam_uq = 'Model'
 
      #--------------------------------------------------------------------------
-     #Plot timeseries
+     #Plot timeseries and legend
      #--------------------------------------------------------------------------
      plt.plot(ZV_time, ZV_Qobs, color='k', linestyle='solid', linewidth=1,     \
               label=YS_obs_nam)
      plt.plot(ZV_time, ZV_Qmod, color='b', linestyle='dotted', linewidth=1,    \
               label=YS_mod_nam)
+     plt.legend(loc='upper right')
      
      #--------------------------------------------------------------------------
      #Plot uncertainties
@@ -318,12 +319,11 @@ for JS_obs_tot in range(IS_obs_tot):
      plt.ylim(0,ZS_max_val)
      
      #--------------------------------------------------------------------------
-     #Format title, labels, and legend
+     #Format title and axis labels
      #--------------------------------------------------------------------------
      plt.title(YV_obs_tot_nm[JS_obs_tot])
      plt.xlabel('Time')
      plt.ylabel('Discharge ('+r'$m^3 s^{-1}$'+')')
-     plt.legend(loc='upper right')
      
      #--------------------------------------------------------------------------
      #Annotate plot with statistics
