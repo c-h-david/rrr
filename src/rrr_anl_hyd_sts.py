@@ -266,7 +266,7 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
 #Print outputs
 #-------------------------------------------------------------------------------
-     with open(rrr_sts_csv, 'ab') as csvfile:
+     with open(rrr_sts_csv, 'a') as csvfile:
           csvwriter = csv.writer(csvfile, dialect='excel')
           csvwriter.writerow([IV_obs_tot_id_srt[JS_obs_tot],                   \
                               round(ZS_obsbar,2),                              \
