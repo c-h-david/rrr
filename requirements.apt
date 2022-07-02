@@ -22,31 +22,33 @@
 #Code management
 #-------------------------------------------------------------------------------
 git
+#version control system
 vim
+#text editor
 zip
+#file compression
 
 #-------------------------------------------------------------------------------
 #Code building
 #-------------------------------------------------------------------------------
-python-dev
-python-tk
-gcc
-g++
-libspatialindex-dev
-libgeos-dev
-libxml2-dev
-libxslt1-dev
-libgdal-dev
+python3-distutils
+#python3 with support for building and installing additional modules
 ffmpeg
+#multimedia file transcoding
 nco
+#netCDF operators
 
 #-------------------------------------------------------------------------------
 #Code testing
 #-------------------------------------------------------------------------------
 wget
+#download utility
 ca-certificates
+#certificate authority
 unzip
+#file extraction
 netcdf-bin
+#netCDF binaries
 
 
 #*******************************************************************************
