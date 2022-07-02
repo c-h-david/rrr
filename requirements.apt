@@ -31,8 +31,10 @@ zip
 #-------------------------------------------------------------------------------
 #Code building
 #-------------------------------------------------------------------------------
+python3.7
+#python3.7
 python3-distutils
-#python3 with support for building and installing additional modules
+#python3 support for building and installing additional modules
 ffmpeg
 #multimedia file transcoding
 nco

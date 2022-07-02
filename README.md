@@ -127,8 +127,15 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 > one by one, for example:
 >
 > ```
-> $ sudo apt-get install -y --no-install-recommends python-dev
+> $ sudo apt-get install -y --no-install-recommends python3.7
 >```
+
+Also make sure that `python3` points to `python3.7`:
+
+```
+$ sudo rm -r /usr/bin/python3
+$ sudo ln -s /usr/bin/python3.7 /usr/bin/python3
+```
 
 ### Install Python packages
 Python packages from the Python Package Index (PyPI) are summarized in
@@ -137,7 +144,7 @@ and can be installed with `pip`. But first, let's make sure that the latest
 version of `pip` is installed
 
 ```
-$ wget https://bootstrap.pypa.io/get-pip.py
+$ wget https://bootstrap.pypa.io/pip/get-pip.py
 $ sudo python3 get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
 $ rm get-pip.py
 ```

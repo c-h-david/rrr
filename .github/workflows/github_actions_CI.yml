@@ -63,13 +63,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' requirements.apt)
+          sudo rm -r /usr/bin/python3
+          sudo ln -s /usr/bin/python3.7 /usr/bin/python3
       
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Install Python requirements
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - name: Install Python requirements
         run: |
-          wget https://bootstrap.pypa.io/get-pip.py
+          wget https://bootstrap.pypa.io/pip/get-pip.py
           sudo python3 get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
           rm get-pip.py
           which pip3
