@@ -955,6 +955,8 @@ echo "- Comparing timeseries for observations, monthly"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/analysis/timeseries_obs_monthly.csv               \
      ../output/San_Guad_JHM2/analysis/timeseries_obs_monthly_tst.csv           \
+     1e-11                                                                     \
+     1e-9                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -1016,6 +1018,8 @@ echo "- Comparing timeseries for model simulations, exp00, monthly"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly.csv         \
      ../output/San_Guad_JHM2/analysis/timeseries_rap_exp00_monthly_tst.csv     \
+     1e-11                                                                     \
+     1e-9                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
