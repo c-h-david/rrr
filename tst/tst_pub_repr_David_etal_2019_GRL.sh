@@ -1258,8 +1258,8 @@ echo "- Comparing statistics from uncertainty propagation, monthly, all reaches"
 ./tst_cmp_csv.py                                                               \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err_all_reaches.csv \
      ../output/WSWM_GRL/analysis/stats_rap_pag_init_monthly_err_all_reaches_tst.csv \
-     1e-6                                                                      \
-     1e-5                                                                      \
+     1e-3                                                                      \
+     2e-2                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
