@@ -6,7 +6,7 @@
 #Purpose:
 #Check netCDF files for fill values, returns error if found, otherwise exit 22.
 #Author:
-#Cedric H. David, 2017-2021
+#Cedric H. David, 2017-2022
 
 
 #*******************************************************************************

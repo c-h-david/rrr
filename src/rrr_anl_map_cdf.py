@@ -8,7 +8,7 @@
 #a folder name, this program creates a series of graphs with cumulative
 #distribution functions.
 #Author:
-#Cedric H. David, 2021-2021
+#Cedric H. David, 2021-2022
 
 
 #*******************************************************************************

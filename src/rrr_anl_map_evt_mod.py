@@ -10,7 +10,7 @@
 #beginning and the end of the analysis are provided, the metrics are only
 #computed over the desired time range.
 #Author:
-#Cedric H. David, 2021-2021
+#Cedric H. David, 2021-2022
 
 
 #*******************************************************************************

@@ -12,7 +12,7 @@
 #where they are sorted (no subbasin capability here). A common multiplying
 #factor is used for correcting runoff between the gauges that are used.
 #Author:
-#Cedric H. David, 2021-2021
+#Cedric H. David, 2021-2022
 
 
 #*******************************************************************************

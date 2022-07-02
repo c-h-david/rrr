@@ -6,7 +6,7 @@
 #Purpose:
 #Compare netCDF files with 3 dimensions: lon, lat, and time.
 #Author:
-#Cedric H. David, 2020-2021
+#Cedric H. David, 2020-2022
 
 
 #*******************************************************************************

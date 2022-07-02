@@ -8,7 +8,7 @@
 #network and the name of a new netCDF file, this program computes the ensemble
 #average value of external inflow for each river reach into the new file.
 #Author:
-#Cedric H. David, 2018-2021
+#Cedric H. David, 2018-2022
 
 
 #*******************************************************************************

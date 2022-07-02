@@ -9,7 +9,7 @@
 %This sand box allows Matlab manipulation of some matrices that are used in
 %RAPID.
 %Author:
-%Cedric H. David, 2020-2021
+%Cedric H. David, 2020-2022
 
 
 %*******************************************************************************

@@ -7,7 +7,7 @@
 #the river network based on polylines/polygons and their mean times and on the
 #time (second) required to complete one cycle.
 #Author:
-#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2021
+#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2022
 
 
 #*******************************************************************************

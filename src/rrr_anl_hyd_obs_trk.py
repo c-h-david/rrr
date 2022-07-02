@@ -9,7 +9,7 @@
 #this program obtains data from WaterTrek and produces a csv file in which the 
 #time series of observed quantities are stored. 
 #Author:
-#Cedric H. David, 2018-2021
+#Cedric H. David, 2018-2022
 
 
 #*******************************************************************************

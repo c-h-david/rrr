@@ -9,7 +9,7 @@
 #this script creates a new polygon shapefile with only the requested HydroSHEDS
 #basins and a new polyline shapefile with the corresponding HydroSHEDS rivers.
 #Author:
-#Cedric H. David, 2018-2021
+#Cedric H. David, 2018-2022
 
 
 #*******************************************************************************

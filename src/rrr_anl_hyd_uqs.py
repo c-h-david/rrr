@@ -12,7 +12,7 @@
 #Note that fields for observed average, NSE and correlation are also produced
 #for consistency with other RRR programs, though they contain '-9999.0'.
 #Author:
-#Cedric H. David, 2011-2021
+#Cedric H. David, 2011-2022
 
 
 #*******************************************************************************
