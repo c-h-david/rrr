@@ -210,6 +210,7 @@ for JS_fig in range(IS_fig):
               label='Normalized STDE')
      plt.plot(ZV_RMS_cdf, IV_pct, color='g', linestyle='solid', linewidth=1,   \
               label='Normalized RMSE')
+     plt.legend(loc='lower right')
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Plot and annotate median values 
@@ -252,7 +253,6 @@ for JS_fig in range(IS_fig):
      plt.axes().yaxis.set_major_locator(tkr.MultipleLocator(25))
      plt.xlabel('Quantity normalized using mean simulated discharge (-)')
      plt.ylabel('Proportion (%)')
-     plt.legend(loc='lower right')
      plt.title(YS_title)
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
