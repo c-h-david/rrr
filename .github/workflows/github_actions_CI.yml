@@ -69,13 +69,12 @@ jobs:
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       - name: Install Python requirements
         run: |
-          wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-          sudo python get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
+          wget https://bootstrap.pypa.io/get-pip.py
+          sudo python3 get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
           rm get-pip.py
-          which pip
-          pip --version
-          sudo pip install --no-cache-dir `grep 'numpy==' requirements.pip`
-          sudo pip install --no-cache-dir -r requirements.pip
+          which pip3
+          pip3 --version
+          sudo pip3 install --no-cache-dir -r requirements.pip
 
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Run tests

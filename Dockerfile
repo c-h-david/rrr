@@ -47,15 +47,14 @@ RUN  apt-get update && \
 #*******************************************************************************
 #Python requirements
 #*******************************************************************************
-ADD https://bootstrap.pypa.io/pip/2.7/get-pip.py .
-RUN python get-pip.py --no-cache-dir \
+ADD https://bootstrap.pypa.io/get-pip.py .
+RUN python3 get-pip.py --no-cache-dir \
     `grep 'pip==' requirements.pip` \
     `grep 'setuptools==' requirements.pip` \
     `grep 'wheel==' requirements.pip` && \
     rm get-pip.py
 
-RUN pip install --no-cache-dir `grep 'numpy==' requirements.pip` && \
-    pip install --no-cache-dir -r requirements.pip
+RUN pip3 install --no-cache-dir -r requirements.pip
 
 
 #*******************************************************************************

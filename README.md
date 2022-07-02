@@ -27,6 +27,7 @@ can be used from the following datasets:
 - The enhanced National Hydrography Dataset (NHDPlus, versions 1 and 2)
 - The Hydrological data and maps based on SHuttle Elevation Derivatives at
   multiple Scales (HydroSHEDS)
+- The Multi-Error-Removed Improved-Terrain (MERIT) Basins
 
 Surface and subsurface runoff are obtained using model outputs from:
 
@@ -136,16 +137,15 @@ and can be installed with `pip`. But first, let's make sure that the latest
 version of `pip` is installed
 
 ```
-$ wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-$ sudo python get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
+$ wget https://bootstrap.pypa.io/get-pip.py
+$ sudo python3 get-pip.py --no-cache-dir `grep 'pip==' requirements.pip` `grep 'setuptools==' requirements.pip` `grep 'wheel==' requirements.pip`
 $ rm get-pip.py
 ```
 
 All packages can be installed at once using:
 
 ```
-$ sudo pip install --no-cache-dir `grep 'numpy==' requirements.pip`
-$ sudo pip install --no-cache-dir -r requirements.pip
+$ sudo pip3 install --no-cache-dir -r requirements.pip
 ```
 
 > Alternatively, one may install the PyPI packages listed in 
@@ -153,7 +153,7 @@ $ sudo pip install --no-cache-dir -r requirements.pip
 > one by one, for example:
 >
 > ```
-> $ sudo pip install dbf==0.96.5
+> $ sudo pip3 install dbf==0.99.2
 > ```
 
 ## Testing on Ubuntu
