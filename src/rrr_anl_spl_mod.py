@@ -200,7 +200,7 @@ for JS_riv_tot2 in range(IS_riv_tot2):
                .append(IV_riv_tot_id2[JS_riv_tot2])
 #Each meantime value now has a list of all associated river IDs
 
-ZV_mea_tim=ZH_mea_tim.keys()
+ZV_mea_tim=list(ZH_mea_tim.keys())
 ZV_mea_tim.sort()
 #The list of meantime values sorted in chronological order
 IS_mea_tim=len(ZV_mea_tim)
