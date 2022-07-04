@@ -213,8 +213,8 @@ else:
 #-------------------------------------------------------------------------------
 print('Computing average, maximum, and minimum')
 
-IV_one=numpy.ones(IS_riv_bas)
-IV_npt=numpy.zeros(IS_riv_bas)
+IV_one=numpy.ones(IS_riv_bas).astype(int)
+IV_npt=numpy.zeros(IS_riv_bas).astype(int)
 ZV_avg=numpy.zeros(IS_riv_bas)
 ZV_max=numpy.zeros(IS_riv_bas)
 ZV_min=numpy.zeros(IS_riv_bas)
