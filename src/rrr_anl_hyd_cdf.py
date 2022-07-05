@@ -201,6 +201,11 @@ for JS_fig in range(IS_fig):
           ZV_STD_cdf=[0*i for i in IV_pct]
           ZV_RMS_cdf=[0*i for i in IV_pct]
 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Create figure and axes objects (helpful for tailoring graphical options)
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     fig, ax=plt.subplots()
+
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Plot CDFs
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -217,7 +222,7 @@ for JS_fig in range(IS_fig):
      ZS_x=round(ZV_bia_cdf[10],2)
      ZS_y=IV_pct[10]
      plt.plot(ZS_x,ZS_y, color='y', marker='+')
-     plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
+     ax.annotate(        '('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
                          xytext=(-13,-16),                                     \
                          textcoords='offset points',                           \
@@ -227,7 +232,7 @@ for JS_fig in range(IS_fig):
      ZS_x=round(ZV_STD_cdf[10],2)
      ZS_y=IV_pct[10]
      plt.plot(ZS_x,ZS_y, color='b', marker='+')
-     plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
+     ax.annotate(        '('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
                          xytext=(-13,12),                                      \
                          textcoords='offset points',                           \
@@ -237,7 +242,7 @@ for JS_fig in range(IS_fig):
      ZS_x=round(ZV_RMS_cdf[10],2)
      ZS_y=IV_pct[10]
      plt.plot(ZS_x,ZS_y, color='g', marker='+')
-     plt.axes().annotate('('+str(ZS_x)+','+str(ZS_y)+')',                      \
+     ax.annotate(        '('+str(ZS_x)+','+str(ZS_y)+')',                      \
                          xy=(ZS_x,ZS_y),                                       \
                          xytext=(10,-1),                                       \
                          textcoords='offset points',                           \
@@ -249,7 +254,7 @@ for JS_fig in range(IS_fig):
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      plt.xlim(0,2)
      plt.ylim(0,100)
-     plt.axes().yaxis.set_major_locator(tkr.MultipleLocator(25))
+     ax.yaxis.set_major_locator(tkr.MultipleLocator(25))
      plt.xlabel('Quantity normalized using mean simulated discharge (-)')
      plt.ylabel('Proportion (%)')
      plt.legend(loc='lower right')
