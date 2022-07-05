@@ -100,6 +100,11 @@ IV_pct=[i*1 for i in range(101)]
 #An array with percentage values going from 0 to 100 with increments of 5
 
 #-------------------------------------------------------------------------------
+#Create figure and axes objects (helpful for tailoring graphical options)
+#-------------------------------------------------------------------------------
+fig, ax=plt.subplots()
+
+#-------------------------------------------------------------------------------
 #Plotting one spatial statistic over multiple experiments
 #-------------------------------------------------------------------------------
 print('- Plotting one spatial statistic over multiple experiments')
@@ -131,7 +136,7 @@ for JS_sts in range(IS_sts):
      #Format figure
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      plt.ylim(0,100)
-     plt.axes().yaxis.set_major_locator(tkr.MultipleLocator(25))
+     ax.yaxis.set_major_locator(tkr.MultipleLocator(25))
      plt.ylabel('Proportion (%)')
 
      if YS_sts[0]=='Q':
@@ -219,9 +224,9 @@ for YS_sts in YV_sts:
 #Format figure
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 plt.ylim(0,100)
-plt.axes().yaxis.set_major_locator(tkr.MultipleLocator(25))
+ax.yaxis.set_major_locator(tkr.MultipleLocator(25))
 plt.ylabel('Proportion (%)')
-#
+
 if YS_sts[0]=='Q':
      plt.xlim(10**0.5,10**6)
      plt.xlabel('Discharge ($m^3/s$)')
