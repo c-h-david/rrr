@@ -280,6 +280,11 @@ for JS_obs_tot in range(IS_obs_tot):
           YS_mod_nam_uq = 'Model'
 
      #--------------------------------------------------------------------------
+     #Create figure and axes objects (helpful for tailoring graphical options)
+     #--------------------------------------------------------------------------
+     fig, ax=plt.subplots()
+
+     #--------------------------------------------------------------------------
      #Plot timeseries and legend
      #--------------------------------------------------------------------------
      plt.plot(ZV_time, ZV_Qobs, color='k', linestyle='solid', linewidth=1,     \
@@ -306,10 +311,10 @@ for JS_obs_tot in range(IS_obs_tot):
      #--------------------------------------------------------------------------
      #Format x axis
      #--------------------------------------------------------------------------
-     plt.axes().xaxis.set_minor_locator(mdates.AutoDateLocator())
+     ax.xaxis.set_minor_locator(mdates.AutoDateLocator())
      locator=mdates.AutoDateLocator(minticks=2,maxticks=6)
-     plt.axes().xaxis.set_major_locator(locator)
-     plt.axes().xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
+     ax.xaxis.set_major_locator(locator)
+     ax.xaxis.set_major_formatter(mdates.AutoDateFormatter(locator))
      plt.xlim(ZV_time[0],ZV_time[IS_time-1])
      
      #--------------------------------------------------------------------------
@@ -334,7 +339,7 @@ for JS_obs_tot in range(IS_obs_tot):
      bbox_prop = dict(boxstyle="round,pad=0.2", fc="white", ec="lightgrey",    \
                       alpha=1.0)
      plt.text(0.02, 0.97, stats_str, ha='left', va='top',                      \
-              transform=plt.axes().transAxes, bbox=bbox_prop)
+              transform=ax.transAxes, bbox=bbox_prop)
      
      #--------------------------------------------------------------------------
      #(Optional) plot in real time
