@@ -53,21 +53,9 @@ jobs:
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Extracting version metadata
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-         - name: Checkout
-           uses: actions/checkout@v2
-
-         - name: Log into Container registry
-           uses: docker/login-action@v2
-           with:
-             registry: ghrc.io
-             username: ${{ github.actor }}
-             password: ${{ secrets.GITHUB_TOKEN }}
-
-         - name: Extract metadata for the Docker image
-           id: meta
-           uses: docker/login-action@v2
-           with:
-             images: ${{ secrets.DOCKER_HUB_NAME }}/rrr
+         - name: Get the version
+           id: get_version
+           run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
 
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Login to Docker Hub
@@ -84,10 +72,8 @@ jobs:
          - name: Build and push
            uses: docker/build-push-action@v3
            with:
-              context: .
               push: true
-              tags: ${{ secrets.DOCKER_HUB_NAME }}/rrr:${{ steps.meta.outputs.tags }}, ${{ secrets.DOCKER_HUB_NAME }}/rrr:latest
-              labels: ${{ steps.meta.outputs.labels }}
+              tags: ${{ secrets.DOCKER_HUB_NAME }}/rrr:${{ steps.get_version.outputs.VERSION }}
 
 
 #*******************************************************************************
