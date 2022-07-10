@@ -51,6 +51,13 @@ jobs:
               echo "The shell used is $SHELL"
 
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      #Extracting version metadata
+      #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+         - name: Get the version
+           id: get_version
+           run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+      #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       #Login to Docker Hub
       #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
          - name: Login to Docker Hub
@@ -66,7 +73,7 @@ jobs:
            uses: docker/build-push-action@v3
            with:
               push: true
-              tags: ${{ secrets.DOCKER_HUB_NAME }}/rrr:${{ github.ref }}
+              tags: ${{ secrets.DOCKER_HUB_NAME }}/rrr:${{ steps.get_version.outputs.VERSION }}
 
 
 #*******************************************************************************
