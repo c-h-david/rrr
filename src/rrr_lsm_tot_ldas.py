@@ -81,7 +81,7 @@ else:
      raise SystemExit(22) 
 
 if rrr_lsm_mod=='VIC' or rrr_lsm_mod=='NOAH' or rrr_lsm_mod=='MOS'             \
-                      or rrr_lsm_mod=='CLM':
+                      or rrr_lsm_mod=='CLSM':
      print('- Model name is valid')
 else:
      print('ERROR - Invalid model name')
