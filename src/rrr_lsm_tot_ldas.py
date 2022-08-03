@@ -188,7 +188,7 @@ print('- The credentials were obtained from ~/.netrc file')
 if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      print('Checking that service and credentials work for one known file')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/NLDAS/NLDAS_VIC0125_H.002/2000/001/'           \
                         +'NLDAS_VIC0125_H.A20000101.0000.002.grb'
@@ -204,7 +204,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      print('- Requesting a subset of NLDAS_VIC0125_H.A20000101.0000.002.grb')
      r=requests.get(url, params=payload, auth=cred)
      #Downloads data from:
-     #http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
+     #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_H.002/2000/001/
      #     NLDAS_VIC0125_H.A20000101.0000.002.grb
      #     &FORMAT=bmM0Lw
@@ -229,7 +229,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
 if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      print('Checking that service and credentials work for one known file')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/NLDAS/NLDAS_VIC0125_M.002/2000/'               \
                         +'NLDAS_VIC0125_M.A200001.002.grb'
@@ -245,7 +245,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      print('- Requesting a subset of NLDAS_VIC0125_M.A200001.002.grb')
      r=requests.get(url, params=payload, auth=cred)
      #Downloads data from:
-     #http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
+     #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_M.002/2000/
      #     NLDAS_VIC0125_M.A200001.002.grb
      #     &FORMAT=bmM0Lw
@@ -270,7 +270,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
 if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
      print('Checking that service and credentials work for one known file')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/'             \
                         +'GLDAS_VIC10_3H.A2000001.0000.001.grb'
@@ -286,7 +286,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
      print('- Requesting a subset of GLDAS_VIC10_3H.A2000001.0000.001.grb')
      r=requests.get(url, params=payload, auth=cred)
      #Downloads data from:
-     #http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
+     #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/
      #     GLDAS_VIC10_3H.A2000001.0000.001.grb
      #     &FORMAT=bmM0Lw
@@ -329,7 +329,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      print('- Initializing URL and payload')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/NLDAS/NLDAS_VIC0125_H.002/2000/001/'                \
                         +'NLDAS_VIC0125_H.A20000101.0000.002.grb'
@@ -405,7 +405,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      print('- Initializing URL and payload')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/NLDAS/NLDAS_VIC0125_M.002/2000/'               \
                         +'NLDAS_VIC0125_M.A200001.002.grb'
@@ -482,7 +482,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      print('- Initializing URL and payload')
 
-     url='http://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
      payload['FILENAME']='/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/'             \
                         +'GLDAS_VIC10_3H.A2000001.0000.001.grb'
