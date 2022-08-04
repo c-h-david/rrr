@@ -305,6 +305,46 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
           print('ERROR - Status code '+str(r.status_code))
           raise SystemExit(22)
 
+#-------------------------------------------------------------------------------
+#If requesting GLDAS monthly data
+#-------------------------------------------------------------------------------
+if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='M':
+     print('Checking that service and credentials work for one known file')
+
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     payload={}
+     payload['FILENAME']='/data/GLDAS/GLDAS_VIC10_M.2.0/2000/'             \
+                        +'GLDAS_VIC10_M.A200001.020.nc4'
+     payload['FORMAT']='bmM0Lw'
+     payload['BBOX']='-60,-180,90,180'
+     payload['LABEL']='GLDAS_VIC10_M.A200001.020.nc4.SUB.nc4'
+     payload['SHORTNAME']='GLDAS_VIC10_M'
+     payload['SERVICE']='L34RS_LDAS'
+     payload['VERSION']='1.02'
+     payload['DATASET_VERSION']='2.0'
+     payload['VARIABLES']='Qs_acc,Qsb_acc'
+
+     print('- Requesting a subset of GLDAS_VIC10_M.A200001.020.nc4')
+     r=requests.get(url, params=payload, auth=cred)
+     #Downloads data from:
+     #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
+     #     ?FILENAME=/data/GLDAS/GLDAS_VIC10_M.2.0/2000/
+     #     GLDAS_VIC10_M.A200001.020.nc4
+     #     &FORMAT=bmM0Lw
+     #     &BBOX=-60,-180,90,180
+     #     &LABEL=GLDAS_VIC10_M.A200001.020.nc4.SUB.nc4
+     #     &SHORTNAME=GLDAS_VIC10_M
+     #     &SERVICE=L34RS_LDAS
+     #     &VERSION=1.02
+     #     &DATASET_VERSION=2.0
+     #     &VARIABLES=Qs_acc,Qsb_acc
+     #requests.get() actually downloads the file into memory and also saves some
+     #associated download metadata
+     if r.ok:
+          print('- The request was successful')
+     else:
+          print('ERROR - Status code '+str(r.status_code))
+          raise SystemExit(22)
 
 #*******************************************************************************
 #Downloading all files
@@ -324,9 +364,9 @@ s.auth=cred
 #-------------------------------------------------------------------------------
 if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Initializing URL and payload
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Initializing URL and payload')
 
      url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
@@ -342,9 +382,9 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      payload['DATASET_VERSION']='002'
      payload['VARIABLES']='BGRUN,SSRUN'
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Looping over all files
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Looping over all files')
 
      rrr_dat_cur=rrr_dat_beg
@@ -400,9 +440,9 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
 #-------------------------------------------------------------------------------
 if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Initializing URL and payload
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Initializing URL and payload')
 
      url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
@@ -418,9 +458,9 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      payload['DATASET_VERSION']='002'
      payload['VARIABLES']='BGRUN,SSRUN'
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Looping over all files
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Looping over all files')
 
      rrr_dat_cur=rrr_dat_beg
@@ -477,9 +517,9 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
 #-------------------------------------------------------------------------------
 if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Initializing URL and payload
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Initializing URL and payload')
 
      url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
@@ -495,9 +535,9 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
      payload['DATASET_VERSION']='2.0'
      payload['VARIABLES']='Qs_acc,Qsb_acc'
 
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Looping over all files
-     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      print('- Looping over all files')
 
      rrr_dat_cur=rrr_dat_beg
@@ -549,6 +589,83 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           rrr_dat_cur=rrr_dat_cur+datetime.timedelta(hours=3)
      
+#-------------------------------------------------------------------------------
+#If requesting GLDAS monthly data
+#-------------------------------------------------------------------------------
+if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='M':
+
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Initializing URL and payload
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     print('- Initializing URL and payload')
+
+     url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
+     payload={}
+     payload['FILENAME']='/data/GLDAS/GLDAS_VIC10_M.2.0/2000/'             \
+                        +'GLDAS_VIC10_M.A200001.020.nc4'
+     payload['FORMAT']='bmM0Lw'
+     payload['BBOX']='-60,-180,90,180'
+     payload['LABEL']='GLDAS_VIC10_M.A200001.020.nc4.SUB.nc4'
+     payload['SHORTNAME']='GLDAS_VIC10_M'
+     payload['SERVICE']='L34RS_LDAS'
+     payload['VERSION']='1.02'
+     payload['DATASET_VERSION']='2.0'
+     payload['VARIABLES']='Qs_acc,Qsb_acc'
+
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     #Looping over all files
+     # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     print('- Looping over all files')
+
+     rrr_dat_cur=rrr_dat_beg
+     for JS_count in range(IS_count):
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Determine current datetime and various date strings
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          YS_yr=rrr_dat_cur.strftime('%Y')
+          YS_mo=rrr_dat_cur.strftime('%m')
+          YS_da=rrr_dat_cur.strftime('%d')
+          YS_hr=rrr_dat_cur.strftime('%H')
+          YS_dy=rrr_dat_cur.strftime('%j')
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Generate file name
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          payload['FILENAME']='/data/GLDAS/GLDAS_'+rrr_lsm_mod+'10_M.2.0/'     \
+                             +YS_yr+'/'                                        \
+                             +'GLDAS_'+rrr_lsm_mod+'10_M.A'+YS_yr+YS_mo        \
+                             +'.020.nc4'
+          payload['LABEL']   ='GLDAS_'+rrr_lsm_mod+'10_M.A'+YS_yr+YS_mo        \
+                             +'.020.nc4.SUB.nc4'
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Create directory if it doesn't exist
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          YS_dir='GLDAS_'+rrr_lsm_mod+'10_M/'+YS_yr+'/'
+          if not os.path.isdir(rrr_lsm_dir+YS_dir):
+               os.makedirs(rrr_lsm_dir+YS_dir)
+          #Update directory name and make sure it exists
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Place request if file does not already exist, and check it is ok
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          if os.path.isfile(rrr_lsm_dir+YS_dir+payload['LABEL']):
+               print(' . Skipping '+payload['LABEL'])
+          else:
+               print(' . Downloading '+payload['LABEL'])
+               r=s.get(url, params=payload)
+               if not r.ok:
+                    print('ERROR - status code '+str(r.status_code)+           \
+                          'returned when downloading '+payload['FILENAME'])
+                    raise SystemExit(22)
+               YS_name=r.headers['content-disposition']
+               YS_name=YS_name.replace('attachment; filename=','')
+               YS_name=YS_name.replace('"','')
+               #The file name is extracted directly from requests.get() results
+               open(rrr_lsm_dir+YS_dir+YS_name, 'wb').write(r.content)
+               #The file is written on local disk
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          #Increment current datetime
+          #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
+          rrr_dat_cur=(rrr_dat_cur+datetime.timedelta(days=32)).replace(day=1)
+
 #-------------------------------------------------------------------------------
 #Closing the networking session
 #-------------------------------------------------------------------------------
