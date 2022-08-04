@@ -84,12 +84,15 @@ fi
 if [ -e "$nc_temp" ]; then
 ncrename -v SSRUN,RUNSF                                                        \
          -v BGRUN,RUNSB                                                        \
-         -v Qs,RUNSF                                                           \
-         -v Qsb,RUNSB                                                          \
+         -v Qs_acc,RUNSF                                                       \
+         -v Qsb_acc,RUNSB                                                      \
+         -v Qs_tavg,RUNSF                                                      \
+         -v Qsb_tavg,RUNSB                                                     \
          $nc_temp
 fi
 #SSRUN / BGRUN are used in NLDAS for surface runoff / subsurface runoff (resp).
-#Qs    / Qsb   are used in GLDAS for surface runoff / subsurface runoff (resp).
+#Q_xx  / Qs_xx are used in GLDAS for surface runoff / subsurface runoff (resp).
+#                       xx can be: acc, or tavg.
 
 #-------------------------------------------------------------------------------
 #scale so that value is accumulated, not averaged 
