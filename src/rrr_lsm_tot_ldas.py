@@ -562,7 +562,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_dir='GLDAS_'+rrr_lsm_mod+'10_3H/'+YS_yr+'/'+YS_dy+'/'
+          YS_dir='GLDAS_'+rrr_lsm_mod+'10_3H.2.0/'+YS_yr+'/'+YS_dy+'/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
@@ -639,7 +639,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='M':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          YS_dir='GLDAS_'+rrr_lsm_mod+'10_M/'+YS_yr+'/'
+          YS_dir='GLDAS_'+rrr_lsm_mod+'10_M.2.0/'+YS_yr+'/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
