@@ -82,14 +82,15 @@ fi
 #Rename netCDF variables in case it was not done before
 #-------------------------------------------------------------------------------
 if [ -e "$nc_temp" ]; then
-ncrename -v SSRUN,RUNSF                                                        \
-         -v BGRUN,RUNSB                                                        \
-         -v Qs_acc,RUNSF                                                       \
-         -v Qsb_acc,RUNSB                                                      \
-         -v Qs_tavg,RUNSF                                                      \
-         -v Qsb_tavg,RUNSB                                                     \
+ncrename -v .SSRUN,RUNSF                                                       \
+         -v .BGRUN,RUNSB                                                       \
+         -v .Qs_acc,RUNSF                                                      \
+         -v .Qsb_acc,RUNSB                                                     \
+         -v .Qs_tavg,RUNSF                                                     \
+         -v .Qsb_tavg,RUNSB                                                    \
          $nc_temp
 fi
+#Adding "." before a variable name informs ncrename that it's optional.
 #SSRUN / BGRUN are used in NLDAS for surface runoff / subsurface runoff (resp).
 #Q_xx  / Qs_xx are used in GLDAS for surface runoff / subsurface runoff (resp).
 #                       xx can be: acc, or tavg.
