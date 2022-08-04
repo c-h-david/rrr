@@ -272,31 +272,31 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
 
      url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
-     payload['FILENAME']='/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/'             \
-                        +'GLDAS_VIC10_3H.A2000001.0000.001.grb'
+     payload['FILENAME']='/data/GLDAS/GLDAS_VIC10_3H.2.0/2000/001/'            \
+                        +'GLDAS_VIC10_3H.A20000101.0000.020.nc4'
      payload['FORMAT']='bmM0Lw'
      payload['BBOX']='-60,-180,90,180'
-     payload['LABEL']='GLDAS_VIC10_3H.A2000001.0000.001.grb.SUB.nc4'
+     payload['LABEL']='GLDAS_VIC10_3H.A20000101.0000.020.nc4.SUB.nc4'
      payload['SHORTNAME']='GLDAS_VIC10_3H'
      payload['SERVICE']='L34RS_LDAS'
      payload['VERSION']='1.02'
-     payload['DATASET_VERSION']='001'
-     payload['VARIABLES']='Qs,Qsb'
+     payload['DATASET_VERSION']='2.0'
+     payload['VARIABLES']='Qs_acc,Qsb_acc'
 
      print('- Requesting a subset of GLDAS_VIC10_3H.A2000001.0000.001.grb')
      r=requests.get(url, params=payload, auth=cred)
      #Downloads data from:
      #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
-     #     ?FILENAME=/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/
-     #     GLDAS_VIC10_3H.A2000001.0000.001.grb
+     #     ?FILENAME=/data/GLDAS/GLDAS_VIC10_3H.2.0/2000/001/
+     #     GLDAS_VIC10_3H.A20000101.0000.020.nc4
      #     &FORMAT=bmM0Lw
-     #     &BBOX=25,-125,53,-67
-     #     &LABEL=GLDAS_VIC10_3H.A2000001.0000.001.grb.SUB.nc4
+     #     &BBOX=-60,-180,90,-180
+     #     &LABEL=GLDAS_VIC10_3H.A20000101.0000.020.nc4.SUB.nc4
      #     &SHORTNAME=GLDAS_VIC10_3H
      #     &SERVICE=L34RS_LDAS
      #     &VERSION=1.02
-     #     &DATASET_VERSION=001
-     #     &VARIABLES=Qs,Qsb'
+     #     &DATASET_VERSION=2.0
+     #     &VARIABLES=Qs_acc,Qsb_acc'
      #requests.get() actually downloads the file into memory and also saves some
      #associated download metadata
      if r.ok:
@@ -484,16 +484,16 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
 
      url='https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi'
      payload={}
-     payload['FILENAME']='/data/GLDAS_V1/GLDAS_VIC10_3H/2000/001/'             \
-                        +'GLDAS_VIC10_3H.A2000001.0000.001.grb'
+     payload['FILENAME']='/data/GLDAS/GLDAS_VIC10_3H.2.0/2000/001/'            \
+                        +'GLDAS_VIC10_3H.A20000101.0000.020.nc4'
      payload['FORMAT']='bmM0Lw'
      payload['BBOX']='-60,-180,90,180'
-     payload['LABEL']='GLDAS_VIC10_3H.A2000001.0000.001.grb.SUB.nc4'
+     payload['LABEL']='GLDAS_VIC10_3H.A20000101.0000.020.nc4.SUB.nc4'
      payload['SHORTNAME']='GLDAS_VIC10_3H'
      payload['SERVICE']='L34RS_LDAS'
      payload['VERSION']='1.02'
-     payload['DATASET_VERSION']='001'
-     payload['VARIABLES']='Qs,Qsb'
+     payload['DATASET_VERSION']='2.0'
+     payload['VARIABLES']='Qs_acc,Qsb_acc'
 
      # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
      #Looping over all files
@@ -513,12 +513,12 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Generate file name
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
-          payload['FILENAME']='/data/GLDAS_V1/GLDAS_'+rrr_lsm_mod+'10_3H/'     \
+          payload['FILENAME']='/data/GLDAS/GLDAS_'+rrr_lsm_mod+'10_3H.2.0/'    \
                              +YS_yr+'/'+YS_dy+'/'                              \
-                             +'GLDAS_'+rrr_lsm_mod+'10_3H.A'+YS_yr+YS_dy       \
-                             +'.'+YS_hr+'00.001.grb'
-          payload['LABEL']   ='GLDAS_'+rrr_lsm_mod+'10_3H.A'+YS_yr+YS_dy       \
-                             +'.'+YS_hr+'00.001.grb.SUB.nc4'
+                             +'GLDAS_'+rrr_lsm_mod+'10_3H.A'+YS_yr+YS_mo+YS_da \
+                             +'.'+YS_hr+'00.020.nc4'
+          payload['LABEL']   ='GLDAS_'+rrr_lsm_mod+'10_3H.A'+YS_yr+YS_mo+YS_da \
+                             +'.'+YS_hr+'00.020.nc4.SUB.nc4'
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
