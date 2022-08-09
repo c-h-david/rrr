@@ -291,9 +291,9 @@ print(' - The number of grid cells found is: '+str(IS_dom_tot))
 
 
 #*******************************************************************************
-#Compute surface area of each grid cell
+#Compute surface area of intersecting grid cells
 #*******************************************************************************
-print('Compute surface area of each grid cell')
+print('Compute surface area of intersecting grid cells')
 
 ZV_dom_sqm=[0]*IS_dom_tot
 for JS_dom_tot in range(IS_dom_tot):
@@ -303,8 +303,8 @@ for JS_dom_tot in range(IS_dom_tot):
                            *6371000*math.radians(ZS_lsm_lon_stp)               \
                            *math.cos(math.radians(ZS_lsm_lat))
 
-print(' - The total area of interesecting grid cells is: '+str(sum(ZV_dom_sqm))\
-      +' m^2')
+print(' - The total area covered by all grid cells that intersect the river'   \
+      +' basin is: 'str(sum(ZV_dom_sqm))+' m^2')
 
 
 #*******************************************************************************
@@ -373,20 +373,20 @@ for JS_lsm_time in range(IS_lsm_time):
 #*******************************************************************************
 print('Printing some diagonostic quantities')
 
-print(' - Spatially accumulated runoff (runoff units * m^2)')
+print(' - Spatially accumulated runoff within basin (runoff units * m^2)')
 print('  . Temporal mean: '+str(numpy.mean(ZV_var)))
 print('  . Temporal max:  '+str(numpy.max(ZV_var)))
 print('  . Temporal min:  '+str(numpy.min(ZV_var)))
 
-print(' - Total discharge (m^3/s if the conversion factor is correct)')
-print('  . Temporal mean: '+str(numpy.mean(ZV_var)*ZS_conv))
-print('  . Temporal max:  '+str(numpy.max(ZV_var)*ZS_conv))
-print('  . Temporal min:  '+str(numpy.min(ZV_var)*ZS_conv))
-
-print(' - Spatially averaged runoff (runoff units)')
+print(' - Spatially averaged runoff within basin (runoff units)')
 print('  . Temporal mean: '+str(numpy.mean(ZV_var)/ZS_sqm))
 print('  . Temporal max:  '+str(numpy.max(ZV_var)/ZS_sqm))
 print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_sqm))
+
+print(' - Total discharge from basin (m^3/s if conversion factor is correct)')
+print('  . Temporal mean: '+str(numpy.mean(ZV_var)*ZS_conv))
+print('  . Temporal max:  '+str(numpy.max(ZV_var)*ZS_conv))
+print('  . Temporal min:  '+str(numpy.min(ZV_var)*ZS_conv))
 
 
 ##*******************************************************************************
