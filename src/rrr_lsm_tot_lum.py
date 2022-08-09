@@ -304,7 +304,7 @@ for JS_dom_tot in range(IS_dom_tot):
                            *math.cos(math.radians(ZS_lsm_lat))
 
 print(' - The total area covered by all grid cells that intersect the river'   \
-      +' basin is: 'str(sum(ZV_dom_sqm))+' m^2')
+      +' basin is: '+str(sum(ZV_dom_sqm))+' m^2')
 
 
 #*******************************************************************************
@@ -336,7 +336,8 @@ for JS_dom_tot in range(IS_dom_tot):
           ZS_sqm=ZS_sqm+ZV_dom_sqm[JS_dom_tot]
 
 print(' - The number of NoData points found is: '+str(IS_dom_msk))
-print(' - The area (m2) for the domain is: '+str(ZS_sqm))
+print(' - The total area of the river basin (after removing NoData points)'    \
+      +' is: '+str(ZS_sqm)+' m^2')
 
 
 #*******************************************************************************
