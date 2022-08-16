@@ -391,32 +391,26 @@ print('  . Temporal max:  '+str(numpy.max(ZV_var)/ZS_lsm_time_stp))
 print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_lsm_time_stp))
 
 
-##*******************************************************************************
-##Determine time strings
-##*******************************************************************************
-#print('Determine time strings')
-#rrr_dat_str=datetime.datetime.strptime('2002-04-01T00:00:00',                \
-#                                         '%Y-%m-%dT%H:%M:%S')
-#
-#YV_lsm_time=[]
-#for JS_lsm_time in range(IS_lsm_time):
-#     rrr_dat_dlt=datetime.timedelta(hours=ZV_lsm_time[JS_lsm_time])
-#     YS_lsm_time=(rrr_dat_str+rrr_dat_dlt).strftime('%Y-%m-%d')
-#     YV_lsm_time.append(YS_lsm_time)
-#
-#
-##*******************************************************************************
-##Write rrr_var_csv
-##*******************************************************************************
-#print('Write rrr_var_csv')
-#
-#with open(rrr_var_csv, 'w') as csvfile:
-#     csvwriter = csv.writer(csvfile, dialect='excel')
-#     for JS_lsm_time in range(IS_lsm_time):
-#          IV_line=[YV_lsm_time[JS_lsm_time],ZV_var[JS_lsm_time]] 
-#          csvwriter.writerow(IV_line) 
-#
-#
+#*******************************************************************************
+#Determine time strings
+#*******************************************************************************
+YV_lsm_time=[datetime.datetime.utcfromtimestamp(t).strftime('%Y-%m-%d')        \
+         for t in ZV_lsm_time]
+
+YS_riv_id=99999
+#*******************************************************************************
+#Write rrr_var_csv
+#*******************************************************************************
+print('Write rrr_var_csv')
+
+with open(rrr_var_csv, 'w') as csvfile:
+     csvwriter = csv.writer(csvfile, dialect='excel')
+     csvwriter.writerow(['Lumped',YS_riv_id])
+     for JS_lsm_time in range(IS_lsm_time):
+          IV_line=[YV_lsm_time[JS_lsm_time],ZV_var[JS_lsm_time]/ZS_lsm_time_stp]
+          csvwriter.writerow(IV_line)
+
+
 #*******************************************************************************
 #End
 #*******************************************************************************
