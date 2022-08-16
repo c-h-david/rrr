@@ -115,6 +115,7 @@ print(' - The number of time steps is: '+str(IS_lsm_time))
 ZV_lsm_lon=f.variables['lon']
 ZV_lsm_lat=f.variables['lat']
 ZV_lsm_time=f.variables['time']
+ZV_lsm_tbds=f.variables['time_bnds']
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get the interval sizes
@@ -125,12 +126,8 @@ print(' - The interval size for longitudes is: '+str(ZS_lsm_lon_stp))
 ZS_lsm_lat_stp=abs(ZV_lsm_lat[1]-ZV_lsm_lat[0])
 print(' - The interval size for latitudes is: '+str(ZS_lsm_lat_stp))
 
-if len(ZV_lsm_time) > 1:
-     ZS_lsm_time_stp=abs(ZV_lsm_time[1]-ZV_lsm_time[0])
-     print(' - The interval size for time is: '+str(ZS_lsm_time_stp))
-else:
-     ZS_lsm_time_stp=0
-     print(' - No interval size for time (one unique time step)')
+ZS_lsm_time_stp=abs(ZV_lsm_tbds[0,1]-ZV_lsm_tbds[0,0])
+print(' - The interval size for time is: '+str(ZS_lsm_time_stp))
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get variable names
