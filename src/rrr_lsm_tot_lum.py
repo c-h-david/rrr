@@ -39,22 +39,24 @@ import csv
 # 2 - ZS_conv
 # 3 - rrr_pol_shp
 # 4 - rrr_pnt_shp
-# 5 - rrr_var_csv
+# 5 - YS_riv_id
+# 6 - rrr_var_csv
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 6:
-     print('ERROR - 5 and only 5 arguments can be used')
+if IS_arg != 7:
+     print('ERROR - 6 and only 6 arguments can be used')
      raise SystemExit(22) 
 
 rrr_lsm_ncf=sys.argv[1]
 ZS_conv=eval(sys.argv[2])
 rrr_pol_shp=sys.argv[3]
 rrr_pnt_shp=sys.argv[4]
-rrr_var_csv=sys.argv[5]
+YS_riv_id=sys.argv[5]
+rrr_var_csv=sys.argv[6]
 
 
 #*******************************************************************************
@@ -65,6 +67,7 @@ print(' - '+rrr_lsm_ncf)
 print(' - '+str(ZS_conv))
 print(' - '+rrr_pol_shp)
 print(' - '+rrr_pnt_shp)
+print(' - '+YS_riv_id)
 print(' - '+rrr_var_csv)
 
 
@@ -397,7 +400,7 @@ print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_lsm_time_stp))
 YV_lsm_time=[datetime.datetime.utcfromtimestamp(t).strftime('%Y-%m-%d')        \
          for t in ZV_lsm_time]
 
-YS_riv_id=99999
+
 #*******************************************************************************
 #Write rrr_var_csv
 #*******************************************************************************
