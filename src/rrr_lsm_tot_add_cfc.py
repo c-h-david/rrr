@@ -7,9 +7,9 @@
 #Given a run file with lon, lat, and time dimensions, and with lon, lat, RUNSF, 
 #and RUNSB variables; along with a start date of the following ISO 8601 format:
 #'2000-01-01T00:00:00', the duration of the time step, and a value allowing for
-#the conversion between the input runoff units and kg m-2, this program creates
-#a new netCDF file that is CF-1.6 compliant and that includes time and time_bnds
-#variables.
+#the conversion between the input runoff units and kg m-2 (as accumulated over
+#the aforementioned time step duration), this program creates a new netCDF file
+#that is CF-1.6 compliant and that includes time and time_bnds variables.
 # - rrr_lsm_file2(lon,lat,time,nv)
 #   . RUNSF(lon,lat,time)
 #   . RUNSF(lon,lat,time)
