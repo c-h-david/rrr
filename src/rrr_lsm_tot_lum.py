@@ -5,15 +5,14 @@
 
 #Purpose:
 #Given surface and subsurface runoff in a netCDF file, a value allowing for the
-#conversion factor between runoff units and m/s, and a shapefile referenced on a
-#Geographic Coordinate System (i.e. longitude, latitude), this script creates an
-#intermediate shapefile with points representative of the grid cell, computes
-#the total discharge (accumulated within the shapefile boundaries) for every
-#time step of the runoff data, and writes the associated time series in a CSV
-#file. If the shapefile touches grid cells that have NoData (e.g. coastal grid
-#cells), these points are ignored in the computations. Additional diagnostic
-#quantities are also given.
-#averaging.
+#conversion between runoff units and kg m-2 (as accumulated over the time step
+#duration), and a shapefile referenced on a Geographic Coordinate System (i.e.
+#longitude, latitude), this script creates an intermediate shapefile with points
+#representative of the grid cell, computes the total discharge (accumulated
+#within the shapefile boundaries) for every time step of the runoff data, and
+#writes the associated time series in a CSV file. If the shapefile touches grid
+#cells that have NoData (e.g. coastal grid cells), these points are ignored in
+#the computations. Additional diagnostic quantities are also printed in stdout.
 #Author:
 #Cedric H. David, 2018-2022
 
@@ -358,12 +357,17 @@ for JS_lsm_time in range(IS_lsm_time):
      ZV_rsf_var=numpy.ma.filled(ZV_rsf_var,fill_value=0)
      ZV_rsb_var=numpy.ma.filled(ZV_rsb_var,fill_value=0)
      #Replacing masked (fill) values by 0
+     ZV_rsf_var=ZS_conv*ZV_rsf_var*0.001
+     ZV_rsb_var=ZS_conv*ZV_rsb_var*0.001
+     #Conversion into kg m-2 and then conversion into m
      ZV_dom_var=(ZV_rsf_var+ZV_rsb_var)*ZV_dom_sqm
      #Elementwise addition and multiplication
      ZS_var=sum(ZV_dom_var)
      #Spatial accumulation
      ZV_var.append(ZS_var)
      #Update time series
+#At this point, ZV_var is a timeseries with the total accumulated volume at each
+#time step, in m3.
 
 
 #*******************************************************************************
@@ -371,20 +375,20 @@ for JS_lsm_time in range(IS_lsm_time):
 #*******************************************************************************
 print('Printing some diagonostic quantities')
 
-print(' - Spatially accumulated runoff within basin (runoff units * m^2)')
+print(' - Spatially accumulated runoff within basin (m3)')
 print('  . Temporal mean: '+str(numpy.mean(ZV_var)))
 print('  . Temporal max:  '+str(numpy.max(ZV_var)))
 print('  . Temporal min:  '+str(numpy.min(ZV_var)))
 
-print(' - Spatially averaged runoff within basin (runoff units)')
-print('  . Temporal mean: '+str(numpy.mean(ZV_var)/ZS_sqm))
-print('  . Temporal max:  '+str(numpy.max(ZV_var)/ZS_sqm))
-print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_sqm))
+print(' - Spatially averaged runoff within basin (mm)')
+print('  . Temporal mean: '+str(numpy.mean(ZV_var)/ZS_sqm*1000))
+print('  . Temporal max:  '+str(numpy.max(ZV_var)/ZS_sqm*1000))
+print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_sqm*1000))
 
-print(' - Total discharge from basin (m^3/s if conversion factor is correct)')
-print('  . Temporal mean: '+str(numpy.mean(ZV_var)*ZS_conv))
-print('  . Temporal max:  '+str(numpy.max(ZV_var)*ZS_conv))
-print('  . Temporal min:  '+str(numpy.min(ZV_var)*ZS_conv))
+print(' - Total discharge from basin (m^3/s)')
+print('  . Temporal mean: '+str(numpy.mean(ZV_var)/ZS_lsm_time_stp))
+print('  . Temporal max:  '+str(numpy.max(ZV_var)/ZS_lsm_time_stp))
+print('  . Temporal min:  '+str(numpy.min(ZV_var)/ZS_lsm_time_stp))
 
 
 ##*******************************************************************************
