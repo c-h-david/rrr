@@ -201,8 +201,8 @@ print('  . Total number of connections: '+str(len(IV_val)))
 #*******************************************************************************
 print('Creating identity matrix')
 
-IV_row=range(IS_riv_bas)
-IV_col=range(IS_riv_bas)
+IV_row=list(range(IS_riv_bas))
+IV_col=list(range(IS_riv_bas))
 IV_val=[1]*IS_riv_bas
 ZM_I=csc_matrix((IV_val,(IV_row,IV_col)),shape=(IS_riv_bas,IS_riv_bas))
 
@@ -217,8 +217,8 @@ print('Computing (I-N)^-1')
 IV_bas_tmp_id=IV_riv_bas_id
 IV_bas_tmp_cr=IV_riv_bas_id
 
-IV_row=range(IS_riv_bas)
-IV_col=range(IS_riv_bas)
+IV_row=list(range(IS_riv_bas))
+IV_col=list(range(IS_riv_bas))
 IV_val=[1]*IS_riv_bas
 
 for JS_riv_bas in range(IS_riv_bas):
