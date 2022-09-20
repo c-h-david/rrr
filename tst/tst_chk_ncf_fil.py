@@ -4,7 +4,7 @@
 #*******************************************************************************
 
 #Purpose:
-#Check netCDF files for fill values, returns error if found, otherwise exit 22.
+#Check netCDF files for fill values, returns error (exit 22) if found.
 #Author:
 #Cedric H. David, 2017-2022
 
@@ -118,7 +118,7 @@ for JS_time in range(IS_time):
 
 
 #*******************************************************************************
-#Exit if there a MaskedArray was detected
+#Exit if a MaskedArray was detected
 #*******************************************************************************
 if (BS_error):
      raise SystemExit(22) 
