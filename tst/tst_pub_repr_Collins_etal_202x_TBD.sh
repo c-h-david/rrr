@@ -146,6 +146,126 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
+#Parameters p_low
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating p_low files"
+../src/rrr_riv_tot_scl_prm.py                                                  \
+     ../output/MH07B01_TBD/kfac_pfaf_74_1km_hour.csv                           \
+     ../output/MH07B01_TBD/xfac_pfaf_74_0.1.csv                                \
+     0.20                                                                      \
+     0.00                                                                      \
+     ../output/MH07B01_TBD/k_pfaf_74_low_tst.csv                               \
+     ../output/MH07B01_TBD/x_pfaf_74_low_tst.csv                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing k_low files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/k_pfaf_74_low.csv                                   \
+     ../output/MH07B01_TBD/k_pfaf_74_low_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing x_low files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/x_pfaf_74_low.csv                                   \
+     ../output/MH07B01_TBD/x_pfaf_74_low_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Parameters p_nrm
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating p_nrm files"
+../src/rrr_riv_tot_scl_prm.py                                                  \
+     ../output/MH07B01_TBD/kfac_pfaf_74_1km_hour.csv                           \
+     ../output/MH07B01_TBD/xfac_pfaf_74_0.1.csv                                \
+     0.35                                                                      \
+     3.00                                                                      \
+     ../output/MH07B01_TBD/k_pfaf_74_nrm_tst.csv                               \
+     ../output/MH07B01_TBD/x_pfaf_74_nrm_tst.csv                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing k_nrm files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/k_pfaf_74_nrm.csv                                   \
+     ../output/MH07B01_TBD/k_pfaf_74_nrm_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing x_nrm files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/x_pfaf_74_nrm.csv                                   \
+     ../output/MH07B01_TBD/x_pfaf_74_nrm_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Parameters p_hig
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/91"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating p_hig files"
+../src/rrr_riv_tot_scl_prm.py                                                  \
+     ../output/MH07B01_TBD/kfac_pfaf_74_1km_hour.csv                           \
+     ../output/MH07B01_TBD/xfac_pfaf_74_0.1.csv                                \
+     0.50                                                                      \
+     5.00                                                                      \
+     ../output/MH07B01_TBD/k_pfaf_74_hig_tst.csv                               \
+     ../output/MH07B01_TBD/x_pfaf_74_hig_tst.csv                               \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing k_hig files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/k_pfaf_74_hig.csv                                   \
+     ../output/MH07B01_TBD/k_pfaf_74_hig_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing x_hig files"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/x_pfaf_74_hig.csv                                   \
+     ../output/MH07B01_TBD/x_pfaf_74_hig_tst.csv                               \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
 #Sorted subset
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
