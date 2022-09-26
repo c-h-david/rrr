@@ -177,7 +177,7 @@ echo "- Comparing k_2004_1 files"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/k_San_Guad_2004_1.csv                             \
      ../output/San_Guad_JHM2/k_San_Guad_2004_1_tst.csv                         \
-     1e-6                                                                      \
+     1e-3                                                                      \
      1e-3                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
@@ -186,7 +186,7 @@ echo "- Comparing x_2004_1 files"
 ./tst_cmp_csv.py                                                               \
      ../output/San_Guad_JHM2/x_San_Guad_2004_1.csv                             \
      ../output/San_Guad_JHM2/x_San_Guad_2004_1_tst.csv                         \
-     1e-6                                                                      \
+     1e-3                                                                      \
      1e-3                                                                      \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
