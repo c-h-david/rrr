@@ -138,12 +138,12 @@ print('Writing files')
 with open(rrr_k_file, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_k[JS_riv_tot]]) 
+          csvwriter.writerow([round(ZV_k[JS_riv_tot],4)])
 
 with open(rrr_x_file, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_x[JS_riv_tot]]) 
+          csvwriter.writerow([round(ZV_x[JS_riv_tot],4)])
 
 
 #*******************************************************************************
