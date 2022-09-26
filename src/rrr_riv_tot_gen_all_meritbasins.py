@@ -134,7 +134,7 @@ IV_riv_tot_id=[]
 ZV_riv_lkm=[]
 for JS_riv_tot in range(IS_riv_tot):
      IV_riv_tot_id.append(int(mer_riv_lay[JS_riv_tot]['properties'][YV_riv_id]))
-     ZV_riv_lkm.append(int(mer_riv_lay[JS_riv_tot]['properties'][YV_riv_lkm]))
+     ZV_riv_lkm.append(float(mer_riv_lay[JS_riv_tot]['properties'][YV_riv_lkm]))
 
 #-------------------------------------------------------------------------------
 #Reading shapes
@@ -298,12 +298,12 @@ with open(rrr_con_csv, 'w') as csvfile:
 with open(rrr_kfc_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_kfac[JS_riv_tot]]) 
+          csvwriter.writerow([round(ZV_kfac[JS_riv_tot],4)])
 
 with open(rrr_xfc_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
      for JS_riv_tot in range(IS_riv_tot):
-          csvwriter.writerow([ZV_xfac[JS_riv_tot]]) 
+          csvwriter.writerow([round(ZV_xfac[JS_riv_tot],4)])
 
 with open(rrr_srt_csv, 'w') as csvfile:
      csvwriter = csv.writer(csvfile, dialect='excel')
