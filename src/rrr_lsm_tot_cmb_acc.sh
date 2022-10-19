@@ -88,6 +88,8 @@ ncrename -v .SSRUN,RUNSF                                                       \
          -v .Qsb_acc,RUNSB                                                     \
          -v .Qs_tavg,RUNSF                                                     \
          -v .Qsb_tavg,RUNSB                                                    \
+         -d .east_west,lon                                                     \
+         -d .north_south,lat                                                   \
          $nc_temp
 fi
 #Adding "." before a variable name informs ncrename that it's optional.
