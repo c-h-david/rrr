@@ -374,9 +374,11 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Concatenating multiple files - Monthly - CLSM"
 
 ../src/rrr_lsm_tot_cmb_acc.sh                                                  \
-     ../input/GLDAS/GLDAS_CLSM10_M.2.0/1980/GLDAS_CLSM10_M.*.nc4               \
+     ../input/GLDAS/GLDAS_CLSM10_M.2.0/198*/GLDAS_CLSM10_M.*.nc4               \
+     ../input/GLDAS/GLDAS_CLSM10_M.2.0/199*/GLDAS_CLSM10_M.*.nc4               \
+     ../input/GLDAS/GLDAS_CLSM10_M.2.0/200*/GLDAS_CLSM10_M.*.nc4               \
      1                                                                         \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_tst.nc4        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "1" because not averaging any consecutive files.
@@ -384,11 +386,11 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Making concatenated file CF compliant - Monthly - CLSM"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_tst.nc4        \
      1980-01-01T00:00:00                                                       \
      2629800                                                                   \
      2629800/10800                                                             \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_cfc_tst.nc4    \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_cfc_tst.nc4    \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "2629800" as the number of seconds in average month for 365.25 days/year.
@@ -397,8 +399,137 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing concatenated file CF compliant - Monthly - CLSM"
 
 ./tst_cmp_n3d.py                                                               \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_cfc.nc4        \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_cfc_tst.nc4    \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_cfc_tst.nc4    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - NOAH
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - NOAH"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/GLDAS/GLDAS_NOAH10_M.2.0/198*/GLDAS_NOAH10_M.*.nc4               \
+     ../input/GLDAS/GLDAS_NOAH10_M.2.0/199*/GLDAS_NOAH10_M.*.nc4               \
+     ../input/GLDAS/GLDAS_NOAH10_M.2.0/200*/GLDAS_NOAH10_M.*.nc4               \
+     1                                                                         \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_tst.nc4        \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+#Using "1" because not averaging any consecutive files.
+
+echo "- Making concatenated file CF compliant - Monthly - NOAH"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_tst.nc4        \
+     1980-01-01T00:00:00                                                       \
+     2629800                                                                   \
+     2629800/10800                                                             \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_cfc_tst.nc4    \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+#Using "2629800" as the number of seconds in average month for 365.25 days/year.
+#Using "2629800/10800": monthly GLDAS files are time:mean of 3-hr accumulation.
+
+echo "- Comparing concatenated file CF compliant - Monthly - NOAH"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_cfc_tst.nc4    \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Concatenating multiple files - Monthly - VIC
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Concatenating multiple files - Monthly - VIC"
+
+../src/rrr_lsm_tot_cmb_acc.sh                                                  \
+     ../input/GLDAS/GLDAS_VIC10_M.2.0/198*/GLDAS_VIC10_M.*.nc4                 \
+     ../input/GLDAS/GLDAS_VIC10_M.2.0/199*/GLDAS_VIC10_M.*.nc4                 \
+     ../input/GLDAS/GLDAS_VIC10_M.2.0/200*/GLDAS_VIC10_M.*.nc4                 \
+     1                                                                         \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_tst.nc4         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+#Using "1" because not averaging any consecutive files.
+
+echo "- Making concatenated file CF compliant - Monthly - VIC"
+
+../src/rrr_lsm_tot_add_cfc.py                                                  \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_tst.nc4         \
+     1980-01-01T00:00:00                                                       \
+     2629800                                                                   \
+     2629800/10800                                                             \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_cfc_tst.nc4     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+#Using "2629800" as the number of seconds in average month for 365.25 days/year.
+#Using "2629800/10800": monthly GLDAS files are time:mean of 3-hr accumulation.
+
+echo "- Comparing concatenated file CF compliant - Monthly - VIC"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_cfc.nc4         \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_cfc_tst.nc4     \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Computing ensemble average
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Computing ensemble average"
+
+../src/rrr_lsm_tot_ens.py                                                      \
+     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_20091231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_NOAH10_M_19800101_20091231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_VIC10_M_19800101_20091231_utc_cfc.nc4         \
+     ../output/MH07B01_TBD/GLDAS_ENS10_M_19800101_20091231_utc_cfc_tst.nc4     \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing ensemble average"
+
+./tst_cmp_n3d.py                                                               \
+     ../output/MH07B01_TBD/GLDAS_ENS10_M_19800101_20091231_utc_cfc.nc4         \
+     ../output/MH07B01_TBD/GLDAS_ENS10_M_19800101_20091231_utc_cfc_tst.nc4     \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
