@@ -321,7 +321,8 @@ else:
 print('- Computing matrix-based lumped routing')
 
 for JS_m3r_tim in range(IS_m3r_tim):
-     ZV_m3r_tmp=f.variables[YS_var][JS_m3r_tim,IV_riv_ix2]
+     ZV_m3r_ttt=f.variables[YS_var][JS_m3r_tim,:]
+     ZV_m3r_tmp=ZV_m3r_ttt[IV_riv_ix2]
      ZV_Qex_tmp=ZV_m3r_tmp/ZS_TaR
      ZV_Qou_lum=spsolve(ZM_I-ZM_Net,ZV_Qex_tmp)
      Qout[JS_m3r_tim,:]=ZV_Qou_lum
