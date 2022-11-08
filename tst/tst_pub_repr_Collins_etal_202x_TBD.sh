@@ -545,7 +545,7 @@ fi
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#Create coupling file, CLSM
+#Create coupling file, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -553,11 +553,11 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating coupling file, CLSM"
+echo "- Creating coupling file, ENS"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/rapid_catchment_pfaf_74.csv                         \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_ENS10_M_19800101_20091231_utc_cfc.nc4         \
      ../output/MH07B01_TBD/rapid_coupling_pfaf_74_GLDAS_tst.csv                \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -576,7 +576,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Create volume file, CLSM
+#Create volume file, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -584,20 +584,20 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating volume file, CLSM"
+echo "- Creating volume file, ENS"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/coords_pfaf_74.csv                                  \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_19800101_19801231_utc_cfc.nc4        \
+     ../output/MH07B01_TBD/GLDAS_ENS10_M_19800101_20091231_utc_cfc.nc4         \
      ../output/MH07B01_TBD/rapid_coupling_pfaf_74_GLDAS.csv                    \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_19801231_CLSM10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_20091231_ENS10_M_utc_tst.nc4 \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing volume file, CLSM"
+echo "- Comparing volume file, ENS"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_19801231_CLSM10_M_utc.nc4   \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_19801231_CLSM10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_20091231_ENS10_M_utc.nc4    \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_20091231_ENS10_M_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -608,7 +608,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Update netCDF attributes, CLSM
+#Update netCDF attributes, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -616,10 +616,10 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Updating netCDF attributes, CLSM"
+echo "- Updating netCDF attributes, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_19801231_CLSM10_M_utc.nc4   \
-     'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS CLSM'   \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_20091231_ENS10_M_utc.nc4    \
+     'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
      6378137                                                                   \
@@ -640,7 +640,7 @@ fi
 #*******************************************************************************
 
 #-------------------------------------------------------------------------------
-#Create lumped matrix-based routing, CLSM
+#Create lumped matrix-based routing, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -648,19 +648,19 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Creating lumped matrix-based routing, CLSM"
+echo "- Creating lumped matrix-based routing, ENS"
 ../src/rrr_cpl_riv_lsm_rte.py                                                  \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_19801231_CLSM10_M_utc.nc4   \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_19800101_20091231_ENS10_M_utc.nc4    \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/riv_bas_id_pfaf_74_topo.csv                         \
-     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_19801231_CLSM10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc_tst.nc4  \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
-echo "- Comparing lumped matrix-based routing, CLSM"
+echo "- Comparing lumped matrix-based routing, ENS"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_19801231_CLSM10_M_utc.nc4     \
-     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_19801231_CLSM10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc.nc4      \
+     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc_tst.nc4  \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -671,7 +671,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Update netCDF attributes, CLSM
+#Update netCDF attributes, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -679,10 +679,10 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Updating netCDF attributes, CLSM"
+echo "- Updating netCDF attributes, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
-     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_19801231_CLSM10_M_utc.nc4     \
-     'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS CLSM'   \
+     ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc.nc4      \
+     'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
      6378137                                                                   \
