@@ -207,7 +207,7 @@ time = g.createDimension("time", None)
 rivid = g.createDimension("rivid", IS_riv_tot)
 nv = g.createDimension("nv", 2)
 
-Qout = g.createVariable("Qout","f4",("time","rivid",),                     \
+Qout = g.createVariable("Qout","f4",("time","rivid",),                         \
                         fill_value=float(1e20))
 rivid = g.createVariable("rivid","i4",("rivid",))
 time = g.createVariable("time","i4",("time",))
@@ -276,9 +276,9 @@ crs.inverse_flattening=''
 
 
 #*******************************************************************************
-#Reading m3_riv_file
+#Reading rrr_m3r_ncf and computing lumped discharge
 #*******************************************************************************
-print('Reading m3_riv file')
+print('Reading rrr_m3r_ncf and computing lumped discharge')
 
 f=netCDF4.Dataset(rrr_m3r_ncf, 'r')
 
@@ -363,6 +363,96 @@ time_bnds[:]=f.variables['time_bnds'][:]
 #-------------------------------------------------------------------------------
 f.close()
 g.close()
+
+
+#*******************************************************************************
+#Creating V netCDF file
+#*******************************************************************************
+if IS_arg >5:
+     print('Creating V netCDF file')
+
+     #--------------------------------------------------------------------------
+     #Creating structure
+     #--------------------------------------------------------------------------
+     print('- Creating structure')
+     h = netCDF4.Dataset(rrr_Vmu_ncf, "w", format="NETCDF4")
+
+     time = h.createDimension("time", None)
+     rivid = h.createDimension("rivid", IS_riv_tot)
+     nv = h.createDimension("nv", 2)
+
+     V = h.createVariable("V","f4",("time","rivid",),                          \
+                             fill_value=float(1e20))
+     rivid = h.createVariable("rivid","i4",("rivid",))
+     time = h.createVariable("time","i4",("time",))
+     time_bnds = h.createVariable("time_bnds","i4",("time","nv",))
+     lon = h.createVariable("lon","f8",("rivid",))
+     lat = h.createVariable("lat","f8",("rivid",))
+     crs = h.createVariable("crs","i4")
+
+     #--------------------------------------------------------------------------
+     #Populating global attributes
+     #--------------------------------------------------------------------------
+     print('- Populating global attributes')
+     dt=datetime.datetime.utcnow()
+     dt=dt.replace(microsecond=0)
+     #Current UTC time without the microseconds
+     vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
+     vsn=vsn[0]
+     vsn=vsn.rstrip()
+     vsn=vsn.decode()
+     #Version of RRR
+
+     h.Conventions='CF-1.6'
+     h.title=''
+     h.institution=''
+     h.source='RRR: '+vsn+', water inflow: '+os.path.basename(rrr_m3r_ncf)
+     h.history='date created: '+dt.isoformat()+'+00:00'
+     h.references='https://github.com/c-h-david/rrr/'
+     h.comment=''
+     h.featureType='timeSeries'
+
+     #--------------------------------------------------------------------------
+     #Populating variable attributes
+     #--------------------------------------------------------------------------
+     print('- Populating variable attributes')
+
+     V.long_name='average river water volume inside of each river reach'
+
+     V.units='m3'
+     V.coordinates='lon lat'
+     V.grid_mapping='crs'
+     V.cell_methods='time: sum'
+
+     time.standard_name='time'
+     time.long_name='time'
+     time.units='seconds since 1970-01-01 00:00:00 +00:00'
+     time.axis='T'
+     time.calendar='gregorian'
+     time.bounds='time_bnds'
+
+     rivid.long_name='unique identifier for each river each'
+     rivid.units='1'
+     rivid.cf_role='timeseries_id'
+
+     lon.standard_name='longitude'
+     lon.long_name='longitude of a point related to each river reach'
+     lon.units='degrees_east'
+     lon.axis='X'
+
+     lat.standard_name='latitude'
+     lat.long_name='latitude of a point related to each river reach'
+     lat.units='degrees_north'
+     lat.axis='Y'
+
+     crs.grid_mapping_name='latitude_longitude'
+     crs.semi_major_axis=''
+     crs.inverse_flattening=''
+
+     #--------------------------------------------------------------------------
+     #Closing all netCDF files
+     #--------------------------------------------------------------------------
+     h.close()
 
 
 #*******************************************************************************
