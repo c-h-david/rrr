@@ -172,14 +172,14 @@ print('-------------------------------')
 #Compare rivid values if they exist in both files
 #-------------------------------------------------------------------------------
 if 'COMID' in f1.variables:
-     IV_riv_tot1=f1.variables['COMID']
+     IV_riv_tot1=f1.variables['COMID'][:]
 elif 'rivid' in f1.variables:
-     IV_riv_tot1=f1.variables['rivid']
+     IV_riv_tot1=f1.variables['rivid'][:]
 
 if 'COMID' in f2.variables:
-     IV_riv_tot2=f2.variables['COMID']
+     IV_riv_tot2=f2.variables['COMID'][:]
 elif 'rivid' in f2.variables:
-     IV_riv_tot2=f2.variables['rivid']
+     IV_riv_tot2=f2.variables['rivid'][:]
 
 if 'IV_riv_tot1' in locals() and 'IV_riv_tot2' in locals():
      #This makes sure that both variables actually exist before comparing them
