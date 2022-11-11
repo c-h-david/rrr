@@ -5,10 +5,12 @@
 
 #Purpose:
 #Given a RAPID water inflow file (.nc4), a RAPID connectivity file (.csv), a
-#RAPID basin ID file (.csv), and a RAPID discharge outflow file (.nc); this
+#RAPID basin ID file (.csv), and a RAPID discharge outflow file (.nc4); this
 #program computes a matrix-based lumped routing and saves the results in the
 #outflow file. Note that a lumped routing on a sub-basin (defined in the basin
 #ID file) is possible.
+#Optional arguments consisting of a Muskingum k file (.csv) and a water storage
+#file (.nc4) can allow for estimates of water storage.
 #Author:
 #Cedric H. David, 2022-2022
 
@@ -33,20 +35,26 @@ import os.path
 # 2 - rrr_con_csv
 # 3 - rrr_bas_csv
 # 4 - rrr_Qou_ncf
+#(5)- rrr_kmu_csv
+#(6)- rrr_Vmu_ncf
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 5:
-     print('ERROR - 4 and only 4 arguments must be used')
-     raise SystemExit(22) 
+if IS_arg < 5 or IS_arg > 7:
+     print('ERROR - A minimum of 4 and a maximum of 6 arguments can be used')
+     raise SystemExit(22)
 
 rrr_m3r_ncf=sys.argv[1]
 rrr_con_csv=sys.argv[2]
 rrr_bas_csv=sys.argv[3]
 rrr_Qou_ncf=sys.argv[4]
+
+if IS_arg > 5:
+     rrr_kmu_csv = sys.argv[5]
+     rrr_Vmu_ncf = sys.argv[6]
 
 
 #*******************************************************************************
@@ -57,6 +65,8 @@ print('- '+rrr_m3r_ncf)
 print('- '+rrr_con_csv)
 print('- '+rrr_bas_csv)
 print('- '+rrr_Qou_ncf)
+if IS_arg > 5: print('- ' + rrr_kmu_csv)
+if IS_arg > 5: print('- ' + rrr_Vmu_ncf)
 
 
 #*******************************************************************************
@@ -82,6 +92,14 @@ try:
 except IOError as e:
      print('ERROR - Unable to open '+rrr_bas_csv)
      raise SystemExit(22) 
+
+if IS_arg > 5:
+     try:
+          with open(rrr_kmu_csv) as file:
+               pass
+     except IOError as e:
+          print('ERROR - Unable to open '+rrr_kmu_csv)
+          raise SystemExit(22)
 
 
 #*******************************************************************************
