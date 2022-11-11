@@ -449,9 +449,43 @@ if IS_arg >5:
      crs.semi_major_axis=''
      crs.inverse_flattening=''
 
+
+#*******************************************************************************
+#Reading rrr_Qou_ncf and computing storage
+#*******************************************************************************
+if IS_arg >5:
+     print('Reading rrr_Qou_ncf and computing storage')
+
+     g=netCDF4.Dataset(rrr_Qou_ncf, 'r')
+
+     IS_Qou_tim=len(g.dimensions['time'])
+
+     #--------------------------------------------------------------------------
+     #Computing storage
+     #-------------------------------------------------------------------------
+     print('- Computing storage')
+
+     for JS_Qou_tim in range(IS_Qou_tim):
+          ZV_Vmu_tmp=g.variables['Qout'][JS_Qou_tim,:]
+          V[JS_Qou_tim,:]=ZV_Vmu_tmp
+
+     print(' . Done')
+
+     #--------------------------------------------------------------------------
+     #Populating static data
+     #--------------------------------------------------------------------------
+     print('- Populating static data')
+
+     rivid[:]=g.variables['rivid'][:]
+     lon[:]=g.variables['lon'][:]
+     lat[:]=g.variables['lat'][:]
+     time[:]=g.variables['time'][:]
+     time_bnds[:]=g.variables['time_bnds'][:]
+
      #--------------------------------------------------------------------------
      #Closing all netCDF files
      #--------------------------------------------------------------------------
+     g.close()
      h.close()
 
 
