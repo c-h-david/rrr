@@ -78,21 +78,13 @@ except IOError as e:
 #*******************************************************************************
 print('Modifying attributes')
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-#-------------------------------------------------------------------------------
-#Open netCDF file
-#-------------------------------------------------------------------------------
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-f = netCDF4.Dataset(rrr_dat_ncf, 'r+')
-
-BS_changes=False
-
 #-------------------------------------------------------------------------------
 #Modify global attributes
 #-------------------------------------------------------------------------------
-
 #Note: Attributes of type "Character" need be deleted before modified if the
 #number of characters is different!
+
+f = netCDF4.Dataset(rrr_dat_ncf, 'r')
 
 if 'title' in f.ncattrs()  and                                                 \
    'comment' in f.ncattrs() and                                                \
@@ -101,8 +93,11 @@ if 'title' in f.ncattrs()  and                                                 \
         f.getncattr('comment')!=rrr_com_str or                                 \
         f.getncattr('institution')!= rrr_ins_str:
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-          #The requested attributes differ from existing: changes need be made
+          #The requested attributes differ from existing: changes needed
           #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          f.close()
+          f = netCDF4.Dataset(rrr_dat_ncf, 'r+')
+
           if 'Conventions' in f.ncattrs():
                rrr_con_str=f.getncattr('Conventions')
                f.delncattr('Conventions')
@@ -143,13 +138,16 @@ if 'title' in f.ncattrs()  and                                                 \
                f.delncattr('featureType')
                f.setncattr('featureType',rrr_fea_str)
           print('- global attributes modified')
-          BS_changes=True
      else:
           print('- No modification made to global attributes')
+
+f.close()
 
 #-------------------------------------------------------------------------------
 #Modify crs attributes
 #-------------------------------------------------------------------------------
+f = netCDF4.Dataset(rrr_dat_ncf, 'r')
+
 if 'crs' in f.variables:
      crs=f.variables['crs']
      if 'semi_major_axis' in crs.ncattrs() and                                 \
@@ -157,24 +155,19 @@ if 'crs' in f.variables:
           if crs.getncattr('semi_major_axis')!=ZS_sem or                       \
              crs.getncattr('inverse_flattening')!=ZS_inv:
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-               #The requested attributes differ from existing
+               #The requested attributes differ from existing: changes needed
                # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+               f.close()
+               f = netCDF4.Dataset(rrr_dat_ncf, 'r+')
                crs.delncattr('semi_major_axis')
                crs.setncattr('semi_major_axis',ZS_sem)
                crs.delncattr('inverse_flattening')
                crs.setncattr('inverse_flattening',ZS_inv)
                print('- crs attributes modified')
-               BS_changes=True
           else:
                print('- No modification made to crs attributes')
 
-#-------------------------------------------------------------------------------
-#Close netCDF file
-#-------------------------------------------------------------------------------
-if BS_changes:
-     f.close()
-     #Closing the new netCDF file allows saves the file.
-     #Only saving when changes where made allows not modifying time stamp.
+f.close()
 
 
 #*******************************************************************************
