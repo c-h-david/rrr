@@ -654,6 +654,8 @@ echo "- Creating lumped matrix-based routing, ENS"
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/riv_bas_id_pfaf_74_topo.csv                         \
      ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc_tst.nc4  \
+     ../output/MH07B01_TBD/k_pfaf_74_nrm.csv                                   \
+     ../output/MH07B01_TBD/V_pfaf_74_19800101_20091231_ENS10_M_utc_nrm_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
@@ -664,6 +666,12 @@ echo "- Comparing lumped matrix-based routing, ENS"
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
+echo "- Comparing water storage, ENS"
+./tst_cmp_ncf.py                                                               \
+     ../output/MH07B01_TBD/V_pfaf_74_19800101_20091231_ENS10_M_utc_nrm.nc4     \
+     ../output/MH07B01_TBD/V_pfaf_74_19800101_20091231_ENS10_M_utc_nrm_tst.nc4 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
 echo "Success"
@@ -671,7 +679,7 @@ echo "********************"
 fi
 
 #-------------------------------------------------------------------------------
-#Update netCDF attributes, ENS
+#Update netCDF attributes, discharge, ENS
 #-------------------------------------------------------------------------------
 unt=$((unt+1))
 if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
@@ -679,9 +687,36 @@ echo "Running unit test $unt/$tot"
 run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
-echo "- Updating netCDF attributes, ENS"
+echo "- Updating netCDF attributes, discharge, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
      ../output/MH07B01_TBD/Qout_pfaf_74_19800101_20091231_ENS10_M_utc.nc4      \
+     'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
+     'Jet Propulsion Laboratory, California Institute of Technology'           \
+     ''                                                                        \
+     6378137                                                                   \
+     298.257222101                                                             \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing to NOTHING"
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Update netCDF attributes, volume, ENS
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Updating netCDF attributes, volume, ENS"
+../src/rrr_cpl_riv_lsm_att.py                                                  \
+     ../output/MH07B01_TBD/V_pfaf_74_19800101_20091231_ENS10_M_utc_nrm.nc4     \
      'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
