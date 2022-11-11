@@ -422,7 +422,8 @@ if IS_arg >5:
      h.Conventions='CF-1.6'
      h.title=''
      h.institution=''
-     h.source='RRR: '+vsn+', water inflow: '+os.path.basename(rrr_m3r_ncf)
+     h.source='RRR: '+vsn+', water inflow: '+os.path.basename(rrr_m3r_ncf)     \
+             +', Muskingum k: '+os.path.basename(rrr_kmu_csv)
      h.history='date created: '+dt.isoformat()+'+00:00'
      h.references='https://github.com/c-h-david/rrr/'
      h.comment=''
