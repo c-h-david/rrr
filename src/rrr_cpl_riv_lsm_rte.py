@@ -366,6 +366,22 @@ g.close()
 
 
 #*******************************************************************************
+#Reading rrr_kmu_csv
+#*******************************************************************************
+if IS_arg >5:
+     print('Reading rrr_kmu_csv')
+
+     ZV_kmu_tmp=[]
+     with open(rrr_kmu_csv,'r') as csvfile:
+          csvreader=csv.reader(csvfile)
+          for row in csvreader:
+               ZV_kmu_tmp.append(float(row[0]))
+
+     ZV_kmu=[ZV_kmu_tmp[IV_riv_ix2[JS_riv_bas]]                                \
+             for JS_riv_bas in range(IS_riv_bas)]
+
+
+#*******************************************************************************
 #Creating V netCDF file
 #*******************************************************************************
 if IS_arg >5:
@@ -467,6 +483,7 @@ if IS_arg >5:
 
      for JS_Qou_tim in range(IS_Qou_tim):
           ZV_Vmu_tmp=g.variables['Qout'][JS_Qou_tim,:]
+          ZV_Vmu_tmp=ZV_Vmu_tmp*ZV_kmu
           V[JS_Qou_tim,:]=ZV_Vmu_tmp
 
      print(' . Done')
