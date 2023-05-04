@@ -5,7 +5,7 @@
 
 [![Docker Images](https://img.shields.io/badge/docker-images-blue?logo=docker)](https://hub.docker.com/r/chdavid/rrr/tags)
 
-[![GitHub CI Status](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CI.yml/badge.svg)](https://github.com/c-h-david/rrr/actions)
+[![GitHub CI Status](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CI.yml/badge.svg)](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CI.yml)
 
 [![GitHub CD Status](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CD.yml/badge.svg)](https://github.com/c-h-david/rrr/actions/workflows/github_actions_CD.yml)
 
