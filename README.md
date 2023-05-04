@@ -133,7 +133,7 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 Also make sure that `python3` points to `python3.9`:
 
 ```
-$ sudo rm -r /usr/bin/python3
+$ sudo rm -f /usr/bin/python3
 $ sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 ```
 
