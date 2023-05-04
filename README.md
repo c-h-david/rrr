@@ -87,7 +87,7 @@ in
 
 ## Installation on Ubuntu
 This document was written and tested on a machine with a **clean** image of 
-[Ubuntu 18.04.6 Desktop 64-bit](https://releases.ubuntu.com/18.04/ubuntu-18.04.6-desktop-amd64.iso)
+[Ubuntu 20.04.6 Desktop 64-bit](https://releases.ubuntu.com/20.04/ubuntu-20.04.6-desktop-amd64.iso)
 installed, *i.e.* **no update** was performed, and **no upgrade** either. 
 
 Note that the experienced users may find more up-to-date installation 
@@ -127,14 +127,14 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 > one by one, for example:
 >
 > ```
-> $ sudo apt-get install -y --no-install-recommends python3.7
+> $ sudo apt-get install -y --no-install-recommends python3.9
 >```
 
-Also make sure that `python3` points to `python3.7`:
+Also make sure that `python3` points to `python3.9`:
 
 ```
 $ sudo rm -r /usr/bin/python3
-$ sudo ln -s /usr/bin/python3.7 /usr/bin/python3
+$ sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 ```
 
 ### Install Python packages

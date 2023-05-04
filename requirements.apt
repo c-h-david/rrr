@@ -31,10 +31,12 @@ zip
 #-------------------------------------------------------------------------------
 #Code building
 #-------------------------------------------------------------------------------
-python3.7
-#python3.7
+python3.9
+#python3.9
 python3-distutils
 #python3 support for building and installing additional modules
+python3-testresources
+#python3 extension to allow declarative use of resources by test cases
 ffmpeg
 #multimedia file transcoding
 nco
