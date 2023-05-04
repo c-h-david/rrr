@@ -6,7 +6,7 @@
 #Purpose:
 #Check netCDF files for negative values, returns error (exit 22) if found.
 #Author:
-#Cedric H. David, 2022-2022
+#Cedric H. David, 2022-2023
 
 
 #*******************************************************************************

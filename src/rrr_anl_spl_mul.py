@@ -11,7 +11,7 @@
 #satellites. The river IDs that were never sampled in the previous sequence are
 #not either sampled in the new sequence.
 #Author:
-#Cedric H. David, 2021-2022
+#Cedric H. David, 2021-2023
 
 
 #*******************************************************************************

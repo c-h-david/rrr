@@ -8,7 +8,7 @@
 #shapefile, this script subsamples the rivers based on the polygon/polyline
 #features.
 #Authors:
-#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2022
+#Etienne Fluet Chouinard, Cedric H. David, Md Safat Sikder, 2016-2023
 
 
 #*******************************************************************************

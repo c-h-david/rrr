@@ -9,7 +9,7 @@
 #only retains those features for which the attribute has a value greater or
 #equal to the threshold.
 #Author:
-#Cedric H. David, 2022-2022
+#Cedric H. David, 2022-2023
 
 
 #*******************************************************************************

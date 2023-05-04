@@ -8,7 +8,7 @@
 #if git is installed and if the RRR git repository is present.  Otherwise
 #'unknown' is used.  
 #Author:
-#Cedric H. David, 2016-2022
+#Cedric H. David, 2016-2023
 
 
 #*******************************************************************************

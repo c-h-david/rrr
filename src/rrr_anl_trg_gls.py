@@ -9,7 +9,7 @@
 #(future) Earth observations. The triggers are saved in two similar files in
 #.csv and .shp formats that are provided as runtime options.
 #Author:
-#Cedric H. David, 2020-2022
+#Cedric H. David, 2020-2023
 
 
 #*******************************************************************************

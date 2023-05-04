@@ -8,7 +8,7 @@
 #and the name of a new netCDF file, this program computes the ensemble average
 #of surface runoff and subsurface runoff for the new file.
 #Author:
-#Cedric H. David, 2022-2022
+#Cedric H. David, 2022-2023
 
 
 #*******************************************************************************

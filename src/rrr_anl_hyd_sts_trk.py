@@ -9,7 +9,7 @@
 #simple statistics comparing observed and modeled hydrographs from WaterTrek and
 #stores them in a csv file.
 #Author:
-#Cedric H. David, 2018-2022
+#Cedric H. David, 2018-2023
 
 
 #*******************************************************************************

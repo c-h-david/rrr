@@ -14,7 +14,7 @@
 #cells that have NoData (e.g. coastal grid cells), these points are ignored in
 #the computations. Additional diagnostic quantities are also printed in stdout.
 #Author:
-#Cedric H. David, 2018-2022
+#Cedric H. David, 2018-2023
 
 
 #*******************************************************************************

@@ -12,7 +12,7 @@
 #If unexpected distant nodes are found, the Node IDs are reported. 
 #
 #Author:
-#Cedric H. David, 2017-2022
+#Cedric H. David, 2017-2023
 
 
 #*******************************************************************************
