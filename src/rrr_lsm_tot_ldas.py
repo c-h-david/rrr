@@ -175,7 +175,13 @@ url='https://urs.earthdata.nasa.gov'
 print('- '+url)
 
 cred=requests.utils.get_netrc_auth(url)
-print('- The credentials were obtained from ~/.netrc file')
+if cred!=None:
+     print('- The credentials were obtained from ~/.netrc file')
+else:
+     print('ERROR - Credentials not available in ~/.netrc file')
+     raise SystemExit(22)
+
+cred_obj=requests.auth.HTTPDigestAuth(cred[0],cred[1])
 
 
 #*******************************************************************************
@@ -202,7 +208,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
      payload['VARIABLES']='BGRUN,SSRUN'
 
      print('- Requesting a subset of NLDAS_VIC0125_H.A20000101.0000.002.grb')
-     r=requests.get(url, params=payload, auth=cred)
+     r=requests.get(url, params=payload, auth=cred_obj)
      #Downloads data from:
      #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_H.002/2000/001/
@@ -243,7 +249,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
      payload['VARIABLES']='BGRUN,SSRUN'
 
      print('- Requesting a subset of NLDAS_VIC0125_M.A200001.002.grb')
-     r=requests.get(url, params=payload, auth=cred)
+     r=requests.get(url, params=payload, auth=cred_obj)
      #Downloads data from:
      #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/NLDAS/NLDAS_VIC0125_M.002/2000/
@@ -284,7 +290,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
      payload['VARIABLES']='Qs_acc,Qsb_acc'
 
      print('- Requesting a subset of GLDAS_VIC10_3H.A2000001.0000.001.grb')
-     r=requests.get(url, params=payload, auth=cred)
+     r=requests.get(url, params=payload, auth=cred_obj)
      #Downloads data from:
      #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/GLDAS/GLDAS_VIC10_3H.2.0/2000/001/
@@ -325,7 +331,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='M':
      payload['VARIABLES']='Qs_acc,Qsb_acc'
 
      print('- Requesting a subset of GLDAS_VIC10_M.A200001.020.nc4')
-     r=requests.get(url, params=payload, auth=cred)
+     r=requests.get(url, params=payload, auth=cred_obj)
      #Downloads data from:
      #https://hydro1.gesdisc.eosdis.nasa.gov/daac-bin/OTF/HTTP_services.cgi
      #     ?FILENAME=/data/GLDAS/GLDAS_VIC10_M.2.0/2000/
@@ -357,7 +363,7 @@ print('Downloading all files')
 print('- Creating a networking session and assigning associated credentials')
 
 s=requests.Session()
-s.auth=cred
+s.auth=cred_obj
 
 #-------------------------------------------------------------------------------
 #If requesting NLDAS hourly data
