@@ -85,10 +85,11 @@ Note that the experienced users may find more up-to-date testing instructions
 in
 [docker.test.yml](https://github.com/c-h-david/rrr/blob/master/docker.test.yml).
 
-## Installation on Ubuntu
+## Installation on Debian
 This document was written and tested on a machine with a **clean** image of 
-[Ubuntu 20.04.6 Desktop 64-bit](https://releases.ubuntu.com/20.04/ubuntu-20.04.6-desktop-amd64.iso)
+[Debian 11.7.0 ARM64](https://cdimage.debian.org/cdimage/archive/11.7.0/arm64/iso-cd/debian-11.7.0-arm64-netinst.iso)
 installed, *i.e.* **no update** was performed, and **no upgrade** either. 
+Similar steps **may** be applicable for Ubuntu.
 
 Note that the experienced users may find more up-to-date installation 
 instructions in
@@ -163,7 +164,7 @@ $ sudo pip3 install --no-cache-dir -r requirements.pip
 > $ sudo pip3 install dbf==0.99.2
 > ```
 
-## Testing on Ubuntu
+## Testing on Debian
 Testing scripts are currently under development.
 
 Note that the experienced users may find more up-to-date testing instructions 

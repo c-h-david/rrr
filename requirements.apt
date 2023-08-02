@@ -31,12 +31,14 @@ zip
 #-------------------------------------------------------------------------------
 #Code building
 #-------------------------------------------------------------------------------
-python3.9
-#python3.9
+python3.9-dev
+#Includes binary libraries (python3.9) and header files (python3.9-dev)
 python3-distutils
 #python3 support for building and installing additional modules
-python3-testresources
-#python3 extension to allow declarative use of resources by test cases
+g++
+#includes C (gcc) and C++ (g++) compilers
+libgdal-dev
+#files needed to develop a software that use GDAL/OGR
 ffmpeg
 #multimedia file transcoding
 nco
