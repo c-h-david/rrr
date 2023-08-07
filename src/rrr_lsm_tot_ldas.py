@@ -29,14 +29,15 @@ import requests
 # 4 - rrr_iso_beg
 # 5 - rrr_iso_end
 # 6 - rrr_lsm_dir
+#(7)- rrr_lsm_org
 
 
 #*******************************************************************************
 #Get command line arguments
 #*******************************************************************************
 IS_arg=len(sys.argv)
-if IS_arg != 7:
-     print('ERROR - 6 and only 6 arguments can be used')
+if IS_arg < 7 or IS_arg > 8:
+     print('ERROR - A minimum of 6 and a maximum of 7 arguments can be used')
      raise SystemExit(22) 
 
 rrr_lsm_exp=sys.argv[1]
@@ -45,6 +46,10 @@ rrr_lsm_frq=sys.argv[3]
 rrr_iso_beg=sys.argv[4]
 rrr_iso_end=sys.argv[5]
 rrr_lsm_dir=sys.argv[6]
+if IS_arg==8:
+     rrr_lsm_org=sys.argv[7]
+else:
+     rrr_lsm_org=''
 
 
 #*******************************************************************************
@@ -57,6 +62,7 @@ print('- '+rrr_lsm_frq)
 print('- '+rrr_iso_beg)
 print('- '+rrr_iso_end)
 print('- '+rrr_lsm_dir)
+print('- '+rrr_lsm_org)
 
 
 #*******************************************************************************
@@ -164,6 +170,19 @@ if rrr_lsm_frq=='M':
           #Adding one month done by adding 32 days and replacing the day by 1
           IS_count=IS_count+1
      print('- The number of files to be downloaded is: '+str(IS_count))
+
+
+#*******************************************************************************
+#Check if retaining LDAS directory structure
+#*******************************************************************************
+print('Check if retaining LDAS directory structure')
+
+if rrr_lsm_org=='org_no':
+     print('- Not retaining LDAS directory structure')
+
+if (rrr_lsm_org!='org_no') and (rrr_lsm_org!=''):
+     print('ERROR: '+rrr_lsm_org+' does not match org_no')
+     raise SystemExit(22)
 
 
 #*******************************************************************************
@@ -416,6 +435,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='H':
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           YS_dir='NLDAS_'+rrr_lsm_mod+'0125_H.002/'+YS_yr+'/'+YS_dy+'/'
+          if rrr_lsm_org=='org_no': YS_dir='/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
@@ -492,6 +512,7 @@ if rrr_lsm_exp=='NLDAS' and rrr_lsm_frq=='M':
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           YS_dir='NLDAS_'+rrr_lsm_mod+'0125_M.002/'+YS_yr+'/'
+          if rrr_lsm_org=='org_no': YS_dir='/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
@@ -569,6 +590,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='3H':
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           YS_dir='GLDAS_'+rrr_lsm_mod+'10_3H.2.0/'+YS_yr+'/'+YS_dy+'/'
+          if rrr_lsm_org=='org_no': YS_dir='/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
@@ -646,6 +668,7 @@ if rrr_lsm_exp=='GLDAS' and rrr_lsm_frq=='M':
           #Create directory if it doesn't exist
           #- + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + - + -
           YS_dir='GLDAS_'+rrr_lsm_mod+'10_M.2.0/'+YS_yr+'/'
+          if rrr_lsm_org=='org_no': YS_dir='/'
           if not os.path.isdir(rrr_lsm_dir+YS_dir):
                os.makedirs(rrr_lsm_dir+YS_dir)
           #Update directory name and make sure it exists
