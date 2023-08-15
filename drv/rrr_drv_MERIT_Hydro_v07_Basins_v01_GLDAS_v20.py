@@ -213,7 +213,7 @@ def drv_lsm(rrr: RRR):
      #Combine and accumulate multiple files
      #--------------------------------------------------------------------------
      print('- Combine and accumulate multiple files')
-     all_nc4=glob.glob(rrr.lsm_dir + '*.nc4')
+     all_nc4=sorted(glob.glob(rrr.lsm_dir + '*.nc4'))
      comnd=['/bin/bash']                                                       \
           +['../src/rrr_lsm_tot_cmb_acc.sh']                                   \
           +all_nc4                                                             \
