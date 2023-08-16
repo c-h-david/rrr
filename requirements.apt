@@ -39,6 +39,8 @@ g++
 #includes C (gcc) and C++ (g++) compilers
 libgdal-dev
 #files needed to develop a software that use GDAL/OGR
+libspatialindex-dev
+#spatial indexing methods, needed for rtree
 ffmpeg
 #multimedia file transcoding
 nco
