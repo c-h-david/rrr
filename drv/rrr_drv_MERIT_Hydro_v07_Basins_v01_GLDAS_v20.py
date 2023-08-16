@@ -93,8 +93,8 @@ class RRR(object):
           #--------------------------------------------------------------------- 
           #Land Surface Model {lsm_mod} {lsm_stp} {yyyy_mm}
           #--------------------------------------------------------------------- 
-          self.lsm_tmp = f'GLDAS_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc.nc4'
-          self.lsm_ncf = f'GLDAS_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc_cfc.nc4'
+          self.lsm_tmp = f'GLDAS_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc_tmp.nc4'
+          self.lsm_ncf = f'GLDAS_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc.nc4'
 
           #--------------------------------------------------------------------- 
           #Coupling {basn_id}
@@ -104,7 +104,7 @@ class RRR(object):
           #--------------------------------------------------------------------- 
           #Lateral inflow {basn_id} {lsm_mod} {lsm_stp} {yyyy_mm}
           #--------------------------------------------------------------------- 
-          self.m3r_ncf = f'm3_riv_pfaf_{self.basn_id}_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc.nc4'
+          self.m3r_ncf = f'm3_riv_pfaf_{self.basn_id}_GLDAS_{self.lsm_mod}_{self.lsm_stp}_{self.yyyy_mm}_utc.nc4'
 
 
 #*******************************************************************************

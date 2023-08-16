@@ -347,7 +347,7 @@ echo "- Concatenating multiple files - Monthly - CLSM"
      ../input/GLDAS/GLDAS_CLSM10_M.2.0/199*/GLDAS_CLSM10_M.*.nc4               \
      ../input/GLDAS/GLDAS_CLSM10_M.2.0/200*/GLDAS_CLSM10_M.*.nc4               \
      1                                                                         \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_tst.nc4            \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc_tmp_tst.nc4        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "1" because not averaging any consecutive files.
@@ -355,11 +355,11 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Making concatenated file CF compliant - Monthly - CLSM"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_tst.nc4            \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc_tmp_tst.nc4        \
      1980-01-01T00:00:00                                                       \
      2629800                                                                   \
      2629800/10800                                                             \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_cfc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc_tst.nc4            \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "2629800" as the number of seconds in average month for 365.25 days/year.
@@ -368,8 +368,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing concatenated file CF compliant - Monthly - CLSM"
 
 ./tst_cmp_n3d.py                                                               \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_cfc.nc4            \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_cfc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc.nc4                \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc_tst.nc4            \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -395,7 +395,7 @@ echo "- Concatenating multiple files - Monthly - NOAH"
      ../input/GLDAS/GLDAS_NOAH10_M.2.0/199*/GLDAS_NOAH10_M.*.nc4               \
      ../input/GLDAS/GLDAS_NOAH10_M.2.0/200*/GLDAS_NOAH10_M.*.nc4               \
      1                                                                         \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_tst.nc4            \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc_tmp_tst.nc4        \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "1" because not averaging any consecutive files.
@@ -403,11 +403,11 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Making concatenated file CF compliant - Monthly - NOAH"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_tst.nc4            \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc_tmp_tst.nc4        \
      1980-01-01T00:00:00                                                       \
      2629800                                                                   \
      2629800/10800                                                             \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_cfc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc_tst.nc4            \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "2629800" as the number of seconds in average month for 365.25 days/year.
@@ -416,8 +416,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing concatenated file CF compliant - Monthly - NOAH"
 
 ./tst_cmp_n3d.py                                                               \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_cfc.nc4            \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_cfc_tst.nc4        \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc.nc4                \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc_tst.nc4            \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -443,7 +443,7 @@ echo "- Concatenating multiple files - Monthly - VIC"
      ../input/GLDAS/GLDAS_VIC10_M.2.0/199*/GLDAS_VIC10_M.*.nc4                 \
      ../input/GLDAS/GLDAS_VIC10_M.2.0/200*/GLDAS_VIC10_M.*.nc4                 \
      1                                                                         \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_tst.nc4             \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc_tmp_tst.nc4         \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "1" because not averaging any consecutive files.
@@ -451,11 +451,11 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Making concatenated file CF compliant - Monthly - VIC"
 
 ../src/rrr_lsm_tot_add_cfc.py                                                  \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_tst.nc4             \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc_tmp_tst.nc4         \
      1980-01-01T00:00:00                                                       \
      2629800                                                                   \
      2629800/10800                                                             \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_cfc_tst.nc4         \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc_tst.nc4             \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 #Using "2629800" as the number of seconds in average month for 365.25 days/year.
@@ -464,8 +464,8 @@ x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 echo "- Comparing concatenated file CF compliant - Monthly - VIC"
 
 ./tst_cmp_n3d.py                                                               \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_cfc.nc4             \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_cfc_tst.nc4         \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc.nc4                 \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc_tst.nc4             \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -487,18 +487,18 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Computing ensemble average"
 
 ../src/rrr_lsm_tot_ens.py                                                      \
-     ../output/MH07B01_TBD/GLDAS_CLSM10_M_198001_200912_utc_cfc.nc4            \
-     ../output/MH07B01_TBD/GLDAS_NOAH10_M_198001_200912_utc_cfc.nc4            \
-     ../output/MH07B01_TBD/GLDAS_VIC10_M_198001_200912_utc_cfc.nc4             \
-     ../output/MH07B01_TBD/GLDAS_ENS10_M_198001_200912_utc_cfc_tst.nc4         \
+     ../output/MH07B01_TBD/GLDAS_CLSM_M_1980-01_2009-12_utc.nc4                \
+     ../output/MH07B01_TBD/GLDAS_NOAH_M_1980-01_2009-12_utc.nc4                \
+     ../output/MH07B01_TBD/GLDAS_VIC_M_1980-01_2009-12_utc.nc4                 \
+     ../output/MH07B01_TBD/GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4             \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing ensemble average"
 
 ./tst_cmp_n3d.py                                                               \
-     ../output/MH07B01_TBD/GLDAS_ENS10_M_198001_200912_utc_cfc.nc4             \
-     ../output/MH07B01_TBD/GLDAS_ENS10_M_198001_200912_utc_cfc_tst.nc4         \
+     ../output/MH07B01_TBD/GLDAS_ENS_M_1980-01_2009-12_utc.nc4                 \
+     ../output/MH07B01_TBD/GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4             \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -526,7 +526,7 @@ echo "- Creating coupling file, ENS"
 ../src/rrr_cpl_riv_lsm_lnk.py                                                  \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/rapid_catchment_pfaf_74.csv                         \
-     ../output/MH07B01_TBD/GLDAS_ENS10_M_198001_200912_utc_cfc.nc4             \
+     ../output/MH07B01_TBD/GLDAS_ENS_M_1980-01_2009-12_utc.nc4                 \
      ../output/MH07B01_TBD/rapid_coupling_pfaf_74_GLDAS_tst.csv                \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -557,16 +557,16 @@ echo "- Creating volume file, ENS"
 ../src/rrr_cpl_riv_lsm_vol.py                                                  \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/coords_pfaf_74.csv                                  \
-     ../output/MH07B01_TBD/GLDAS_ENS10_M_198001_200912_utc_cfc.nc4             \
+     ../output/MH07B01_TBD/GLDAS_ENS_M_1980-01_2009-12_utc.nc4                 \
      ../output/MH07B01_TBD/rapid_coupling_pfaf_74_GLDAS.csv                    \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_198001_200912_ENS10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4 \
    > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing volume file, ENS"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_198001_200912_ENS10_M_utc.nc4    \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_198001_200912_ENS10_M_utc_tst.nc4 \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4  \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4 \
    > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -587,7 +587,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Updating netCDF attributes, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_198001_200912_ENS10_M_utc.nc4        \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4  \
      'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
@@ -619,26 +619,26 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating lumped matrix-based routing, ENS"
 ../src/rrr_cpl_riv_lsm_rte.py                                                  \
-     ../output/MH07B01_TBD/m3_riv_pfaf_74_198001_200912_ENS10_M_utc.nc4        \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4  \
      ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
      ../output/MH07B01_TBD/riv_bas_id_pfaf_74_topo.csv                         \
-     ../output/MH07B01_TBD/Qout_pfaf_74_198001_200912_ENS10_M_utc_tst.nc4      \
+     ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4 \
      ../output/MH07B01_TBD/k_pfaf_74_nrm.csv                                   \
-     ../output/MH07B01_TBD/V_pfaf_74_198001_200912_ENS10_M_utc_nrm_tst.nc4     \
+     ../output/MH07B01_TBD/V_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_nrm_tst.nc4 \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
 
 echo "- Comparing lumped matrix-based routing, ENS"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MH07B01_TBD/Qout_pfaf_74_198001_200912_ENS10_M_utc.nc4          \
-     ../output/MH07B01_TBD/Qout_pfaf_74_198001_200912_ENS10_M_utc_tst.nc4      \
+     ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4    \
+     ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_tst.nc4 \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 echo "- Comparing water storage, ENS"
 ./tst_cmp_ncf.py                                                               \
-     ../output/MH07B01_TBD/V_pfaf_74_198001_200912_ENS10_M_utc_nrm.nc4         \
-     ../output/MH07B01_TBD/V_pfaf_74_198001_200912_ENS10_M_utc_nrm_tst.nc4     \
+     ../output/MH07B01_TBD/V_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_nrm.nc4   \
+     ../output/MH07B01_TBD/V_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_nrm_tst.nc4 \
      > $cmp_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
@@ -658,7 +658,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Updating netCDF attributes, discharge, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
-     ../output/MH07B01_TBD/Qout_pfaf_74_198001_200912_ENS10_M_utc.nc4          \
+     ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4    \
      'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
@@ -685,7 +685,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Updating netCDF attributes, volume, ENS"
 ../src/rrr_cpl_riv_lsm_att.py                                                  \
-     ../output/MH07B01_TBD/V_pfaf_74_198001_200912_ENS10_M_utc_nrm.nc4         \
+     ../output/MH07B01_TBD/V_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc_nrm.nc4   \
      'RRR data corresponding to MERIT Hydro 07 Basin 01 pfaf_74, GLDAS ENS'    \
      'Jet Propulsion Laboratory, California Institute of Technology'           \
      ''                                                                        \
