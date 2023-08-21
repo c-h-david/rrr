@@ -701,6 +701,38 @@ echo "Success"
 echo "********************"
 fi
 
+#-------------------------------------------------------------------------------
+#Creating shapefile with average flow
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Creating shapefile with average flow"
+
+../src/rrr_anl_map_avg_shp.py                                                  \
+     ../input/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01.shp           \
+     ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4    \
+     ../output/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01_GLDAS_ENS_tst.shp \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing shapefile"
+
+./tst_cmp_shp.py                                                               \
+     ../output/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01_GLDAS_ENS.shp \
+     ../output/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01_GLDAS_ENS_tst.shp \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
 
 #*******************************************************************************
 #Clean up
