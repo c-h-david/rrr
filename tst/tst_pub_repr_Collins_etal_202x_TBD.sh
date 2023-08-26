@@ -712,7 +712,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Creating shapefile with average flow"
 
-../src/rrr_anl_map_avg_shp.py                                                  \
+../src/rrr_anl_shp_avg_riv.py                                                  \
      ../input/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01.shp           \
      ../output/MH07B01_TBD/Qout_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4    \
      ../output/MH07B01_TBD/riv_pfaf_74_MERIT_Hydro_v07_Basins_v01_GLDAS_ENS_tst.shp \
