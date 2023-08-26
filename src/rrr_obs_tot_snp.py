@@ -397,7 +397,6 @@ print('- Coordinate Reference System copied')
 rrr_obs_sch=rrr_obs_lay.schema
 rrr_snp_sch=rrr_obs_sch.copy()
 rrr_snp_sch['properties']['rivid']='int:9'
-#rrr_snp_sch['properties']['meanQ']='float:10.3'
 #print(rrr_snp_sch)
 print('- Schema copied')
 
@@ -417,7 +416,6 @@ for JS_obs_shp in range(IS_obs_shp):
           rrr_snp_prp=rrr_obs_prp.copy()
           rrr_snp_geo=rrr_obs_geo.copy()
 
-#          rrr_snp_prp['meanQ']=str(round(float(rrr_snp_prp['meanQ']), 3))
           rrr_snp_prp['rivid']=HM_snp[rrr_obs_prp[YS_obs_nm]]['riv_id']
 
           rrr_snp_lay.write({                                                  \
