@@ -159,7 +159,7 @@ for JS_obs_shp in range(IS_obs_shp):
      rrr_new_prp=rrr_obs_prp.copy()
      rrr_new_geo=rrr_obs_geo.copy()
 
-     rrr_new_prp['meanQ']=round(ZV_Qob[JS_obs_shp])
+     rrr_new_prp['meanQ']=round(ZV_Qav[JS_obs_shp],3)
 
      rrr_new_lay.write({                                                       \
                         'properties': rrr_new_prp,                             \
