@@ -23,8 +23,8 @@ import numpy
 #*******************************************************************************
 #Declaration of variables (given as command line arguments)
 #*******************************************************************************
-# 1 - rrr_out_ncf
-# 2 - rrr_riv_shp
+# 1 - rrr_riv_shp
+# 2 - rrr_out_ncf
 # 3 - rrr_new_shp
 
 
