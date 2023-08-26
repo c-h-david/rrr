@@ -6,20 +6,20 @@
 #Purpose:
 #This script reproduces all RRR pre- and post-processing steps used in the
 #writing of:
-#Collins, E. L., 
+#Collins, E. L.,
 #DOI: xx.xxxx/xxxxxxxxxxxx
 #The files used are available from:
-#Collins, E. L., 
+#Collins, E. L.,
 #DOI: xx.xxxx/xxxxxxxxxxxx
 #The following are the possible arguments:
 # - No argument: all unit tests are run
 # - One unique unit test number: this test is run
 # - Two unit test numbers: all tests between those (included) are run
 #The script returns the following exit codes
-# - 0  if all experiments are successful 
-# - 22 if some arguments are faulty 
-# - 33 if a search failed 
-# - 99 if a comparison failed 
+# - 0  if all experiments are successful
+# - 22 if some arguments are faulty
+# - 33 if a search failed
+# - 99 if a comparison failed
 #Author:
 #Cedric H. David, 2022-2023
 
@@ -47,30 +47,30 @@ if [ "$#" = "0" ]; then
      lst=$tot
      echo "Performing all unit tests: $1-$2"
      echo "********************"
-fi 
-#Perform all unit tests if no options are given 
+fi
+#Perform all unit tests if no options are given
 
 if [ "$#" = "1" ]; then
      fst=$1
      lst=$1
      echo "Performing one unit test: $1"
      echo "********************"
-fi 
-#Perform one single unit test if one option is given 
+fi
+#Perform one single unit test if one option is given
 
 if [ "$#" = "2" ]; then
      fst=$1
      lst=$2
      echo "Performing unit tests: $1-$2"
      echo "********************"
-fi 
-#Perform all unit tests between first and second option given (both included) 
+fi
+#Perform all unit tests between first and second option given (both included)
 
 if [ "$#" -gt "2" ]; then
      echo "A maximum of two options can be used" 1>&2
      exit 22
-fi 
-#Exit if more than two options are given 
+fi
+#Exit if more than two options are given
 
 
 #*******************************************************************************
