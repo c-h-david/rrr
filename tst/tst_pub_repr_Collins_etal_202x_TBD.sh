@@ -798,6 +798,45 @@ echo "********************"
 fi
 
 
+#-------------------------------------------------------------------------------
+#Subsample observations
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Subsample observations"
+
+../src/rrr_obs_bas_sub.py                                                      \
+     ../input/MH07B01_TBD/Qobs_1980-01_2009-12_100cms.csv                      \
+     ../output/MH07B01_TBD/sites_1980-01_2009-12_100cms_meanQ_pfaf_74.shp      \
+     ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74_tst.csv          \
+     ../output/MH07B01_TBD/Qobs_1980-01_2009-12_100cms_pfaf_74_tst.csv         \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing subsample river IDs"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74.csv              \
+     ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74_tst.csv          \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+echo "- Comparing subsample observations"
+./tst_cmp_csv.py                                                               \
+     ../output/MH07B01_TBD/Qobs_1980-01_2009-12_100cms_pfaf_74.csv             \
+     ../output/MH07B01_TBD/Qobs_1980-01_2009-12_100cms_pfaf_74_tst.csv         \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+echo "Success"
+echo "********************"
+fi
+
+
 #*******************************************************************************
 #Clean up
 #*******************************************************************************
