@@ -762,6 +762,7 @@ echo "- Comparing shapefile"
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
@@ -793,10 +794,10 @@ echo "- Comparing shapefile"
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
-
 
 #-------------------------------------------------------------------------------
 #Subsample observations
@@ -808,7 +809,6 @@ run_file=tmp_run_$unt.txt
 cmp_file=tmp_cmp_$unt.txt
 
 echo "- Subsample observations"
-
 ../src/rrr_obs_bas_sub.py                                                      \
      ../input/MH07B01_TBD/Qobs_1980-01_2009-12_100cms.csv                      \
      ../output/MH07B01_TBD/sites_1980-01_2009-12_100cms_meanQ_pfaf_74.shp      \
@@ -832,6 +832,41 @@ echo "- Comparing subsample observations"
 x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
 
 rm -f $run_file
+rm -f $cmp_file
+echo "Success"
+echo "********************"
+fi
+
+#-------------------------------------------------------------------------------
+#Bias correction for runoff
+#-------------------------------------------------------------------------------
+unt=$((unt+1))
+if (("$unt" >= "$fst")) && (("$unt" <= "$lst")) ; then
+echo "Running unit test $unt/$tot"
+run_file=tmp_run_$unt.txt
+cmp_file=tmp_cmp_$unt.txt
+
+echo "- Bias correction for runoff"
+../src/rrr_cpl_riv_lsm_bia.py                                                  \
+     ../output/MH07B01_TBD/rapid_connect_pfaf_74.csv                           \
+     ../output/MH07B01_TBD/riv_bas_id_pfaf_74_topo.csv                         \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_ENS_M_1980-01_2009-12_utc.nc4  \
+     ../output/MH07B01_TBD/Qobs_1980-01_2009-12_100cms_pfaf_74.csv             \
+     ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74.csv              \
+     ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74.csv              \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_COR_M_1980-01_2009-12_utc_tst.nc4 \
+     > $run_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
+
+echo "- Comparing netCDF files"
+./tst_cmp_ncf.py                                                               \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_COR_M_1980-01_2009-12_utc.nc4 \
+     ../output/MH07B01_TBD/m3_riv_pfaf_74_GLDAS_COR_M_1980-01_2009-12_utc_tst.nc4 \
+     > $cmp_file
+x=$? && if [ $x -gt 0 ] ; then echo "Failed comparison: $cmp_file" >&2 ; exit $x ; fi
+
+rm -f $run_file
+rm -f $cmp_file
 echo "Success"
 echo "********************"
 fi
