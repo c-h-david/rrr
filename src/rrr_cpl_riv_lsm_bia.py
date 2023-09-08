@@ -97,8 +97,8 @@ try:
      with open(rrr_Qob_csv) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_Qob_csv)
-     raise SystemExit(22) 
+     print('WARNING - Unable to open '+rrr_Qob_csv+', skipping')
+     raise SystemExit(-22)
 
 try:
      with open(rrr_obs_csv) as file:
