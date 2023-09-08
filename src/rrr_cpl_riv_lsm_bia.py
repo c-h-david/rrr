@@ -553,6 +553,19 @@ g.close()
 print(' . Done')
 
 
+#*******************************************************************************
+#Display potential warnings
+#*******************************************************************************
+print('Display potential warnings')
+
+IS_neg=numpy.sum(ZV_lbd<0)
+IS_NEG=numpy.sum(ZV_LAM<0)
+
+if IS_neg>0:
+     print('WARNING - NEGATIVE runoff corrections for',IS_neg,'subbasin(s)',   \
+           'affecting',IS_NEG,'river reaches, in',rrr_m3b_ncf)
+
+
 ##*******************************************************************************
 ##Writing optional diagnosis files
 ##*******************************************************************************
