@@ -432,11 +432,21 @@ print('- Done')
 
 
 #*******************************************************************************
-#Computing corrections for each independent subbasin
+#Computing the total lateral inflow for each subbasin
 #*******************************************************************************
-print('Computing corrections for each independent subbasin')
+print('Computing the total lateral inflow for each subbasin')
 
-ZV_dke=spsolve(ZM_Sel*ZM_inN*ZM_Sel.transpose(),ZV_Qus_avg-ZM_Sel*ZV_Qri_avg)
+ZV_lqe_avg=spsolve(ZM_Sel*ZM_inN*ZM_Sel.transpose(),ZV_Qus_avg)
+
+print('- Done')
+
+
+#*******************************************************************************
+#Creating N*(I-St*S)
+#*******************************************************************************
+print('Creating N*(I-St*S)')
+
+ZM_DNe=ZM_Net-ZM_Net*ZM_Sel.transpose()*ZM_Sel
 
 print('- Done')
 
@@ -446,8 +456,7 @@ print('- Done')
 #*******************************************************************************
 print('Computing independent accumulation of runoff over independent subbasins')
 
-ZV_ske=spsolve(ZM_I-ZM_Net+ZM_Net*ZM_Sel.transpose()*ZM_Sel,ZV_Qex_avg)
-ZV_ske=ZM_Sel*ZV_ske
+ZV_QrD_avg=spsolve(ZM_I-ZM_DNe,ZV_Qex_avg)
 
 print('- Done')
 
@@ -457,20 +466,17 @@ print('- Done')
 #*******************************************************************************
 print('Computing scaling factor for each subbasin')
 
-ZV_lke=ZV_dke/ZV_ske
+ZV_lbd=ZV_lqe_avg/(ZM_Sel*ZV_QrD_avg)
 
 print('- Done')
 
 
 #*******************************************************************************
-#Computing correction of all runoff
+#Computing scaling factor for each reach
 #*******************************************************************************
-print('Computing correction of all runoff')
+print('Computing scaling factor for each reach')
 
-ZV_dQe_avg=spsolve( ZM_I-ZM_Net.transpose()                                    \
-                   +ZM_Sel.transpose()*ZM_Sel*ZM_Net.transpose(),              \
-                                                      ZM_Sel.transpose()*ZV_lke)
-ZV_dQe_avg=ZV_dQe_avg*ZV_Qex_avg
+ZV_LAM=spsolve((ZM_I-ZM_DNe).transpose(),ZM_Sel.transpose()*ZV_lbd)
 
 print('- Done')
 
@@ -480,7 +486,7 @@ print('- Done')
 #*******************************************************************************
 print('Propagating corrected runoff')
 
-ZV_Qrc_avg=spsolve(ZM_I-ZM_Net,ZV_Qex_avg+ZV_dQe_avg)
+ZV_Qrc_avg=spsolve(ZM_I-ZM_Net,ZV_LAM*ZV_Qex_avg)
 
 print('- Done')
 
@@ -496,9 +502,9 @@ print('- Average value of difference at stations: '+str(ZV_dif.mean()))
 print('- Minimum value of difference at stations: '+str(ZV_dif.min()))
 print('- Maximum value of difference at stations: '+str(ZV_dif.max()))
 
-print('- Average value of correction factors: '+str(ZV_lke.mean()))
-print('- Minimum value of correction factors: '+str(ZV_lke.min()))
-print('- Maximum value of correction factors: '+str(ZV_lke.max()))
+print('- Average value of correction factors: '+str(ZV_lbd.mean()))
+print('- Minimum value of correction factors: '+str(ZV_lbd.min()))
+print('- Maximum value of correction factors: '+str(ZV_lbd.max()))
 
 if numpy.max(numpy.absolute(ZV_dif/ZV_Qus_avg)) <= 0.01:
      print('  . Success!!!')
@@ -515,11 +521,11 @@ else:
 print('Creating new m3_riv file')
 
 #-------------------------------------------------------------------------------
-#Computing the constant shift in m3_riv values
+#Computing multiplying factors in same sort as m3_riv_values
 #-------------------------------------------------------------------------------
 print('- Computing the constant shift in m3_riv values')
 
-ZV_dm3_avg=ZV_dQe_avg[IV_riv_ix1]*ZS_TaR
+ZV_LAM=ZV_LAM[IV_riv_ix1]
 
 print(' . Done')
 
@@ -533,16 +539,17 @@ shutil.copyfile(rrr_m3r_ncf,rrr_m3b_ncf)
 print(' . Done')
 
 #-------------------------------------------------------------------------------
-#Shifting values in new netCDF file
+#Scaling values in new netCDF file
 #-------------------------------------------------------------------------------
-print('- Shifting values in new netCDF file')
+print('- Scaling values in new netCDF file')
 
 g = netCDF4.Dataset(rrr_m3b_ncf, 'a')
 for JS_m3r_tim in range(IS_m3r_tim):
      g.variables[YV_var][JS_m3r_tim,:]=g.variables[YV_var][JS_m3r_tim,:]       \
-                                      +ZV_dm3_avg
+                                      *ZV_LAM
 
 g.close()
+
 print(' . Done')
 
 
