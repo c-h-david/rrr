@@ -70,8 +70,8 @@ try:
      with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
-     print('ERROR - Unable to open '+rrr_obs_shp)
-     raise SystemExit(22)
+     print('WARNING - Unable to open '+rrr_obs_shp+', skipping')
+     raise SystemExit(-22)
 
 
 #*******************************************************************************
