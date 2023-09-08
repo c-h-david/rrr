@@ -382,6 +382,11 @@ print(' - Gauges within buffer          '+str(IS_buf))
 print(' - Gauges removed because of mag '+str(IS_buf-IS_snp))
 print(' - Gauges removed as duplicates  '+str(IS_dup_ids-IS_uni_ids))
 print(' - Expected remaining gauges     '+str(IS_snp-(IS_dup_ids-IS_uni_ids)))
+print(' - Expected remaining gauges v2  '+str(len(HM_snp)))
+
+if len(HM_snp)==0:
+     print('WARNING - No station to be snapped: not creating a shapefile')
+     raise SystemExit(-22)
 
 
 #*******************************************************************************
