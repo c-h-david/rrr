@@ -163,7 +163,7 @@ if rrr_ncf_var1==rrr_ncf_var2:
      print('Common variable name          :'+rrr_ncf_var)
 else:
      print('ERROR - The variable names differ: '                               \
-           +rrr_ncf_var1+' <> '+rrr_ncf_var1)
+           +rrr_ncf_var1+' <> '+rrr_ncf_var2)
      raise SystemExit(99) 
 
 print('-------------------------------')
