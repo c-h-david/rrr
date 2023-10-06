@@ -97,14 +97,14 @@ print('Read CSV file')
 with open(rrr_Qob_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      row=next(iter(csvreader))
-     YV_Qob_nam=row
+     YV_Qob_nam=row[1:]
      IS_Qob_csv=len(YV_Qob_nam)
 
      IS_time=0
      ZV_Qav=numpy.zeros(IS_Qob_csv)
      for row in csvreader:
           IS_time=IS_time+1
-          ZV_Qob=numpy.array([float(Qob) for Qob in row])
+          ZV_Qob=numpy.array([float(Qob) for Qob in row[1:]])
           ZV_Qav=ZV_Qav+ZV_Qob
      ZV_Qav=ZV_Qav/IS_time
 
