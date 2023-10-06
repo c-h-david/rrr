@@ -749,7 +749,7 @@ cmp_file=tmp_cmp_$unt.txt
 echo "- Add mean Q to gauge shapefile"
 ../src/rrr_anl_shp_avg_obs.py                                                  \
      ../input/MH07B01_TBD/sites_1980-01_2009-12_100cms.shp                     \
-     ../input/MH07B01_TBD/Qobs_1980-01_2009-12_100cms.csv                      \
+     ../input/MH07B01_TBD/timeseries_obs_1980-01_2009-12_100cms_monthly.csv    \
      ../output/MH07B01_TBD/sites_1980-01_2009-12_100cms_meanQ_tst.shp          \
      > $run_file
 x=$? && if [ $x -gt 0 ] ; then echo "Failed run: $run_file" >&2 ; exit $x ; fi
@@ -810,7 +810,7 @@ cmp_file=tmp_cmp_$unt.txt
 
 echo "- Subsample observations"
 ../src/rrr_obs_bas_sub.py                                                      \
-     ../input/MH07B01_TBD/Qobs_1980-01_2009-12_100cms.csv                      \
+     ../input/MH07B01_TBD/timeseries_obs_1980-01_2009-12_100cms_monthly.csv    \
      ../output/MH07B01_TBD/sites_1980-01_2009-12_100cms_meanQ_pfaf_74.shp      \
      ../output/MH07B01_TBD/obs_tot_id_1980-01_2009-12_pfaf_74_tst.csv          \
      ../output/MH07B01_TBD/Qobs_1980-01_2009-12_100cms_pfaf_74_tst.csv         \
