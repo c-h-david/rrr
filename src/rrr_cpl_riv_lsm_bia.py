@@ -466,6 +466,7 @@ print('- Done')
 print('Computing scaling factor for each subbasin')
 
 ZV_lbd=ZV_lqe_avg/(ZM_Sel*ZV_QrD_avg)
+ZV_alp=ZV_lbd-1
 
 print('- Done')
 
@@ -475,7 +476,8 @@ print('- Done')
 #*******************************************************************************
 print('Computing scaling factor for each reach')
 
-ZV_LAM=spsolve((ZM_I-ZM_DNe).transpose(),ZM_Sel.transpose()*ZV_lbd)
+ZV_LAM=spsolve((ZM_I-ZM_DNe).transpose(),ZM_Sel.transpose()*ZV_alp)
+ZV_LAM=ZV_LAM+1
 
 print('- Done')
 
