@@ -18,8 +18,6 @@
 import sys
 import fiona
 import shapely.geometry
-import shapely.prepared
-import rtree
 
 
 #*******************************************************************************
@@ -99,31 +97,14 @@ print(' - The number of river features is: '+str(IS_riv_shp))
 
 
 #*******************************************************************************
-#Create spatial index for the bounds of each river feature
-#*******************************************************************************
-print('Create spatial index for the bounds of each river feature')
-
-index=rtree.index.Index()
-for rrr_riv_fea in rrr_riv_lay:
-     rrr_riv_did=rrr_riv_fea['properties'][YS_riv_dn]
-     if rrr_riv_did==0:
-     #here only looking at the terminal river reaches: NextDownID=0
-          rrr_riv_fid=int(rrr_riv_fea['id'])
-          #the 1st argument of index.insert has to be 'int', not 'long' or 'str'
-          rrr_riv_shy=shapely.geometry.shape(rrr_riv_fea['geometry'])
-          #get geometry
-          index.insert(rrr_riv_fid, rrr_riv_shy.bounds)
-          #creates an index between the feature ID and the feature bounds
-
-print(' - Spatial index created')
-
-
-#*******************************************************************************
 #Read coast shapefile
 #*******************************************************************************
 print('Read coast shapefile')
 
 rrr_cst_lay=fiona.open(rrr_cst_shp, 'r')
+
+rrr_cst_geo = shapely.geometry.shape(rrr_cst_lay[0]['geometry'])
+#get geometry of coast
 
 IS_cst_shp=len(rrr_cst_lay)
 print(' - The number of coast features is: '+str(IS_cst_shp))
@@ -136,27 +117,20 @@ print('Intersect river IDs with buffered coast')
 
 IV_riv_cst=[]
 
-for rrr_cst_fea in rrr_cst_lay:
-     rrr_cst_shy=shapely.geometry.shape(rrr_cst_fea['geometry'])
-     #shapely geometric object for each gauge
-     rrr_buf_shy=rrr_cst_shy.buffer(ZS_buf)
-     #shapefly geometric object for a disc buffered around each gauge
-     rrr_buf_pre=shapely.prepared.prep(rrr_buf_shy)
-     #a 'prepared' geometric object allows for faster processing after
-     IV_riv_fid=[int(x) for x in list(index.intersection(rrr_buf_shy.bounds))]
-     #List of feature IDs where reach bounds intersect with buffer bounds
-
-     for IS_riv_fid in IV_riv_fid:
-          #---------------------------------------------------------------------
-          #current reach might be within buffer of current gauge
-          #---------------------------------------------------------------------
-          rrr_riv_fea=rrr_riv_lay[IS_riv_fid]
+for rrr_riv_fea in rrr_riv_lay:
+     rrr_riv_did=rrr_riv_fea['properties'][YS_riv_dn]
+     if rrr_riv_did==0:
+     #here only looking at the terminal river reaches: NextDownID=0
           rrr_riv_shy=shapely.geometry.shape(rrr_riv_fea['geometry'])
-          if rrr_buf_pre.intersects(rrr_riv_shy):
-               #----------------------------------------------------------------
-               #Current reach is actually within buffer of current gauge
-               #----------------------------------------------------------------
-               IV_riv_cst.append(rrr_riv_fea['properties'][YS_riv_id])
+          #get geometry
+          rrr_cst_dis = rrr_cst_geo.distance(rrr_riv_shy)
+          #calculate distance to coast
+          #----------------------------------------------------------------
+          #Current reach is actually within buffer distance of coast
+          #----------------------------------------------------------------
+          if rrr_cst_dis < ZS_buf:
+              IV_riv_cst.append(rrr_riv_fea['properties'][YS_riv_id])
+              # Add id to list
 
 
 #*******************************************************************************
