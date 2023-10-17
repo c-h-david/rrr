@@ -151,9 +151,9 @@ print('Read rrr_riv_shp')
 
 rrr_riv_lay=fiona.open(rrr_riv_shp, 'r')
 
-if 'COMID' in rrr_riv_lay[0]['properties']:
+if 'COMID' in rrr_riv_lay.schema['properties']:
      YS_riv_rid='COMID'
-elif 'rivid' in rrr_riv_lay[0]['properties']:
+elif 'rivid' in rrr_riv_lay.schema['properties']:
      YS_riv_rid='rivid'
 else:
      print('ERROR - COMID, rivid do not exist in '+rrr_riv_shp)
