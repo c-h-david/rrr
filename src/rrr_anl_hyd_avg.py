@@ -81,7 +81,7 @@ for col in df1:
     IS_max_NaN1=max(IS_max_NaN1, len(df1[col])-df1[col].count())
 
 print('- Number of time steps in rrr_hyd_csv: '+str(IS_row1))
-print('- Number of river reaches in rrr_hyd_csv: '+str(IS_col1-1))
+print('- Number of river reaches in rrr_hyd_csv: '+str(IS_col1))
 print('- Max number of NaNs per river reach in rrr_hyd_csv: '+str(IS_max_NaN1))
 if IS_max_NaN1 !=0: print('WARNING: There are NaNs')
 
@@ -102,7 +102,7 @@ for col in df2:
     IS_max_NaN2=max(IS_max_NaN2, len(df2[col])-df2[col].count())
 
 print('- Number of time steps in rrr_avg_csv: '+str(IS_row2))
-print('- Number of river reaches in rrr_avg_csv: '+str(IS_col2-1))
+print('- Number of river reaches in rrr_avg_csv: '+str(IS_col2))
 print('- Max number of NaNs per river reach in rrr_avg_csv: '+str(IS_max_NaN2))
 if IS_max_NaN2 !=0: print('WARNING: There are NaNs')
 
@@ -112,7 +112,8 @@ if IS_max_NaN2 !=0: print('WARNING: There are NaNs')
 #*******************************************************************************
 print('Write rrr_avg_csv')
 
-df2.to_csv(rrr_avg_csv)
+df2.to_csv(rrr_avg_csv,na_rep='NaN')
+#Writing NaNs as 'NaN'
 
 
 #*******************************************************************************
