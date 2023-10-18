@@ -17,7 +17,7 @@
 #*******************************************************************************
 import sys
 import fiona
-import csv
+import pandas
 import numpy
 
 
@@ -94,19 +94,22 @@ for rrr_obs_fea in rrr_obs_lay:
 #*******************************************************************************
 print('Read CSV file')
 
-with open(rrr_Qob_csv) as csvfile:
-     csvreader=csv.reader(csvfile)
-     row=next(iter(csvreader))
-     YV_Qob_nam=row[1:]
-     IS_Qob_csv=len(YV_Qob_nam)
+df1=pandas.read_csv(rrr_Qob_csv)
+#Read the csv file using Pandas
 
-     IS_time=0
-     ZV_Qav=numpy.zeros(IS_Qob_csv)
-     for row in csvreader:
-          IS_time=IS_time+1
-          ZV_Qob=numpy.array([float(Qob) for Qob in row[1:]])
-          ZV_Qav=ZV_Qav+ZV_Qob
-     ZV_Qav=ZV_Qav/IS_time
+YS_name=df1.columns.values[0]
+#The header of the first column which contains dates
+
+df1[YS_name]=pandas.to_datetime(df1[YS_name])
+#Convert the first column to DateTime
+
+df1.set_index(YS_name,inplace=True)
+#Sets the index of the dataframe as the first column
+
+IS_time=df1.shape[0]
+IS_Qob_csv=df1.shape[1]
+YV_Qob_nam=df1.columns.tolist()
+ZV_Qav=df1.mean().tolist()
 
 print('- The number of gauges in CSV file is: '+str(IS_Qob_csv))
 print('- The number of time steps in CSV file is: '+str(IS_time))
