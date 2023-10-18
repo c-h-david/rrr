@@ -4,10 +4,10 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a shapefile with unique integer identifiers for observing stations and 
+#Given a shapefile with unique integer identifiers for observing stations and
 #unique station codes, a csv file containing observations previously downloaded
-#using rrr_obs_tot_nwisdv.py, a start date (%Y-%m-%d), an interval (in number of 
-#days), and a name; this program creates one csv file that contains a summary 
+#using rrr_obs_tot_nwisdv.py, a start date (%Y-%m-%d), an interval (in number of
+#days), and a name; this program creates one csv file that contains a summary
 #table of hydrographs indexed by station rivid. An optional percentage integer
 #can also be given to compute a similar uncertainty table.
 #Author:
@@ -44,7 +44,7 @@ import datetime
 IS_arg=len(sys.argv)
 if IS_arg < 8 or IS_arg > 9:
      print('ERROR - A minimum of 7 and a maximum of 8 arguments can be used')
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
@@ -74,14 +74,14 @@ print('- '+str(ZS_pct_uq))
 
 
 #*******************************************************************************
-#Check if files exist 
+#Check if files exist
 #*******************************************************************************
 try:
      with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_shp)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 try:
      with open(rrr_obs_csv) as file:
@@ -95,11 +95,11 @@ try:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_flw_csv)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 if (ZS_pct_uq < 0 or ZS_pct_uq >100):
      print('ERROR - The percentage '+str(ZS_pct_uq)+' must be in range [0,100]')
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 
 #*******************************************************************************
@@ -117,17 +117,21 @@ elif 'FLComID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='FLComID'
 elif 'ARCID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='ARCID'
+elif 'rivid' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='rivid'
 else:
-     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
-     raise SystemExit(22) 
+     print('ERROR - No known name for river ID exist in '+rrr_obs_shp)
+     raise SystemExit(22)
 
 if 'SOURCE_FEA' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='SOURCE_FEA'
 elif 'Code' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='Code'
+elif 'Sttn_Nm' in rrr_obs_lay[0]['properties']:
+     YV_obs_cd='Sttn_Nm'
 else:
-     print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
-     raise SystemExit(22) 
+     print('ERROR - No known name for gauge station code exist in '+rrr_obs_shp)
+     raise SystemExit(22)
 
 IV_obs_bas_id=[]
 YV_obs_bas_cd=[]
@@ -220,7 +224,7 @@ with open(rrr_hyd_csv, 'w') as csvfile:
      csvwriter.writerow([rrr_obs_str]+IV_obs_bas_id_srt)
      for JS_time in range(IS_time):
           IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,IV_obs_loc])
-          csvwriter.writerow(IV_line) 
+          csvwriter.writerow(IV_line)
 
 if ZS_pct_uq > 0:
      rrr_hyd_csv=rrr_hyd_csv[:-4]+'_uq.csv'
@@ -231,8 +235,8 @@ if ZS_pct_uq > 0:
           for JS_time in range(IS_time):
                IV_line=[YV_time[JS_time]]+list(ZM_obs[JS_time,IV_obs_loc]      \
                                                *ZS_pct_uq/100)
-               csvwriter.writerow(IV_line) 
-#Write hydrographs for uncertainty 
+               csvwriter.writerow(IV_line)
+#Write hydrographs for uncertainty
 
 
 #*******************************************************************************

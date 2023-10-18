@@ -4,8 +4,8 @@
 #*******************************************************************************
 
 #Purpose:
-#Given a list of unique integer identifiers for observing stations, and two 
-#folders where csv timeseries of observed/computed quantities are stored, this 
+#Given a list of unique integer identifiers for observing stations, and two
+#folders where csv timeseries of observed/computed quantities are stored, this
 #program computes simple statistics comparing observed and modeled hydrographs.
 #In case timeseries of different lengths are given, the smallest length is used
 #unless an optional argument containing the desired length is given.
@@ -40,7 +40,7 @@ from datetime import datetime
 IS_arg=len(sys.argv)
 if IS_arg < 5 or IS_arg > 7 or IS_arg == 6:
      print('ERROR - Either 4 or 6 arguments must be used')
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 rrr_obs_shp=sys.argv[1]
 rrr_obs_csv=sys.argv[2]
@@ -73,28 +73,28 @@ print('- '+str(rrr_end_dat))
 
 
 #*******************************************************************************
-#Check if files exist 
+#Check if files exist
 #*******************************************************************************
 try:
      with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_shp)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 try:
      with open(rrr_obs_csv) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open'+rrr_obs_csv)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 try:
      with open(rrr_mod_csv) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open'+rrr_mod_csv)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 
 #*******************************************************************************
@@ -120,16 +120,22 @@ with fiona.open(rrr_obs_shp, 'r') as shpfile:
           YV_obs_id='ARCID'
      elif 'COMID' in shpfile[0]['properties']:
           YV_obs_id='COMID'
+     elif 'rivid' in shpfile[0]['properties']:
+          YV_obs_id='rivid'
      else:
-          print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
-          raise SystemExit(22) 
+          print('ERROR - No known name for river ID exist in '+rrr_obs_shp)
+          raise SystemExit(22)
+
      if 'SOURCE_FEA' in shpfile[0]['properties']:
           YV_obs_cd='SOURCE_FEA'
      elif 'Code' in shpfile[0]['properties']:
           YV_obs_cd='Code'
+     elif 'Sttn_Nm' in shpfile[0]['properties']:
+          YV_obs_cd='Sttn_Nm'
      else:
-          print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
+          print('ERROR - No known name for gauge station code exist in '+rrr_obs_shp)
           raise SystemExit(22)
+
      for reach in shpfile:
           IV_obs_tot_id.append(reach['properties'][YV_obs_id])
           YV_obs_tot_cd.append(reach['properties'][YV_obs_cd])
@@ -146,7 +152,7 @@ YV_obs_tot_cd_srt=list(YV_obs_tot_cd_srt)
 
 
 #*******************************************************************************
-#Check length of all hydrographs 
+#Check length of all hydrographs
 #*******************************************************************************
 print('- Checking the length of all hydrographs')
 
@@ -177,7 +183,7 @@ with open(rrr_sts_csv, 'w') as csvfile:
      #'w' here ensures creation of a new file instead of appending.
      csvwriter = csv.writer(csvfile, dialect='excel')
      csvwriter.writerow(['rivid','Qobsbar','Qmodbar','RMSE','Bias',            \
-                         'STDE','Nash','Correl']) 
+                         'STDE','Nash','Correl'])
 
 #-------------------------------------------------------------------------------
 #Read hydrographs
@@ -276,7 +282,7 @@ for JS_obs_tot in range(IS_obs_tot):
                               round(ZS_modSTD,2),                              \
                               round(ZS_modNash,2),                             \
                               round(ZS_modCor,2),                              \
-                             ]) 
+                             ])
 
 
 #*******************************************************************************

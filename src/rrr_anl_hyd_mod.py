@@ -4,10 +4,10 @@
 #*******************************************************************************
 
 #Purpose:
-#Given an observing stations shapefile with unique integer identifiers and 
-#unique station codes, a netCDF file containing modeled quantities (for many 
-#days/many reaches), a name for the simulation, and a number of consecutive 
-#values to be averaged together, this program produces a csv file in which the 
+#Given an observing stations shapefile with unique integer identifiers and
+#unique station codes, a netCDF file containing modeled quantities (for many
+#days/many reaches), a name for the simulation, and a number of consecutive
+#values to be averaged together, this program produces a csv file in which the
 #(averaged) time series of modeled quantities are stored. In case time metadata
 #is missing from the netCDF file, this can be provided in the command line.
 #If uncertainty information is provided in the netCDF file, another csv file is
@@ -34,7 +34,7 @@ import calendar
 #*******************************************************************************
 iso_str_dat='1970-01-01T00:00:00'
 #The beginning time of the first time step in the input netCDF file.
-#ISO 8601 format: '1970-01-01T00:00:00', make sure UTC is used 
+#ISO 8601 format: '1970-01-01T00:00:00', make sure UTC is used
 ZS_TauR=10800
 #The duration (s) of the time steps in the input netCDF files, 3h is most common
 
@@ -57,7 +57,7 @@ ZS_TauR=10800
 IS_arg=len(sys.argv)
 if IS_arg < 6 or IS_arg > 8:
      print('ERROR - A minimum of 5 and a maximum of 7 arguments can be used')
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 rrr_obs_shp=sys.argv[1]
 rrr_out_ncf=sys.argv[2]
@@ -84,21 +84,21 @@ print('- '+str(ZS_TauR))
 
 
 #*******************************************************************************
-#Check if files exist 
+#Check if files exist
 #*******************************************************************************
 try:
      with open(rrr_out_ncf) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_out_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 try:
      with open(rrr_obs_shp) as file:
           pass
 except IOError as e:
      print('ERROR - Unable to open '+rrr_obs_shp)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 
 #*******************************************************************************
@@ -118,17 +118,21 @@ elif 'ARCID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='ARCID'
 elif 'COMID' in rrr_obs_lay[0]['properties']:
      YV_obs_id='COMID'
+elif 'rivid' in rrr_obs_lay[0]['properties']:
+     YV_obs_id='rivid'
 else:
-     print('ERROR - COMID_1, FLComID, or ARCID do not exist in '+rrr_obs_shp)
-     raise SystemExit(22) 
+     print('ERROR - No known name for river ID exist in '+rrr_obs_shp)
+     raise SystemExit(22)
 
 if 'SOURCE_FEA' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='SOURCE_FEA'
 elif 'Code' in rrr_obs_lay[0]['properties']:
      YV_obs_cd='Code'
+elif 'Sttn_Nm' in rrr_obs_lay[0]['properties']:
+     YV_obs_cd='Sttn_Nm'
 else:
-     print('ERROR - Neither SOURCE_FEA nor Code exist in '+rrr_obs_shp)
-     raise SystemExit(22) 
+     print('ERROR - No known name for gauge station code exist in '+rrr_obs_shp)
+     raise SystemExit(22)
 
 IV_obs_tot_id=[]
 YV_obs_tot_cd=[]
@@ -164,7 +168,7 @@ elif 'rivid' in f.dimensions:
      YS_id_name='rivid'
 else:
      print('ERROR - neither COMID nor rivid exist in'+rrr_out_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 if 'Time' in f.dimensions:
      YS_time_name='Time'
@@ -172,7 +176,7 @@ elif 'time' in f.dimensions:
      YS_time_name='time'
 else:
      print('ERROR - Neither Time nor time exist in '+rrr_out_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 if 'Qout' in f.variables:
      YS_out_name='Qout'
@@ -180,7 +184,7 @@ elif 'V' in f.variables:
      YS_out_name='V'
 else:
      print('ERROR - neither Qout nor V exist in'+rrr_out_ncf)
-     raise SystemExit(22) 
+     raise SystemExit(22)
 
 if 'sQout' in f.variables:
      YS_uq_name='sQout'
@@ -190,7 +194,7 @@ else:
      YS_uq_name=''
 
 #-------------------------------------------------------------------------------
-#Get variable sizes 
+#Get variable sizes
 #-------------------------------------------------------------------------------
 IS_riv_bas=len(f.variables[YS_id_name])
 print('- Number of river reaches: '+str(IS_riv_bas))
@@ -272,24 +276,24 @@ ZM_out_avg=numpy.array([]).reshape(0,IS_out_avg)
 for JS_obs_tot in range(IS_obs_tot):
      print('  . processing river ID: '+str(IV_obs_tot_id_srt[JS_obs_tot]))
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Get values
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      ZV_out=f.variables[YS_out_name][:,IM_hsh[IV_obs_tot_id_srt[JS_obs_tot]]]
      #This follows the following format for RAPID outputs: Qout(time,rivid)
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Average every so many values
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      #Examples: IS_avg=8 to make daily from 3-hourly
      #          IS_avg=1 to make 3-hourly from 3-hourly
      ZV_out_avg=(ZV_out.reshape(-1,IS_avg)).mean(axis=1)
      #This uses numpy reshape to make a list of lists with IS_avg elements each
      #before using numpy again to average each list.
 
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Update array containing all hydrographs
-#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      ZM_out_avg=numpy.vstack((ZM_out_avg,ZV_out_avg))
 
 #-------------------------------------------------------------------------------
@@ -310,10 +314,10 @@ with open(rrr_hyd_csv, 'w') as csvfile:
      #csvwriter.writerow([rrr_out_str]+YV_obs_tot_cd_srt)
      csvwriter.writerow([rrr_out_str]+IV_obs_tot_id_srt)
      for JS_out_avg in range(IS_out_avg):
-          IV_line=[YV_time_avg[JS_out_avg]]+list(ZM_out_avg[JS_out_avg,:]) 
-          csvwriter.writerow(IV_line) 
+          IV_line=[YV_time_avg[JS_out_avg]]+list(ZM_out_avg[JS_out_avg,:])
+          csvwriter.writerow(IV_line)
 #Write hydrographs
- 
+
 if YS_uq_name!='' and                                                          \
    f.variables[YS_uq_name][0]!=netCDF4.default_fillvals['f4']:
    #If the uncertainty variable exists but was not populated it holds the
@@ -333,9 +337,9 @@ if YS_uq_name!='' and                                                          \
           csvwriter.writerow([rrr_out_str]+IV_obs_tot_id_srt)
           for JS_out_avg in range(IS_out_avg):
                IV_line=[YV_time_avg[JS_out_avg]]+list( ZM_out_avg[JS_out_avg,:]\
-                                                      *ZV_pct_uq[:]/100) 
-               csvwriter.writerow(IV_line) 
-#Write hydrographs for uncertainty 
+                                                      *ZV_pct_uq[:]/100)
+               csvwriter.writerow(IV_line)
+#Write hydrographs for uncertainty
 
 
 #*******************************************************************************
