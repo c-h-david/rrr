@@ -104,6 +104,12 @@ if rrr_dis_shy.type=='MultiPolygon':
 print(' . The dissolved catchment geometry is of type: '+rrr_dis_shy.type)
 
 #-------------------------------------------------------------------------------
+#Additional union in case of inner islands
+#-------------------------------------------------------------------------------
+print('- Additional union in case of inner islands')
+rrr_dis_shy=shapely.ops.unary_union(rrr_dis_shy)
+
+#-------------------------------------------------------------------------------
 #Get perimeter
 #-------------------------------------------------------------------------------
 print('- Get perimeter')
