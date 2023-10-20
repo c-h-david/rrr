@@ -193,8 +193,7 @@ with open(rrr_obs_csv) as csvfile:
      IV_headid = [int(h) for h in YV_header[1:]]
      ZH_obs = {rid: [0]*IS_M for rid in IV_headid}
      JS_M = 0
-     while JS_M < IS_M:
-          row = next(iter(csvreader))
+     for row in csvreader:
           dat = datetime.strptime(row[0], "%Y-%m-%d")
           if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
                for i, rid in enumerate(IV_headid):
@@ -207,8 +206,7 @@ with open(rrr_mod_csv) as csvfile:
      IV_headid = [int(h) for h in YV_header[1:]]
      ZH_mod = {rid: [0]*IS_M for rid in IV_headid}
      JS_M = 0
-     while JS_M < IS_M:
-          row = next(iter(csvreader))
+     for row in csvreader:
           dat = datetime.strptime(row[0], "%Y-%m-%d")
           if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
                for i, rid in enumerate(IV_headid):
