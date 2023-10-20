@@ -215,7 +215,7 @@ with open(rrr_mod_csv) as csvfile:
                JS_Mm += 1
 
 if JS_Mo==JS_Mm:
-     print(' . Common number of time steps for dates provided: '+str(JS_Mo))
+     print('  . Common number of time steps for dates provided: '+str(JS_Mo))
 else:
      print('ERROR - Different number of steps for dates provided: '            \
           +str(JS_Mo)+' <> '+str(JS_Mm))
