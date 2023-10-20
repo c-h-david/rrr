@@ -21,6 +21,7 @@ import os.path
 import csv
 import fiona
 from datetime import datetime
+import math
 
 
 #*******************************************************************************
@@ -222,7 +223,7 @@ else:
 
 for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
-#initialize all stats to zero
+#Initialize all stats to zero
 #-------------------------------------------------------------------------------
      ZS_obsbar=0
      ZS_modbar=0
@@ -236,10 +237,23 @@ for JS_obs_tot in range(IS_obs_tot):
      ZS_den2=0
 
 #-------------------------------------------------------------------------------
-#select data and convert to list
+#Select data and convert to list
 #-------------------------------------------------------------------------------
      ZV_obs = [value for value in ZH_obs[IV_obs_tot_id_srt[JS_obs_tot]]]
      ZV_mod = [value for value in ZH_mod[IV_obs_tot_id_srt[JS_obs_tot]]]
+
+     if len(ZV_obs)!=len(ZV_mod):
+          print('ERROR - Different number of steps for dates provided: '       \
+               +str(len(ZV_obs))+' <> '+str(len(ZV_mod)))
+          raise SystemExit(22)
+
+#-------------------------------------------------------------------------------
+#Get rid of pair if obs is NaN
+#-------------------------------------------------------------------------------
+     ZV_obs = [ZV_obs[i] for i in range(len(ZV_obs))                           \
+               if not math.isnan(ZV_obs[i])]
+     ZV_mod = [ZV_mod[i] for i in range(len(ZV_obs))                           \
+               if not math.isnan(ZV_obs[i])]
 
 #-------------------------------------------------------------------------------
 #Determine common number of time steps
@@ -252,7 +266,7 @@ for JS_obs_tot in range(IS_obs_tot):
           raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
-#calculate stats
+#Calculate stats
 #-------------------------------------------------------------------------------
      ZS_obsbar=sum(ZV_obs)/IS_M
      ZS_modbar=sum(ZV_mod)/IS_M
