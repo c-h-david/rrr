@@ -248,12 +248,13 @@ for JS_obs_tot in range(IS_obs_tot):
           raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
-#Get rid of pair if obs is NaN
+#Get rid of pair only if obs is NaN
 #-------------------------------------------------------------------------------
+     ZV_mod = [ZV_mod[i] for i in range(len(ZV_mod))                           \
+               if not math.isnan(ZV_obs[i])]
      ZV_obs = [ZV_obs[i] for i in range(len(ZV_obs))                           \
                if not math.isnan(ZV_obs[i])]
-     ZV_mod = [ZV_mod[i] for i in range(len(ZV_obs))                           \
-               if not math.isnan(ZV_obs[i])]
+     #Doing mod before obs because obs is the common check before modification
 
 #-------------------------------------------------------------------------------
 #Determine common number of time steps
