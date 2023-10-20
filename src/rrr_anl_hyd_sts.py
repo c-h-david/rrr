@@ -161,16 +161,16 @@ with open(rrr_obs_csv) as csvfile:
      next(iter(csvreader), None)  # skip header
      IS_count=sum(1 for row in csvreader)
      #print(IS_count)
-     IS_M=IS_count
+     IS_step=IS_count
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      next(iter(csvreader), None)  # skip header
      IS_count=sum(1 for row in csvreader)
      #print(IS_count)
-     if (IS_count<IS_M):
-          IS_M=IS_count
+     if (IS_count<IS_step):
+          IS_step=IS_count
 
-print('  . Shortest timeseries has: '+str(IS_M)+' time steps')
+print('  . Shortest timeseries has: '+str(IS_step)+' time steps')
 
 
 #*******************************************************************************
@@ -217,7 +217,7 @@ if JS_Mo==JS_Mm:
      print(' . Common number of time steps for dates provided: '+str(JS_Mo))
 else:
      print('ERROR - Different number of steps for dates provided: '            \
-          +str(JS_Mo)+' <> '+str(SM_Mm))
+          +str(JS_Mo)+' <> '+str(JS_Mm))
      raise SystemExit(22)
 
 for JS_obs_tot in range(IS_obs_tot):
@@ -240,6 +240,16 @@ for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
      ZV_obs = [value for value in ZH_obs[IV_obs_tot_id_srt[JS_obs_tot]]]
      ZV_mod = [value for value in ZH_mod[IV_obs_tot_id_srt[JS_obs_tot]]]
+
+#-------------------------------------------------------------------------------
+#Determine common number of time steps
+#-------------------------------------------------------------------------------
+     if len(ZV_obs)==len(ZV_mod):
+          IS_M=len(ZV_obs)
+     else:
+          print('ERROR - Different number of steps for dates provided: '       \
+               +str(len(ZV_obs))+' <> '+str(len(ZV_mod)))
+          raise SystemExit(22)
 
 #-------------------------------------------------------------------------------
 #calculate stats
