@@ -192,26 +192,33 @@ with open(rrr_obs_csv) as csvfile:
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
      ZH_obs = {rid: [0]*IS_M for rid in IV_headid}
-     JS_M = 0
+     JS_Mo = 0
      for row in csvreader:
           dat = datetime.strptime(row[0], "%Y-%m-%d")
           if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
                for i, rid in enumerate(IV_headid):
-                    ZH_obs[rid][JS_M] = float(row[i+1])
-               JS_M += 1
+                    ZH_obs[rid][JS_Mo] = float(row[i+1])
+               JS_Mo += 1
 
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      YV_header = next(iter(csvreader))
      IV_headid = [int(h) for h in YV_header[1:]]
      ZH_mod = {rid: [0]*IS_M for rid in IV_headid}
-     JS_M = 0
+     JS_Mm = 0
      for row in csvreader:
           dat = datetime.strptime(row[0], "%Y-%m-%d")
           if rrr_str_dat is None or (dat >= rrr_str_dat and dat <= rrr_end_dat):
                for i, rid in enumerate(IV_headid):
-                    ZH_mod[rid][JS_M] = float(row[i+1])
-               JS_M += 1
+                    ZH_mod[rid][JS_Mm] = float(row[i+1])
+               JS_Mm += 1
+
+if JS_Mo==JS_Mm:
+     print(' . Common number of time steps for dates provided: '+str(JS_Mo))
+else:
+     print('ERROR - Different number of steps for dates provided: '            \
+          +str(JS_Mo)+' <> '+str(SM_Mm))
+     raise SystemExit(22)
 
 for JS_obs_tot in range(IS_obs_tot):
 #-------------------------------------------------------------------------------
