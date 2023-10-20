@@ -53,9 +53,9 @@ if IS_arg==7:
      except ValueError:
           print('ERROR - Dates need to provided in YEAR-MONTH-DAY format')
           raise SystemExit(22)
-     IS_M = (rrr_end_dat-rrr_str_dat).days+1
+     IS_day = (rrr_end_dat-rrr_str_dat).days+1
 else:
-     IS_M=1e20
+     IS_day=1e20
      rrr_str_dat = None
      rrr_end_dat = None
 
@@ -101,7 +101,7 @@ except IOError as e:
 #Print desired length for statistics
 #*******************************************************************************
 print('Print desired length for statistics')
-print('- The dates provided (or ommitted) correspond to '+str(IS_M)+' days')
+print('- The dates provided (or ommitted) correspond to '+str(IS_day)+' days')
 
 
 #*******************************************************************************
@@ -161,8 +161,7 @@ with open(rrr_obs_csv) as csvfile:
      next(iter(csvreader), None)  # skip header
      IS_count=sum(1 for row in csvreader)
      #print(IS_count)
-     if (IS_count<IS_M):
-          IS_M=IS_count
+     IS_M=IS_count
 with open(rrr_mod_csv) as csvfile:
      csvreader=csv.reader(csvfile)
      next(iter(csvreader), None)  # skip header
@@ -171,7 +170,7 @@ with open(rrr_mod_csv) as csvfile:
      if (IS_count<IS_M):
           IS_M=IS_count
 
-print('  . Will compute statistics for: '+str(IS_M)+' time steps')
+print('  . Shortest timeseries has: '+str(IS_M)+' time steps')
 
 
 #*******************************************************************************
