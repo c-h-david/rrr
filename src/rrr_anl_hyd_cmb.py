@@ -131,7 +131,7 @@ for JS_arg in range(2,IS_arg-1):
 #*******************************************************************************
 print('Write CSV file')
 
-dfc.to_csv(rrr_cmb_csv)
+dfc.to_csv(rrr_cmb_csv,na_rep='NaN')
 
 print('- Done')
 
