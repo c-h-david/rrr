@@ -21,6 +21,7 @@
 import sys
 import shutil
 import csv
+import pandas
 import netCDF4
 import numpy
 from scipy.sparse import csc_matrix
@@ -353,20 +354,12 @@ print('- Done')
 print('Reading observation file and computing average')
 
 with open(rrr_Qob_csv,'r') as csvfile:
-     csvreader=csv.reader(csvfile)
-     IS_Qob_tim=0
-     for row in csvreader:
-          IS_Qob_tim=IS_Qob_tim+1
-     IS_obs_tot=len(row)
+     df=pandas.read_csv(csvfile,header=None)
+     ZV_Qob_avg=df.mean().tolist()
+     IS_Qob_tim=df.shape[0]
+     IS_obs_tot=df.shape[1]
 print('- Number of gauges in rrr_Qob_csv: '+str(IS_obs_tot))
 print('- Number of time steps in rrr_Qob_csv: '+str(IS_Qob_tim))
-
-ZV_Qob_avg=numpy.zeros(IS_obs_tot)
-with open(rrr_Qob_csv,'r') as csvfile:
-     csvreader=csv.reader(csvfile)
-     for row in csvreader:
-          ZV_Qob_tmp=numpy.array([float(obs) for obs in row])
-          ZV_Qob_avg=ZV_Qob_avg+ZV_Qob_tmp/IS_Qob_tim
 
 print('- Done')
 
