@@ -189,8 +189,8 @@ for rrr_obs_fea in rrr_obs_lay:
                BS_bad=obs_av>=  ZS_mag*riv_av or                               \
                       obs_av<=1/ZS_mag*riv_av
                #BS_bad in case want to check for magnitude along with distance
-               if ZS_dst<=ZS_cls:
-               #if ZS_dst<=ZS_cls and not BS_bad:
+               #if ZS_dst<=ZS_cls:
+               if ZS_dst<=ZS_cls and not BS_bad:
                     #-----------------------------------------------------------
                     #Current reach is within buffer, (magnitude), and closer
                     #-----------------------------------------------------------
