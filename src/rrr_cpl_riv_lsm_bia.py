@@ -458,7 +458,13 @@ print('- Done')
 #*******************************************************************************
 print('Computing scaling factor for each subbasin')
 
-ZV_lbd=ZV_lqe_avg/(ZM_Sel*ZV_QrD_avg)
+for JS_obs_use in range(IS_obs_use):
+     if (ZM_Sel*ZV_QrD_avg)[JS_obs_use]==0:
+          print('WARNING - ZERO runoff accumulation for gauge at rivid: '      \
+                +str(IV_obs_use_id[JS_obs_use])                                \
+                +' - No correction will be applied at that gauge')
+
+ZV_lbd=numpy.divide(ZV_lqe_avg,ZM_Sel*ZV_QrD_avg,where=(ZM_Sel*ZV_QrD_avg)!=0)
 ZV_alp=ZV_lbd-1
 
 print('- Done')
@@ -490,7 +496,7 @@ print('- Done')
 #*******************************************************************************
 print('Checking successful bias correction')
 
-ZV_dif=ZV_Qus_avg-ZM_Sel*ZV_Qrc_avg
+ZV_dif=numpy.subtract(ZV_Qus_avg,ZM_Sel*ZV_Qrc_avg,where=(ZM_Sel*ZV_QrD_avg)!=0)
 
 print('- Average value of difference at stations: '+str(ZV_dif.mean()))
 print('- Minimum value of difference at stations: '+str(ZV_dif.min()))
