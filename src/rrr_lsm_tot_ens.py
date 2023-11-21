@@ -18,6 +18,9 @@ import sys
 import shutil
 import netCDF4
 import numpy
+import datetime
+import os.path
+import subprocess
 
 
 #*******************************************************************************
@@ -471,8 +474,24 @@ ZV_RUNSB_avt=ZV_RUNSB_avt/IS_time
 #-------------------------------------------------------------------------------
 print('- Populate global attributes')
 
-f4.source='RRR'
-f4.history=''
+dt=datetime.datetime.utcnow()
+dt=dt.replace(microsecond=0)
+#Current UTC time without the microseconds
+vsn=subprocess.Popen('../version.sh',stdout=subprocess.PIPE).communicate()
+vsn=vsn[0]
+vsn=vsn.rstrip()
+vsn=vsn.decode()
+#Version of RRR
+
+f4.Conventions='CF-1.6'
+f4.title=''
+f4.institution=''
+f4.source='RRR: '+vsn+', runoff: '+os.path.basename(rrr_lsm_in1)+', '          \
+                                  +os.path.basename(rrr_lsm_in2)+', '          \
+                                  +os.path.basename(rrr_lsm_in3)
+f4.history='date created: '+dt.isoformat()+'+00:00'
+f4.references='https://github.com/c-h-david/rrr/'
+f4.comment=''
 
 #-------------------------------------------------------------------------------
 #Close netCDF files
