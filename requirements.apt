@@ -45,6 +45,8 @@ ffmpeg
 #multimedia file transcoding
 nco
 #netCDF operators
+cdo
+#climate data operators (for NLDAS GRIB to netCDF conversion)
 
 #-------------------------------------------------------------------------------
 #Code testing
