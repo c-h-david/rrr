@@ -1,7 +1,7 @@
 # RRR
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3236649.svg)](https://doi.org/10.5281/zenodo.3236649)
 
-[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg)](https://github.com/c-h-david/rrr/blob/master/LICENSE)
+[![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-yellow.svg)](https://github.com/c-h-david/rrr/blob/main/LICENSE)
 
 [![Docker Images](https://img.shields.io/badge/docker-images-blue?logo=docker)](https://hub.docker.com/r/chdavid/rrr/tags)
 
@@ -61,7 +61,7 @@ systems. To install it, follow the instructions in the link provided above.
 
 Note that the experienced users may find more up-to-date installation
 instructions in
-[Dockerfile](https://github.com/c-h-david/rrr/blob/master/Dockerfile).
+[Dockerfile](https://github.com/c-h-david/rrr/blob/main/Dockerfile).
 
 ### Download RRR
 Downloading RRR with Docker can be done using:
@@ -83,7 +83,7 @@ Testing scripts are currently under development.
 
 Note that the experienced users may find more up-to-date testing instructions
 in
-[docker.test.yml](https://github.com/c-h-david/rrr/blob/master/docker.test.yml).
+[docker.test.yml](https://github.com/c-h-david/rrr/blob/main/docker.test.yml).
 
 ## Installation on Debian
 This document was written and tested on a machine with a **clean** image of 
@@ -93,7 +93,7 @@ Similar steps **may** be applicable for Ubuntu.
 
 Note that the experienced users may find more up-to-date installation 
 instructions in
-[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/master/.github/workflows/github_actions_CI.yml).
+[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/main/.github/workflows/github_actions_CI.yml).
 
 ### Download RRR
 First, make sure that `git` is installed: 
@@ -116,7 +116,7 @@ $ cd rrr/
 
 ### Install APT packages
 Software packages for the Advanced Packaging Tool (APT) are summarized in 
-[requirements.apt](https://github.com/c-h-david/rrr/blob/master/requirements.apt)
+[requirements.apt](https://github.com/c-h-david/rrr/blob/main/requirements.apt)
 and can be installed with `apt-get`. All packages can be installed at once using:
 
 ```
@@ -124,7 +124,7 @@ $ sudo apt-get install -y --no-install-recommends $(grep -v -E '(^#|^$)' require
 ```
 
 > Alternatively, one may install the APT packages listed in 
-> [requirements.apt](https://github.com/c-h-david/rrr/blob/master/requirements.apt)
+> [requirements.apt](https://github.com/c-h-david/rrr/blob/main/requirements.apt)
 > one by one, for example:
 >
 > ```
@@ -140,7 +140,7 @@ $ sudo ln -s /usr/bin/python3.9 /usr/bin/python3
 
 ### Install Python packages
 Python packages from the Python Package Index (PyPI) are summarized in
-[requirements.pip](https://github.com/c-h-david/rrr/blob/master/requirements.pip)
+[requirements.pip](https://github.com/c-h-david/rrr/blob/main/requirements.pip)
 and can be installed with `pip`. But first, let's make sure that the latest
 version of `pip` is installed
 
@@ -157,7 +157,7 @@ $ sudo pip3 install --no-cache-dir -r requirements.pip
 ```
 
 > Alternatively, one may install the PyPI packages listed in 
-> [requirements.pip](https://github.com/c-h-david/rrr/blob/master/requirements.pip)
+> [requirements.pip](https://github.com/c-h-david/rrr/blob/main/requirements.pip)
 > one by one, for example:
 >
 > ```
@@ -169,4 +169,4 @@ Testing scripts are currently under development.
 
 Note that the experienced users may find more up-to-date testing instructions 
 in
-[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/master/.github/workflows/github_actions_CI.yml).
+[github\_actions\_CI.yml](https://github.com/c-h-david/rrr/blob/main/.github/workflows/github_actions_CI.yml).
