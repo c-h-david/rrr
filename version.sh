@@ -18,7 +18,7 @@ if type 'git' > /dev/null; then
      #git is installed
      if git rev-parse --git-dir > /dev/null 2>&1; then
           #this is a git repository
-          git describe 
+          git describe --tags 
      else
           #this is not a git repository
           echo "unknown, NOT a git repository"

@@ -75,7 +75,7 @@ The beauty of Docker is that there is **no need to install anymore packages**.
 RRR is ready to go! To run it, just use:
 
 ```
-$ docker run --rm -it chdavid/rrr
+$ docker run --rm -e EARTHDATA_USERNAME="yourUsername" -e EARTHDATA_PASSWORD="yourPassword" -it chdavid/rrr
 ```
 
 ## Testing with Docker
